@@ -20,7 +20,9 @@
     "app/app.component.ts",
     "app/environment.ts",
     "app/index.ts",
-    "app/shared/index.ts",
+    "app/services/search/index.ts",
+    "app/services/search/search.service.spec.ts",
+    "app/services/search/search.service.ts",
     "main.ts",
     "system-config.ts",
     "typings.d.ts"
