@@ -1,3 +1,47 @@
-<p>
-  search-result works!
-</p>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <search-bar></search-bar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6" *ngIf="filteredReactions.length">
+      <h2>Reactions
+        <small>-
+          {{filteredReactions.length}}
+          Result Found</small>
+      </h2>
+      <p *ngFor="let item of filteredReactions; let i=index ">
+        <a [routerLink]="['ReactionDetails', { reactionId:item.id}]">
+          {{item.name}}
+        </a>
+      </p>
+    </div>
+    <div class="col-md-6" *ngIf="filteredMetabolites.length">
+      <h2>Metabolites
+        <small>-
+          {{filteredMetabolites.length}}
+          Result Found</small>
+      </h2>
+      <p *ngFor="let item of filteredMetabolites; let i=index">
+        <a [routerLink]="['MetaboliteDetails', { metaboliteId:item.id}]">
+          {{item.name}}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="al">
+    <div class="row" *ngIf="n==0">
+      <h1>NOTHING FOUND</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <br>
+  </div>
+</div>

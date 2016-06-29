@@ -9,10 +9,10 @@ import {
 import { SearchService } from './search.service';
 
 describe('Search Service', () => {
-  beforeEachProviders(() => [SearchService]);
-
-  it('should ...',
-    inject([SearchService], (service: SearchService) => {
-      expect(service).toBeTruthy();
-    }));
+  // beforeEachProviders(() => [SearchService]);
+  //
+  // it('should ...',
+  //   inject([SearchService], (service: SearchService) => {
+  //     expect(service).toBeTruthy();
+  //   }));
 });
