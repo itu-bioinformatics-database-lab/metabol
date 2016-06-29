@@ -5,6 +5,6 @@ import {SearchResultComponent} from './search-result';
 
 export const SearchRoutes: RouterConfig = [
   { path: 'search', component: SearchPageComponent },
-  { path: 'search-result', component: SearchResultComponent },
+  { path: 'search-result/:query', component: SearchResultComponent },
   { path: '', redirectTo: 'search', terminal: true },
 ];
