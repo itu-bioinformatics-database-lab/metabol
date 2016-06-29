@@ -32,6 +32,16 @@
     "app/components/analyze/upload/index.ts",
     "app/components/analyze/upload/upload.component.spec.ts",
     "app/components/analyze/upload/upload.component.ts",
+    "app/components/details/chemical-equation/chemical-equation.component.spec.ts",
+    "app/components/details/chemical-equation/chemical-equation.component.ts",
+    "app/components/details/chemical-equation/index.ts",
+    "app/components/details/details.routes.ts",
+    "app/components/details/metabolite-details/index.ts",
+    "app/components/details/metabolite-details/metabolite-details.component.spec.ts",
+    "app/components/details/metabolite-details/metabolite-details.component.ts",
+    "app/components/details/reaction-details/index.ts",
+    "app/components/details/reaction-details/reaction-details.component.spec.ts",
+    "app/components/details/reaction-details/reaction-details.component.ts",
     "app/components/search/search-bar/index.ts",
     "app/components/search/search-bar/search-bar.component.spec.ts",
     "app/components/search/search-bar/search-bar.component.ts",
@@ -44,6 +54,16 @@
     "app/components/search/search.routes.ts",
     "app/environment.ts",
     "app/index.ts",
+    "app/pipes/keys.pipe.spec.ts",
+    "app/pipes/keys.pipe.ts",
+    "app/services/metabolite/index.ts",
+    "app/services/metabolite/metabolite.service.spec.ts",
+    "app/services/metabolite/metabolite.service.ts",
+    "app/services/metabolite/metabolite.ts",
+    "app/services/reaction/index.ts",
+    "app/services/reaction/reaction.service.spec.ts",
+    "app/services/reaction/reaction.service.ts",
+    "app/services/reaction/reaction.ts",
     "app/services/search/index.ts",
     "app/services/search/search.service.spec.ts",
     "app/services/search/search.service.ts",
@@ -52,7 +72,8 @@
     "typings.d.ts"
   ],
   "filesGlob": [
-    "**/*.ts"
+    "**/*.ts",
+    "node_modules/angular2/typings/browser.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

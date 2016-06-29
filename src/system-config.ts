@@ -37,6 +37,10 @@ const barrels: string[] = [
   'app/components/search/search-bar',
   'app/components/search/search-resutl',
   'app/components/search/search-result',
+  'app/components/details/equaltion',
+  'app/components/details/chemical-equation',
+  'app/components/details/metabolite-details',
+  'app/components/details/reaction-details',
   /** @cli-barrel */
 ];
 
