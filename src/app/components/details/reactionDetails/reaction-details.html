@@ -1,0 +1,70 @@
+<section class="reactionDetails">
+  <div *ngIf="reaction" class="reactionDetailsChild col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>{{reaction.name}}</strong></h3>
+      </div>
+      <div class="panel-body" >
+        <p *ngIf="reaction.id ">
+          id: {{reaction.id}}
+        </p>
+        <p *ngIf="reaction.name">
+          name: {{reaction.name}}
+        </p>
+        <p *ngIf="reaction.reversible">
+          reversible: {{reaction.reversible}}
+        </p>
+        <p *ngIf="reaction.model">
+          model: {{reaction.model}}
+        </p>
+        <p *ngIf="reaction.annotation">
+          annotation: {{reaction.annotation}}
+        </p>
+        <p *ngIf="reaction.sboTerm">
+          sbo term:{{reaction.sboTerm}}
+        </p>
+        <p *ngIf="reaction.notes">
+          notes: {{reaction.notes}}
+        </p>
+
+        <h3 *ngIf="relatedMetabolites">
+          <chemical-equation [metabolites]=relatedMetabolites></chemical-equation>
+        </h3>
+
+        <div>
+          <br>
+          <h4><strong>Connected Reactions</strong></h4>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Metabolite</strong>
+                </td>
+                <td>
+                  <strong>Reactions</strong>
+                </td>
+              </tr>
+
+              <tr *ngFor="let item of relatedMetabolites">
+                <td>
+                  <a [routerLink]="['MetaboliteDetails',{metaboliteId: item.id}]">
+                   {{item.id}}
+                  </a>
+                </td>
+                <td>
+                  <span *ngFor="let item2 of item.reactions; let count = index">
+                    {{(0!=count)? ", " : ""}}
+                    <a [routerLink]="['ReactionDetails',{reactionId: item2.id}]">
+                      {{item2.id}}
+                    </a>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

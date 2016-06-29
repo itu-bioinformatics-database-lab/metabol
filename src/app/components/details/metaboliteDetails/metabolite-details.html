@@ -1,0 +1,79 @@
+<section class="metaboliteDetails">
+    <div *ngIf="metabolite" class="metaboliteDetailsChild col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <strong>
+                        {{metabolite.name}}
+                    </strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <p *ngIf="metabolite.id">
+                    id: {{metabolite.id}} {{metaboliteId}}
+                </p>
+                <p *ngIf="metabolite.name">
+                    name: {{metabolite.name}}
+                </p>
+                <p *ngIf="metabolite.compartment">
+                    compartment: {{metabolite.compartment}}
+                </p>
+                <p *ngIf="metabolite.initialAmount">
+                    initial amount: {{metabolite.initialAmount}}
+                </p>
+                <p *ngIf="metabolite.charge">
+                    charge: {{metabolite.charge}}
+                </p>
+                <p *ngIf="metabolite.model">
+                    model: {{metabolite.model}}
+                </p>
+                <p *ngIf="metabolite.species_type">
+                    species_type: {{metabolite.species_type}}
+                </p>
+                <p *ngIf="metabolite.annotation">
+                    annotation: {{metabolite.annotation}}
+                </p>
+                <p *ngIf="metabolite.sboTerm">
+                    sbo term: {{metabolite.sboTerm}}
+                </p>
+                <p *ngIf="metabolite.notes">
+                    notes: {{metabolite.notes}}
+                </p>
+                <br>
+                <div *ngIf="relatedReactions">
+                    <h4>
+                    <strong>Connected Reactions</strong>
+                </h4>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>Reaction</strong>
+                                </td>
+                                <td>
+                                    <strong>Chemical Formula</strong>
+                                </td>
+                            </tr>
+
+
+                            <tr *ngFor="let item of relatedReactions.reactions">
+
+                                <td>
+                                    <a [routerLink]="['ReactionDetails',{reactionId: item.id}]">
+                                      {{item.id}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <chemical-equation [metabolites]="item.metabolites"
+                                      [selectedMetabolite]="{'stoichiometry': item.stoichiometry,
+                                                           'id': metabolite.id }">
+                                    </chemical-equation>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
