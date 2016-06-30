@@ -1,1 +1,1 @@
-export * from './analyze.component';
+export * from './analyze.routes';

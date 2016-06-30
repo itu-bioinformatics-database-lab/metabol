@@ -10,11 +10,11 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { ConcentrationTableComponent } from './concentration-table.component';
+import { MeasurementComponent } from './measurement.component';
 
-describe('Component: ConcentrationTable', () => {
+describe('Component: Measurement', () => {
   it('should create an instance', () => {
-    // let component = new ConcentrationTableComponent();
-    // expect(component).toBeTruthy();
+    let component = new MeasurementComponent();
+    expect(component).toBeTruthy();
   });
 });

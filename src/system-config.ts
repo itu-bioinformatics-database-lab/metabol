@@ -18,7 +18,7 @@ const packages: any = {
  * Everything underneath this line is managed by the CLI.
  **********************************************************************************************/
 const barrels: string[] = [
-  // Angular specific barrels.
+// Angular specific barrels.
   '@angular/core',
   '@angular/common',
   '@angular/compiler',
@@ -27,10 +27,10 @@ const barrels: string[] = [
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
-  // Thirdparty barrels.
+// Thirdparty barrels.
   'rxjs',
 
-  // App specific barrels.
+// App specific barrels.
   'app',
   'app/shared',
   'app/components/search/search-page',
@@ -41,6 +41,8 @@ const barrels: string[] = [
   'app/components/details/chemical-equation',
   'app/components/details/metabolite-details',
   'app/components/details/reaction-details',
+  'app/components/analyze/measurement',
+  'app/components/documentation/documentation',
   'app/signup',
   'app/login',
   /** @cli-barrel */
