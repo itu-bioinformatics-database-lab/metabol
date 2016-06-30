@@ -41,6 +41,7 @@ const barrels: string[] = [
   'app/components/details/chemical-equation',
   'app/components/details/metabolite-details',
   'app/components/details/reaction-details',
+  'app/components/analyze/measurement',
   /** @cli-barrel */
 ];
 
