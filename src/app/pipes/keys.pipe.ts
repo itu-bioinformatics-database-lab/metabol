@@ -4,9 +4,5 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'keys'
 })
 export class KeysPipe implements PipeTransform {
-
-  transform(value: any, args?: any): any {
-    return null;
-  }
-
+  transform = (value: any) => Object.keys(value);
 }
