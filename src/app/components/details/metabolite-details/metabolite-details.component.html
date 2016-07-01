@@ -70,11 +70,12 @@
 
                 <td>
                   <a [routerLink]="['/reaction', item.id]">
-                    {{item.id}}
+                    {{item.name}}
                   </a>
                 </td>
                 <td>
-                  <chemical-equation [metabolites]="item.metabolites" [selectedMetabolite]="{'stoichiometry': item.stoichiometry, 'id': metabolite.id }"></chemical-equation>
+
+                  <chemical-equation [metabolites]="item.metabolites[0].reactions" [selectedMetabolite]="{'stoichiometry': item.stoichiometry, 'id': metabolite.id }"></chemical-equation>
                 </td>
               </tr>
             </tbody>

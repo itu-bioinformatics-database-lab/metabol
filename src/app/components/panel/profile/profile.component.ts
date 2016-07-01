@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ROUTER_DIRECTIVES, Router} from '@angular/router';
+import { ROUTER_DIRECTIVES} from '@angular/router';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
-import {SignupService} from '../../services/signup/signup.service';
-import { Http, Response, Headers} from '@angular/http';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-signup',
-  templateUrl: 'signup.component.html',
-  styleUrls: ['signup.component.css'],
-  directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES],
-  providers: [SignupService],
+  selector: 'app-profile',
+  templateUrl: 'profile.component.html',
+  styleUrls: ['profile.component.css'],
+  directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES]
+
 })
-export class SignupComponent {
+export class ProfileComponent {
 
   form: ControlGroup;
-
-  constructor(private _signupService: SignupService, private fb: FormBuilder,
-    private http: Http, private router: Router) {
-
+  constructor(fb: FormBuilder) {
     this.form = fb.group({
       "Name": ["", Validators.required],
       "Surname": ["", Validators.required],
@@ -43,20 +38,8 @@ export class SignupComponent {
     }
   }
 
-  onSubmit(value) {
+  onSubmit(value: string) {
     console.log(value);
-    this._signupService.onSubmit(value)
-      .subscribe(
-      response => {
-        this.router.navigate(['panel'])
-      },
-      error => {
-        alert(error.text());
-        console.log(error.text());
-      });
-
   }
-
-
 
 }

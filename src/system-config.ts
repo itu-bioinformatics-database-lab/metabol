@@ -51,6 +51,10 @@ const barrels: string[] = [
   'app/components/analyze/result/iteration-color-box',
   'app/components/analyze/result/text-result',
   'app/components/accordion',
+  'app/components/panel/panel',
+  'app/components/panel',
+  'app/components/panel/analyze',
+  'app/components/panel/profile'
   /** @cli-barrel */
 ];
 
