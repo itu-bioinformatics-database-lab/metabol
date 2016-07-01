@@ -60,8 +60,8 @@ export class ConcentrationTableComponent {
   }
 
   analyze() {
-    // this.fba.getFbaKeyForData(this.conTable,
-    //   (key) => this.router.navigate(['FbaResult', { 'fbaKey': key }]));
+    this.fba.getFbaKeyForData(this.conTable,
+      (key) => this.router.navigate(['/analyze/result', key]));
   }
 
 }

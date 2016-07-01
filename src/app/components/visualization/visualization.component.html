@@ -1,0 +1,33 @@
+<svg (window:resize)="onResize()"
+         [class.small-size]="!isFullScreen"
+         [class.full-screen]="isFullScreen">
+      <g [attr.transform]="'translate('+ translate +')scale('+ scale +')'">
+        <line class="link" *ngFor="let l of d3links"
+          [attr.x1]="l.source.x"
+          [attr.y1]="l.source.y"
+          [attr.x2]="l.target.x"
+          [attr.y2]="l.target.y"></line>
+        <circle class="metabolite" r="10" *ngFor="let d of metabolites"
+          [attr.cx]="d.x"
+          [attr.cy]="d.y"
+          [attr.fill]="d.color"></circle>
+        <rect class="reaction" width="20" height="20" *ngFor="let d of reactions"
+          [attr.x]="d.x - 10"
+          [attr.y]="d.y - 10"
+          [attr.fill]="d.color"></rect>
+        <text class="text" *ngFor="let d of d3nodes"
+          [attr.x]="d.x - 8"
+          [attr.y]="d.y + 5">{{ d.iteration }}</text>
+        <text class="text" *ngFor="let d of d3nodes"
+          [attr.x]="d.x - 15"
+          [attr.y]="d.y - 15">{{ d.name }}</text>
+      </g>
+</svg>
+<button id="resize-full" class="btn btn-default"
+  (click)="toggleFullScreen()"
+  [style.position]="isFullScreen ? 'fixed' :'absolute'">
+    <span *ngIf="!isFullScreen" class="glyphicon glyphicon-resize-full"
+      aria-hidden="true"> </span>
+    <span *ngIf="isFullScreen" class="glyphicon glyphicon-resize-small"
+      aria-hidden="true"> </span>
+</button>

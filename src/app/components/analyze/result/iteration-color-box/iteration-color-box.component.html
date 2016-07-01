@@ -1,0 +1,12 @@
+<div class="panel panel-default" id="iterationColorInf">
+  <span> Iteration color </span>
+    <svg>
+      <template ngFor let-c [ngForOf]="colors" let-i="index">
+        <circle [attr.cx]="colorCircleX(i)" [attr.cy]="colorCircleY(i)"
+          r="10" [attr.fill]="c"></circle>
+        <text [attr.x]="colorCircleX(i)-8" [attr.y]="colorCircleY(i)+4">
+          {{ i + 1 }}
+        </text>
+      </template>
+    </svg>
+</div>

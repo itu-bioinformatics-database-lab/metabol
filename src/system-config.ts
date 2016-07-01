@@ -18,7 +18,7 @@ const packages: any = {
  * Everything underneath this line is managed by the CLI.
  **********************************************************************************************/
 const barrels: string[] = [
-// Angular specific barrels.
+  // Angular specific barrels.
   '@angular/core',
   '@angular/common',
   '@angular/compiler',
@@ -27,10 +27,11 @@ const barrels: string[] = [
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
-// Thirdparty barrels.
+  // Thirdparty barrels.
   'rxjs',
+  'd3',
 
-// App specific barrels.
+  // App specific barrels.
   'app',
   'app/shared',
   'app/components/search/search-page',
@@ -45,14 +46,21 @@ const barrels: string[] = [
   'app/components/documentation/documentation',
   'app/signup',
   'app/login',
+  'app/components/analyze/result',
+  'app/components/visualization',
+  'app/components/analyze/result/iteration-color-box',
+  'app/components/analyze/result/text-result',
+  'app/components/accordion',
   /** @cli-barrel */
 ];
 
 const cliSystemConfigPackages: any = {};
+
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
 
+cliSystemConfigPackages["d3"].main = 'd3.js'
 /** Type declaration for ambient System. */
 declare var System: any;
 
@@ -61,6 +69,8 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
+    // 'd3': 'vendor/d3',
+    'd3': 'vendor/d3',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages

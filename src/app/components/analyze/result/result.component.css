@@ -1,0 +1,19 @@
+#next, #previous {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+#next {
+  margin-left: 50px;
+}
+#save {
+  position: absolute;
+  top: 10px;
+  right: 60px;
+}
+iteration-color-box {
+  position: absolute;
+  width: 200px;
+  bottom: 10px;
+  right: 10px;
+}

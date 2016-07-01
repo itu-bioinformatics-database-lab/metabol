@@ -1,0 +1,16 @@
+<accordion [title]="titleGenerater(i)" *ngFor="let r of textResult;let i=index">
+  <accordion [title]="'Constraints'">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let c of r.constraints">
+        {{ c }}
+      </li>
+    </ul>
+  </accordion>
+  <accordion [title]="'Reaction Fluxes'">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let f of r.fluxes|keys">
+        {{ f }}:{{ r.fluxes[f] }}
+      </li>
+    </ul>
+  </accordion>
+</accordion>
