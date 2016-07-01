@@ -12,10 +12,8 @@ import {KeysPipe} from '../../../pipes/keys.pipe';
 
 })
 export class ChemicalEquationComponent {
-  @Input()
-  metabolites: any[];
-  @Input()
-  selectedMetabolite: Object;
+  @Input() metabolites: any[];
+  @Input() selectedMetabolite: Object;
   reactants: Object = {};
   products: Object = {};
 
