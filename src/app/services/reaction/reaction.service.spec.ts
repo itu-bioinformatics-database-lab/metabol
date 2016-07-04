@@ -9,10 +9,10 @@ import {
 import { ReactionService } from './reaction.service';
 
 describe('Reaction Service', () => {
-  beforeEachProviders(() => [ReactionService]);
-
-  it('should ...',
-      inject([ReactionService], (service: ReactionService) => {
-    expect(service).toBeTruthy();
-  }));
+  // beforeEachProviders(() => [ReactionService]);
+  //
+  // it('should ...',
+  //     inject([ReactionService], (service: ReactionService) => {
+  //   expect(service).toBeTruthy();
+  // }));
 });

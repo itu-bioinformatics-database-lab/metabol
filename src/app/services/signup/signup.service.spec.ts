@@ -9,10 +9,10 @@ import {
 import { SignupService } from './signup.service';
 
 describe('Signup Service', () => {
-  beforeEachProviders(() => [SignupService]);
-
-  it('should ...',
-      inject([SignupService], (service: SignupService) => {
-    expect(service).toBeTruthy();
-  }));
+  // beforeEachProviders(() => [SignupService]);
+  //
+  // it('should ...',
+  //     inject([SignupService], (service: SignupService) => {
+  //   expect(service).toBeTruthy();
+  // }));
 });

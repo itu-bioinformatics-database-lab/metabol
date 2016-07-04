@@ -1,18 +1,106 @@
 /* tslint:disable:no-unused-variable */
 
 import {
-  beforeEach, beforeEachProviders,
-  describe, xdescribe,
-  expect, it, xit,
-  async, inject
+  beforeEach,
+  beforeEachProviders,
+  describe,
+  expect,
+  it,
+  async,
+  inject
 } from '@angular/core/testing';
+
 import { SearchService } from './search.service';
+import {provide} from '@angular/core';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+
+import {
+  Http,
+  HTTP_PROVIDERS,
+  Response,
+  ResponseOptions,
+  BaseRequestOptions
+} from '@angular/http';
 
 describe('Search Service', () => {
-  // beforeEachProviders(() => [SearchService]);
-  //
-  // it('should ...',
-  //   inject([SearchService], (service: SearchService) => {
-  //     expect(service).toBeTruthy();
-  //   }));
+  let searchService: SearchService;
+  let mockBackend: MockBackend;
+
+  const mockHttpProvider = {
+    deps: [MockBackend, BaseRequestOptions],
+    useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+      return new Http(backend, defaultOptions);
+    }
+  }
+
+  beforeEachProviders(() => [
+    MockBackend,
+    BaseRequestOptions,
+    provide(Http, mockHttpProvider),
+    SearchService
+  ]);
+
+  beforeEach(inject([SearchService, MockBackend], (s, m) => {
+    searchService = s;
+    mockBackend = m;
+  }));
+
+  it('should response search prefix', async(() => {
+
+    let apiData = {
+      reactions: ['a', 'b', 'c'],
+      metabolites: ['x', 'y', 'z']
+    };
+
+    let query = 'pro';
+
+    mockBackend.connections.subscribe(
+      (connection: MockConnection) => {
+        let options = new ResponseOptions({ body: JSON.stringify(apiData) });
+        connection.mockRespond(new Response(options));
+
+        let expectedUrl = `http://biodb.sehir.edu.tr/api2/searchprefix/${query}`;
+        expect(connection.request.url).toEqual(expectedUrl);
+      });
+
+    searchService.searchPrefix(query).subscribe((data) => {
+      expect(data.reactions).toEqual(apiData.reactions);
+      expect(data.metabolites).toEqual(apiData.metabolites);
+    });
+
+  }));
+
+  it('should response search', async(() => {
+
+    let apiData = {
+      reactions: [
+        { id: "a", name: "a1" },
+        { id: "b", name: "b1" },
+        { id: "c", name: "c1" }
+      ],
+      metabolites: [
+        { id: "x", name: "x1" },
+        { id: "y", name: "y1" },
+        { id: "z", name: "z1" }
+      ],
+    };
+
+    let query = 'pro';
+
+    mockBackend.connections.subscribe(
+      (connection: MockConnection) => {
+        let options = new ResponseOptions({ body: JSON.stringify(apiData) });
+        connection.mockRespond(new Response(options));
+
+        let expectedUrl = `http://biodb.sehir.edu.tr/api2/search/${query}`;
+        expect(connection.request.url).toEqual(expectedUrl);
+      });
+
+    searchService.searchResult(query).subscribe((data) => {
+      expect(data.reactions).toEqual(apiData.reactions);
+      expect(data.metabolites).toEqual(apiData.metabolites);
+    });
+
+  }));
+
 });

@@ -9,10 +9,10 @@ import {
 import { MetaboliteService } from './metabolite.service';
 
 describe('Metabolite Service', () => {
-  beforeEachProviders(() => [MetaboliteService]);
-
-  it('should ...',
-      inject([MetaboliteService], (service: MetaboliteService) => {
-    expect(service).toBeTruthy();
-  }));
+  // beforeEachProviders(() => [MetaboliteService]);
+  //
+  // it('should ...',
+  //     inject([MetaboliteService], (service: MetaboliteService) => {
+  //   expect(service).toBeTruthy();
+  // }));
 });

@@ -36,8 +36,8 @@ export class SearchResultComponent {
     if (this.query.length > 0)
       this.searchService.searchResult(query).subscribe(
         data => {
-          this.filteredReactions = data["reactions"];
-          this.filteredMetabolites = data["metabolites"];
+          this.filteredReactions = data.reactions;
+          this.filteredMetabolites = data.metabolites;
         });
     else
       this.generateFilters();

@@ -2,10 +2,9 @@
 
 /*global jasmine, __karma__, window*/
 Error.stackTraceLimit = Infinity;
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000;
 
-__karma__.loaded = function () {
-};
+__karma__.loaded = function() {};
 
 var distPath = '/base/dist/';
 var appPaths = ['app']; //Add all valid source code folders here
@@ -39,7 +38,7 @@ System.import('system-config.js').then(function() {
   return Promise.all([
     System.import('@angular/core/testing'),
     System.import('@angular/platform-browser-dynamic/testing')
-  ]).then(function (providers) {
+  ]).then(function(providers) {
     var testing = providers[0];
     var testingBrowser = providers[1];
 
@@ -50,7 +49,7 @@ System.import('system-config.js').then(function() {
   // Finally, load all spec files.
   // This will run the tests directly.
   return Promise.all(
-    allSpecFiles.map(function (moduleName) {
+    allSpecFiles.map(function(moduleName) {
       return System.import(moduleName);
     }));
 }).then(__karma__.start, __karma__.error);
