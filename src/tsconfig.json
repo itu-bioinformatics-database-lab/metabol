@@ -126,9 +126,7 @@
     "typings.d.ts"
   ],
   "filesGlob": [
-    "**/*.ts",
-    "typings/browser.d.ts",
-    "typings/modules/d3/index.d.ts"
+    "**/*.ts"
   ],
   "atom": {
     "rewriteTsconfig": true
