@@ -94,7 +94,6 @@ module.exports = function(config) {
     remapIstanbulReporter: {
       src: './coverage/coverage-final.json',
       reports: {
-        html: './coverage/html',
         lcovonly: './coverage/lcov.info',
       }
     },
