@@ -8,8 +8,8 @@ module.exports = function(config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-coverage'),
-      require('karma-remap-istanbul'),
-      require('karma-chrome-launcher')
+      require('karma-chrome-launcher'),
+      require('karma-remap-istanbul')
     ],
     customLaunchers: {
       // chrome setup for travis CI using chromium
@@ -75,12 +75,13 @@ module.exports = function(config) {
       'dist/vendor/**/*.spec.js'
     ],
 
-    reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
 
     preprocessors: {
       'dist/app/**/!(*.spec).js': ['coverage'],
       // 'dist/app/**/*.js': ['sourcemap']
     },
+
+    reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
 
     coverageReporter: {
       includeAllSources: true,
@@ -93,10 +94,9 @@ module.exports = function(config) {
     remapIstanbulReporter: {
       src: './coverage/coverage-final.json',
       reports: {
+        html: './coverage/html',
         lcovonly: './coverage/lcov.info',
-      },
-      timeoutNotCreated: 15000,
-      timeoutNoMoreFiles: 15000
+      }
     },
 
     port: 9876,
