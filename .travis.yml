@@ -5,6 +5,9 @@ node_js:
   - '6.2.0'
 
 addons:
+    code_climate:
+        repo_token: 1bb5ae3c9135d1c8fc045c801dbfcab351398330c92d15844b327fedd85f761b
+
 apt:
   sources:
     - google-chrome
@@ -20,8 +23,13 @@ before_install:
 before_script:
 - npm install -g angular-cli
 - npm install -g karma
+- npm install -g codeclimate-test-reporter
 - npm install
 - typings install
 - ng build
 
 script: karma start config/karma.conf.js --single-run
+
+after_script:
+  - karma start config/karma.conf.js --single-run
+  - codeclimate-test-reporter < coverage/lcov.info

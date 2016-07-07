@@ -8,7 +8,7 @@ module.exports = function(config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-coverage'),
-      // require('karma-sourcemap-loader'),
+      require('karma-remap-istanbul'),
       require('karma-chrome-launcher')
     ],
     customLaunchers: {
@@ -58,14 +58,13 @@ module.exports = function(config) {
         included: false,
         watched: true
       }
-
       // paths to support debugging with source maps in dev tools
       , {
         pattern: 'src/**/*.ts',
         included: false,
         watched: false
       }, {
-        pattern: 'dist/app/**/*.js.map',
+        pattern: 'dist/**/*.js.map',
         included: false,
         watched: false
       }
@@ -75,17 +74,31 @@ module.exports = function(config) {
       // Vendor packages might include spec files. We don't want to use those.
       'dist/vendor/**/*.spec.js'
     ],
-    reporters: ['progress', 'coverage'],
+
+    reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
+
     preprocessors: {
       'dist/app/**/!(*.spec).js': ['coverage'],
       // 'dist/app/**/*.js': ['sourcemap']
     },
+
     coverageReporter: {
-      reporters: [{
-        type: 'html',
-        subdir: '.'
-      }]
+      includeAllSources: true,
+      type: 'json',
+      dir: '.',
+      subdir: 'coverage',
+      file: 'coverage-final.json'
     },
+
+    remapIstanbulReporter: {
+      src: './coverage/coverage-final.json',
+      reports: {
+        lcovonly: './coverage/lcov.info',
+      },
+      timeoutNotCreated: 15000,
+      timeoutNoMoreFiles: 15000
+    },
+
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
