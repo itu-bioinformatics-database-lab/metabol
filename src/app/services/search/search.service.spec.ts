@@ -25,6 +25,7 @@ import {
 describe('Search Service', () => {
   let searchService: SearchService;
   let mockBackend: MockBackend;
+  let query = 'pro';
 
   const mockHttpProvider = {
     deps: [MockBackend, BaseRequestOptions],
@@ -52,11 +53,9 @@ describe('Search Service', () => {
       metabolites: ['x', 'y', 'z']
     };
 
-    let query = 'pro';
-
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
-        let options = new ResponseOptions({ body: JSON.stringify(apiData) });
+        let options = new ResponseOptions({ body: apiData });
         connection.mockRespond(new Response(options));
 
         let expectedUrl = `http://biodb.sehir.edu.tr/api2/searchprefix/${query}`;
@@ -85,11 +84,9 @@ describe('Search Service', () => {
       ],
     };
 
-    let query = 'pro';
-
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
-        let options = new ResponseOptions({ body: JSON.stringify(apiData) });
+        let options = new ResponseOptions({ body: apiData });
         connection.mockRespond(new Response(options));
 
         let expectedUrl = `http://biodb.sehir.edu.tr/api2/search/${query}`;
