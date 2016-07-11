@@ -12,7 +12,7 @@ beforeEachProviders(() => [AppComponent]);
 
 describe('App: Metabol', () => {
   it('should create the app',
-      inject([AppComponent], (app: AppComponent) => {
-    expect(app).toBeTruthy();
-  }));
+    inject([AppComponent], (app: AppComponent) => {
+      expect(app).toBeTruthy();
+    }));
 });
