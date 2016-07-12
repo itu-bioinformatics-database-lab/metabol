@@ -24,6 +24,9 @@ import {
   BaseRequestOptions
 } from '@angular/http';
 
+import {AppSettings} from '../../../app/';
+
+
 describe('Fba Service', () => {
   let fbaService: FbaService;
   let mockBackend: MockBackend;
@@ -55,7 +58,7 @@ describe('Fba Service', () => {
         let options = new ResponseOptions({ body: { key: guid } });
         connection.mockRespond(new Response(options));
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/fba/start`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/fba/start`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
@@ -96,7 +99,7 @@ describe('Fba Service', () => {
 
         expect(body.concentrationChanges.length).toEqual(apiData.length);
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/fba/start`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/fba/start`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
@@ -123,7 +126,7 @@ describe('Fba Service', () => {
         let options = new ResponseOptions({ body: apiData });
         connection.mockRespond(new Response(options));
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/fba/${fbaService.key}/${fbaService.currentIteration}`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/fba/${fbaService.key}/${fbaService.currentIteration}`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
@@ -142,7 +145,7 @@ describe('Fba Service', () => {
         let options = new ResponseOptions({ body: { key: guid } });
         connection.mockRespond(new Response(options));
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/fba/save`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/fba/save`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 

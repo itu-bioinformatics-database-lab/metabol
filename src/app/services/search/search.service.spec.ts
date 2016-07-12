@@ -13,6 +13,7 @@ import {
 import { SearchService } from './search.service';
 import {provide} from '@angular/core';
 import {MockBackend, MockConnection} from '@angular/http/testing';
+import {AppSettings} from '../../../app/';
 
 import {
   Http,
@@ -58,7 +59,7 @@ describe('Search Service', () => {
         let options = new ResponseOptions({ body: apiData });
         connection.mockRespond(new Response(options));
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/searchprefix/${query}`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/searchprefix/${query}`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
@@ -89,7 +90,7 @@ describe('Search Service', () => {
         let options = new ResponseOptions({ body: apiData });
         connection.mockRespond(new Response(options));
 
-        let expectedUrl = `http://biodb.sehir.edu.tr/api2/search/${query}`;
+        let expectedUrl = `${AppSettings.API_ENDPOINT}/search/${query}`;
         expect(connection.request.url).toEqual(expectedUrl);
       });
 

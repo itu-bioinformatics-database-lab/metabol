@@ -2,17 +2,21 @@ import {Injectable} from '@angular/core'
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {FbaIteration} from './fbaiteration';
 import {MetaboliteConcentration} from './metaboliteConcentration';
+import {AppSettings} from '../../../app/';
 
 
 @Injectable()
 export class FbaService {
-  apiUrl = "http://biodb.sehir.edu.tr/api2/fba";
+  apiUrl: String;
+
   currentIteration: number;
   key: String;
   fbas: Array<FbaIteration>;
   options: RequestOptions;
 
   constructor(private http: Http) {
+    this.apiUrl = `${AppSettings.API_ENDPOINT}/fba`;
+
     this.currentIteration = 0;
     this.fbas = new Array<FbaIteration>();
     this.options = new RequestOptions({
@@ -52,7 +56,8 @@ export class FbaService {
   getNextIteration(callback: (key: FbaIteration) => void) {
     this.currentIteration++;
 
-    this.http.get(`${this.apiUrl}/${this.key}/${this.currentIteration}`, this.options)
+    this.http
+      .get(`${this.apiUrl}/${this.key}/${this.currentIteration}`, this.options)
       .map(res => res.json()).subscribe(
       (data: FbaIteration) => {
         this.fbas.push(data);

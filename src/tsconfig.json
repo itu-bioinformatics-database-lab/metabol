@@ -19,6 +19,7 @@
     "app/app.component.spec.ts",
     "app/app.component.ts",
     "app/app.routes.ts",
+    "app/appSettings.ts",
     "app/components/accordion/accordion.component.spec.ts",
     "app/components/accordion/accordion.component.ts",
     "app/components/accordion/index.ts",

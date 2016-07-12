@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-
+import {AppSettings} from '../../../app/';
 
 @Injectable()
 export class SearchService {
 
-  apiUrl: string;
-
-  constructor(private http: Http) {
-    this.apiUrl = 'http://biodb.sehir.edu.tr/api2';
-  }
+  constructor(private http: Http) { }
 
   searchPrefix(query: string)
     : Observable<{ reactions: String[]; metabolites: String[]; }> {
-    return this.http.get(`${this.apiUrl}/searchprefix/${query}`)
+    return this.http.get(`${AppSettings.API_ENDPOINT}/searchprefix/${query}`)
       .map(response => response.json());
   }
 
@@ -23,7 +19,7 @@ export class SearchService {
       reactions: Array<{ id: string; name: string; }>;
       metabolites: Array<{ id: string; name: string; }>;
     }> {
-    return this.http.get(`${this.apiUrl}/search/${query}`)
+    return this.http.get(`${AppSettings.API_ENDPOINT}/search/${query}`)
       .map(response => response.json());
   }
 

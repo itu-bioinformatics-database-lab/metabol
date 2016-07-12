@@ -2,26 +2,22 @@ import { Injectable } from '@angular/core';
 import {Reaction, ConnectedMetabolites} from './reaction';
 import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-
+import {AppSettings} from '../../../app/';
 
 @Injectable()
 export class ReactionService {
-  reactionUrl: string;
-  relatedMetabolitesUrl: string;
 
-  constructor(private http: Http) {
-    this.reactionUrl = 'http://biodb.sehir.edu.tr/api2/reaction';
-    this.relatedMetabolitesUrl = "http://biodb.sehir.edu.tr/api2/relatedmetabolites"
-  }
+  constructor(private http: Http) { }
 
   getReaction(reactionId: string) {
-    return this.http.get(`${this.reactionUrl}/${reactionId}`)
+    return this.http
+      .get(`${AppSettings.API_ENDPOINT}/reaction/${reactionId}`)
       .map(response => response.json());
-
   }
 
   getRelatedMetabolites(reactionId: string) {
-    return this.http.get(`${this.relatedMetabolitesUrl}/${reactionId}`)
+    return this.http
+      .get(`${AppSettings.API_ENDPOINT}/relatedmetabolites/${reactionId}`)
       .map(response => response.json());
   }
 
