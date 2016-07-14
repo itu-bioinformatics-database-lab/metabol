@@ -21,4 +21,6 @@
       [attr.y]="d.y - 15">{{ d.name }}</svg:text>
   </svg:g>
 </fullscreenable-svg>
-<ng-content></ng-content>
+<div id="down-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-down-right"></ng-content>
+</div>
