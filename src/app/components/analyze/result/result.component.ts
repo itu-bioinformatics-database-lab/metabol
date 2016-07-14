@@ -31,9 +31,10 @@ export class ResultComponent {
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
     this.colors = new Array<String>();
+    this.isFullScreen = false;
 
     route.params.subscribe((params) => {
-      this.fba.startFba(params['fbaKey']);
+      this.fba.startFba(params['key']);
     });
 
     this.currentIteration = 0;

@@ -17,3 +17,6 @@ iteration-color-box {
   bottom: 10px;
   right: 10px;
 }
+visualization > * {
+  z-index: 3;
+}

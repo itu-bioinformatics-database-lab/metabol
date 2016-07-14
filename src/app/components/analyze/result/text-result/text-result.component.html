@@ -1,4 +1,6 @@
-<accordion [title]="titleGenerater(i)" *ngFor="let r of textResult;let i=index">
+<accordion
+  [title]="'Iteration ' + (textResult.length - i) + ' (Expanded Metabolite: ' + 'x' + ')' + ' (Added ' + r.newMetaboliteCount + ' metabolites, ' + r.newReactionCount + ' reactions)'"
+  *ngFor="let r of textResult;let i=index">
   <accordion [title]="'Constraints'">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let c of r.constraints">

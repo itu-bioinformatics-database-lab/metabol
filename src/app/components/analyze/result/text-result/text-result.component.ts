@@ -7,7 +7,7 @@ import {KeysPipe} from '../../../../pipes/keys.pipe';
   selector: 'text-result',
   templateUrl: 'text-result.component.html',
   styleUrls: ['text-result.component.css'],
-  directives:[AccordionComponent],
+  directives: [AccordionComponent],
   pipes: [KeysPipe]
 })
 export class TextResultComponent {
@@ -17,14 +17,18 @@ export class TextResultComponent {
   // TODO: update api
   @Input() textResult: Array<any>;
 
-  titleGenerater(index) {
-    console.log('a');
-    let iteration = this.textResult[index];
-    let title = 'Iteration ' + (this.textResult.length - index)
-      + ' (Expanded Metabolite: ' + '' + ')'
-      + ' (Added ' + iteration.newMetaboliteCount + ' metabolites, '
-      + iteration.newReactionCount + ' reactions)';
-
-    return title;
+  constructor() {
+    this.textResult = new Array<any>();
   }
+
+  // Bad performans
+  // titleGenerater(index) {
+  //   let iteration = this.textResult[index];
+  //   let title = 'Iteration ' + (this.textResult.length - index)
+  //     + ' (Expanded Metabolite: ' + '' + ')'
+  //     + ' (Added ' + iteration.newMetaboliteCount + ' metabolites, '
+  //     + iteration.newReactionCount + ' reactions)';
+  //
+  //   return title;
+  // }
 }

@@ -54,7 +54,9 @@ const barrels: string[] = [
   'app/components/panel/panel',
   'app/components/panel',
   'app/components/panel/analyze',
-  'app/components/panel/profile'
+  'app/components/panel/profile',
+  'app/components/fullscreenable-svg',
+  'app/components/test',
   /** @cli-barrel */
 ];
 
