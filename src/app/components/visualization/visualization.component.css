@@ -26,9 +26,23 @@
   height: 100vh;
   background-color: #ffffff;
 }
-#down-right {
+#down-right, #down-left, #top-right, #top-left {
   position: absolute;
   z-index: 3;
+}
+#down-right {
   bottom: 10px;
+  right: 10px;
+}
+#down-left {
+  bottom: 10px;
+  left: 10px;
+}
+#top-right {
+  top: 10px;
+  right: 10px;
+}
+#top-left {
+  top: 10px;
   left: 10px;
 }

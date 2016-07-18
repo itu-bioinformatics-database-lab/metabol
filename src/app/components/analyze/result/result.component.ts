@@ -21,7 +21,6 @@ export class ResultComponent {
   nodes: FbaNode[];
   links: FbaLink[];
   colorize: colorization.IdenticalByHalf;
-  isFullScreen: Boolean;
   currentIteration: number;
   colors: Array<String>;
   textResult: Array<any>;
@@ -31,7 +30,6 @@ export class ResultComponent {
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
     this.colors = new Array<String>();
-    this.isFullScreen = false;
 
     route.params.subscribe((params) => {
       this.fba.startFba(params['key']);

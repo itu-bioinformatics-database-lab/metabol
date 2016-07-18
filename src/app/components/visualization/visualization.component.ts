@@ -25,17 +25,12 @@ export class VisualizationComponent implements OnChanges, OnInit {
   scale: number;
   translate: Array<number>;
 
-  fullScreen: Boolean;
-  @Input() isFullScreen: Boolean;
-  @Output() isFullScreenChange: EventEmitter<Boolean>;
+  isFullScreen: Boolean;
 
   constructor(private elementRef: ElementRef) {
 
     this.scale = 1;
     this.translate = [1, 1];
-
-    this.isFullScreen = this.isFullScreen || false;
-    this.isFullScreenChange = new EventEmitter<Boolean>();
 
     this.force = this.initForce();
   }
@@ -57,10 +52,6 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
     this.d3links = this.force.links();
     this.d3nodes = this.force.nodes();
-  }
-
-  onFullScreenChange(fullScreen) {
-    this.isFullScreenChange.emit(fullScreen);
   }
 
   ngOnInit() {

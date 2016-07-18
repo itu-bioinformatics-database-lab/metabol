@@ -1,4 +1,4 @@
-<fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="fullScreen" (isFullScreenChange)="onFullScreenChange(fullScreen)">
+<fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="isFullScreen">
   <svg:g [attr.transform]="'translate('+ translate +')scale('+ scale +')'">
     <svg:line class="link" *ngFor="let l of d3links"
       [attr.x1]="l.source.x"
@@ -23,4 +23,13 @@
 </fullscreenable-svg>
 <div id="down-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
   <ng-content select="fullscreenable-down-right"></ng-content>
+</div>
+<div id="down-left" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-down-left"></ng-content>
+</div>
+<div id="top-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-top-right"></ng-content>
+</div>
+<div id="top-left" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-top-left"></ng-content>
 </div>
