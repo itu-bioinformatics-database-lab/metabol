@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <visualization [nodes]="nodes" [links]="links">
+    <visualization [nodes]="nodes" [links]="links" [searchTerm]="searchTerm">
       <fullscreenable-down-left>
         <div class="btn-group">
           <button class="btn btn-default" (click)="previous()">
@@ -17,9 +17,9 @@
           <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
         </button>
         <div class="form-group search-form-group">
-          <input type="text" class="form-control" placeholder="Search for...">
+          <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search for..." >
         </div>
-        <button class="btn btn-default" (click)="save()" id="save">
+        <button class="btn btn-default" (click)="save()">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
       </fullscreenable-top-left>

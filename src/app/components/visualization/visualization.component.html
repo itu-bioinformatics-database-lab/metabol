@@ -18,7 +18,8 @@
       [attr.y]="d.y + 5">{{ d.iteration }}</svg:text>
     <svg:text class="text" *ngFor="let d of d3nodes"
       [attr.x]="d.x - 15"
-      [attr.y]="d.y - 15">{{ d.name }}</svg:text>
+      [attr.y]="d.y - 15"
+      [style.fill]="searchInGraph(d.name)">{{ d.name }}</svg:text>
   </svg:g>
 </fullscreenable-svg>
 <div id="down-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">

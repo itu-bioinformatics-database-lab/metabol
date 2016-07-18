@@ -14,6 +14,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   @Input() nodes: Array<FbaNode>;
   @Input() links: Array<FbaLink>;
+  @Input() searchTerm: string;
 
   reactions: Array<FbaNode>;
   metabolites: Array<FbaNode>;
@@ -31,7 +32,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
     this.scale = 1;
     this.translate = [1, 1];
-
+    this.searchTerm = "";
     this.force = this.initForce();
   }
 
@@ -83,6 +84,12 @@ export class VisualizationComponent implements OnChanges, OnInit {
     this.force.stop();
     this.force.nodes(this.nodes).links(this.links);
     this.force.start();
+  }
+
+  searchInGraph(nodeName: String) {
+    if (nodeName.startsWith(this.searchTerm) || !this.searchTerm)
+      return '#000';
+    return '#ccc';
   }
 
 }
