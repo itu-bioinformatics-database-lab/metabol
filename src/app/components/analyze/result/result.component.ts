@@ -25,6 +25,8 @@ export class ResultComponent {
   colors: Array<String>;
   textResult: Array<any>;
 
+  searchActive: Boolean;
+
   constructor(private fba: FbaService, route: ActivatedRoute) {
     this.colorize = new colorization.IdenticalByHalf();
     this.nodes = new Array<FbaNode>();
@@ -38,6 +40,10 @@ export class ResultComponent {
     this.currentIteration = 0;
 
     this.textResult = new Array<any>();
+  }
+
+  toggleSearch() {
+    this.searchActive = !this.searchActive;
   }
 
   next() {
