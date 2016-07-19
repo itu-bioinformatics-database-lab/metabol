@@ -1,10 +1,10 @@
 import { RouterConfig } from '@angular/router';
-import {SearchPageComponent} from './search-page';
-import {SearchResultComponent} from './search-result';
+import {SearchPageComponent} from './search-page/search-page.component';
+import {SearchResultComponent} from './search-result/search-result.component';
 
 
 export const SearchRoutes: RouterConfig = [
   { path: 'search', component: SearchPageComponent },
   { path: 'search-result/:query', component: SearchResultComponent },
-  { path: '', redirectTo: 'search', terminal: true },
+  { path: '', redirectTo: '/search', terminal: true },
 ];
