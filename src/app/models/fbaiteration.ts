@@ -22,8 +22,6 @@ export interface FbaNode extends d3.layout.force.Node {
   iteration?: number;
 }
 
-export interface FbaLink extends d3.layout.force.Link<FbaNode> {
-  source: FbaNode;
-  target: FbaNode;
+export interface FbaLink extends d3.layout.force.Link<FbaNode | Number> {
   role: string;
 }

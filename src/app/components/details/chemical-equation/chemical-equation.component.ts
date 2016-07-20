@@ -16,7 +16,6 @@ export class ChemicalEquationComponent {
   @Input() selectedMetabolite: Object;
   reactants: Array<{ id: string, stoichiometry: number }>;
   products: Array<{ id: string, stoichiometry: number }>;
-  a: any;
 
   constructor() {
     this.reactants = new Array<{ id: string, stoichiometry: number }>();
@@ -26,7 +25,7 @@ export class ChemicalEquationComponent {
   // TODO: check if given data is resolved
   ngOnChanges() {
     this.constructor();
-    
+
     this.metabolites
       .filter((key) => key.stoichiometry > 0)
       .forEach((key) => {
