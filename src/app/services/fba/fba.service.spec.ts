@@ -13,8 +13,8 @@ import {
 import { FbaService } from './fba.service';
 import {provide} from '@angular/core';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {MetaboliteConcentration} from './metaboliteConcentration';
-import {FbaIteration, FbaNode, FbaLink} from './fbaiteration';
+import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
+import {FbaIteration, FbaNode, FbaLink} from '../../models/fbaiteration';
 
 import {
   Http,

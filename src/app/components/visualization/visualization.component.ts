@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef} from '@angular/core';
-import {FbaNode, FbaLink} from '../../services/fba/fbaiteration';
+import {FbaNode, FbaLink} from '../../models/fbaiteration';
 import * as d3 from 'd3';
 import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component';
 

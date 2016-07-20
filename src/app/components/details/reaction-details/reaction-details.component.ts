@@ -3,7 +3,7 @@ import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {ReactionService} from '../../../services/reaction/reaction.service';
 import {ChemicalEquationComponent} from '../chemical-equation/chemical-equation.component';
 import {KeysPipe} from '../../../pipes/keys.pipe';
-import {Reaction} from '../../../services/reaction/reaction';
+import {Reaction} from '../../../models/reaction';
 
 @Component({
   moduleId: module.id,

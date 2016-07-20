@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MetaboliteConcentration} from '../../../services/fba/metaboliteConcentration';
+import {MetaboliteConcentration} from '../../../models/metaboliteConcentration';
 import {Control, FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
 import {KeysPipe} from '../../../pipes/keys.pipe';
 import {FbaService} from '../../../services/fba/fba.service';

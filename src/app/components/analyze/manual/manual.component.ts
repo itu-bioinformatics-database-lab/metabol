@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
 import {ConcentrationTableComponent} from '../concentration-table/concentration-table.component';
-import {MetaboliteConcentration} from '../../../services/fba/metaboliteConcentration';
+import {MetaboliteConcentration} from '../../../models/metaboliteConcentration';
 
 @Component({
   moduleId: module.id,
@@ -17,5 +17,5 @@ export class ManualComponent {
   constructor(private fb: FormBuilder) {
     this.conTable = new Array<MetaboliteConcentration>();
   }
-  
+
 }

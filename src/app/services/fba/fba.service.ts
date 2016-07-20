@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {Http, Headers, RequestOptions} from '@angular/http';
-import {FbaIteration} from './fbaiteration';
-import {MetaboliteConcentration} from './metaboliteConcentration';
+import {FbaIteration} from '../../models/fbaiteration';
+import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
 import {AppSettings} from '../../../app/';
 
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FbaService} from '../../../services/fba/fba.service';
-import {FbaIteration, FbaNode, FbaLink} from '../../../services/fba/fbaiteration';
+import {FbaIteration, FbaNode, FbaLink} from '../../../models/fbaiteration';
 import * as colorization from '../../../modules/colorization';
 import {VisualizationComponent} from '../../visualization/visualization.component';
 import {IterationColorBoxComponent} from './iteration-color-box/iteration-color-box.component';

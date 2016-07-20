@@ -1,4 +1,4 @@
-import {Metabolite, RelatedReactions} from './metabolite';
+import {Metabolite, RelatedReactions} from '../../models/metabolite';
 import {Injectable} from '@angular/core';
 import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
