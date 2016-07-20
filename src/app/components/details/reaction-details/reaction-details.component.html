@@ -35,9 +35,9 @@
           {{reaction.notes}}
         </p>
 
-        <h3 *ngIf="relatedMetabolites">
-          <chemical-equation [metabolites]=relatedMetabolites></chemical-equation>
-        </h3>
+        <h4 *ngIf="relatedMetabolites">
+          <chemical-equation [metabolites]="relatedMetabolites" [selectedMetabolite]="{}"></chemical-equation>
+        </h4>
 
         <div>
           <br>
