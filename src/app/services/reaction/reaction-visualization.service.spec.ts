@@ -23,10 +23,10 @@ describe('ReactionVisualization Service', () => {
   ];
 
   let expectedFbaNode: FbaNode[] = [
-    { id: 0, name: 'a', type: 'm', index: 0 },
-    { id: 1, name: 'b', type: 'm', index: 0 },
-    { id: 2, name: 'c', type: 'm', index: 0 },
-    { id: 3, name: 'r', type: 'r', index: 0 }
+    { id: 0, name: 'a', type: 'm', index: 0, color:'#ff0000' },
+    { id: 1, name: 'b', type: 'm', index: 0, color:'#7fff00' },
+    { id: 2, name: 'c', type: 'm', index: 0, color:'#00ffff' },
+    { id: 3, name: 'r', type: 'r', index: 0, color:'#7f00ff' }
   ];
 
   let expectedFbaLink: FbaLink[] = [
