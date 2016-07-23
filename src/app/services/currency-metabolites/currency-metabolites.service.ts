@@ -24,7 +24,7 @@ export class CurrencyMetabolitesService {
    * @param  {string}  metabolite name of metabolite
    * @return {boolean}            is metabolite currency or not
    */
-  isCurrecy(metabolite: string): boolean {
+  isCurrency(metabolite: string): boolean {
     return Boolean(metabolite in this.currencyMetabolites);
   }
 

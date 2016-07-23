@@ -12,6 +12,7 @@ export class ConnectedMetabolite {
   id: string;
   name: string;
   stoichiometry: number;
+  reactions: Array<{ id: string, stoichiometry: number }>;
 }
 
 export class ConnectedMetabolites {

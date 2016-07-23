@@ -33,9 +33,9 @@ describe('CurrencyMetabolites Service', () => {
   });
 
   it('should isCurrecyMetabolite', () => {
-    expect(currencyMetabolitesService.isCurrecy('h[c]')).toBeTruthy();
-    expect(currencyMetabolitesService.isCurrecy('2hb[e]')).toBeTruthy();
-    expect(currencyMetabolitesService.isCurrecy('nocurrency')).not.toBeTruthy();
+    expect(currencyMetabolitesService.isCurrency('h[c]')).toBeTruthy();
+    expect(currencyMetabolitesService.isCurrency('2hb[e]')).toBeTruthy();
+    expect(currencyMetabolitesService.isCurrency('nocurrency')).not.toBeTruthy();
   });
 
   afterAll(() => {

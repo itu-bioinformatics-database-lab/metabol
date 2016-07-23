@@ -6,56 +6,100 @@ import {
   expect, it, xit,
   async, inject
 } from '@angular/core/testing';
+import {provide} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ReactionVisualizationService } from './reaction-visualization.service';
 import {Reaction, ConnectedMetabolites, ConnectedMetabolite} from '../../models/reaction';
 import {Metabolite} from '../../models/metabolite';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
+import {CurrencyMetabolitesService} from '../currency-metabolites/currency-metabolites.service';
+
+/**
+ * Wrost test i ever write but dependcy injection of service to service not working
+ */
 
 describe('ReactionVisualization Service', () => {
-  beforeEachProviders(() => [ReactionVisualizationService]);
 
-  let reaction = <Reaction>{ id: 'r' };
+  // console.log(mockCurrencyMetabolitesService);
+
+  beforeEachProviders(() => [
+    ReactionVisualizationService
+  ]);
+
+  let localStoreData = {
+    "2hb[c]": "",
+    "2hb[e]": "",
+    "h[c]": ""
+  };
+
+  /**
+   * Bad hacking beacuse dependcy injection not working
+   */
+  beforeAll(function() {
+    localStorage.clear();
+    localStorage.setItem('currency-metabolites', JSON.stringify(localStoreData));
+  });
+
+  let service: ReactionVisualizationService;
+  beforeEach(inject([ReactionVisualizationService], (rv) => {
+    service = rv;
+  }));
+
+  let reaction = <Reaction>{ id: 'r1' };
   let connectedMetabolites: ConnectedMetabolite[] = [
-      <ConnectedMetabolite>{ id: 'a', stoichiometry: 1 },
-      <ConnectedMetabolite>{ id: 'b', stoichiometry: 2 },
-      <ConnectedMetabolite>{ id: 'c', stoichiometry: -1 },
+    <ConnectedMetabolite>{
+      id: 'm1', stoichiometry: 1,
+      reactions: [{ id: "r2", stoichiometry: 1 }, { id: "r4", stoichiometry: -1 }]
+    },
+    <ConnectedMetabolite>{
+      id: 'h[c]', stoichiometry: 2,
+      reactions: [{ id: "r3", stoichiometry: -1 }]
+    },
+    <ConnectedMetabolite>{
+      id: 'm3', stoichiometry: -1,
+      reactions: []
+    },
   ];
 
   let expectedFbaNode: FbaNode[] = [
-    { id: 0, name: 'a', type: 'm', index: 0, color:'#ff0000' },
-    { id: 1, name: 'b', type: 'm', index: 0, color:'#7fff00' },
-    { id: 2, name: 'c', type: 'm', index: 0, color:'#00ffff' },
-    { id: 3, name: 'r', type: 'r', index: 0, color:'#7f00ff' }
+    { id: 0, name: 'r1', type: 'r', index: 0, color: '#ff0000' },
+    { id: 1, name: 'm1', type: 'm', index: 0, color: '#7fff00' },
+    { id: 2, name: 'h[c]', type: 'm', index: 0, color: '#00ffff' },
+    { id: 3, name: 'm3', type: 'm', index: 0, color: '#7f00ff' },
+    { id: 4, name: 'r2', type: 'r', index: 0, color: '#ff0000' },
+    { id: 5, name: 'r4', type: 'r', index: 0, color: '#ffbf00' }
   ];
 
   let expectedFbaLink: FbaLink[] = [
-    { source: 0, target: 3, role: 's' },
-    { source: 1, target: 3, role: 's' },
-    { source: 3, target: 2, role: 'p' }
+    { source: 1, target: 0, role: 's' },
+    { source: 2, target: 0, role: 's' },
+    { source: 0, target: 3, role: 'p' },
+    { source: 4, target: 1, role: 'p' },
+    { source: 1, target: 5, role: 's' }
   ];
 
-  it('should ...',
-    inject([ReactionVisualizationService], (service: ReactionVisualizationService) => {
-      expect(service).toBeTruthy();
-    }));
+  it('should ...', () => {
+    expect(service).toBeTruthy();
+  });
 
-  it('should convertToFbaNode',
-    inject([ReactionVisualizationService], (service: ReactionVisualizationService) => {
-      let fbaNodes = service.convertToFbaNode(reaction, connectedMetabolites);
-      expect(fbaNodes).toEqual(expectedFbaNode);
-    }));
+  it('should convertToFbaNode', () => {
+    let fbaNodes = service.convertToFbaNode(reaction, connectedMetabolites);
+    expect(fbaNodes).toEqual(expectedFbaNode);
+  });
 
-  it('should convertToFbaLink',
-    inject([ReactionVisualizationService], (service: ReactionVisualizationService) => {
-      let fbaLinks = service.convertToFbaLink(reaction, connectedMetabolites);
-      expect(fbaLinks).toEqual(expectedFbaLink);
-    }));
+  it('should convertToFbaLink', () => {
+    let fbaLinks = service.convertToFbaLink(reaction, connectedMetabolites);
+    expect(fbaLinks).toEqual(expectedFbaLink);
+  });
 
-  it('should convertToFbaVisualization',
-    inject([ReactionVisualizationService], (service: ReactionVisualizationService) => {
-      let fbaVisualization = service.convertToFbaVisualization(reaction, connectedMetabolites);
-      expect(fbaVisualization).toEqual([expectedFbaNode, expectedFbaLink]);
-    }));
+  it('should convertToFbaVisualization', () => {
+    let fbaVisualization = service.convertToFbaVisualization(reaction, connectedMetabolites);
+    expect(fbaVisualization).toEqual([expectedFbaNode, expectedFbaLink]);
+  });
+
+  afterAll(() => {
+    localStorage.clear();
+  });
 
 });
