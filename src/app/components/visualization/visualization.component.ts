@@ -28,6 +28,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
   translate: Array<number>;
 
   isFullScreen: Boolean;
+  url: string;
 
   constructor(private elementRef: ElementRef, private router: Router) {
 
@@ -35,6 +36,8 @@ export class VisualizationComponent implements OnChanges, OnInit {
     this.translate = [1, 1];
     this.searchTerm = "";
     this.force = this.initForce();
+
+    this.url = window.location.href;
   }
 
   initForce() {
