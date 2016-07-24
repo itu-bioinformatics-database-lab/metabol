@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef} from '@angular/core';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
 import * as d3 from 'd3';
+import {Router} from '@angular/router';
 import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component';
 
 @Component({
@@ -28,7 +29,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   isFullScreen: Boolean;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private router: Router) {
 
     this.scale = 1;
     this.translate = [1, 1];
