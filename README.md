@@ -4,11 +4,14 @@
 
 Web tools for our metabolic data analyze research project. This tool will help researchers to use our analyze algorithms and provide searching functionality in our database that includes reaction and metabolite in a human body with helpful visualizations.
 
+## Demo
+[Link](http://muhammedhasan.github.io/metabol/)
+
 ## Install
 Run `npm install` for installation.
 
 ## Run
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Build
 
@@ -20,5 +23,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
