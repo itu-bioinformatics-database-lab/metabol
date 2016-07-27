@@ -25,6 +25,7 @@ export class ResultComponent {
   colors: Array<String>;
   textResult: Array<any>;
 
+  searchTerm:string;
   searchActive: Boolean;
 
   constructor(private fba: FbaService, route: ActivatedRoute) {
