@@ -1,8 +1,9 @@
 import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef} from '@angular/core';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
 import * as d3 from 'd3';
-import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component';
+import {Location} from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -30,14 +31,12 @@ export class VisualizationComponent implements OnChanges, OnInit {
   isFullScreen: Boolean;
   url: string;
 
-  constructor(private elementRef: ElementRef, private router: Router) {
+  constructor(private elementRef: ElementRef, private location: Location) {
 
     this.scale = 1;
     this.translate = [1, 1];
     this.searchTerm = "";
     this.force = this.initForce();
-
-    this.url = window.location.href;
   }
 
   initForce() {
@@ -88,6 +87,8 @@ export class VisualizationComponent implements OnChanges, OnInit {
     this.force.stop();
     this.force.nodes(this.nodes).links(this.links);
     this.force.start();
+
+    this.url= this.location.path();
   }
 
   searchInGraph(nodeName: String) {
