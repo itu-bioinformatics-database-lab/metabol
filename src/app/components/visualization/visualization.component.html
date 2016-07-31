@@ -10,7 +10,7 @@
       [attr.y1]="l.source.y"
       [attr.x2]="l.target.x"
       [attr.y2]="l.target.y"
-      [attr.marker-end]="'/metabol/url(' + url + '#markerArrow)'"/>
+      [attr.marker-end]="'url(/metabol/' + url + '#markerArrow)'"/>
     <svg:circle class="metabolite" r="10" *ngFor="let d of metabolites"
       [attr.cx]="d.x"
       [attr.cy]="d.y"
