@@ -10,45 +10,34 @@
       </div>
       <div class="panel-body">
         <p *ngIf="metabolite.id">
-          id:
-          {{metabolite.id}}
-          {{metaboliteId}}
+          id: {{metabolite.id}} {{metaboliteId}}
         </p>
         <p *ngIf="metabolite.name">
-          name:
-          {{metabolite.name}}
+          name: {{metabolite.name}}
         </p>
         <p *ngIf="metabolite.compartment">
-          compartment:
-          {{metabolite.compartment}}
+          compartment: {{metabolite.compartment}}
         </p>
         <p *ngIf="metabolite.initialAmount">
-          initial amount:
-          {{metabolite.initialAmount}}
+          initial amount: {{metabolite.initialAmount}}
         </p>
         <p *ngIf="metabolite.charge">
-          charge:
-          {{metabolite.charge}}
+          charge: {{metabolite.charge}}
         </p>
         <p *ngIf="metabolite.model">
-          model:
-          {{metabolite.model}}
+          model: {{metabolite.model}}
         </p>
         <p *ngIf="metabolite.species_type">
-          species_type:
-          {{metabolite.species_type}}
+          species_type: {{metabolite.species_type}}
         </p>
         <p *ngIf="metabolite.annotation">
-          annotation:
-          {{metabolite.annotation}}
+          annotation: {{metabolite.annotation}}
         </p>
         <p *ngIf="metabolite.sboTerm">
-          sbo term:
-          {{metabolite.sboTerm}}
+          sbo term: {{metabolite.sboTerm}}
         </p>
-        <p *ngIf="metabolite.notes">
-          notes:
-          {{metabolite.notes}}
+        <p *ngFor="let n of metabolite.notes">
+          {{ n }}
         </p>
         <br>
         <div *ngIf="relatedReactions">
@@ -65,17 +54,17 @@
                   <strong>Chemical Formula</strong>
                 </td>
               </tr>
-
               <tr *ngFor="let item of relatedReactions">
-
                 <td>
                   <a [routerLink]="['/reaction', item.id]">
                     {{item.name}}
                   </a>
                 </td>
                 <td>
-
-                  <chemical-equation [metabolites]="item.metabolites[0].reactions" [selectedMetabolite]="{'stoichiometry': item.stoichiometry, 'id': metabolite.id }"></chemical-equation>
+                  <chemical-equation
+                    [metabolites]="item.metabolites"
+                    [selectedMetabolite]="{id:metabolite.id, stoichiometry: item.stoichiometry}">
+                  </chemical-equation>
                 </td>
               </tr>
             </tbody>

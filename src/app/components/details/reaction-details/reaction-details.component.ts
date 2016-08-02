@@ -45,6 +45,7 @@ export class ReactionDetailsComponent implements OnInit {
     //  Adam gibi bir tanesi load add sonra digerini load edersin
     this.rea.getReaction(reactionId).subscribe(data => {
       this.reaction = data;
+      this.reaction.notes = data.notes.split('\n');
       this.rea.getRelatedMetabolites(reactionId)
         .subscribe(data => {
           this.relatedMetabolites = data['metabolites'];

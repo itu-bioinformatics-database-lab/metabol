@@ -15,11 +15,12 @@
         <div *ngIf="filteredReactions.length > 0">
           <h2>Reactions</h2>
           <div *ngFor="let r of filteredReactions" id="change-color-on-mouse-over">
-            <ul (click)="selectSearch(r)">
+            <ul>
               <li>
-                <a>{{ r }}</a>
+                <a [routerLink]="['/search-result', r.name]">
+                  <b>{{ r.id }}</b> {{ r.name }}
+                </a>
               </li>
-
             </ul>
           </div>
         </div>
@@ -29,9 +30,11 @@
         <div *ngIf="filteredMetabolites.length > 0">
           <h2>Metabolites</h2>
           <div *ngFor="let m of filteredMetabolites" id="change-color-on-mouse-over">
-            <ul (click)="selectSearch(m)">
+            <ul>
               <li>
-                <a>{{ m }}</a>
+                <a [routerLink]="['/search-result', m.name]">
+                  <b>{{ m.id }}</b> {{ m.name }}
+                </a>
               </li>
             </ul>
           </div>

@@ -8,33 +8,27 @@
       </div>
       <div class="panel-body">
         <p *ngIf="reaction.id ">
-          id:
-          {{reaction.id}}
+          id: {{reaction.id}}
         </p>
         <p *ngIf="reaction.name">
-          name:
-          {{reaction.name}}
+          name: {{reaction.name}}
         </p>
         <p *ngIf="reaction.reversible">
-          reversible:
-          {{reaction.reversible}}
+          reversible: {{reaction.reversible}}
         </p>
         <p *ngIf="reaction.model">
-          model:
-          {{reaction.model}}
+          model: {{reaction.model}}
         </p>
         <p *ngIf="reaction.annotation">
-          annotation:
-          {{reaction.annotation}}
+          annotation: {{reaction.annotation}}
         </p>
         <p *ngIf="reaction.sboTerm">
           sbo term:{{reaction.sboTerm}}
         </p>
-        <p *ngIf="reaction.notes">
-          notes:
-          {{reaction.notes}}
+        <p *ngFor="let r of reaction.notes">
+          {{ r }}
         </p>
-
+        <br>
         <h4 *ngIf="relatedMetabolites">
           <chemical-equation [metabolites]="relatedMetabolites" [selectedMetabolite]="{}"></chemical-equation>
         </h4>

@@ -1,17 +1,19 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import {SearchService} from '../../../services/search/search.service';
-import {Router} from '@angular/router';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
   moduleId: module.id,
   selector: 'search-bar',
   templateUrl: 'search-bar.component.html',
   styleUrls: ['search-bar.component.css'],
+  directives: [ROUTER_DIRECTIVES],
   providers: [SearchService],
   host: {
     '(document:click)': 'handleClick($event)',
   },
 })
+
 export class SearchBarComponent {
 
   query: String;
@@ -31,11 +33,6 @@ export class SearchBarComponent {
     this.filteredMetabolites = new Array<any>();
   }
 
-  selectSearch(searchPrefix) {
-    this.query = searchPrefix;
-    this.generateFilters();
-  }
-
   search() {
     if (this.query)
       this.router.navigate(['/search-result', this.query]);
@@ -52,7 +49,12 @@ export class SearchBarComponent {
       this.generateFilters();
   }
 
-  handleClick(event) { //This function closes the autocomplete when click anywhere
+
+  /**
+   * Closes the autocomplete when click anywhere
+   * @param  {[type]} event clickEvent
+   */
+  handleClick(event) {
     var clickedComponent = event.target;
     var inside = false;
     do {
