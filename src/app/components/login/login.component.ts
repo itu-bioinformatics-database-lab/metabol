@@ -19,18 +19,30 @@ export class LoginComponent  {
   form: ControlGroup;
   token: string;
   error: boolean = false;
-
+  authHeader: Headers;
   constructor(fb: FormBuilder, public http: Http, public auth: LoginService, private router: Router) {
     this.form = fb.group({
       "Email": ["", Validators.required],
       "Password": ["", Validators.required]
     });
+//    this.token = localStorage.getItem('token');
+    this.authHeader = new Headers();
 
 
   }
 
-  onSubmit(value) {
-    this.auth.login(value.Email, value.Password);
+  onSubmit(value:any) {
+
+
+    this.auth.login(value).subscribe(
+        response => {
+          this.router.navigate(['/panel'])
+        },
+        error => {
+          alert(error.text());
+          console.log(error.text());
+        });
+
   }
 
 }
