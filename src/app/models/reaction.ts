@@ -5,7 +5,7 @@ export class Reaction {
   model: string;
   annotation: string;
   sboTerm: string;
-  notes: string;
+  notes: Array<string>;
 }
 
 export class ConnectedMetabolite {

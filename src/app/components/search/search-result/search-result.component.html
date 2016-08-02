@@ -15,7 +15,7 @@
       </h2>
       <p *ngFor="let item of filteredReactions; let i=index ">
         <a [routerLink]="['/reaction', item.id]">
-          {{item.name}}
+          <b>{{item.id}}</b> {{item.name}}
         </a>
       </p>
     </div>
@@ -27,7 +27,7 @@
       </h2>
       <p *ngFor="let item of filteredMetabolites; let i=index">
         <a [routerLink]="['/metabolite', item.id]">
-          {{item.name}}
+          <b>{{item.id}}</b> {{item.name}}
         </a>
       </p>
     </div>

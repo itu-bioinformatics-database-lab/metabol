@@ -9,14 +9,13 @@ import {KeysPipe} from '../../../pipes/keys.pipe';
   selector: 'app-metabolite-details',
   templateUrl: 'metabolite-details.component.html',
   styleUrls: ['metabolite-details.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, ChemicalEquationComponent],
   providers: [MetaboliteService]
 })
 export class MetaboliteDetailsComponent implements OnInit {
 
   metabolite: any;
   relatedReactions: Array<any>;
-
 
   constructor(private mea: MetaboliteService, private route: ActivatedRoute) {
     this.metabolite = new Object();
@@ -30,13 +29,14 @@ export class MetaboliteDetailsComponent implements OnInit {
   }
 
   loadData(metaboliteId) {
-    //  Adam gibi bir tanesi load add sonra digerini load edersin
+    let a: string;
+
     this.mea.getMetabolite(metaboliteId).subscribe(data => {
       this.metabolite = data;
+      this.metabolite.notes = this.metabolite.notes.split('\n');
       this.mea.getRelatedReactions(metaboliteId)
         .subscribe(data => {
           this.relatedReactions = data['reactions'];
-          console.log(data);
         });
     });
   }
