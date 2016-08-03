@@ -12,7 +12,7 @@ export class CurrencyMetabolitesService {
   }
 
   /**
-   * load currency metabolites from localStorage
+   * Loads currency metabolites from localStorage
    */
   private loadCurrecyMetabolites(): void {
     let collection = 'currency-metabolites';
