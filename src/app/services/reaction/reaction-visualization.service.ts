@@ -32,13 +32,13 @@ export class ReactionVisualizationService {
   /**
    * Create Fba Node and add color to node.
    */
-  private createFbaNode(id: number, name: string, type: string): FbaNode {
+  private createFbaNode(id: number, name: string, type: string, color: string): FbaNode {
     return {
       id: id,
       name: name,
       type: type,
       index: 0,
-      color: this.identicalByHalf.next()
+      color: color
     };
   }
 
@@ -52,16 +52,20 @@ export class ReactionVisualizationService {
     let fbaNodes = new Array<FbaNode>();
     let idCounter = 0;
 
-    fbaNodes.push(this.createFbaNode(idCounter++, reaction.id, 'r'));
+    fbaNodes.push(this.createFbaNode(idCounter++, reaction.id, 'r', '#003fff'));
 
-    for (let m of connectedMetabolites)
-      fbaNodes.push(this.createFbaNode(idCounter++, m.id, 'm'));
+    for (let m of connectedMetabolites) {
+      if (m.stoichiometry == 1)
+        fbaNodes.push(this.createFbaNode(idCounter++, m.id, 'm', '#ff0000'));
+      else
+        fbaNodes.push(this.createFbaNode(idCounter++, m.id, 'm', '#7fff00'));
+    }
 
     // To different loop requert to know nodes ids.
     for (let m of connectedMetabolites)
       if (!this.cur.isCurrency(m.id))
         for (let r of m.reactions)
-          fbaNodes.push(this.createFbaNode(idCounter++, r.id, 'r'));
+          fbaNodes.push(this.createFbaNode(idCounter++, r.id, 'r', '#999'));
 
     return fbaNodes;
   }
@@ -88,7 +92,6 @@ export class ReactionVisualizationService {
   convertToFbaVisualization(
     reaction: Reaction,
     connectedMetabolites: ConnectedMetabolite[]): [FbaNode[], FbaLink[]] {
-    this.constructor();
     return [
       this.convertToFbaNode(reaction, connectedMetabolites),
       this.convertToFbaLink(reaction, connectedMetabolites)

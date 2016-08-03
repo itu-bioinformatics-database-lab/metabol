@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {Router, CanActivate,ROUTER_DIRECTIVES} from '@angular/router';
+import {LoginService} from '../../services/login/login.service';
+
 @Component({
   moduleId: module.id,
   selector: 'app-panel',
@@ -10,10 +12,23 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 
   ],
   directives: [ROUTER_DIRECTIVES],
+  providers: [LoginService],
 })
-export class PanelComponent {
 
-  constructor() { }
+
+//@CanActivate(() => isLoggedIn())
+export class PanelComponent implements CanActivate{
+
+  constructor(public auth: LoginService) { }
+
+  canActivate() {
+    console.log('AuthGuard#canActivate called');
+    return true;
+  }
+
+  ngOnInit(){
+        this.auth.checkCredentials();
+    }
 
 
 }

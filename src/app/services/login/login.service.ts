@@ -1,52 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
+//import {LocalStorageService} from "angular2-localstorage/LocalStorageEmitter";
 
 @Injectable()
 export class LoginService {
-
+  headers: Headers;
   token: string;
+  token2: string;
   data2: string;
   options: RequestOptions;
 
-  constructor(private http: Http) {
-    this.token = localStorage.getItem('token');
+  constructor(private http: Http, private router: Router) {
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
 
-    this.options = new RequestOptions({
-      headers: new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
-    });
   }
-  //Yeni post nasıl bulamadım
-  login(Email: String, Password: String) {
-    let postData = { Email: Email, Password: Password, grant_type: "password" };
-    this.http
-      .post(`${AppSettings.API_ENDPOINT}/token`, postData, this.options)
+
+  login(value) {
+
+    var token_data = "grant_type=password&username=" + value.Email + "&password=" + value.Password;
+
+    return this.http
+      .post(`${AppSettings.API_ENDPOINT}/Token`, token_data, { headers: this.headers })
       .map(res => {
-        console.log(res);
-        return res.json();
-      })
-      .subscribe((data) => {
-        console.log(data.token);
-        this.token = data.token;
-        localStorage.setItem('token', this.token);
-      });
+      let data = res.json();
+      localStorage.setItem('access_token', data.access_token);
+      console.log(data.access_token)
+    });
+
   }
 
-  /*logout() {
-
-      return this.http.get(this.config.serverUrl + '/auth/logout', {
-          headers: new Headers({
-              'x-security-token': this.token
-          })
-      })
-          .map((res: any) => {
-          this.token = undefined;
-          localStorage.removeItem('token');
+  logout() {
+    localStorage.removeItem('access_token');
+    return this.http
+      .post(`${AppSettings.API_ENDPOINT}/account/Logout`, { headers: this.headers })
+      .subscribe(
+      response => {
+        this.router.navigate(['/panel'])
       });
 
-  }*/
+  }
+
+
+  checkCredentials() { //If user is not loggedIn this function detect this and
+    if (localStorage.getItem('access_token') === null) { // navigate user login page.
+      this.router.navigate(['/login']);
+    }
+  }
+
 
 
 }
