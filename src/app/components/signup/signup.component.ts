@@ -48,7 +48,7 @@ export class SignupComponent {
     this._signupService.onSubmit(value)
       .subscribe(
       response => {
-        this.router.navigate(['panel'])
+        this.router.navigate(['/panel'])
       },
       error => {
         alert(error.text());
