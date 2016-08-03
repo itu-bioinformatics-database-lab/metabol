@@ -50,8 +50,16 @@ describe('Search Service', () => {
   it('should response search prefix', async(() => {
 
     let apiData = {
-      reactions: ['a', 'b', 'c'],
-      metabolites: ['x', 'y', 'z']
+      reactions: [
+        { id: "a", name: "a1" },
+        { id: "b", name: "b1" },
+        { id: "c", name: "c1" }
+      ],
+      metabolites: [
+        { id: "x", name: "x1" },
+        { id: "y", name: "y1" },
+        { id: "z", name: "z1" }
+      ],
     };
 
     mockBackend.connections.subscribe(
