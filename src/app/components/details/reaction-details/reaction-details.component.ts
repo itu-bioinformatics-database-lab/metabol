@@ -42,7 +42,6 @@ export class ReactionDetailsComponent implements OnInit {
   }
 
   loadData(reactionId) {
-    //  Adam gibi bir tanesi load add sonra digerini load edersin
     this.rea.getReaction(reactionId).subscribe(data => {
       this.reaction = data;
       this.reaction.notes = data.notes.split('\n');

@@ -20,25 +20,29 @@ export class SignupComponent {
     private http: Http, private router: Router) {
 
     this.form = fb.group({
-      "Name": ["", Validators.required],
-      "Surname": ["", Validators.required],
-      "Email": ["", Validators.required],
-      "Institution": ["", Validators.required],
-      "ConfirmPassword": ["", Validators.required],
-      "Password": ["", Validators.compose([Validators.required, Validators.minLength(6)])],
-
+      "name": ["", Validators.required],
+      "surname": ["", Validators.required],
+      "email": ["", Validators.required],
+      "affiliation": ["", Validators.required],
+      "confirmPassword": ["", Validators.required],
+      "password": ["", Validators.compose([Validators.required, Validators.minLength(6)])],
     },
-      { validator: this.matchingPasswords('Password', 'ConfirmPassword') });
+      { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
 
-  //To chech whether confirmPasswor is same with Password or not
+  /**
+   * To chech whether confirmPasswor is same with Password or not
+   * @param  {string} passwordKey        [description]
+   * @param  {string} confirmPasswordKey [description]
+   * @return {[type]}                    [description]
+   */
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: ControlGroup): { [key: string]: any } => {
-      let Password = group.controls[passwordKey];
-      let ConfirmPassword = group.controls[confirmPasswordKey];
-      if (!ConfirmPassword)
+      let password = group.controls[passwordKey];
+      let confirmPassword = group.controls[confirmPasswordKey];
+      if (!confirmPassword)
         return { mismatchedPasswords: false };
-      else if (Password.value !== ConfirmPassword.value)
+      else if (password.value !== confirmPassword.value)
         return { mismatchedPasswords: true };
     }
   }
