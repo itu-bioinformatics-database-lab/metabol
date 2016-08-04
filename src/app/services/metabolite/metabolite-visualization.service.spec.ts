@@ -73,9 +73,9 @@ describe('ReactionVisualization Service', () => {
   ];
 
   let expectedFbaLink: FbaLink[] = [
-    { source: 1, target: 0, role: 'p' },
-    { source: 2, target: 0, role: 'p' },
-    { source: 0, target: 3, role: 's' },
+    { source: 0, target: 1, role: 's' },
+    { source: 0, target: 2, role: 's' },
+    { source: 3, target: 0, role: 'p' },
     { source: 4, target: 1, role: 's' },
     { source: 1, target: 5, role: 'p' },
     { source: 2, target: 6, role: 'p' }
