@@ -62,10 +62,9 @@ export class MetaboliteVisualizationService {
     let fbaLinks = new Array<FbaLink>();
     let idCounter = 1;
 
-    for (let r of relatedReactions) {
-      // Be carefull there is -r.stoichiometry beacuse it is stoichiometry of reaction
-      fbaLinks.push(this.createFbaLink(-r.stoichiometry, 0, idCounter++));
-    }
+    for (let r of relatedReactions)
+      fbaLinks.push(this.createFbaLink(r.stoichiometry, 0, idCounter++));
+
 
     let rid = 1;
     for (let r of relatedReactions) {
