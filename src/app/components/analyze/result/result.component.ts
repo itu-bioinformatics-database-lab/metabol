@@ -25,7 +25,7 @@ export class ResultComponent {
   colors: Array<String>;
   textResult: Array<any>;
 
-  searchTerm:string;
+  searchTerm: string;
   searchActive: Boolean;
 
   constructor(private fba: FbaService, route: ActivatedRoute) {
@@ -48,16 +48,17 @@ export class ResultComponent {
   }
 
   next() {
-    this.fba.getNextIteration(
-      (data) => {
-        this.visualizationResultAnalyze(data);
-        this.textResultAnalyze(data);
-
-      });
+    if (this.fba.currentIteration == this.currentIteration)
+      this.fba.getNextIteration(
+        (data) => {
+          this.visualizationResultAnalyze(data);
+          this.textResultAnalyze(data);
+        });
+    this.currentIteration++;
   }
 
   previous() {
-    this.currentIteration--;
+    if (this.currentIteration > 1) this.currentIteration--;
   }
 
   save() {
@@ -69,7 +70,6 @@ export class ResultComponent {
     data.nodes.forEach((x) => x.color = colorOfIteration);
     this.colors.push(colorOfIteration);
 
-    this.currentIteration++;
     data.nodes.forEach((x) => x.iteration = this.currentIteration);
 
     this.nodes = this.nodes.concat(data.nodes);

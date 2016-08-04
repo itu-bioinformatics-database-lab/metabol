@@ -5,27 +5,49 @@
     </svg:marker>
   </svg:defs>
   <svg:g [attr.transform]="'translate('+ translate +')scale('+ scale +')'">
-    <svg:line class="link" *ngFor="let l of d3links"
-      [attr.x1]="l.source.x"
-      [attr.y1]="l.source.y"
-      [attr.x2]="l.target.x"
-      [attr.y2]="l.target.y"
-      [attr.marker-end]="'url(/metabol' + url + '#markerArrow)'"/>
-    <svg:circle class="metabolite" r="10" *ngFor="let d of metabolites"
-      [attr.cx]="d.x"
-      [attr.cy]="d.y"
-      [attr.fill]="d.color"/>
-    <svg:rect class="reaction" width="20" height="20" *ngFor="let d of reactions"
-      [attr.x]="d.x - 10"
-      [attr.y]="d.y - 10"
-      [attr.fill]="d.color"/>
-    <svg:text class="text" *ngFor="let d of d3nodes"
-      [attr.x]="d.x - 8"
-      [attr.y]="d.y + 5">{{ d.iteration }}</svg:text>
-    <svg:text class="text" *ngFor="let d of d3nodes"
-      [attr.x]="d.x - 15"
-      [attr.y]="d.y - 15"
-      [style.fill]="searchInGraph(d.name)">{{ d.name }}</svg:text>
+
+
+    <template ngFor let-l [ngForOf]="d3links">
+      <svg:line class="link"
+        *ngIf="(currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration"
+        [attr.x1]="l.source.x"
+        [attr.y1]="l.source.y"
+        [attr.x2]="l.target.x"
+        [attr.y2]="l.target.y"
+        [attr.marker-end]="'url(/metabol' + url + '#markerArrow)'"/>
+    </template>
+
+
+    <template ngFor let-d [ngForOf]="metabolites">
+      <svg:circle class="metabolite" r="10"
+        *ngIf="currentIteration >= d?.iteration || !currentIteration"
+        [attr.cx]="d.x"
+        [attr.cy]="d.y"
+        [attr.fill]="d.color"/>
+    </template>
+
+    <template ngFor let-d [ngForOf]="reactions">
+      <svg:rect class="reaction" width="20" height="20"
+        *ngIf="currentIteration >= d?.iteration || !currentIteration"
+        [attr.x]="d.x - 10"
+        [attr.y]="d.y - 10"
+        [attr.fill]="d.color"/>
+    </template>
+
+    <template ngFor let-d [ngForOf]="d3nodes">
+      <svg:text class="text"
+        *ngIf="currentIteration >= d?.iteration || !currentIteration"
+        [attr.x]="d.x - 8"
+        [attr.y]="d.y + 5">{{ d.iteration }}</svg:text>
+    </template>
+
+    <template ngFor let-d [ngForOf]="d3nodes">
+      <svg:text class="text"
+        *ngIf="(currentIteration >= d?.iteration) || !currentIteration"
+        [attr.x]="d.x - 15"
+        [attr.y]="d.y - 15"
+        [style.fill]="searchInGraph(d.name)">{{ d.name }}</svg:text>
+    </template>
   </svg:g>
 </fullscreenable-svg>
 <div id="down-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">

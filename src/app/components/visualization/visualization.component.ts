@@ -17,6 +17,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
   @Input() nodes: Array<FbaNode>;
   @Input() links: Array<FbaLink>;
   @Input() searchTerm: string;
+  @Input() currentIteration: Number;
 
   reactions: Array<FbaNode>;
   metabolites: Array<FbaNode>;
@@ -88,7 +89,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
     this.force.nodes(this.nodes).links(this.links);
     this.force.start();
 
-    this.url= this.location.path();
+    this.url = this.location.path();
   }
 
   searchInGraph(nodeName: String) {
