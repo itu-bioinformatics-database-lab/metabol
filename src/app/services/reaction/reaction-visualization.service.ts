@@ -1,7 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
 import {Reaction, ConnectedMetabolite} from '../../models/reaction';
-import {IdenticalByHalf} from '../../modules/colorization';
 import {CurrencyMetabolitesService} from '../currency-metabolites/currency-metabolites.service';
 
 /**
@@ -13,33 +12,13 @@ import {CurrencyMetabolitesService} from '../currency-metabolites/currency-metab
 export class ReactionVisualizationService {
 
   /**
-   * colorization algorithim
-   * @type {IdenticalByHalf}
-   */
-  private identicalByHalf: IdenticalByHalf;
-
-  /**
    * Dependies injection of service into service not working
    * @type {CurrencyMetabolitesService}
    */
   private cur: CurrencyMetabolitesService;
 
   constructor() {
-    this.identicalByHalf = new IdenticalByHalf();
     this.cur = new CurrencyMetabolitesService();
-  }
-
-  /**
-   * Create Fba Node and add color to node.
-   */
-  private createFbaNode(id: number, name: string, type: string, color: string): FbaNode {
-    return {
-      id: id,
-      name: name,
-      type: type,
-      index: 0,
-      color: color
-    };
   }
 
   private createFbaLink(stoichiometry: number, metaboliteId: number, reactionId: number) {
@@ -52,20 +31,28 @@ export class ReactionVisualizationService {
     let fbaNodes = new Array<FbaNode>();
     let idCounter = 0;
 
-    fbaNodes.push(this.createFbaNode(idCounter++, reaction.id, 'r', '#003fff'));
+    fbaNodes.push({
+      id: idCounter++, name: reaction.id, type: 'r', index: 0, color: '#003fff'
+    });
 
     for (let m of connectedMetabolites) {
       if (m.stoichiometry == 1)
-        fbaNodes.push(this.createFbaNode(idCounter++, m.id, 'm', '#ff0000'));
+        fbaNodes.push({
+          id: idCounter++, name: m.id, type: 'm', index: 0, color: '#ff0000'
+        });
       else
-        fbaNodes.push(this.createFbaNode(idCounter++, m.id, 'm', '#7fff00'));
+        fbaNodes.push({
+          id: idCounter++, name: m.id, type: 'm', index: 0, color: '#7fff00'
+        });
     }
 
     // To different loop requert to know nodes ids.
     for (let m of connectedMetabolites)
       if (!this.cur.isCurrency(m.id))
         for (let r of m.reactions)
-          fbaNodes.push(this.createFbaNode(idCounter++, r.id, 'r', '#999'));
+          fbaNodes.push({
+            id: idCounter++, name: r.id, type: 'r', index: 0, color: '#999'
+          });
 
     return fbaNodes;
   }

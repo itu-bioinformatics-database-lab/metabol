@@ -126,6 +126,8 @@
     "app/services/login/login.service.spec.ts",
     "app/services/login/login.service.ts",
     "app/services/metabolite/index.ts",
+    "app/services/metabolite/metabolite-visualization.service.spec.ts",
+    "app/services/metabolite/metabolite-visualization.service.ts",
     "app/services/metabolite/metabolite.service.spec.ts",
     "app/services/metabolite/metabolite.service.ts",
     "app/services/reaction/index.ts",

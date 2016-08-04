@@ -39,6 +39,11 @@
         <p *ngFor="let n of metabolite.notes">
           {{ n }}
         </p>
+        <div class="row">
+          <div class="col-md-12">
+            <visualization [nodes]="nodes" [links]="links"></visualization>
+          </div>
+        </div>
         <br>
         <div *ngIf="relatedReactions">
           <h4>
@@ -61,9 +66,7 @@
                   </a>
                 </td>
                 <td>
-                  <chemical-equation
-                    [metabolites]="item.metabolites"
-                    [selectedMetabolite]="{id:metabolite.id, stoichiometry: item.stoichiometry}">
+                  <chemical-equation [metabolites]="item.metabolites" [selectedMetabolite]="{id:metabolite.id, stoichiometry: item.stoichiometry}">
                   </chemical-equation>
                 </td>
               </tr>

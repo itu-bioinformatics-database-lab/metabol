@@ -9,7 +9,7 @@ import {
 import {provide} from '@angular/core';
 import { Injectable } from '@angular/core';
 
-import { ReactionVisualizationService } from './reaction-visualization.service';
+import { MetaboliteVisualizationService} from './metabolite-visualization.service';
 import {Reaction, ConnectedMetabolites, ConnectedMetabolite} from '../../models/reaction';
 import {Metabolite} from '../../models/metabolite';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
@@ -24,7 +24,7 @@ describe('ReactionVisualization Service', () => {
   // console.log(mockCurrencyMetabolitesService);
 
   beforeEachProviders(() => [
-    ReactionVisualizationService
+    MetaboliteVisualizationService
   ]);
 
   let localStoreData = {
@@ -41,42 +41,44 @@ describe('ReactionVisualization Service', () => {
     localStorage.setItem('currency-metabolites', JSON.stringify(localStoreData));
   });
 
-  let service: ReactionVisualizationService;
-  beforeEach(inject([ReactionVisualizationService], (rv) => {
+  let service: MetaboliteVisualizationService;
+  beforeEach(inject([MetaboliteVisualizationService], (rv) => {
     service = rv;
   }));
 
-  let reaction = <Reaction>{ id: 'r1' };
-  let connectedMetabolites: ConnectedMetabolite[] = [
-    <ConnectedMetabolite>{
-      id: 'm1', stoichiometry: 1,
-      reactions: [{ id: "r2", stoichiometry: 1 }, { id: "r4", stoichiometry: -1 }]
+  let metabolite = <Metabolite>{ id: 'm1' };
+  let relatedReactions = [
+    {
+      id: 'r1', stoichiometry: 1,
+      metabolites: [{ id: "m2", stoichiometry: 1 }, { id: "m3", stoichiometry: -1 }]
     },
-    <ConnectedMetabolite>{
-      id: 'h[c]', stoichiometry: 2,
-      reactions: [{ id: "r3", stoichiometry: -1 }]
+    {
+      id: 'r2', stoichiometry: 1,
+      metabolites: [{ id: "m4", stoichiometry: -1 }]
     },
-    <ConnectedMetabolite>{
-      id: 'm3', stoichiometry: -1,
-      reactions: []
+    {
+      id: 'r3', stoichiometry: -1,
+      metabolites : []
     },
   ];
 
   let expectedFbaNode: FbaNode[] = [
-    { id: 0, name: 'r1', type: 'r', index: 0, color: '#003fff' },
-    { id: 1, name: 'm1', type: 'm', index: 0, color: '#ff0000' },
-    { id: 2, name: 'h[c]', type: 'm', index: 0, color: '#7fff00' },
-    { id: 3, name: 'm3', type: 'm', index: 0, color: '#7fff00' },
-    { id: 4, name: 'r2', type: 'r', index: 0, color: '#999' },
-    { id: 5, name: 'r4', type: 'r', index: 0, color: '#999' }
+    { id: 0, name: 'm1', type: 'm', index: 0, color: '#003fff' },
+    { id: 1, name: 'r1', type: 'r', index: 0, color: '#7fff00' },
+    { id: 2, name: 'r2', type: 'r', index: 0, color: '#7fff00' },
+    { id: 3, name: 'r3', type: 'r', index: 0, color: '#ff0000' },
+    { id: 4, name: 'm2', type: 'm', index: 0, color: '#999' },
+    { id: 5, name: 'm3', type: 'm', index: 0, color: '#999' },
+    { id: 6, name: 'm4', type: 'm', index: 0, color: '#999' }
   ];
 
   let expectedFbaLink: FbaLink[] = [
-    { source: 1, target: 0, role: 's' },
-    { source: 2, target: 0, role: 's' },
-    { source: 0, target: 3, role: 'p' },
-    { source: 4, target: 1, role: 'p' },
-    { source: 1, target: 5, role: 's' }
+    { source: 1, target: 0, role: 'p' },
+    { source: 2, target: 0, role: 'p' },
+    { source: 0, target: 3, role: 's' },
+    { source: 4, target: 1, role: 's' },
+    { source: 1, target: 5, role: 'p' },
+    { source: 2, target: 6, role: 'p' }
   ];
 
   it('should ...', () => {
@@ -84,17 +86,17 @@ describe('ReactionVisualization Service', () => {
   });
 
   it('should convertToFbaNode', () => {
-    let fbaNodes = service.convertToFbaNode(reaction, connectedMetabolites);
+    let fbaNodes = service.convertToFbaNode(metabolite, relatedReactions);
     expect(fbaNodes).toEqual(expectedFbaNode);
   });
 
   it('should convertToFbaLink', () => {
-    let fbaLinks = service.convertToFbaLink(reaction, connectedMetabolites);
+    let fbaLinks = service.convertToFbaLink(metabolite, relatedReactions);
     expect(fbaLinks).toEqual(expectedFbaLink);
   });
 
   it('should convertToFbaVisualization', () => {
-    let fbaVisualization = service.convertToFbaVisualization(reaction, connectedMetabolites);
+    let fbaVisualization = service.convertToFbaVisualization(metabolite, relatedReactions);
     expect(fbaVisualization).toEqual([expectedFbaNode, expectedFbaLink]);
   });
 
