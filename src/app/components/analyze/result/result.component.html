@@ -6,6 +6,9 @@
           <button class="btn btn-default" (click)="previous()">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           </button>
+          <button class="btn btn-default">
+            {{ currentIteration }}
+          </button>
           <button class="btn btn-default" (click)="next()">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           </button>
@@ -33,6 +36,6 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <text-result [title]="'. Iteration'" [textResult]="textResult"></text-result>
+    <text-result [title]="'. Iteration'" [textResult]="textResult" [currentIteration]="currentIteration"></text-result>
   </div>
 </div>

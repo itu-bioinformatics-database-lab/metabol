@@ -13,6 +13,7 @@ import {KeysPipe} from '../../../../pipes/keys.pipe';
 export class TextResultComponent {
 
   @Input() title: String;
+  @Input() currentIteration: Number;
 
   // TODO: update api
   @Input() textResult: Array<any>;
