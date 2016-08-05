@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
-//import {LocalStorageService} from "angular2-localstorage/LocalStorageEmitter";
+
 
 @Injectable()
 export class LoginService {
@@ -15,7 +15,6 @@ export class LoginService {
   constructor(private http: Http, private router: Router) {
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-
   }
 
   login(value) {
@@ -25,10 +24,9 @@ export class LoginService {
     return this.http
       .post(`${AppSettings.API_ENDPOINT}/Token`, token_data, { headers: this.headers })
       .map(res => {
-      let data = res.json();
-      localStorage.setItem('access_token', data.access_token);
-      console.log(data.access_token)
-    });
+        let data = res.json();
+        localStorage.setItem('access_token', data.access_token);
+      });
 
   }
 
@@ -38,9 +36,20 @@ export class LoginService {
       .post(`${AppSettings.API_ENDPOINT}/account/Logout`, { headers: this.headers })
       .subscribe(
       response => {
-        this.router.navigate(['/panel'])
+        this.router.navigate(['/login'])
       });
 
+  }
+
+  isLoggedIn() {
+     
+      //return false;
+      if (localStorage.getItem('access_token') !== null) {
+        return true;
+      }
+
+      this.router.navigate(['/login']);
+      return false;
   }
 
 

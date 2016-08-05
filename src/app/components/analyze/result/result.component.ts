@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FbaService} from '../../../services/fba/fba.service';
 import {FbaIteration, FbaNode, FbaLink} from '../../../models/fbaiteration';
@@ -16,7 +16,7 @@ import {TextResultComponent} from './text-result/text-result.component';
   directives: [VisualizationComponent, IterationColorBoxComponent, TextResultComponent],
   providers: [FbaService]
 })
-export class ResultComponent {
+export class ResultComponent implements OnInit {
 
   nodes: FbaNode[];
   links: FbaLink[];
@@ -28,19 +28,20 @@ export class ResultComponent {
   searchTerm: string;
   searchActive: Boolean;
 
-  constructor(private fba: FbaService, route: ActivatedRoute) {
+  constructor(private fba: FbaService, private route: ActivatedRoute) {
     this.colorize = new colorization.IdenticalByHalf();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
     this.colors = new Array<String>();
-
-    route.params.subscribe((params) => {
-      this.fba.startFba(params['key']);
-    });
-
     this.currentIteration = 0;
-
     this.textResult = new Array<any>();
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.fba.startFba(params['key']);
+      this.next();
+    });
   }
 
   toggleSearch() {
@@ -51,10 +52,12 @@ export class ResultComponent {
     if (this.fba.currentIteration == this.currentIteration)
       this.fba.getNextIteration(
         (data) => {
+          this.currentIteration++;
           this.visualizationResultAnalyze(data);
           this.textResultAnalyze(data);
         });
-    this.currentIteration++;
+    else
+      this.currentIteration++;
   }
 
   previous() {
