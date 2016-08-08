@@ -10,6 +10,7 @@ import {TestComponent} from './components/test/test.component';
 import {LoadingComponent} from './components/loading/loading.component';
 
 import {AuthGuard} from './auth-guard/auth-guard';
+import {AuthGuardLogin} from './auth-guard-login/auth-guard-login';
 
 export const routes: RouterConfig = [
   ...SearchRoutes,
@@ -26,5 +27,6 @@ export const routes: RouterConfig = [
 
 export const APP_ROUTER_PROVIDERS = [
   provideRouter(routes),
-  AuthGuard
+  AuthGuard,
+  AuthGuardLogin
 ];
