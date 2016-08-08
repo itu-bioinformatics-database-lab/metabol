@@ -30,7 +30,8 @@
           <a>Contact</a>
         </li>
         <li>
-          <a [routerLink]="['login']">Login</a>
+          <a *ngIf = "!loginService.isLoggedIn()" [routerLink]="['login']">Login</a>
+          <a *ngIf = "loginService.isLoggedIn()" (click) = "loginService.logout()" [routerLink]="['panel']">Logout</a>
         </li>
       </ul>
     </div>

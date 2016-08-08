@@ -42,23 +42,11 @@ export class LoginService {
   }
 
   isLoggedIn() {
-     
-      //return false;
-      if (localStorage.getItem('access_token') !== null) {
+      if (localStorage.getItem('access_token') !== null){
         return true;
-      }
-
-      this.router.navigate(['/login']);
-      return false;
-  }
-
-
-  checkCredentials() { //If user is not loggedIn this function detect this and
-    if (localStorage.getItem('access_token') === null) { // navigate user login page.
-      this.router.navigate(['/login']);
     }
-  }
 
+  }
 
 
 }

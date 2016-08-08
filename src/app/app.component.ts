@@ -3,6 +3,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 import {AppDataLoader} from './appDataLoader';
 import {LoadingComponent} from './components/loading/loading.component';
 import {LoadingService} from './services/loading/loading.service';
+import {LoginService} from './services/login/login.service'
 
 
 @Component({
@@ -11,13 +12,15 @@ import {LoadingService} from './services/loading/loading.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [ROUTER_DIRECTIVES, LoadingComponent],
-  providers: [AppDataLoader]
+  providers: [AppDataLoader,LoginService]
 })
 export class AppComponent {
 
   loading: boolean = false;
 
-  constructor(appDataLoader: AppDataLoader, public loadingService: LoadingService) {
+  constructor(appDataLoader: AppDataLoader,
+    public loadingService: LoadingService,
+    public loginService: LoginService) {
     appDataLoader.load();
   }
 
