@@ -1,3 +1,4 @@
+import {LoadingService} from "../../../services/loading/loading.service";
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 import {MetaboliteService} from '../../../services/metabolite/metabolite.service';
@@ -25,7 +26,8 @@ export class MetaboliteDetailsComponent implements OnInit {
   constructor(
     private mea: MetaboliteService,
     private route: ActivatedRoute,
-    private meaVis: MetaboliteVisualizationService) {
+    private meaVis: MetaboliteVisualizationService,
+    private loading: LoadingService) {
 
     this.metabolite = new Object();
     this.relatedReactions = new Array<any>();
@@ -40,6 +42,7 @@ export class MetaboliteDetailsComponent implements OnInit {
   }
 
   loadData(metaboliteId) {
+    this.loading.start();
     this.mea.getMetabolite(metaboliteId).subscribe(data => {
       this.metabolite = data;
       this.metabolite.notes = this.metabolite.notes.split('\n');
@@ -47,6 +50,7 @@ export class MetaboliteDetailsComponent implements OnInit {
         .subscribe(data => {
           this.relatedReactions = data['reactions'];
           this.loadVisualization();
+          this.loading.finish();
         });
     });
   }

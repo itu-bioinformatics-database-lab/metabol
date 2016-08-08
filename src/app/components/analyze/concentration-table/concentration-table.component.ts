@@ -1,3 +1,4 @@
+import {LoadingService} from "../../../services/loading/loading.service";
 import { Component, OnInit, Input } from '@angular/core';
 import {MetaboliteConcentration} from '../../../models/metaboliteConcentration';
 import {Control, FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
@@ -27,7 +28,7 @@ export class ConcentrationTableComponent {
 
   form: ControlGroup;
 
-  constructor(private fb: FormBuilder, private fba: FbaService, private router: Router) {
+  constructor(private fb: FormBuilder, private fba: FbaService, private router: Router, private loading: LoadingService) {
     this.form = this.createForm();
   }
 
@@ -60,8 +61,9 @@ export class ConcentrationTableComponent {
   }
 
   analyze() {
-    this.fba.getFbaKeyForData(this.conTable,
-      (key) => this.router.navigate(['/analyze/result', key]));
+    this.fba.getFbaKeyForData(this.conTable, (key) => {
+      this.router.navigate(['/analyze/result', key]);
+    });
   }
 
 }
