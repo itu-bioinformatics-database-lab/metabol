@@ -41,6 +41,8 @@ export class LoginService {
 
   }
 
-  isLoggedIn = () => localStorage.getItem('access_token') !== null
+  isLoggedIn() {
+    return localStorage.getItem('access_token') !== null
+  }
 
 }
