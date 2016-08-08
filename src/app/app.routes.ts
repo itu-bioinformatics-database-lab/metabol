@@ -7,6 +7,8 @@ import {AnalyzeRoutes} from './components/analyze/analyze.routes';
 import {PanelRoutes} from './components/panel/panel.routes';
 import {DocumentationComponent} from './components/documentation/documentation.component';
 import {TestComponent} from './components/test/test.component';
+import {LoadingComponent} from './components/loading/loading.component';
+
 import {AuthGuard} from './auth-guard/auth-guard';
 
 export const routes: RouterConfig = [
@@ -17,7 +19,9 @@ export const routes: RouterConfig = [
   ...AnalyzeRoutes,
   ...PanelRoutes,
   { path: 'documentation', component: DocumentationComponent },
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+  { path: 'loading', component: LoadingComponent }
+
 ];
 
 export const APP_ROUTER_PROVIDERS = [
