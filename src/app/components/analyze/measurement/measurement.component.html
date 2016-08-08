@@ -4,8 +4,13 @@
       Upload File
     </a>
     <span>OR</span>
-    <a [routerLink]="['../manual']"class="btn btn-info">
-      Add Manual
+    <a [routerLink]="['../manual']" class="btn btn-info">
+      Manually Add Metabolite Changes
+    </a>
+
+    <span>OR</span>
+    <a (click)="sampleAnalyze()" class="btn btn-info">
+      Use the Sample Metabolite Change List
     </a>
   </div>
 </div>
