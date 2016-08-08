@@ -1,3 +1,4 @@
+import {LoadingService} from "../../../services/loading/loading.service";
 import { Component, OnInit } from '@angular/core';
 import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {ReactionService} from '../../../services/reaction/reaction.service';
@@ -27,7 +28,8 @@ export class ReactionDetailsComponent implements OnInit {
   constructor(
     private rea: ReactionService,
     private route: ActivatedRoute,
-    private reaVis: ReactionVisualizationService
+    private reaVis: ReactionVisualizationService,
+    private loading: LoadingService
   ) {
     this.reaction = new Reaction();
     this.relatedMetabolites = new Array<any>();
@@ -42,6 +44,7 @@ export class ReactionDetailsComponent implements OnInit {
   }
 
   loadData(reactionId) {
+    this.loading.start();
     this.rea.getReaction(reactionId).subscribe(data => {
       this.reaction = data;
       this.reaction.notes = data.notes.split('\n');
@@ -49,6 +52,7 @@ export class ReactionDetailsComponent implements OnInit {
         .subscribe(data => {
           this.relatedMetabolites = data['metabolites'];
           this.loadVisualization();
+          this.loading.finish();
         });
     });
   }
