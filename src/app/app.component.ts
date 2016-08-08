@@ -4,6 +4,7 @@ import {AppDataLoader} from './appDataLoader';
 import {LoadingComponent} from './components/loading/loading.component';
 import {LoadingService} from './services/loading/loading.service';
 
+
 @Component({
   moduleId: module.id,
   selector: 'app-root',
@@ -14,7 +15,10 @@ import {LoadingService} from './services/loading/loading.service';
 })
 export class AppComponent {
 
-  constructor(appDataLoader: AppDataLoader, public loading: LoadingService) {
+  loading: boolean = false;
+
+  constructor(appDataLoader: AppDataLoader, public loadingService: LoadingService) {
     appDataLoader.load();
   }
+
 }

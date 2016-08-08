@@ -9,13 +9,8 @@ import {LoadingService} from '../../services/loading/loading.service';
 })
 export class DocumentationComponent implements OnInit {
 
-  constructor(private loading: LoadingService) {
+  constructor() { }
 
-  }
-
-  ngOnInit() {
-    this.loading.start();
-
-  }
+  ngOnInit() { }
 
 }

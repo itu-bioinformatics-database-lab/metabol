@@ -1,3 +1,4 @@
+import {LoadingService} from "../../../services/loading/loading.service";
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FbaService} from '../../../services/fba/fba.service';
@@ -28,7 +29,8 @@ export class ResultComponent implements OnInit {
   searchTerm: string;
   searchActive: Boolean;
 
-  constructor(private fba: FbaService, private route: ActivatedRoute) {
+  constructor(private fba: FbaService, private route: ActivatedRoute, private loading: LoadingService) {
+
     this.colorize = new colorization.IdenticalByHalf();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
@@ -38,6 +40,7 @@ export class ResultComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading.start();
     this.route.params.subscribe((params) => {
       this.fba.startFba(params['key']);
       this.next();
@@ -49,13 +52,16 @@ export class ResultComponent implements OnInit {
   }
 
   next() {
-    if (this.fba.currentIteration == this.currentIteration)
+    if (this.fba.currentIteration == this.currentIteration) {
+      this.loading.start();
       this.fba.getNextIteration(
         (data) => {
           this.currentIteration++;
           this.visualizationResultAnalyze(data);
           this.textResultAnalyze(data);
+          this.loading.finish();
         });
+    }
     else
       this.currentIteration++;
   }
