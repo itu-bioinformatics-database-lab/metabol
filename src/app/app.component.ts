@@ -4,15 +4,15 @@ import {AppDataLoader} from './appDataLoader';
 import {LoadingComponent} from './components/loading/loading.component';
 import {LoadingService} from './services/loading/loading.service';
 import {LoginService} from './services/login/login.service'
-
+import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications'
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES, LoadingComponent],
-  providers: [AppDataLoader,LoginService]
+  directives: [ROUTER_DIRECTIVES, LoadingComponent, SimpleNotificationsComponent],
+  providers: [AppDataLoader, LoginService]
 })
 export class AppComponent {
 
