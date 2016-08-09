@@ -16,7 +16,7 @@ export class SignupComponent {
 
   form: ControlGroup;
 
-  constructor(private _signupService: SignupService, private fb: FormBuilder,
+  constructor(private signupService: SignupService, private fb: FormBuilder,
     private http: Http, private router: Router) {
 
     this.form = fb.group({
@@ -48,19 +48,6 @@ export class SignupComponent {
   }
 
   onSubmit(value) {
-    console.log(value);
-    this._signupService.onSubmit(value)
-      .subscribe(
-      response => {
-        this.router.navigate(['/panel'])
-      },
-      error => {
-        alert(error.text());
-        console.log(error.text());
-      });
-
+    this.signupService.signup(value, () => this.router.navigate(['/panel']));
   }
-
-
-
 }
