@@ -48,6 +48,8 @@ export class SignupComponent {
   }
 
   onSubmit(value) {
-    this.signupService.signup(value, () => this.router.navigate(['/panel']));
+    this.signupService.signup(value, () => {
+      this.router.navigate(['/panel']);
+    });
   }
 }

@@ -15,12 +15,14 @@ export class SignupService {
     this.headers.append('Content-Type', 'application/json');
   }
 
-  signup(signupForm, callback: (data) => void) {
+  signup(signupForm, callback: () => void) {
     let url = `${AppSettings.API_ENDPOINT}/account/Register`;
     this.http.post(url, signupForm, { headers: this.headers })
-      .map((res) => res.json())
       .subscribe(
-      data => callback(data),
+      () => {
+        this.notify.success('Sign Up Successful','Welcome');
+        callback();
+      },
       error => {
         if (error.status == 400) {
           let errorContent = error.json()

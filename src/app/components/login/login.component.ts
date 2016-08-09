@@ -14,7 +14,7 @@ import {LoginService} from '../../services/login/login.service';
   providers: [LoginService],
 
 })
-export class LoginComponent  {
+export class LoginComponent {
 
   form: ControlGroup;
   token: string;
@@ -25,24 +25,11 @@ export class LoginComponent  {
       "Email": ["", Validators.required],
       "Password": ["", Validators.required]
     });
-//    this.token = localStorage.getItem('token');
     this.authHeader = new Headers();
-
-
   }
 
-  onSubmit(value:any) {
-
-
-    this.auth.login(value).subscribe(
-        response => {
-          this.router.navigate(['/panel'])
-        },
-        error => {
-          alert(error.text());
-          console.log(error.text());
-        });
-
+  onSubmit(value) {
+    this.auth.login(value, () => this.router.navigate(['/panel']));
   }
 
 }
