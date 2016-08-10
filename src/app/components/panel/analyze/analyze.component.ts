@@ -4,25 +4,23 @@ import {Router} from '@angular/router';
 import {AnalyzeService} from '../../../services/analyze/analyze.service';
 
 
-
 @Component({
   moduleId: module.id,
   selector: 'app-analyze',
   templateUrl: 'analyze.component.html',
-  styleUrls: ['analyze.component.css']
+  styleUrls: ['analyze.component.css'],
+  providers: [AnalyzeService]
 })
-export class AnalyzeComponent {
+export class AnalyzeComponent implements OnInit {
 
-    constructor(private _AnalyzeService: AnalyzeService,private http: Http){
+  analyzes: any;
 
-      }
+  constructor(private analyzeService: AnalyzeService, private http: Http) { }
 
-      getList(){
-          this._AnalyzeService.getList((data) => {
-              console.log(data);
-
-          });
-
-      }
+  ngOnInit() {
+    this.analyzeService.getList((data) => {
+      this.analyzes = data;
+    });
+  }
 
 }

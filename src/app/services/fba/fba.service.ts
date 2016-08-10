@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import {FbaIteration} from '../../models/fbaiteration';
 import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
 import {AppSettings} from '../../../app/';
-
+import {LoginService} from "../login/login.service";
 
 @Injectable()
 export class FbaService {
@@ -12,19 +12,11 @@ export class FbaService {
   currentIteration: number;
   key: String;
   fbas: Array<FbaIteration>;
-  options: RequestOptions;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private login: LoginService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/fba`;
-
     this.currentIteration = 0;
     this.fbas = new Array<FbaIteration>();
-    this.options = new RequestOptions({
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-    });
   }
 
   startFba(key?: string, callback?: () => void) {
@@ -46,7 +38,7 @@ export class FbaService {
       "concentrationChanges": data
     };
 
-    this.http.post(`${this.apiUrl}/start`, postData, this.options)
+    this.http.post(`${this.apiUrl}/start`, postData, this.login.optionByAuthorization())
       .map((res) => res.json()).subscribe(
       (data) => {
         callback(data['key']);
@@ -57,7 +49,7 @@ export class FbaService {
     this.currentIteration++;
 
     this.http
-      .get(`${this.apiUrl}/${this.key}/${this.currentIteration}`, this.options)
+      .get(`${this.apiUrl}/${this.key}/${this.currentIteration}`)
       .map(res => res.json()).subscribe(
       (data: FbaIteration) => {
         this.fbas.push(data);
@@ -65,11 +57,10 @@ export class FbaService {
       });
   }
 
-  save(callback: (key: string) => void) {
+  save(callback: (response) => void) {
     // TODO: recheck response of api
-    this.http.post(`${this.apiUrl}/save`, this.key, this.options)
-      .map((res) => res.json())
-      .subscribe((data) => callback(data));
+    this.http.post(`${this.apiUrl}/save`, JSON.stringify(this.key), this.login.optionByAuthorization())
+      .subscribe((response) => callback(response));
   }
 
 }
