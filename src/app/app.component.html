@@ -34,6 +34,9 @@
           <a *ngIf = "!loginService.isLoggedIn()" [routerLink]="['login']">Login</a>
           <a *ngIf = "loginService.isLoggedIn()" (click) = "loginService.logout()" [routerLink]="['panel']">Logout</a>
         </li>
+        <li *ngIf = "loginService.isLoggedIn()">
+          <a [routerLink]="['panel']">Panel</a>
+        </li>
       </ul>
     </div>
   </div>
