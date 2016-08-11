@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
-import {Router} from '@angular/router';
+import {Router, ROUTER_DIRECTIVES } from '@angular/router';
 import {AnalyzeService} from '../../../services/analyze/analyze.service';
 
 
@@ -9,7 +9,8 @@ import {AnalyzeService} from '../../../services/analyze/analyze.service';
   selector: 'app-analyze',
   templateUrl: 'analyze.component.html',
   styleUrls: ['analyze.component.css'],
-  providers: [AnalyzeService]
+  providers: [AnalyzeService],
+  directives: [ROUTER_DIRECTIVES]
 })
 export class AnalyzeComponent implements OnInit {
 

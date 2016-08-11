@@ -1,3 +1,4 @@
+import {DetailComponent} from "./analyze/detail/detail.component";
 import {Component} from '@angular/core';
 import {RouterConfig} from '@angular/router';
 import {PanelComponent} from './panel.component';
@@ -13,5 +14,6 @@ export const PanelRoutes: RouterConfig = [{
     { path: '', component: ProfileComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'analyze', component: AnalyzeComponent },
+    { path: 'analyze-detail/:key', component: DetailComponent },
   ]
 }];
