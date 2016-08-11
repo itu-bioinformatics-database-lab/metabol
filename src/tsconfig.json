@@ -124,6 +124,7 @@
     "app/models/reaction.ts",
     "app/modules/calculater.ts",
     "app/modules/colorization.ts",
+    "app/notificationOptions.ts",
     "app/pipes/keys.pipe.spec.ts",
     "app/pipes/keys.pipe.ts",
     "app/services/analyze/analyze.service.spec.ts",
