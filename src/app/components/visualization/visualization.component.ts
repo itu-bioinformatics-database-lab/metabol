@@ -98,4 +98,26 @@ export class VisualizationComponent implements OnChanges, OnInit {
     return '#ccc';
   }
 
+  linkColorByFlux(source: FbaNode, target: FbaNode) {
+    let flux = this.fluxOfReactionOnLink(source, target);
+    if (flux == 0) return '#777';
+    let r = Math.floor(Math.abs(221 - flux / 30.0));
+    let g = Math.floor(Math.abs(221 - flux / 4.6));
+    return `rgb(${r},${g},0)`;
+  }
+
+  strokeWidtByFlux(source: FbaNode, target: FbaNode) {
+    let flux = this.fluxOfReactionOnLink(source, target);
+    let strokeWidth = 1 + flux / 100;
+    return `${strokeWidth}px`;
+  }
+
+  fluxOfReactionOnLink(source: FbaNode, target: FbaNode) {
+    if (target.type == 'r')
+      return target.v;
+    else if (source.type == 'r')
+      return source.v
+  }
+
+
 }

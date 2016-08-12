@@ -15,6 +15,7 @@ export interface FbaNode extends d3.layout.force.Node {
   name: string;
   type: string;
   index: number;
+  v?: number;
   isBorder?: boolean;
   concentration?: number;
   change?: string;
