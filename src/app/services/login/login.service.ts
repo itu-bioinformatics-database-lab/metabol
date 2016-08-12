@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
-import {NotificationsService} from 'angular2-notifications'
+import {NotificationsService} from 'angular2-notifications';
 
 @Injectable()
 export class LoginService {

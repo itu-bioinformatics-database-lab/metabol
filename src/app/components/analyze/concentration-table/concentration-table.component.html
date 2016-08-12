@@ -1,4 +1,18 @@
+<div class="form-group">
+  <label>Analyze Name</label>
+  <input [ngFormControl]="analyzeName" type="text" class="form-control" placeholder="Analyze Name">
+  <span class="text-danger" *ngIf="!analyzeName.valid && analyzeName.dirty">
+    Field Required
+  </span>
+</div>
+
 <form class="hidden-md hidden-lg" [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="form-group">
+    <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
+    <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
+      Field Required
+    </span>
+  </div>
   <div class="form-group">
     <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
     <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
@@ -80,4 +94,4 @@
     </table>
   </div>
 </form>
-<button (click)="analyze()" class="btn btn-default">Analyze</button>
+<button (click)="analyze()" class="btn btn-default" [disabled]="!analyzeName.valid">Analyze</button>

@@ -107,7 +107,7 @@ xdescribe('Fba Service', () => {
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
-    fbaService.getFbaKeyForData(apiData, (data) => {
+    fbaService.getFbaKeyForData('test', apiData, (data) => {
       expect(data).toEqual(guid);
     });
 
