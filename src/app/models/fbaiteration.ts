@@ -24,4 +24,5 @@ export interface FbaNode extends d3.layout.force.Node {
 
 export interface FbaLink extends d3.layout.force.Link<FbaNode | Number> {
   role: string;
+  stoichiometry?: number;
 }

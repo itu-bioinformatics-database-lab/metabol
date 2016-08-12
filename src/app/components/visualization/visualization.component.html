@@ -8,13 +8,18 @@
 
 
     <template ngFor let-l [ngForOf]="d3links">
-      <svg:line class="link"
-        *ngIf="(currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration"
-        [attr.x1]="l.source.x"
-        [attr.y1]="l.source.y"
-        [attr.x2]="l.target.x"
-        [attr.y2]="l.target.y"
-        [attr.marker-end]="'url(/metabol' + url + '#markerArrow)'"/>
+      <template [ngIf]="(currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration">
+        <svg:line class="link"
+          [attr.x1]="l.source.x"
+          [attr.y1]="l.source.y"
+          [attr.x2]="l.target.x"
+          [attr.y2]="l.target.y"
+          [attr.marker-end]="'url(/metabol' + url + '#markerArrow)'"/>
+
+        <svg:text class="text"
+          [attr.x]="(l.source.x + l.target.x) / 2"
+          [attr.y]="(l.source.y + l.target.y) / 2">{{ l.stoichiometry }}</svg:text>
+      </template>
     </template>
 
 

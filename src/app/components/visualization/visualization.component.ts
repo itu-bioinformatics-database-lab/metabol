@@ -42,8 +42,8 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   initForce() {
     return d3.layout.force<FbaLink, FbaNode>()
-      .linkDistance(25)
-      .charge(-500)
+      .linkDistance(100)
+      .charge(-1000)
       .size([1000, 400])
       .on('tick', () => this.onForceTick());
   }

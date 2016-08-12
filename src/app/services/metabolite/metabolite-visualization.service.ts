@@ -21,10 +21,10 @@ export class MetaboliteVisualizationService {
     this.cur = new CurrencyMetabolitesService();
   }
 
-  private createFbaLink(stoichiometry: number, metaboliteId: number, reactionId: number) {
+  private createFbaLink(stoichiometry: number, metaboliteId: number, reactionId: number): FbaLink {
     if (stoichiometry > 0)
-      return { source: metaboliteId, target: reactionId, role: 's' };
-    return { source: reactionId, target: metaboliteId, role: 'p' };
+      return { source: metaboliteId, target: reactionId, role: 's', stoichiometry: stoichiometry };
+    return { source: reactionId, target: metaboliteId, role: 'p', stoichiometry: stoichiometry };
   }
 
   convertToFbaNode(metabolite: Metabolite, relatedReactions: Array<any>): Array<FbaNode> {
