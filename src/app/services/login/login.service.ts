@@ -7,7 +7,7 @@ import {NotificationsService} from 'angular2-notifications'
 @Injectable()
 export class LoginService {
   options: RequestOptions;
-  
+
   constructor(private http: Http, private router: Router, private notify: NotificationsService) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
@@ -37,7 +37,7 @@ export class LoginService {
       .post(`${AppSettings.API_ENDPOINT}/account/Logout`, this.options)
       .subscribe(
       response => {
-        this.notify.info('Logouted', 'Goodbye');
+        this.notify.info('Logged out', 'Goodbye');
         this.router.navigate(['/login']);
       });
 
