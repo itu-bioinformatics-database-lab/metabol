@@ -108,15 +108,15 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   strokeWidtByFlux(source: FbaNode, target: FbaNode) {
     let flux = this.fluxOfReactionOnLink(source, target);
-    let strokeWidth = 1 + flux / 100;
+    let strokeWidth = 1 + flux / 300;
     return `${strokeWidth}px`;
   }
 
   fluxOfReactionOnLink(source: FbaNode, target: FbaNode) {
     if (target.type == 'r')
-      return target.v;
+      return target.v || 0;
     else if (source.type == 'r')
-      return source.v
+      return source.v || 0;
   }
 
 
