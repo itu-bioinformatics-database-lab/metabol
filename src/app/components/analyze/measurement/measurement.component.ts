@@ -16,12 +16,12 @@ export class MeasurementComponent {
 
   constructor(private fba: FbaService, private router: Router, private loading:LoadingService) { }
 
-  sampleAnalyze() {
-    this.loading.start();
-    this.fba.startFba('', () => {
-      this.router.navigate(['/analyze/result', this.fba.key]);
-      this.loading.finish();
-    });
-  }
+  // sampleAnalyze() {
+  //   this.loading.start();
+  //   this.fba.startFba('', () => {
+  //     this.router.navigate(['/analyze/result', this.fba.key]);
+  //     this.loading.finish();
+  //   });
+  // }
 
 }

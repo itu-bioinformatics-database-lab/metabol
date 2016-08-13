@@ -1,3 +1,4 @@
+import {SampleComponent} from "./sample/sample.component";
 import { RouterConfig } from '@angular/router';
 import {ConcentrationTableComponent} from './concentration-table';
 import {ManualComponent} from './manual/manual.component';
@@ -15,6 +16,7 @@ export const AnalyzeRoutes: RouterConfig = [{
     { path: 'upload', component: UploadComponent },
     { path: 'measurement', component: MeasurementComponent },
     { path: 'result/:key', component: ResultComponent },
+    { path: 'sample', component: SampleComponent },
     { path: '', redirectTo: 'measurement', terminal: true }
   ]
 }];

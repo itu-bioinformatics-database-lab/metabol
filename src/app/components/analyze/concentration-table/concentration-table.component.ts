@@ -31,7 +31,7 @@ export class ConcentrationTableComponent {
 
   constructor(private fb: FormBuilder, private fba: FbaService, private router: Router, private loading: LoadingService) {
     this.form = this.createForm();
-    this.analyzeName = new Control("", Validators.required);
+    this.analyzeName = new Control("My Analyze", Validators.required);
   }
 
   remove(index) {
