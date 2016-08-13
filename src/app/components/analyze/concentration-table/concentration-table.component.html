@@ -1,97 +1,101 @@
-<div class="form-group">
-  <label>Analyze Name</label>
-  <input [ngFormControl]="analyzeName" type="text" class="form-control" placeholder="Analyze Name">
-  <span class="text-danger" *ngIf="!analyzeName.valid && analyzeName.dirty">
+<div class="row">
+  <div class="form-group col-md-4">
+    <label>Analyze Name</label>
+    <input [ngFormControl]="analyzeName" type="text" class="form-control" placeholder="Analyze Name">
+    <span class="text-danger" *ngIf="!analyzeName.valid && analyzeName.dirty">
     Field Required
   </span>
+  </div>
 </div>
+<div class="row">
 
-<form class="hidden-md hidden-lg" [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
-  <div class="form-group">
-    <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
-    <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
+  <form class="hidden-md hidden-lg" [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="form-group">
+      <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
+      <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
       Field Required
     </span>
-  </div>
-  <div class="form-group">
-    <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
-    <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
+    </div>
+    <div class="form-group">
+      <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
+      <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
       Field Required
     </span>
-  </div>
-  <div class="form-group">
-    <select class="form-control" [ngFormControl]="form.controls['change']">
-      <option value="" disabled selected>Change</option>
-      <option *ngFor="let c of change|keys" [value]="c">
-        {{ change[c] }}
-      </option>
-    </select>
-    <span class="text-danger" *ngIf="!form.controls['change'].valid && form.controls['change'].dirty">
+    </div>
+    <div class="form-group">
+      <select class="form-control" [ngFormControl]="form.controls['change']">
+        <option value="" disabled selected>Change</option>
+        <option *ngFor="let c of change|keys" [value]="c">
+          {{ change[c] }}
+        </option>
+      </select>
+      <span class="text-danger" *ngIf="!form.controls['change'].valid && form.controls['change'].dirty">
       Field Required
     </span>
-  </div>
-  <div class="form-group" *ngIf="form.controls['change'].value == 10">
-    <input type="text" class="form-control" placeholder="Value" [ngFormControl]="form.controls['value']">
-    <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
+    </div>
+    <div class="form-group" *ngIf="form.controls['change'].value == 10">
+      <input type="text" class="form-control" placeholder="Value" [ngFormControl]="form.controls['value']">
+      <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
       Field Required
     </span>
-  </div>
-  <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
-</form>
+    </div>
+    <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
+  </form>
 
-<form [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Metabolite Name</th>
-          <th>Change</th>
-          <th>Exact Value</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hidden-xs hidden-sm">
-          <td>
-            <div class="form-group">
-              <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
-              <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
+  <form [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Metabolite Name</th>
+            <th>Change</th>
+            <th>Exact Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hidden-xs hidden-sm">
+            <td>
+              <div class="form-group">
+                <input [ngFormControl]="form.controls['name']" type="text" class="form-control" placeholder="Metabolite Name">
+                <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
                 Field Required
               </span>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select class="form-control" [ngFormControl]="form.controls['change']">
-                <option value="" disabled selected>Change</option>
-                <option *ngFor="let c of change|keys" [value]="c">
-                  {{ change[c] }}
-                </option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <input type="text" [disabled]="form.controls['change'].value != 10" class="form-control" placeholder="Value" [ngFormControl]="form.controls['value']">
-              <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" [ngFormControl]="form.controls['change']">
+                  <option value="" disabled selected>Change</option>
+                  <option *ngFor="let c of change|keys" [value]="c">
+                    {{ change[c] }}
+                  </option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <input type="text" [disabled]="form.controls['change'].value != 10" class="form-control" placeholder="Value" [ngFormControl]="form.controls['value']">
+                <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
                 Field Required
               </span>
-            </div>
-          </td>
-          <td>
-            <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
-          </td>
-        </tr>
-        <tr *ngFor="let c of conTable;let i=index">
-          <td>{{ c.name }}</td>
-          <td>{{ change[c.change] }}</td>
-          <td>{{ c.exactValue || '-' }}</td>
-          <td>
-            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="remove(i)"></span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</form>
+              </div>
+            </td>
+            <td>
+              <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
+            </td>
+          </tr>
+          <tr *ngFor="let c of conTable;let i=index">
+            <td>{{ c.name }}</td>
+            <td>{{ change[c.change] }}</td>
+            <td>{{ c.exactValue || '-' }}</td>
+            <td>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="remove(i)"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>
 <button (click)="analyze()" class="btn btn-default" [disabled]="!analyzeName.valid">Analyze</button>
