@@ -46,6 +46,29 @@ export class LoginService {
 
   }
 
+  changePassword(signupForm, callback: () => void){
+        let url = `${AppSettings.API_ENDPOINT}/account/ChangePassword`;
+        console.log(signupForm)
+        this.http.post(url, signupForm, this.login.optionByAuthorization())
+          .subscribe(
+          () => {
+            this.notify.success('Password Changed Successfully','');
+            callback();
+          },
+          error => {
+            if (error.status == 400) {
+              let errorContent = error.json()
+              for (let em in errorContent.modelState)
+                for (let e of errorContent.modelState[em])
+                  this.notify.error(errorContent.message, e);
+            }
+          });
+
+
+
+
+  }
+
   isLoggedIn() {
     return localStorage.getItem('access_token') !== null
   }

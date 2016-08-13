@@ -59,6 +59,7 @@ const barrels: string[] = [
   'app/components/fullscreenable-svg',
   'app/components/test',
   'app/components/loading',
+  'app/components/panel/profile/change-password',
   /** @cli-barrel */
 ];
 
