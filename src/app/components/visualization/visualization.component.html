@@ -53,7 +53,7 @@
         *ngIf="(currentIteration >= d?.iteration) || !currentIteration"
         [attr.x]="d.x - 15"
         [attr.y]="d.y - 15"
-        [style.fill]="searchInGraph(d.name)">{{ d.name }}</svg:text>
+        [style.fill]="searchInGraph(d.name)">{{ d.name }} {{d.v ? "(" + d.v + ")" : ""}}</svg:text>
     </template>
   </svg:g>
 </fullscreenable-svg>
