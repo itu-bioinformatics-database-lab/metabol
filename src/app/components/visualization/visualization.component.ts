@@ -101,7 +101,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   mapFluxValue() {
     this.nodes = this.nodes.map<FbaNode>((x) => {
-      if (x.type == 'r')
+      if (x.v)
         if (x.v > 1 || x.v < -1 )
           x.v = Number(x.v.toFixed(1));
         else
