@@ -58,7 +58,7 @@ describe('ReactionVisualization Service', () => {
     },
     {
       id: 'r3', stoichiometry: -1,
-      metabolites : []
+      metabolites: []
     },
   ];
 
@@ -73,12 +73,12 @@ describe('ReactionVisualization Service', () => {
   ];
 
   let expectedFbaLink: FbaLink[] = [
-    { source: 0, target: 1, role: 's' },
-    { source: 0, target: 2, role: 's' },
-    { source: 3, target: 0, role: 'p' },
-    { source: 4, target: 1, role: 's' },
-    { source: 1, target: 5, role: 'p' },
-    { source: 2, target: 6, role: 'p' }
+    { source: 0, target: 1, role: 's', stoichiometry: 1 },
+    { source: 0, target: 2, role: 's', stoichiometry: 1 },
+    { source: 3, target: 0, role: 'p', stoichiometry: -1 },
+    { source: 4, target: 1, role: 's', stoichiometry: 1 },
+    { source: 1, target: 5, role: 'p', stoichiometry: -1 },
+    { source: 2, target: 6, role: 'p', stoichiometry: -1 }
   ];
 
   it('should ...', () => {

@@ -42,8 +42,8 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   initForce() {
     return d3.layout.force<FbaLink, FbaNode>()
-      .linkDistance(25)
-      .charge(-500)
+      .linkDistance(100)
+      .charge(-1000)
       .size([1000, 400])
       .on('tick', () => this.onForceTick());
   }
@@ -97,5 +97,27 @@ export class VisualizationComponent implements OnChanges, OnInit {
       return '#000';
     return '#ccc';
   }
+
+  linkColorByFlux(source: FbaNode, target: FbaNode) {
+    let flux = this.fluxOfReactionOnLink(source, target);
+    if (flux == 0) return '#777';
+    let r = Math.floor(Math.abs(221 - flux / 30.0));
+    let g = Math.floor(Math.abs(221 - flux / 4.6));
+    return `rgb(${r},${g},0)`;
+  }
+
+  strokeWidtByFlux(source: FbaNode, target: FbaNode) {
+    let flux = this.fluxOfReactionOnLink(source, target);
+    let strokeWidth = 1 + flux / 300;
+    return `${strokeWidth}px`;
+  }
+
+  fluxOfReactionOnLink(source: FbaNode, target: FbaNode) {
+    if (target.type == 'r')
+      return target.v || 0;
+    else if (source.type == 'r')
+      return source.v || 0;
+  }
+
 
 }

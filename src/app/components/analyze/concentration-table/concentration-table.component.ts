@@ -27,9 +27,11 @@ export class ConcentrationTableComponent {
   };
 
   form: ControlGroup;
+  analyzeName: Control;
 
   constructor(private fb: FormBuilder, private fba: FbaService, private router: Router, private loading: LoadingService) {
     this.form = this.createForm();
+    this.analyzeName = new Control("My Analyze", Validators.required);
   }
 
   remove(index) {
@@ -61,7 +63,7 @@ export class ConcentrationTableComponent {
   }
 
   analyze() {
-    this.fba.getFbaKeyForData(this.conTable, (key) => {
+    this.fba.getFbaKeyForData(this.analyzeName.value, this.conTable, (key) => {
       this.router.navigate(['/analyze/result', key]);
     });
   }

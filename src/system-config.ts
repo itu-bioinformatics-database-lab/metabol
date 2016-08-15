@@ -60,6 +60,10 @@ const barrels: string[] = [
   'app/components/test',
   'app/components/loading',
   'app/components/panel/profile/change-password',
+  'app/components/panel/analyze/detail',
+  'app/components/fba-visualization',
+  'app/components/panel/analyze/detail/saved-result',
+  'app/components/analyze/sample',
   /** @cli-barrel */
 ];
 

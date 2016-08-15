@@ -72,11 +72,11 @@ describe('ReactionVisualization Service', () => {
   ];
 
   let expectedFbaLink: FbaLink[] = [
-    { source: 1, target: 0, role: 's' },
-    { source: 2, target: 0, role: 's' },
-    { source: 0, target: 3, role: 'p' },
-    { source: 4, target: 1, role: 'p' },
-    { source: 1, target: 5, role: 's' }
+    { source: 1, target: 0, role: 's', stoichiometry: 1 },
+    { source: 2, target: 0, role: 's', stoichiometry: 2 },
+    { source: 0, target: 3, role: 'p', stoichiometry: -1 },
+    { source: 4, target: 1, role: 'p', stoichiometry: -1 },
+    { source: 1, target: 5, role: 's', stoichiometry: 1 }
   ];
 
   it('should ...', () => {

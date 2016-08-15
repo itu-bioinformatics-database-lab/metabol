@@ -1,32 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
-import {NotificationsService} from 'angular2-notifications'
+import {NotificationsService} from 'angular2-notifications';
 
 @Injectable()
 export class LoginService {
-  headers: Headers;
-  token: string;
-  token2: string;
-  data2: string;
   options: RequestOptions;
 
   constructor(private http: Http, private router: Router, private notify: NotificationsService) {
-    this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    this.options = new RequestOptions({ headers: headers });
   }
 
   login(loginForm, callback: (data) => void) {
     let tokenData = `grant_type=password&username=${loginForm.Email}&password=${loginForm.Password}`;
     let url = `${AppSettings.API_ENDPOINT}/Token`;
-    this.http.post(url, tokenData, { headers: this.headers })
+    this.http.post(url, tokenData, this.options)
       .map(res => res.json())
       .subscribe(
       data => {
         callback(data);
-        this.notify.success('Login Successful','Welcome');
+        this.notify.success('Login Successful', 'Welcome');
         localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('userName', data.userName);
       },
       error => {
         if (error.status == 400)
@@ -37,40 +35,56 @@ export class LoginService {
   logout() {
     localStorage.removeItem('access_token');
     return this.http
-      .post(`${AppSettings.API_ENDPOINT}/account/Logout`, { headers: this.headers })
+      .post(`${AppSettings.API_ENDPOINT}/account/Logout`, this.options)
       .subscribe(
       response => {
-        this.notify.info('Logouted', 'Goodbye');
+        this.notify.info('Logged out', 'Goodbye');
         this.router.navigate(['/login']);
       });
 
   }
 
-  changePassword(signupForm, callback: () => void){
-        let url = `${AppSettings.API_ENDPOINT}/account/ChangePassword`;
-        console.log(signupForm)
-        this.http.post(url, signupForm, this.login.optionByAuthorization())
-          .subscribe(
-          () => {
-            this.notify.success('Password Changed Successfully','');
-            callback();
-          },
-          error => {
-            if (error.status == 400) {
-              let errorContent = error.json()
-              for (let em in errorContent.modelState)
-                for (let e of errorContent.modelState[em])
-                  this.notify.error(errorContent.message, e);
-            }
-          });
+  changePassword(signupForm, callback: () => void) {
+    let url = `${AppSettings.API_ENDPOINT}/account/ChangePassword`;
+    this.http.post(url, signupForm, this.optionByAuthorization())
+      .subscribe(
+      () => {
+        this.notify.success('Password Changed Successfully', '');
+        callback();
+      },
+      error => {
+        if (error.status == 400) {
+          let errorContent = error.json()
+          for (let em in errorContent.modelState)
+            for (let e of errorContent.modelState[em])
+              this.notify.error(errorContent.message, e);
+        }
+      });
+  }
 
-
-
-
+  userInfo(callback: (data) => void) { //Gets user info to fill My Profile part in panel
+    let url = `${AppSettings.API_ENDPOINT}/fba/list`; //User infoda ad soyad göstermiyor bu nedenle bu adresi kullandım
+    this.http.get(url, this.optionByAuthorization())
+      .map(response => response.json())
+      .subscribe(data => {
+        callback(data)
+      });
   }
 
   isLoggedIn() {
     return localStorage.getItem('access_token') !== null
+  }
+
+  token() {
+    return `Bearer ${localStorage.getItem('access_token')}`;
+  }
+
+  optionByAuthorization() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    if (this.isLoggedIn())
+      headers.append('Authorization', this.token());
+    return new RequestOptions({ headers: headers });
   }
 
 }

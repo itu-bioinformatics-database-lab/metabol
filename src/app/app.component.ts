@@ -5,6 +5,7 @@ import {LoadingComponent} from './components/loading/loading.component';
 import {LoadingService} from './services/loading/loading.service';
 import {LoginService} from './services/login/login.service'
 import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications'
+import {notificationOptions} from './notificationOptions';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +18,7 @@ import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notif
 export class AppComponent {
 
   loading: boolean = false;
+  notificationOptions = notificationOptions;
 
   constructor(appDataLoader: AppDataLoader,
     public loadingService: LoadingService,
