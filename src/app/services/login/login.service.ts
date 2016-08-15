@@ -24,6 +24,7 @@ export class LoginService {
         callback(data);
         this.notify.success('Login Successful', 'Welcome');
         localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('userName', data.userName);
       },
       error => {
         if (error.status == 400)
@@ -41,6 +42,33 @@ export class LoginService {
         this.router.navigate(['/login']);
       });
 
+  }
+
+  changePassword(signupForm, callback: () => void) {
+    let url = `${AppSettings.API_ENDPOINT}/account/ChangePassword`;
+    this.http.post(url, signupForm, this.optionByAuthorization())
+      .subscribe(
+      () => {
+        this.notify.success('Password Changed Successfully', '');
+        callback();
+      },
+      error => {
+        if (error.status == 400) {
+          let errorContent = error.json()
+          for (let em in errorContent.modelState)
+            for (let e of errorContent.modelState[em])
+              this.notify.error(errorContent.message, e);
+        }
+      });
+  }
+
+  userInfo(callback: (data) => void) { //Gets user info to fill My Profile part in panel
+    let url = `${AppSettings.API_ENDPOINT}/fba/list`; //User infoda ad soyad göstermiyor bu nedenle bu adresi kullandım
+    this.http.get(url, this.optionByAuthorization())
+      .map(response => response.json())
+      .subscribe(data => {
+        callback(data)
+      });
   }
 
   isLoggedIn() {
