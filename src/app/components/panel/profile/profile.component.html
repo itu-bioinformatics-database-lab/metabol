@@ -24,33 +24,23 @@
       </div>
       <div class="form-group">
         <label for="email" class="control-label">Email</label>
-        <input class="form-control" id="Email" placeholder="Email" type="Email" [ngFormControl]="form.controls['Email']">
+        <input class="form-control" id="Email" placeholder="Email" type="email" [ngFormControl]="form.controls['Email']">
         <span class="text-danger" *ngIf="!form.controls['Email'].valid && form.controls['Email'].dirty">
           Field Required
         </span>
       </div>
       <div class="form-group">
         <label for="Email" class="control-label">Institution</label>
-        <input class="form-control"  placeholder="Institution" type="Institution" [ngFormControl]="form.controls['Institution']">
-        <span class="text-danger" *ngIf="!form.controls['Institution'].valid && form.controls['Institution'].dirty">
+        <input class="form-control" placeholder="Affiliation" type="text" [ngFormControl]="form.controls['Affiliation']">
+        <span class="text-danger" *ngIf="!form.controls['Affiliation'].valid && form.controls['Affiliation'].dirty">
           Field Required
         </span>
       </div>
-      <div class="form-group">
-        <label for="Password" class="control-label">Password</label>
-        <input class="form-control" placeholder="Password" type="password" [ngFormControl]="form.controls['Password']">
-        <span class="text-danger" *ngIf="!form.controls['Password'].valid && form.controls['Password'].dirty">
-          Password needs to be at least 6 characters.
-        </span>
-      </div>
-      <div class="form-group">
-        <label for="ConfirmPassword" class="control-label">Confirm Password</label>
-        <input class="form-control" placeholder="Confirm Password" type="password" [ngFormControl]="form.controls['ConfirmPassword']">
-        <span class="text-danger" *ngIf="form.hasError('mismatchedPasswords')">
-          Passwords do not match
-        </span>
-      </div>
+
       <input value="Save" type="submit" class="btn btn-info" [disabled]="!form.valid">
     </form>
   </div>
+</div>
+<div>
+  <app-change-password></app-change-password>
 </div>

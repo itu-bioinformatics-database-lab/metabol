@@ -19,6 +19,7 @@ export const routes: RouterConfig = [
   ...SignupRoutes,
   ...AnalyzeRoutes,
   ...PanelRoutes,
+  
   { path: 'documentation', component: DocumentationComponent },
   { path: 'test', component: TestComponent },
   { path: 'loading', component: LoadingComponent }

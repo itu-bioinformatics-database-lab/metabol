@@ -1,41 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
-
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {LoginService} from '../../../services/login/login.service';
 @Component({
   moduleId: module.id,
   selector: 'app-profile',
   templateUrl: 'profile.component.html',
   styleUrls: ['profile.component.css'],
-  directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES]
-
+  directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, ChangePasswordComponent],
+  providers: [LoginService]
 })
 export class ProfileComponent {
-
+  Name: string;
+  Surname:string;
+  Email:string;
+  Affiliation:string;
   form: ControlGroup;
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, public loginService: LoginService) {
+    this.formValues();
     this.form = fb.group({
-      "Name": ["", Validators.required],
-      "Surname": ["", Validators.required],
-      "Email": ["", Validators.required],
-      "Institution": ["", Validators.required],
-      "ConfirmPassword": ["", Validators.required],
-      "Password": ["", Validators.compose([Validators.required, Validators.minLength(6)])],
-
-    },
-      { validator: this.matchingPasswords('Password', 'ConfirmPassword') });
+      "Name": [this.Name, Validators.required],
+      "Surname": [this.Surname, Validators.required],
+      "Email": [this.Email, Validators.required],
+      "Affiliation": [this.Affiliation, Validators.required],
+    });
   }
 
-  //To chech whether confirmPasswor is same with Password or not
-  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-    return (group: ControlGroup): { [key: string]: any } => {
-      let Password = group.controls[passwordKey];
-      let ConfirmPassword = group.controls[confirmPasswordKey];
-      if (!ConfirmPassword)
-        return { mismatchedPasswords: false };
-      else if (Password.value !== ConfirmPassword.value)
-        return { mismatchedPasswords: true };
-    }
+  formValues() {
+    this.loginService.userInfo((data) => {
+      this.Name = data; //Burda bir problem var user info datasını alamıyorum
+    });
+
+    this.Name = "ALi";
+
   }
 
   onSubmit(value: string) {
