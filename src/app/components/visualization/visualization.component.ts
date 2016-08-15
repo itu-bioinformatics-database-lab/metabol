@@ -86,6 +86,7 @@ export class VisualizationComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     this.force.stop();
+    this.mapFluxValue();
     this.force.nodes(this.nodes).links(this.links);
     this.force.start();
 
@@ -98,9 +99,20 @@ export class VisualizationComponent implements OnChanges, OnInit {
     return '#ccc';
   }
 
+  mapFluxValue() {
+    this.nodes = this.nodes.map<FbaNode>((x) => {
+      if (x.type == 'r')
+        if (x.v > 1 || x.v < -1 )
+          x.v = Number(x.v.toFixed(1));
+        else
+          x.v = Number(x.v.toFixed(2));
+      return x;
+    });
+  }
+
   linkColorByFlux(source: FbaNode, target: FbaNode) {
     let flux = this.fluxOfReactionOnLink(source, target);
-    if (flux == 0) return '#777';
+    if (flux == 0) return "#c8c8c8";
     let r = Math.floor(Math.abs(221 - flux / 30.0));
     let g = Math.floor(Math.abs(221 - flux / 4.6));
     return `rgb(${r},${g},0)`;
