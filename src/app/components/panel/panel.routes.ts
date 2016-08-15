@@ -11,7 +11,7 @@ export const PanelRoutes: RouterConfig = [{
   component: PanelComponent,
   canActivate: [AuthGuard],
   children: [
-    { path: '', component: ProfileComponent },
+    { path: '', redirectTo: 'analyze', terminal: true },
     { path: 'profile', component: ProfileComponent },
     { path: 'analyze', component: AnalyzeComponent },
     { path: 'analyze-detail/:key', component: DetailComponent },
