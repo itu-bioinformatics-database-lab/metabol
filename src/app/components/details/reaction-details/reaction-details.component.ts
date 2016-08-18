@@ -47,7 +47,8 @@ export class ReactionDetailsComponent implements OnInit {
     this.loading.start();
     this.rea.getReaction(reactionId).subscribe(data => {
       this.reaction = data;
-      this.reaction.notes = data.notes.split('\n');
+      if (this.reaction.notes)
+        this.reaction.notes = data.notes.split('\n');
       this.rea.getRelatedMetabolites(reactionId)
         .subscribe(data => {
           this.relatedMetabolites = data['metabolites'];
