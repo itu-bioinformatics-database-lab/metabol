@@ -1,148 +1,40 @@
 [{
-    "name": "fru[c]",
+    "name": "h_e",
     "change": 1
 }, {
-    "name": "CE1787[c]",
+    "name": "h_c",
     "change": 1
 }, {
-    "name": "f6p[c]",
+    "name": "6pgl_c",
     "change": 1
 }, {
-    "name": "f1p[c]",
+    "name": "h2o_c",
     "change": 1
 }, {
-    "name": "fdp[c]",
+    "name": "etoh_c",
     "change": 1
 }, {
-    "name": "fru[e]",
+    "name": "acon_C_c",
     "change": -1
 }, {
-    "name": "glyald[c]",
+    "name": "gln__L_c",
     "change": 1
 }, {
-    "name": "glyald[m]",
+    "name": "fru_e",
     "change": -1
 }, {
-    "name": "g3p[c]",
+    "name": "nad_c",
     "change": -1
 }, {
-    "name": "thr_L[l]",
+    "name": "6pgc_c",
     "change": -1
 }, {
-    "name": "thr_L[c]",
+    "name": "mal__L_c",
     "change": -1
 }, {
-    "name": "thr_L[e]",
+    "name": "acald_c",
     "change": 1
 }, {
-    "name": "thr_L[m]",
-    "change": -1
-}, {
-    "name": "tdchola[x]",
-    "change": 1
-}, {
-    "name": "tdchola[c]",
-    "change": -1
-}, {
-    "name": "tdchola[e]",
-    "change": -1
-}, {
-    "name": "g6p[r]",
-    "change": 1
-}, {
-    "name": "glc_D[l]",
-    "change": -1
-}, {
-    "name": "g1p[c]",
-    "change": -1
-}, {
-    "name": "g6p[c]",
-    "change": -1
-}, {
-    "name": "glc_D[e]",
-    "change": -1
-}, {
-    "name": "glc_D[r]",
-    "change": -1
-}, {
-    "name": "glc_D[c]",
-    "change": 1
-}, {
-    "name": "dtdp4d6dg[c]",
-    "change": -1
-}, {
-    "name": "g1p[e]",
-    "change": 1
-}, {
-    "name": "glc_D[g]",
-    "change": 1
-}, {
-    "name": "3pg[m]",
-    "change": 1
-}, {
-    "name": "3pg[c]",
-    "change": 1
-}, {
-    "name": "pep[m]",
-    "change": 1
-}, {
-    "name": "phpyr[c]",
-    "change": -1
-}, {
-    "name": "3spyr[c]",
-    "change": -1
-}, {
-    "name": "pyr[x]",
-    "change": 1
-}, {
-    "name": "34hpp[c]",
-    "change": -1
-}, {
-    "name": "pyr[e]",
-    "change": 1
-}, {
-    "name": "pyr[c]",
-    "change": 1
-}, {
-    "name": "mercppyr[m]",
-    "change": -1
-}, {
-    "name": "hpyr[m]",
-    "change": 1
-}, {
-    "name": "hpyr[c]",
-    "change": 1
-}, {
-    "name": "34hpp[m]",
-    "change": 1
-}, {
-    "name": "mercppyr[c]",
-    "change": -1
-}, {
-    "name": "pyr[m]",
-    "change": -1
-}, {
-    "name": "34hpp[e]",
-    "change": -1
-}, {
-    "name": "3spyr[m]",
-    "change": 1
-}, {
-    "name": "hpyr[x]",
-    "change": -1
-}, {
-    "name": "3snpyr[m]",
-    "change": -1
-}, {
-    "name": "pep[c]",
-    "change": -1
-}, {
-    "name": "phpyr[m]",
-    "change": 1
-}, {
-    "name": "3snpyr[c]",
-    "change": -1
-}, {
-    "name": "3php[c]",
+    "name": "pyr_e",
     "change": -1
 }]

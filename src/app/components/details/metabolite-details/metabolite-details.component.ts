@@ -45,7 +45,8 @@ export class MetaboliteDetailsComponent implements OnInit {
     this.loading.start();
     this.mea.getMetabolite(metaboliteId).subscribe(data => {
       this.metabolite = data;
-      this.metabolite.notes = this.metabolite.notes.split('\n');
+      if (this.metabolite.notes)
+        this.metabolite.notes = data.notes.split('\n');
       this.mea.getRelatedReactions(metaboliteId)
         .subscribe(data => {
           this.relatedReactions = data['reactions'];

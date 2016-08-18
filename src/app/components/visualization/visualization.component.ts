@@ -94,15 +94,16 @@ export class VisualizationComponent implements OnChanges, OnInit {
   }
 
   searchInGraph(nodeName: String) {
-    if (nodeName.startsWith(this.searchTerm) || !this.searchTerm)
-      return '#000';
+    if (nodeName)
+      if (nodeName.startsWith(this.searchTerm) || !this.searchTerm)
+        return '#000';
     return '#ccc';
   }
 
   mapFluxValue() {
     this.nodes = this.nodes.map<FbaNode>((x) => {
       if (x.v)
-        if (x.v > 1 || x.v < -1 )
+        if (x.v > 1 || x.v < -1)
           x.v = Number(x.v.toFixed(1));
         else
           x.v = Number(x.v.toFixed(2));
