@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" id="logo">
-        <img src="img/logo.png" alt=""/>
+        <img src="img/logo.png" alt="" />
         <span>
           Metabolitics
         </span>
@@ -28,13 +28,16 @@
           <a [routerLink]="['documentation']">Documentation</a>
         </li>
         <li>
+          <a [routerLink]="['subsystem']">Browse</a>
+        </li>
+        <li>
           <a>Contact</a>
         </li>
         <li>
-          <a *ngIf = "!loginService.isLoggedIn()" [routerLink]="['login']">Login</a>
-          <a *ngIf = "loginService.isLoggedIn()" (click) = "loginService.logout()" [routerLink]="['panel']">Logout</a>
+          <a *ngIf="!loginService.isLoggedIn()" [routerLink]="['login']">Login</a>
+          <a *ngIf="loginService.isLoggedIn()" (click)="loginService.logout()" [routerLink]="['panel']">Logout</a>
         </li>
-        <li *ngIf = "loginService.isLoggedIn()">
+        <li *ngIf="loginService.isLoggedIn()">
           <a [routerLink]="['panel']">Control Panel</a>
         </li>
       </ul>

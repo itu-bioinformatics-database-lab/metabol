@@ -8,6 +8,7 @@ import {PanelRoutes} from './components/panel/panel.routes';
 import {DocumentationComponent} from './components/documentation/documentation.component';
 import {TestComponent} from './components/test/test.component';
 import {LoadingComponent} from './components/loading/loading.component';
+import {SubsystemRoutes} from './components/subsystem/subsystem.routes';
 
 import {AuthGuard} from './auth-guard/auth-guard';
 import {AuthGuardLogin} from './auth-guard-login/auth-guard-login';
@@ -19,7 +20,7 @@ export const routes: RouterConfig = [
   ...SignupRoutes,
   ...AnalyzeRoutes,
   ...PanelRoutes,
-  
+  ...SubsystemRoutes,
   { path: 'documentation', component: DocumentationComponent },
   { path: 'test', component: TestComponent },
   { path: 'loading', component: LoadingComponent }

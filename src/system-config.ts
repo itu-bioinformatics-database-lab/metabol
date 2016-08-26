@@ -64,6 +64,8 @@ const barrels: string[] = [
   'app/components/fba-visualization',
   'app/components/panel/analyze/detail/saved-result',
   'app/components/analyze/sample',
+  'app/subsystem',
+  'app/subsystem-detail',
   /** @cli-barrel */
 ];
 
