@@ -63,11 +63,26 @@ export class LoginService {
   }
 
   userInfo(callback: (data) => void) { //Gets user info to fill My Profile part in panel
-    let url = `${AppSettings.API_ENDPOINT}/fba/list`; //User infoda ad soyad göstermiyor bu nedenle bu adresi kullandım
-    this.http.get(url, this.optionByAuthorization())
+    let url = `${AppSettings.API_ENDPOINT}/account/UserInfo`; //User infoda ad soyad göstermiyor bu nedenle bu adresi kullandım
+     this.http.get(url, this.optionByAuthorization())
       .map(response => response.json())
       .subscribe(data => {
         callback(data)
+      });
+  }
+
+  submitUserInfo(value, callback: (data) => void) {
+    let url = `${AppSettings.API_ENDPOINT}/account/Update`;
+    this.http.post(url, value, this.optionByAuthorization())
+      .map(res => res.json())
+      .subscribe(
+      data => {
+        callback(data);
+        this.notify.success('Password Changed Successfully', '')},
+
+      error => {
+        if (error.status == 400)
+          this.notify.error('An Error Occured', error.json().error_description);
       });
   }
 
