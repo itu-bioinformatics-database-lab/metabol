@@ -46,3 +46,7 @@
   top: 10px;
   left: 10px;
 }
+.lighting-line {
+    stroke: pink;
+    stroke-width: 20px;
+}
