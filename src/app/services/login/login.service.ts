@@ -74,12 +74,11 @@ export class LoginService {
   submitUserInfo(value, callback: (data) => void) {
     let url = `${AppSettings.API_ENDPOINT}/account/Update`;
     this.http.post(url, value, this.optionByAuthorization())
-      .map(res => res.json())
       .subscribe(
-      data => {
+      (data) => {
+        this.notify.success('My Profile Changed Successfully', '')
         callback(data);
-        this.notify.success('Password Changed Successfully', '')},
-
+      },
       error => {
         if (error.status == 400)
           this.notify.error('An Error Occured', error.json().error_description);
