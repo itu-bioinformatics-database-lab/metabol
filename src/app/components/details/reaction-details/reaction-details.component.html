@@ -23,7 +23,10 @@
           annotation: {{reaction.annotation}}
         </p>
         <p *ngIf="reaction.sboTerm">
-          sbo term:{{reaction.sboTerm}}
+          sbo term: {{reaction.sboTerm}}
+        </p>
+        <p *ngIf="reaction.subsystem">
+          subsystem: {{reaction.subsystem}}
         </p>
         <p *ngFor="let r of reaction.notes">
           {{ r }}
