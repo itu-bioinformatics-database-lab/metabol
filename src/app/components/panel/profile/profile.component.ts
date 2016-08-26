@@ -18,27 +18,26 @@ export class ProfileComponent {
   affiliation: string;
   form: ControlGroup;
 
-  constructor(fb: FormBuilder, public loginService: LoginService, private router: Router) {
-
-    this.formValues();
+  //TODO: reduce code repetation
+  constructor(private fb: FormBuilder, public loginService: LoginService, private router: Router) {
     this.form = fb.group({
       "name": [this.name, Validators.required],
       "surname": [this.surname, Validators.required],
       "email": [this.email, Validators.required],
       "affiliation": [this.affiliation, Validators.required],
     });
+    this.formValues();
   }
 
-  formValues():void {
+  formValues(): void {
     this.loginService.userInfo((data) => {
-      this.name = data.name;  // data.name;
-      this.surname = data.surname;
-      this.email = data.email;
-      this.affiliation = data.affiliation
-      console.log(this.name);
-
-  });
-  this.name = "aaa";
+      this.form = this.fb.group({
+        "name": [data.name, Validators.required],
+        "surname": [data.surname, Validators.required],
+        "email": [data.email, Validators.required],
+        "affiliation": [data.affiliation, Validators.required],
+      });
+    });
   }
 
   onSubmit(value) {

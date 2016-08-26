@@ -6,8 +6,6 @@
 <div class="row">
   <div class="col-md-8">
     <form [ngFormModel]="form" (ngSubmit)="onSubmit(form.value)">
-
-
       <div class="form-group">
         <label for="email" class="control-label">Name</label>
         <input class="form-control" placeholder="Name" type="text" [ngFormControl]="form.controls['name']">
@@ -36,7 +34,6 @@
           Field Required
         </span>
       </div>
-
       <input value="Save" type="submit" class="btn btn-info" [disabled]="!form.valid">
     </form>
   </div>
