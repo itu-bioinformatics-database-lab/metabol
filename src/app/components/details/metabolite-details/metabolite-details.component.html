@@ -36,6 +36,10 @@
         <p *ngIf="metabolite.sboTerm">
           sbo term: {{metabolite.sboTerm}}
         </p>
+        <p>
+          Subsystems:
+          <span *ngFor="let s of metabolite.subsystems;let i = index;">{{ i ? "," : "" }} {{ s }}</span>
+        </p>
         <p *ngFor="let n of metabolite.notes">
           {{ n }}
         </p>
