@@ -6,9 +6,16 @@
   </svg:defs>
   <svg:g [attr.transform]="'translate('+ translate +')scale('+ scale +')'">
 
-
     <template ngFor let-l [ngForOf]="d3links">
       <template [ngIf]="(currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration">
+
+        <svg:line class="link lighting-line"
+          *ngIf="fluxOfReactionOnLink(l.source, l.target)"
+          [attr.x1]="l.source.x"
+          [attr.y1]="l.source.y"
+          [attr.x2]="l.target.x"
+          [attr.y2]="l.target.y"/>
+
         <svg:line class="link"
           [attr.x1]="l.source.x"
           [attr.y1]="l.source.y"
