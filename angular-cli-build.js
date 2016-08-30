@@ -16,6 +16,7 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       'd3/**/*.+(js|js.map)',
+      'underscore/underscore.js',
       'angular2-notifications/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)'
     ]

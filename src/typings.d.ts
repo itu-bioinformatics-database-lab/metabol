@@ -2,6 +2,6 @@
 // https://github.com/typings/typings
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 /// <reference path="../typings/main.d.ts" />
-
+/// <reference path="../typings/globals/underscore/index.d.ts" />
 
 declare var module: { id: string };
