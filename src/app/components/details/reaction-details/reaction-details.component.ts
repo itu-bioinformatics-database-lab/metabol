@@ -8,7 +8,7 @@ import {KeysPipe} from '../../../pipes/keys.pipe';
 import {Reaction} from '../../../models/reaction';
 import {FbaNode, FbaLink} from '../../../models/fbaiteration';
 import {VisualizationComponent} from '../../visualization/visualization.component';
-
+import {RelatedMetabolite} from '../../../models/relateds';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +21,7 @@ import {VisualizationComponent} from '../../visualization/visualization.componen
 })
 export class ReactionDetailsComponent implements OnInit {
   reaction: Reaction;
-  relatedMetabolites: Array<any>;
+  relatedMetabolites: RelatedMetabolite[];
   nodes: Array<FbaNode>;
   links: Array<FbaLink>;
 
@@ -32,7 +32,6 @@ export class ReactionDetailsComponent implements OnInit {
     private loading: LoadingService
   ) {
     this.reaction = new Reaction();
-    this.relatedMetabolites = new Array<any>();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
   };
@@ -50,7 +49,7 @@ export class ReactionDetailsComponent implements OnInit {
       if (this.reaction.notes)
         this.reaction.notes = data.notes.split('\n');
       this.rea.getRelatedMetabolites(reactionId)
-        .subscribe(data => {
+        .subscribe((data) => {
           this.relatedMetabolites = data['metabolites'];
           this.loadVisualization();
           this.loading.finish();

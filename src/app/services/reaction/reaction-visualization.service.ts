@@ -27,7 +27,7 @@ export class ReactionVisualizationService {
     return { source: reactionId, target: metaboliteId, role: 'p', stoichiometry: stoichiometry };
   }
 
-  convertToFbaNode(reaction: Reaction, connectedMetabolites: ConnectedMetabolite[]): Array<FbaNode> {
+  convertToFbaNode(reaction: Reaction, connectedMetabolites): Array<FbaNode> {
     let fbaNodes = new Array<FbaNode>();
     let idCounter = 0;
 
@@ -57,7 +57,7 @@ export class ReactionVisualizationService {
     return fbaNodes;
   }
 
-  convertToFbaLink(reaction: Reaction, connectedMetabolites: ConnectedMetabolite[]): Array<FbaLink> {
+  convertToFbaLink(reaction: Reaction, connectedMetabolites): Array<FbaLink> {
     let fbaLinks = new Array<FbaLink>();
     let idCounter = 1;
 
@@ -78,7 +78,7 @@ export class ReactionVisualizationService {
 
   convertToFbaVisualization(
     reaction: Reaction,
-    connectedMetabolites: ConnectedMetabolite[]): [FbaNode[], FbaLink[]] {
+    connectedMetabolites): [FbaNode[], FbaLink[]] {
     return [
       this.convertToFbaNode(reaction, connectedMetabolites),
       this.convertToFbaLink(reaction, connectedMetabolites)
