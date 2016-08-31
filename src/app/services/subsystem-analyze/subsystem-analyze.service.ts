@@ -8,19 +8,26 @@ import {SubsystemTreeNode} from "../../models/subsystem";
 @Injectable()
 export class SubsystemAnalyzeService {
   apiUrl: String;
-  solutionTree: SubsystemTreeNode;
+  private solutionTree: SubsystemTreeNode;
 
   constructor(private http: Http, private login: LoginService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
     this.solutionTree = {
-      name: "All"
+      name: "All",
+      children: []
     };
   }
 
+  /**
+   * Calls metabolitics api and return solution for subsystem analyze
+   * @param analyzeName Analyze name to save database to future review
+   * @param data        Concentration of metabolites in network
+   * @param callback    Result of analyze as callback function
+   */
   getSolutions(
     analyzeName: string,
     data: Array<MetaboliteConcentration>,
-    callback: (data: { [solutions: string]: Set<string> }) => void) {
+    callback: (data: { [solutions: string]: Array<string> }) => void) {
 
     let postData = {
       "name": analyzeName,
@@ -31,65 +38,99 @@ export class SubsystemAnalyzeService {
       .map(res => res.json()).subscribe(callback);
   }
 
-  reverseDict(dict: { [solution: string]: Set<string> }): { [pathways: string]: Set<string> } {
-    let reverseDict: { [pathways: string]: Set<string> } = {};
+  /**
+   * Reverse dictionary of solution to dictionary of pathways
+   * @param  dict Dictionary of solutions
+   * @return Dictionary of pathways
+   */
+  reverseDict(dict: { [solution: string]: Array<string> }): { [pathways: string]: Array<string> } {
+    let reverseDict: { [pathways: string]: Array<string> } = {};
     for (let key in dict)
       dict[key].forEach(x => {
-        if (!reverseDict[x]) reverseDict[x] = new Set<string>();
-        reverseDict[x].add(key);
+        if (!reverseDict[x]) reverseDict[x] = new Array<string>();
+        reverseDict[x].push(key);
       });
     return reverseDict;
   }
 
-  mostActivePathway(data: { [pathways: string]: Set<string> }): string {
+  /**
+   * Finds most active pathway in solutions
+   * @param data solution as dictionary of pathways
+   * @return most active pathway
+   */
+  mostActivePathway(data: { [pathways: string]: Array<string> }): string {
     let max = 0;
     let pmost = "";
     for (let key in data)
-      if (data[key].size > max) {
-        max = data[key].size;
+      if (data[key].length > max) {
+        max = data[key].length;
         pmost = key;
       }
     return pmost;
   }
 
-  pathwayIntersection(pathwayName: string, data: { [pathways: string]: Set<string> })
-    : [{ [intersection: string]: Set<string> }, { [nonintersection: string]: Set<string> }] {
+  /**
+   * Calculates new branch of solution visulazition tree
+   * Most active pathway's children are intersection pathways without their diff solution
+   * Most active pathway's parent's children are dif pathways without their intersection solution
+   * @param  pathwayName most active pathways name in solutions tree
+   * @param  data        data solution as dictionary of pathways
+   * @return data solution as dictionary of pathways
+   */
+  newBranchsOfSolution(pathwayName: string, data: { [pathways: string]: Array<string> })
+    : [{ [children: string]: Array<string> }, { [parentsChildren: string]: Array<string> }] {
 
-    let intersection: { [pathways: string]: Set<string> } = {};
-    let nonintersection: { [pathways: string]: Set<string> } = {};
+    let children: { [pathways: string]: Array<string> } = {};
+    let parentsChildren: { [pathways: string]: Array<string> } = {};
 
     for (let key in data) {
-      if (this.isThereIntersetion(data[pathwayName], data[key]))
-        intersection[key] = data[key];
-      else
-        nonintersection[key] = data[key];
+      let intersection = _.intersection(data[pathwayName], data[key]);
+      let difference = _.difference(data[key], data[pathwayName]);
+
+      if (intersection.length) children[key] = intersection;
+      if (difference.length) parentsChildren[key] = difference;
     }
 
-    delete intersection[pathwayName];
+    delete children[pathwayName];
 
-    return [intersection, nonintersection];
+    return [children, parentsChildren];
   }
 
-  private isThereIntersetion(set1: Set<any>, set2: Set<any>) {
-    let intersection = false;
-    set1.forEach(x => {
-      if (set2.has(x)) intersection = true;
-    });
-    return intersection;
-  }
 
-  createSolutionTree(parent, data: { [pathways: string]: Set<string> }) {
+  createSolutionTree(parent, data: { [pathways: string]: Array<string> }) {
     let mostActivePathway = this.mostActivePathway(data);
     let nmostActiveNode: SubsystemTreeNode = {
-      name : mostActivePathway
+      name: mostActivePathway,
+      children: []
     };
 
-    this.solutionTree.children.push(nmostActiveNode);
+    let [children, parentsChildren] = this.newBranchsOfSolution(mostActivePathway, data);
 
-    let [intersection, nonintersection] = this.pathwayIntersection(mostActivePathway, data);
+    if (Object.keys(children).length)
+      this.createSolutionTree(nmostActiveNode, children)
 
+    if (Object.keys(parentsChildren).length)
+      this.createSolutionTree(parent, parentsChildren)
+
+
+    let other = new Array<string>();
+
+    for (let key in children)
+      other = other.concat(data[key]);
+
+
+    let directSolution: string[] = _.difference(data[mostActivePathway], other)
+
+    for (let s of directSolution)
+      nmostActiveNode.children.push(<SubsystemTreeNode>{
+        name: s,
+      });
+
+    parent.children.push(nmostActiveNode);
   }
 
-
-
+  getSolutionTree(data: { [pathways: string]: Array<string> }) {
+    this.createSolutionTree(this.solutionTree, data);
+    return this.solutionTree;
+  }
 }

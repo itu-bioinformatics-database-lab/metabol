@@ -55,11 +55,12 @@ describe('SubsystemAnalyze Service', () => {
     mockBackend = m;
   }));
 
-  let responseData: { [solution: string]: Set<string> } = {
-    "solution-1": new Set(["pathway-1", "pathway-2", "pathway-3"]),
-    "solution-2": new Set(["pathway-1", "pathway-2"]),
-    "solution-3": new Set(["pathway-1", "pathway-3"]),
-    "solution-4": new Set(["pathway-2", "pathway-4"])
+  let responseData: { [solution: string]: Array<string> } = {
+    "solution-1": ["pathway-1", "pathway-2", "pathway-3"],
+    "solution-2": ["pathway-1", "pathway-2"],
+    "solution-3": ["pathway-1", "pathway-3"],
+    "solution-4": ["pathway-2", "pathway-4"],
+    "solution-5": ["pathway-4"]
   };
 
   it('should ...', () => {
@@ -80,7 +81,6 @@ describe('SubsystemAnalyze Service', () => {
 
         let body = JSON.parse(connection.request.json());
         expect(body).toBeDefined();
-        console.log(body);
         expect(body.concentrationChanges.length).toEqual(apiData.length);
 
         let expectedUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
@@ -93,11 +93,11 @@ describe('SubsystemAnalyze Service', () => {
 
   }));
 
-  let pathwayData: { [solution: string]: Set<string> } = {
-    "pathway-1": new Set(["solution-1", "solution-2", "solution-3"]),
-    "pathway-2": new Set(["solution-1", "solution-2"]),
-    "pathway-3": new Set(["solution-1", "solution-3"]),
-    "pathway-4": new Set(["solution-4"]),
+  let pathwayData: { [solution: string]: Array<string> } = {
+    "pathway-1": ["solution-1", "solution-2", "solution-3"],
+    "pathway-2": ["solution-1", "solution-2", "solution-4"],
+    "pathway-3": ["solution-1", "solution-3"],
+    "pathway-4": ["solution-4", "solution-5"],
   };
 
   it('should reverseDict', () => {
@@ -110,20 +110,22 @@ describe('SubsystemAnalyze Service', () => {
     expect(service.mostActivePathway(pathwayData)).toEqual("pathway-1");
   });
 
-  it('should find intersection and nonintersection', () => {
+  it('should calculate new branch', () => {
 
-    let intersection: { [solution: string]: Set<string> } = {
-      "pathway-2": new Set(["solution-1", "solution-2"]),
-      "pathway-3": new Set(["solution-1", "solution-3"]),
+    let children: { [solution: string]: Array<string> } = {
+      "pathway-2": ["solution-1", "solution-2"],
+      "pathway-3": ["solution-1", "solution-3"],
     };
 
-    let nonintersection: { [solution: string]: Set<string> } = {
-      "pathway-4": new Set(["solution-4"]),
+    let parentsChildren: { [solution: string]: Array<string> } = {
+      "pathway-4": ["solution-4", "solution-5"],
+      "pathway-2": ["solution-4"],
     };
 
-    let expectIntersection = service.pathwayIntersection("pathway-1", pathwayData);
+    let expectBranch = service.newBranchsOfSolution("pathway-1", pathwayData);
 
-    expect(expectIntersection).toEqual([intersection, nonintersection]);
+    expect(expectBranch[0]).toEqual(children);
+    expect(expectBranch[1]).toEqual(parentsChildren);
   });
 
   it('should create subsystem solution tree', () => {
@@ -131,15 +133,55 @@ describe('SubsystemAnalyze Service', () => {
       name: "All",
       children: [
         <SubsystemTreeNode>{
-          name: "p1"
+          name: "pathway-4",
+          children: [
+            <SubsystemTreeNode>{
+              name: "pathway-2",
+              children: [
+                <SubsystemTreeNode>{
+                  name: "solution-4",
+                }
+              ]
+            },
+            <SubsystemTreeNode>{
+              name: "solution-5"
+            }
+          ]
         },
         <SubsystemTreeNode>{
-          name: "p1"
-        },
+          name: "pathway-1",
+          children: [
+            <SubsystemTreeNode>{
+              name: "pathway-3",
+              children: [
+                <SubsystemTreeNode>{
+                  name: "solution-3"
+                }
+              ]
+            },
+            <SubsystemTreeNode>{
+              name: "pathway-2",
+              children: [
+                <SubsystemTreeNode>{
+                  name: "pathway-3",
+                  children: [
+                    <SubsystemTreeNode>{
+                      name: "solution-1"
+                    }
+                  ]
+                },
+                <SubsystemTreeNode>{
+                  name: "solution-2"
+                }
+              ]
+            }
+          ]
+        }
       ]
     };
 
-    expect().toEqual();
+    let expectedTree = service.getSolutionTree(pathwayData);
+    expect(expectedTree).toEqual(solutionTree);
   });
 
 });
