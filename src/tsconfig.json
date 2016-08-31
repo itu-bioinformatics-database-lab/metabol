@@ -136,6 +136,7 @@
     "app/models/metaboliteConcentration.ts",
     "app/models/reaction.ts",
     "app/models/relateds.ts",
+    "app/models/subsystem.ts",
     "app/modules/calculater.ts",
     "app/modules/colorization.ts",
     "app/notificationOptions.ts",

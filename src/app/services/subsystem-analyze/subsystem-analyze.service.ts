@@ -3,13 +3,18 @@ import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
 import {AppSettings} from "../../appSettings";
+import {SubsystemTreeNode} from "../../models/subsystem";
 
 @Injectable()
 export class SubsystemAnalyzeService {
   apiUrl: String;
+  solutionTree: SubsystemTreeNode;
 
   constructor(private http: Http, private login: LoginService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
+    this.solutionTree = {
+      name: "All"
+    };
   }
 
   getSolutions(
@@ -48,7 +53,7 @@ export class SubsystemAnalyzeService {
   }
 
   pathwayIntersection(pathwayName: string, data: { [pathways: string]: Set<string> })
-    : [{ [pathways: string]: Set<string> }, { [pathways: string]: Set<string> }] {
+    : [{ [intersection: string]: Set<string> }, { [nonintersection: string]: Set<string> }] {
 
     let intersection: { [pathways: string]: Set<string> } = {};
     let nonintersection: { [pathways: string]: Set<string> } = {};
@@ -72,6 +77,19 @@ export class SubsystemAnalyzeService {
     });
     return intersection;
   }
+
+  createSolutionTree(parent, data: { [pathways: string]: Set<string> }) {
+    let mostActivePathway = this.mostActivePathway(data);
+    let nmostActiveNode: SubsystemTreeNode = {
+      name : mostActivePathway
+    };
+
+    this.solutionTree.children.push(nmostActiveNode);
+
+    let [intersection, nonintersection] = this.pathwayIntersection(mostActivePathway, data);
+
+  }
+
 
 
 }

@@ -26,6 +26,9 @@ import {
 
 import {AppSettings} from '../../../app/';
 
+
+import {SubsystemTreeNode} from "../../models/subsystem";
+
 describe('SubsystemAnalyze Service', () => {
 
   let service: SubsystemAnalyzeService;
@@ -121,6 +124,22 @@ describe('SubsystemAnalyze Service', () => {
     let expectIntersection = service.pathwayIntersection("pathway-1", pathwayData);
 
     expect(expectIntersection).toEqual([intersection, nonintersection]);
+  });
+
+  it('should create subsystem solution tree', () => {
+    let solutionTree: SubsystemTreeNode = {
+      name: "All",
+      children: [
+        <SubsystemTreeNode>{
+          name: "p1"
+        },
+        <SubsystemTreeNode>{
+          name: "p1"
+        },
+      ]
+    };
+
+    expect().toEqual();
   });
 
 });
