@@ -26,6 +26,7 @@ before_script:
 - npm install -g codeclimate-test-reporter
 - npm install
 - typings install
+- typings install dt~underscore --global --save
 - ng build
 
 script: karma start config/karma.conf.js --single-run
