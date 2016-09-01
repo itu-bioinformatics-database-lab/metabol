@@ -30,7 +30,7 @@ const barrels: string[] = [
   // Thirdparty barrels.
   'rxjs',
   'd3',
-  'underscore',
+  'lodash',
   'angular2-notifications',
 
   // App specific barrels.
@@ -79,7 +79,6 @@ barrels.forEach((barrelName: string) => {
 
 cliSystemConfigPackages["d3"].main = 'd3.js'
 cliSystemConfigPackages["angular2-notifications"].main = 'components.js'
-cliSystemConfigPackages["underscore"].main = 'underscore.js'
 
 /** Type declaration for ambient System. */
 declare var System: any;
@@ -91,7 +90,7 @@ System.config({
     'rxjs': 'vendor/rxjs',
     'd3': 'vendor/d3',
     'angular2-notifications': 'vendor/angular2-notifications',
-    'underscore': 'vendor/underscore',
+    'lodash': 'vendor/lodash',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages
