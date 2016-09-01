@@ -91,7 +91,7 @@ System.config({
     'rxjs': 'vendor/rxjs',
     'd3': 'vendor/d3',
     'angular2-notifications': 'vendor/angular2-notifications',
-    'underscore': 'vendor/underscore/underscore.js',
+    'underscore': 'vendor/underscore',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages

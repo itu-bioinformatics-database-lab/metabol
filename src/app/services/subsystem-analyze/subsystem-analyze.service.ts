@@ -4,6 +4,7 @@ import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
 import {AppSettings} from "../../appSettings";
 import {SubsystemTreeNode} from "../../models/subsystem";
+import * as _ from "underscore";
 
 @Injectable()
 export class SubsystemAnalyzeService {
