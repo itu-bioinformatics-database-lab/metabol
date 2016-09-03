@@ -10,11 +10,11 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { SubsystemAnaylzeComponent } from './subsystem-anaylze.component';
+import { SubsystemAnalyzeComponent } from './subsystem-analyze.component';
 
-describe('Component: SubsystemAnaylze', () => {
+describe('Component: SubsystemAnalyze', () => {
   it('should create an instance', () => {
-    let component = new SubsystemAnaylzeComponent();
+    let component = new SubsystemAnalyzeComponent();
     expect(component).toBeTruthy();
   });
 });

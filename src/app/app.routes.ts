@@ -9,6 +9,7 @@ import {DocumentationComponent} from './components/documentation/documentation.c
 import {TestComponent} from './components/test/test.component';
 import {LoadingComponent} from './components/loading/loading.component';
 import {SubsystemRoutes} from './components/subsystem/subsystem.routes';
+import {SubsystemAnalyzeComponent} from './components/subsystem-analyze/subsystem-analyze.component';
 
 import {AuthGuard} from './auth-guard/auth-guard';
 import {AuthGuardLogin} from './auth-guard-login/auth-guard-login';
@@ -23,8 +24,8 @@ export const routes: RouterConfig = [
   ...SubsystemRoutes,
   { path: 'documentation', component: DocumentationComponent },
   { path: 'test', component: TestComponent },
-  { path: 'loading', component: LoadingComponent }
-
+  { path: 'loading', component: LoadingComponent },
+  { path: 'subsystem-analyze', component: SubsystemAnalyzeComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {FbaNode, FbaLink} from '../../models/fbaiteration';
 import * as d3 from 'd3';
 import {ActivatedRoute} from '@angular/router';
@@ -12,12 +12,13 @@ import {Location} from '@angular/common';
   styleUrls: ['visualization.component.css'],
   directives: [FullScreenableSvgComponent]
 })
-export class VisualizationComponent implements OnChanges, OnInit {
+export class VisualizationComponent implements OnChanges {
 
   @Input() nodes: Array<FbaNode>;
   @Input() links: Array<FbaLink>;
   @Input() searchTerm: string;
   @Input() currentIteration: Number;
+  @ViewChild(FullScreenableSvgComponent) fullSvg: FullScreenableSvgComponent;
 
   reactions: Array<FbaNode>;
   metabolites: Array<FbaNode>;
@@ -25,17 +26,12 @@ export class VisualizationComponent implements OnChanges, OnInit {
   force: d3.layout.Force<FbaLink, FbaNode>;
   d3links: Array<FbaLink>;
   d3nodes: Array<FbaNode>;
-  zoom: d3.behavior.Zoom<any>;
-  scale: number;
-  translate: Array<number>;
 
   isFullScreen: Boolean;
   url: string;
 
   constructor(private elementRef: ElementRef, private location: Location) {
 
-    this.scale = 1;
-    this.translate = [1, 1];
     this.searchTerm = "";
     this.force = this.initForce();
   }
@@ -59,28 +55,8 @@ export class VisualizationComponent implements OnChanges, OnInit {
     this.d3nodes = this.force.nodes();
   }
 
-  ngOnInit() {
-    this.zoom = d3.behavior.zoom()
-      .scaleExtent([0.1, 10])
-      .on('zoom', () => this.onZoom());
-
-    d3.select(this.elementRef.nativeElement)
-      .select('svg')
-      .call(this.zoom);
-  }
-
-  onZoom() {
-    this.scale = this.zoom.scale();
-    this.translate = this.zoom.translate();
-  }
-
-  getSizeOfSvg(): [number, number] {
-    let sizes = document.getElementsByTagName("svg")[0].getBoundingClientRect();
-    return [sizes.width, sizes.height];
-  }
-
   onResize() {
-    this.force.size(this.getSizeOfSvg());
+    this.force.size(this.fullSvg.getSizeOfSvg());
     this.force.start();
   }
 
@@ -131,6 +107,4 @@ export class VisualizationComponent implements OnChanges, OnInit {
     else if (source.type == 'r')
       return source.v || 0;
   }
-
-
 }

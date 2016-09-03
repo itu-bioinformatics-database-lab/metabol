@@ -3,7 +3,7 @@ import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
 import {AppSettings} from "../../appSettings";
-import {SubsystemTreeNode} from "../../models/subsystem";
+import {SubsystemTreeNode, SubsystemTreeNodeType} from "../../models/subsystem";
 import * as _ from "lodash";
 
 @Injectable()
@@ -15,6 +15,8 @@ export class SubsystemAnalyzeService {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
     this.solutionTree = {
       name: "All",
+      type: SubsystemTreeNodeType.All,
+      active: true,
       children: []
     };
   }
@@ -102,6 +104,8 @@ export class SubsystemAnalyzeService {
     let mostActivePathway = this.mostActivePathway(data);
     let nmostActiveNode: SubsystemTreeNode = {
       name: mostActivePathway,
+      type: SubsystemTreeNodeType.Pathway,
+      active: true,
       children: []
     };
 
@@ -125,13 +129,15 @@ export class SubsystemAnalyzeService {
     for (let s of directSolution)
       nmostActiveNode.children.push(<SubsystemTreeNode>{
         name: s,
+        active: true,
+        type: SubsystemTreeNodeType.Solution
       });
 
     parent.children.push(nmostActiveNode);
   }
 
-  getSolutionTree(data: { [pathways: string]: Array<string> }) {
-    this.createSolutionTree(this.solutionTree, data);
+  getSolutionTree(data: { [solutions: string]: Array<string> }) {
+    this.createSolutionTree(this.solutionTree, this.reverseDict(data));
     return this.solutionTree;
   }
 }

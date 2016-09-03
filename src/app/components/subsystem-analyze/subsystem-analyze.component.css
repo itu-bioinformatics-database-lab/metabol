@@ -1,0 +1,8 @@
+.link {
+  stroke-width: 2px;
+}
+.node{
+  fill:white;
+  stroke-width:3px;
+  r:5;
+}

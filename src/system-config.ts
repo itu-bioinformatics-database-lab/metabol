@@ -68,6 +68,7 @@ const barrels: string[] = [
   'app/subsystem',
   'app/subsystem-detail',
   'app/subsystem-anaylze',
+  'app/subsystem-analyze',
   /** @cli-barrel */
 ];
 

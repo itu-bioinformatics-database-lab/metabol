@@ -1,5 +1,7 @@
 <svg [class.small-size]="!isFullScreen" [class.full-screen]="isFullScreen">
-  <ng-content></ng-content>
+  <svg:g [attr.transform]="'translate('+ translate +')scale('+ scale +')'">
+    <ng-content></ng-content>
+  </svg:g>
 </svg>
 <button id="resize-full" class="btn btn-default" (click)="toggleFullScreen()" [style.position]="isFullScreen ? 'fixed' :'absolute'">
   <span *ngIf="!isFullScreen" class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>

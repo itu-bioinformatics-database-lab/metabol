@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="panel panel-default visulazition">
+        <div class="panel-heading">
+          <h3 class="panel-title">Visulazition</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="isFullScreen">
+                <svg:line class="link" *ngFor="let l of links" [style.stroke]="linkColor(l.target)" [attr.x1]="l.source.x" [attr.y1]="l.source.y" [attr.x2]="l.target.x" [attr.y2]="l.target.y"/>
+
+                <svg:circle class="node" *ngFor="let d of nodes" [style.stroke]="nodeColor(d)" [attr.cx]="d.x" [attr.cy]="d.y"/>
+
+                <svg:text class="text" *ngFor="let d of nodes" [attr.x]="d.x+10" [attr.y]="d.y">{{ d.name }}</svg:text>
+              </fullscreenable-svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Tabular View</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Solution
+              </th>
+              <th>
+                Active
+              </th>
+              <th>
+                Deactive
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Filter</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group" *ngFor="let d of filterNode(nodes)">
+            <label>{{d.name}}</label>
+            <select class="form-control" [ngModel]="d.active" (ngModelChange)="activationChange(d,$event)">
+              <option [ngValue]="true">Active</option>
+              <option [ngValue]="false">Passive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

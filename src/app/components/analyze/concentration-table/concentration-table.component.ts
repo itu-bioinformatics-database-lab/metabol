@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class ConcentrationTableComponent {
   @Input() conTable: Array<MetaboliteConcentration>;
-
+  
   change = {
     '1': 'Increase Slightly',
     '2': 'Increase Dyramaticly',
