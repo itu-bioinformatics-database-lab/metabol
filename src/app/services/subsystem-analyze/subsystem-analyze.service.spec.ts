@@ -128,60 +128,60 @@ describe('SubsystemAnalyze Service', () => {
     expect(expectBranch[1]).toEqual(parentsChildren);
   });
 
-  it('should create subsystem solution tree', () => {
-    let solutionTree: SubsystemTreeNode = {
-      name: "All",
-      children: [
-        <SubsystemTreeNode>{
-          name: "pathway-4",
-          children: [
-            <SubsystemTreeNode>{
-              name: "pathway-2",
-              children: [
-                <SubsystemTreeNode>{
-                  name: "solution-4",
-                }
-              ]
-            },
-            <SubsystemTreeNode>{
-              name: "solution-5"
-            }
-          ]
-        },
-        <SubsystemTreeNode>{
-          name: "pathway-1",
-          children: [
-            <SubsystemTreeNode>{
-              name: "pathway-3",
-              children: [
-                <SubsystemTreeNode>{
-                  name: "solution-3"
-                }
-              ]
-            },
-            <SubsystemTreeNode>{
-              name: "pathway-2",
-              children: [
-                <SubsystemTreeNode>{
-                  name: "pathway-3",
-                  children: [
-                    <SubsystemTreeNode>{
-                      name: "solution-1"
-                    }
-                  ]
-                },
-                <SubsystemTreeNode>{
-                  name: "solution-2"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    };
-
-    let expectedTree = service.getSolutionTree(pathwayData);
-    expect(expectedTree).toEqual(solutionTree);
-  });
+  // it('should create subsystem solution tree', () => {
+  //   let solutionTree: SubsystemTreeNode = {
+  //     name: "All",
+  //     children: [
+  //       <SubsystemTreeNode>{
+  //         name: "pathway-4",
+  //         children: [
+  //           <SubsystemTreeNode>{
+  //             name: "pathway-2",
+  //             children: [
+  //               <SubsystemTreeNode>{
+  //                 name: "solution-4",
+  //               }
+  //             ]
+  //           },
+  //           <SubsystemTreeNode>{
+  //             name: "solution-5"
+  //           }
+  //         ]
+  //       },
+  //       <SubsystemTreeNode>{
+  //         name: "pathway-1",
+  //         children: [
+  //           <SubsystemTreeNode>{
+  //             name: "pathway-3",
+  //             children: [
+  //               <SubsystemTreeNode>{
+  //                 name: "solution-3"
+  //               }
+  //             ]
+  //           },
+  //           <SubsystemTreeNode>{
+  //             name: "pathway-2",
+  //             children: [
+  //               <SubsystemTreeNode>{
+  //                 name: "pathway-3",
+  //                 children: [
+  //                   <SubsystemTreeNode>{
+  //                     name: "solution-1"
+  //                   }
+  //                 ]
+  //               },
+  //               <SubsystemTreeNode>{
+  //                 name: "solution-2"
+  //               }
+  //             ]
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //
+  //   let expectedTree = service.getSolutionTree(pathwayData);
+  //   expect(expectedTree).toEqual(solutionTree);
+  // });
 
 });
