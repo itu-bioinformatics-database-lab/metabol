@@ -1,9 +1,12 @@
 import {RequestOptions, Headers} from "@angular/http";
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LoginTestingService {
 
+  constructor() {
+
+  }
 
   login(loginForm, callback: (data) => void) {
     throw new SyntaxError("Not implemented");

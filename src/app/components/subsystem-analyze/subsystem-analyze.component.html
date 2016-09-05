@@ -9,9 +9,32 @@
           <div class="row">
             <div class="col-md-12">
               <fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="isFullScreen">
-                <svg:line class="link" *ngFor="let l of links" [style.stroke]="linkColor(l.target)" [attr.x1]="l.source.x" [attr.y1]="l.source.y" [attr.x2]="l.target.x" [attr.y2]="l.target.y"/>
 
-                <svg:circle class="node" *ngFor="let d of nodes" [style.stroke]="nodeColor(d)" [attr.cx]="d.x" [attr.cy]="d.y"/>
+                <svg:line class="link highlight-link"
+                  *ngFor="let l of filterHighlightLink(links)"
+                  [attr.x1]="l.source.x"
+                  [attr.y1]="l.source.y"
+                  [attr.x2]="l.target.x"
+                  [attr.y2]="l.target.y"/>
+
+                <svg:line class="link"
+                  *ngFor="let l of links"
+                  [style.stroke]="linkColor(l.target)"
+                  [attr.x1]="l.source.x"
+                  [attr.y1]="l.source.y"
+                  [attr.x2]="l.target.x"
+                  [attr.y2]="l.target.y"/>
+
+                <svg:circle class="highlight"
+                  *ngFor="let d of filterHighlight(nodes)"
+                  [attr.cx]="d.x"
+                  [attr.cy]="d.y"/>
+
+                <svg:circle class="node"
+                  *ngFor="let d of nodes"
+                  [style.stroke]="nodeColor(d)"
+                  [attr.cx]="d.x"
+                  [attr.cy]="d.y"/>
 
                 <svg:text class="text" *ngFor="let d of nodes" [attr.x]="d.x+10" [attr.y]="d.y">{{ d.name }}</svg:text>
               </fullscreenable-svg>
@@ -37,6 +60,13 @@
               </th>
             </tr>
           </thead>
+          <tbody>
+            <tr *ngFor="let n of filterSolution(nodes)" (click)="highlight(n)">
+              <th>{{ n.name }}</th>
+              <th>{{ getParentByActivation(n,true) | json }}</th>
+              <th>{{ getParentByActivation(n,false) | json }}</th>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

@@ -18,6 +18,8 @@ export class SubsystemAnalyzeComponent implements OnInit {
   @ViewChild(FullScreenableSvgComponent) fullSvg: FullScreenableSvgComponent;
 
   data: any;
+  datakeys: string[];
+
   solutionTree: any;
   nodes: any;
   links: any;
@@ -34,6 +36,7 @@ export class SubsystemAnalyzeComponent implements OnInit {
   ngOnInit() {
     this.analyze.getSolutions("myname", [], (data) => {
       this.data = data;
+      this.datakeys = Object.keys(data);
       let solutionTree = this.analyze.getSolutionTree(this.data);
       this.nodes = this.tree.nodes(solutionTree);
       this.links = this.tree.links(this.nodes);
@@ -84,6 +87,53 @@ export class SubsystemAnalyzeComponent implements OnInit {
   filterNode(nodes: SubsystemTreeNode[]) {
     if (nodes)
       return nodes.filter(x => x.type == SubsystemTreeNodeType.Pathway);
+  }
+
+  filterSolution(nodes: SubsystemTreeNode[]) {
+    if (nodes)
+      return nodes.filter(x => x.type == SubsystemTreeNodeType.Solution);
+  }
+
+  getParentByActivation(solution: SubsystemTreeNode, activation: boolean, parents?: Array<string>) {
+    let parent = <SubsystemTreeNode>solution.parent;
+    if (!parents)
+      parents = new Array<string>();
+    if (parent.type != SubsystemTreeNodeType.All) {
+      if (parent.active == activation)
+        parents.push(parent.name);
+      return this.getParentByActivation(parent, activation, parents);
+    }
+    return parents;
+  }
+
+  filterHighlight(nodes: SubsystemTreeNode[]) {
+    if (nodes)
+      return nodes.filter(x => x.highlight);
+  }
+
+  filterHighlightLink(links) {
+    if (links)
+      return links.filter(x => x.target.highlight);
+  }
+
+  highlight(solution: SubsystemTreeNode){
+    this.dehighlightAll();
+    this.highlightPath(solution);
+  }
+
+  highlightPath(solution: SubsystemTreeNode) {
+    let parent = <SubsystemTreeNode>solution.parent;
+    solution.highlight = true;
+    if (parent.type != SubsystemTreeNodeType.All)
+      this.highlightPath(parent)
+    else
+      parent.highlight = true;
+  }
+
+  dehighlightAll() {
+    for (let n of this.nodes) {
+      n.highlight = false;
+    }
   }
 
 }

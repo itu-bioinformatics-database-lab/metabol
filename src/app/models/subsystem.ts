@@ -5,6 +5,7 @@ export interface SubsystemTreeNode extends d3.layout.tree.Node {
   children: Array<SubsystemTreeNode>;
   type: SubsystemTreeNodeType;
   active: boolean;
+  highlight:boolean;
 }
 
 export enum SubsystemTreeNodeType {
