@@ -175,6 +175,7 @@
     "app/services/signup/index.ts",
     "app/services/signup/signup.service.spec.ts",
     "app/services/signup/signup.service.ts",
+    "app/services/subsystem-analyze/index.ts",
     "app/services/subsystem-analyze/subsystem-analyze.service.spec.ts",
     "app/services/subsystem-analyze/subsystem-analyze.service.ts",
     "app/services/subsystem/subsystem.service.spec.ts",

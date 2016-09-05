@@ -7,10 +7,22 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'd3': 'vendor/d3',
+  'angular2-notifications': 'vendor/angular2-notifications',
+  'lodash': 'vendor/lodash',
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'd3': {
+    main: 'd3.js'
+  },
+  'angular2-notifications': {
+    main: 'components.js'
+  },
+  'lodash': {
+    main: 'index.js'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,9 +41,6 @@ const barrels: string[] = [
 
   // Thirdparty barrels.
   'rxjs',
-  'd3',
-  'lodash',
-  'angular2-notifications',
 
   // App specific barrels.
   'app',
@@ -64,11 +73,7 @@ const barrels: string[] = [
   'app/components/panel/analyze/detail',
   'app/components/fba-visualization',
   'app/components/panel/analyze/detail/saved-result',
-  'app/components/analyze/sample',
-  'app/subsystem',
-  'app/subsystem-detail',
-  'app/subsystem-anaylze',
-  'app/subsystem-analyze',
+  'app/components/analyze/sample'
   /** @cli-barrel */
 ];
 
@@ -78,9 +83,6 @@ barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
 
-cliSystemConfigPackages["d3"].main = 'd3.js'
-cliSystemConfigPackages["angular2-notifications"].main = 'components.js'
-
 /** Type declaration for ambient System. */
 declare var System: any;
 
@@ -89,9 +91,6 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'd3': 'vendor/d3',
-    'angular2-notifications': 'vendor/angular2-notifications',
-    'lodash': 'vendor/lodash',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages

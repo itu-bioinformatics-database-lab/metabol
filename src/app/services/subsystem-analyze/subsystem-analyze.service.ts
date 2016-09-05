@@ -16,6 +16,7 @@ export class SubsystemAnalyzeService {
     this.solutionTree = {
       name: "All",
       type: SubsystemTreeNodeType.All,
+      highlight:false,
       active: true,
       children: []
     };
@@ -105,6 +106,7 @@ export class SubsystemAnalyzeService {
     let nmostActiveNode: SubsystemTreeNode = {
       name: mostActivePathway,
       type: SubsystemTreeNodeType.Pathway,
+      highlight:false,
       active: true,
       children: []
     };
@@ -130,6 +132,7 @@ export class SubsystemAnalyzeService {
       nmostActiveNode.children.push(<SubsystemTreeNode>{
         name: s,
         active: true,
+        highlight:false,
         type: SubsystemTreeNodeType.Solution
       });
 
