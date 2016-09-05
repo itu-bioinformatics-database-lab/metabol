@@ -27,7 +27,7 @@ import {
 import {AppSettings} from '../../../app/';
 
 
-import {SubsystemTreeNode} from "../../models/subsystem";
+import {SubsystemTreeNode, SubsystemTreeNodeType} from "../../models/subsystem";
 
 describe('SubsystemAnalyze Service', () => {
 
@@ -131,6 +131,8 @@ describe('SubsystemAnalyze Service', () => {
   it('should create subsystem solution tree', () => {
     let solutionTree: SubsystemTreeNode = {
       name: "All",
+      type: SubsystemTreeNodeType.All,
+      active:true,
       children: [
         <SubsystemTreeNode>{
           name: "pathway-4",
