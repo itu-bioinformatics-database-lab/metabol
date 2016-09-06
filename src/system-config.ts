@@ -7,10 +7,22 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'd3': 'vendor/d3',
+  'angular2-notifications': 'vendor/angular2-notifications',
+  'lodash': 'vendor/lodash'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'd3': {
+    main: 'd3.js'
+  },
+  'angular2-notifications': {
+    main: 'components.js'
+  },
+  'lodash': {
+    main: 'index.js'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,43 +41,63 @@ const barrels: string[] = [
 
   // Thirdparty barrels.
   'rxjs',
-  'd3',
-  'angular2-notifications',
 
   // App specific barrels.
-  'app',
-  'app/shared',
-  'app/components/search/search-page',
-  'app/components/search/search-bar',
-  'app/components/search/search-resutl',
-  'app/components/search/search-result',
-  'app/components/details/equaltion',
-  'app/components/details/chemical-equation',
-  'app/components/details/metabolite-details',
-  'app/components/details/reaction-details',
-  'app/components/analyze/measurement',
-  'app/components/documentation/documentation',
-  'app/signup',
-  'app/login',
-  'app/components/analyze/result',
-  'app/components/visualization',
-  'app/components/analyze/result/iteration-color-box',
-  'app/components/analyze/result/text-result',
-  'app/components/accordion',
-  'app/components/panel/panel',
-  'app/components/panel',
-  'app/components/panel/analyze',
-  'app/components/panel/profile',
-  'app/components/fullscreenable-svg',
-  'app/components/test',
-  'app/components/loading',
-  'app/components/panel/profile/change-password',
-  'app/components/panel/analyze/detail',
-  'app/components/fba-visualization',
-  'app/components/panel/analyze/detail/saved-result',
-  'app/components/analyze/sample',
-  'app/subsystem',
-  'app/subsystem-detail',
+  "app/components/documentation",
+  "app/components/panel",
+  "app/components/panel/profile/change-password",
+  "app/components/panel/profile",
+  "app",
+  "auth/auth-guard-login",
+  "auth/auth-guard",
+  "auth/components",
+  "auth/components/login",
+  "auth/components/signup",
+  "auth/services",
+  "auth/services/login",
+  "auth/services/signup",
+  "auth/services",
+  "auth",
+  "common/components/accordion",
+  "common/components",
+  "common/components/loading",
+  "common",
+  "common/pipes",
+  "common/pipes/keys",
+  "common/services/currency-metabolites",
+  "common/services",
+  "common/services/loading",
+  "search-engine/components/details/chemical-equation",
+  "search-engine/components/details",
+  "search-engine/components/details/metabolite-details",
+  "search-engine/components/details/reaction-details",
+  "search-engine/components",
+  "search-engine/components/search",
+  "search-engine/components/search/search-bar",
+  "search-engine/components/search/search-page",
+  "search-engine/components/search/search-result",
+  "search-engine/components/subsystem",
+  "search-engine/components/subsystem/subsystem-detail",
+  "search-engine",
+  "search-engine/models",
+  "search-engine/services",
+  "search-engine/services/metabolite",
+  "search-engine/services/reaction",
+  "search-engine/services/search",
+  "subsystem-analyze/components/concentration-table",
+  "subsystem-analyze/components",
+  "subsystem-analyze/components/manual",
+  "subsystem-analyze/components/measurement",
+  "subsystem-analyze/components/sample",
+  "subsystem-analyze/components/subsystem-analyze",
+  "subsystem-analyze/components/upload",
+  "subsystem-analyze",
+  "subsystem-analyze/services/subsystem-analyze",
+  "visualizations/components/fullscreenable-svg",
+  "visualizations/components",
+  "visualizations/components/visualization",
+  "visualizations",
+  "visualizations/models",
   /** @cli-barrel */
 ];
 
@@ -75,9 +107,6 @@ barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
 
-cliSystemConfigPackages["d3"].main = 'd3.js'
-cliSystemConfigPackages["angular2-notifications"].main = 'components.js'
-
 /** Type declaration for ambient System. */
 declare var System: any;
 
@@ -86,8 +115,6 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'd3': 'vendor/d3',
-    'angular2-notifications': 'vendor/angular2-notifications',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages

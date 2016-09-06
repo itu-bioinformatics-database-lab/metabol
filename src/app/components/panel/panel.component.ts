@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, ROUTER_DIRECTIVES} from '@angular/router';
-import {LoginService} from '../../services/login/login.service';
+import {LoginService} from '../../../auth/services';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +9,6 @@ import {LoginService} from '../../services/login/login.service';
   styleUrls: ['./css/font-awesome.min.css',
     './css/sb-admin-2.css',
     './css/style.css',
-
   ],
   directives: [ROUTER_DIRECTIVES],
   providers: [LoginService],
