@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES,Router} from '@angular/router';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
-import {LoginService} from '../../../../services/login/login.service';
+import {LoginService} from '../../../../../auth/services';
 
 @Component({
   moduleId: module.id,

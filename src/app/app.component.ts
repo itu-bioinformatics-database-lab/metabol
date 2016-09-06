@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {AppDataLoader} from './appDataLoader';
-import {LoadingComponent} from './components/loading/loading.component';
-import {LoadingService} from './services/loading/loading.service';
-import {LoginService} from './services/login/login.service'
+import {LoadingComponent} from '../common/components';
+import {LoadingService} from '../common/services';
+import {LoginService} from '../auth/services'
 import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications'
 import {notificationOptions} from './notificationOptions';
 

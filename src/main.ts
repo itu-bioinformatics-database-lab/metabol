@@ -2,7 +2,7 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { APP_ROUTER_PROVIDERS, AppComponent, environment } from './app';
 import {HTTP_PROVIDERS} from '@angular/http';
-import {LoadingService} from './app/services/loading/loading.service';
+import {LoadingService} from './common/services';
 import {NotificationsService} from 'angular2-notifications'
 
 if (environment.production) {
