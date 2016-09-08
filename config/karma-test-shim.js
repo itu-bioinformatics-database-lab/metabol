@@ -7,7 +7,9 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000;
 __karma__.loaded = function() {};
 
 var distPath = '/base/dist/';
-var appPaths = ['app']; //Add all valid source code folders here
+
+//Add all valid source code folders here
+var appPaths = ['app','auth','common','search-engine','subsystem-analyze','visualizations'];
 
 function isJsFile(path) {
   return path.slice(-3) == '.js';
