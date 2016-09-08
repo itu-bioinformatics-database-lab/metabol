@@ -10,7 +10,7 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { SubsystemAnalyzeComponent } from './subsystem-analyze.component';
+import { AnalyzeComponent } from './subsystem-analyze.component';
 
 describe('Component: SubsystemAnalyze', () => {
   it('should create an instance', () => {
