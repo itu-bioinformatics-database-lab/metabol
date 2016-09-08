@@ -5,7 +5,6 @@ import {SubsystemAnalyzeRoutes} from '../subsystem-analyze';
 import {PanelRoutes} from './components/panel/panel.routes';
 import {DocumentationComponent} from './components/documentation/documentation.component';
 import {LoadingComponent} from '../common/components';
-import {SubsystemAnalyzeComponent} from '../subsystem-analyze/components';
 
 import {AuthGuard, AuthGuardLogin} from '../auth';
 
@@ -16,8 +15,7 @@ export const routes: RouterConfig = [
   ...SubsystemAnalyzeRoutes,
   ...PanelRoutes,
   { path: 'documentation', component: DocumentationComponent },
-  { path: 'loading', component: LoadingComponent },
-  { path: 'subsystem-analyze', component: SubsystemAnalyzeComponent }
+  { path: 'loading', component: LoadingComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

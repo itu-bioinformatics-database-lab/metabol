@@ -1,4 +1,5 @@
 import {LoginService} from "../../../auth/services";
+import {LoadingService} from "../../../common/services";
 import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
@@ -11,12 +12,12 @@ export class SubsystemAnalyzeService {
   apiUrl: String;
   private solutionTree: SubsystemTreeNode;
 
-  constructor(private http: Http, private login: LoginService) {
+  constructor(private http: Http, private login: LoginService, private loading: LoadingService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
     this.solutionTree = {
       name: "All",
       type: SubsystemTreeNodeType.All,
-      highlight:false,
+      highlight: false,
       active: true,
       children: []
     };
@@ -28,18 +29,33 @@ export class SubsystemAnalyzeService {
    * @param data        Concentration of metabolites in network
    * @param callback    Result of analyze as callback function
    */
-  getSolutions(
+  startSolutions(
     analyzeName: string,
     data: Array<MetaboliteConcentration>,
-    callback: (data: { [solutions: string]: Array<string> }) => void) {
+    callback: (key:string) => void) {
 
     let postData = {
       "name": analyzeName,
       "concentrationChanges": data
     };
 
-    this.http.post(`${this.apiUrl}`, postData, this.login.optionByAuthorization())
-      .map(res => res.json()).subscribe(callback);
+    this.loading.start();
+    this.http.post(`${this.apiUrl}-start`, postData, this.login.optionByAuthorization())
+      .map(res => res.json())
+      .subscribe((data) => {
+        callback(data);
+        this.loading.finish();
+      });
+  }
+
+  getSolution(key: string, callback: (data: { [solutions: string]: Array<string> }) => void ){
+    this.loading.start();
+    this.http.get(`${this.apiUrl}/${key}`)
+      .map(res => res.json())
+      .subscribe((data) => {
+        callback(data);
+        this.loading.finish();
+      });
   }
 
   /**
@@ -106,7 +122,7 @@ export class SubsystemAnalyzeService {
     let nmostActiveNode: SubsystemTreeNode = {
       name: mostActivePathway,
       type: SubsystemTreeNodeType.Pathway,
-      highlight:false,
+      highlight: false,
       active: true,
       children: []
     };
@@ -132,7 +148,7 @@ export class SubsystemAnalyzeService {
       nmostActiveNode.children.push(<SubsystemTreeNode>{
         name: s,
         active: true,
-        highlight:false,
+        highlight: false,
         type: SubsystemTreeNodeType.Solution
       });
 
@@ -140,7 +156,9 @@ export class SubsystemAnalyzeService {
   }
 
   getSolutionTree(data: { [solutions: string]: Array<string> }) {
+    this.loading.start();
     this.createSolutionTree(this.solutionTree, this.reverseDict(data));
+    this.loading.finish();
     return this.solutionTree;
   }
 }

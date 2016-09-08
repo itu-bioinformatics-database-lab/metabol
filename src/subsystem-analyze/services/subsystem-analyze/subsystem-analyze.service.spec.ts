@@ -86,7 +86,7 @@ xdescribe('SubsystemAnalyze Service', () => {
         expect(connection.request.url).toEqual(expectedUrl);
       });
 
-    service.getSolutions("analyze name", apiData, (data) => {
+    service.startSolutions("analyze name", apiData, (data) => {
       expect(data).toEqual(responseData);
     });
 

@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3'
 import {SubsystemTreeNode, SubsystemTreeNodeType} from '../../models/subsystem';
 import {FullScreenableSvgComponent} from '../../../visualizations/components';
+import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -13,7 +15,7 @@ import {FullScreenableSvgComponent} from '../../../visualizations/components';
   providers: [SubsystemAnalyzeService],
   directives: [FullScreenableSvgComponent]
 })
-export class SubsystemAnalyzeComponent implements OnInit {
+export class AnalyzeComponent implements OnInit {
 
   @ViewChild(FullScreenableSvgComponent) fullSvg: FullScreenableSvgComponent;
 
@@ -28,18 +30,20 @@ export class SubsystemAnalyzeComponent implements OnInit {
 
   SubsystemTreeNodeType = SubsystemTreeNodeType;
 
-  constructor(private analyze: SubsystemAnalyzeService) {
+  constructor(private analyze: SubsystemAnalyzeService, private route: ActivatedRoute) {
     this.tree = d3.layout.tree<SubsystemTreeNode>()
-      .size([1000, 400]);
+      .size([10000, 1000]);
   }
 
   ngOnInit() {
-    this.analyze.getSolutions("myname", [], (data) => {
-      this.data = data;
-      this.datakeys = Object.keys(data);
-      let solutionTree = this.analyze.getSolutionTree(this.data);
-      this.nodes = this.tree.nodes(solutionTree);
-      this.links = this.tree.links(this.nodes);
+    this.route.params.subscribe((params) => {
+      this.analyze.getSolution(params['key'], (data) => {
+        this.data = data;
+        this.datakeys = Object.keys(data);
+        let solutionTree = this.analyze.getSolutionTree(this.data);
+        this.nodes = this.tree.nodes(solutionTree);
+        this.links = this.tree.links(this.nodes);
+      });
     });
 
     this.fullSvg.translate = [1, 10];
@@ -116,7 +120,7 @@ export class SubsystemAnalyzeComponent implements OnInit {
       return links.filter(x => x.target.highlight);
   }
 
-  highlight(solution: SubsystemTreeNode){
+  highlight(solution: SubsystemTreeNode) {
     this.dehighlightAll();
     this.highlightPath(solution);
   }

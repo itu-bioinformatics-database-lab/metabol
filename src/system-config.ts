@@ -98,6 +98,8 @@ const barrels: string[] = [
   "visualizations/components/visualization",
   "visualizations",
   "visualizations/models",
+  "visualizations/services",
+  "visualizations/services/related-to-visualization",
   /** @cli-barrel */
 ];
 
