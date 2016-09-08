@@ -3,16 +3,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
 import {Control, FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
 import {KeysPipe} from '../../../common/pipes';
-// import {FbaService} from '../../../services/fba/fba.service';
 import {Router} from '@angular/router';
-
+import {SubsystemAnalyzeService} from "../../services/subsystem-analyze/subsystem-analyze.service";
 
 @Component({
   moduleId: module.id,
   selector: 'concentration-table',
   templateUrl: 'concentration-table.component.html',
   styleUrls: ['concentration-table.component.css'],
-  // providers: [FbaService],
+  providers:[SubsystemAnalyzeService],
   pipes: [KeysPipe]
 })
 export class ConcentrationTableComponent {
@@ -29,7 +28,12 @@ export class ConcentrationTableComponent {
   form: ControlGroup;
   analyzeName: Control;
 
-  constructor(private fb: FormBuilder, private router: Router, private loading: LoadingService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private loading: LoadingService,
+    private analyzeService: SubsystemAnalyzeService) {
+
     this.form = this.createForm();
     this.analyzeName = new Control("My Analyze", Validators.required);
   }
@@ -63,9 +67,19 @@ export class ConcentrationTableComponent {
   }
 
   analyze() {
-      this.router.navigate(['/subsystem-analyze']);
-    // this.fba.getFbaKeyForData(this.analyzeName.value, this.conTable, (key) => {
-    // });
+
+    let onlyWorkingData: MetaboliteConcentration[] = [
+      {
+        name: "acon_C_c",
+        change: 1,
+        exactValue: 0
+      }
+    ];
+
+    this.analyzeService.startSolutions(this.analyzeName.value, onlyWorkingData,
+      (key) => {
+        this.router.navigate(['/analyze/subsystem', key]);
+      });
   }
 
 }

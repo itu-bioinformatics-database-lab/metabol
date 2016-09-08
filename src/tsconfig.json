@@ -176,6 +176,10 @@
     "visualizations/models/index.ts",
     "visualizations/modules/calculater.ts",
     "visualizations/modules/colorization.ts",
+    "visualizations/services/index.ts",
+    "visualizations/services/related-to-visualization/index.ts",
+    "visualizations/services/related-to-visualization/related-to-visualization.service.spec.ts",
+    "visualizations/services/related-to-visualization/related-to-visualization.service.ts",
     "visualizations/services/visualization/service.service.spec.ts",
     "visualizations/services/visualization/service.service.ts"
   ],

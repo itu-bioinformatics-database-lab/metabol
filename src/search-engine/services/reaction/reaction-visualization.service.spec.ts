@@ -21,8 +21,6 @@ import {CurrencyMetabolitesService} from '../../../common/services';
 
 describe('ReactionVisualization Service', () => {
 
-  // console.log(mockCurrencyMetabolitesService);
-
   beforeEachProviders(() => [
     ReactionVisualizationService
   ]);
