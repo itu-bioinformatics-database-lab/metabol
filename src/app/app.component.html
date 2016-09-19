@@ -1,3 +1,39 @@
-<h1>
-  {{title}}
-</h1>
+<app-loading *ngIf="loadingService.loading$ | async"></app-loading>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="logo">
+        <img src="/assets/img/logo.png" alt="" />
+        <span>
+          Metabolitics
+        </span>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a [routerLink]="['analyze']">Analyze</a>
+        </li>
+        <li>
+          <a [routerLink]="['search']">Search</a>
+        </li>
+        <li>
+          <a [routerLink]="['documentation']">Documentation</a>
+        </li>
+        <li>
+          <a [routerLink]="['subsystem']">Browse</a>
+        </li>
+        <li>
+          <a>Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

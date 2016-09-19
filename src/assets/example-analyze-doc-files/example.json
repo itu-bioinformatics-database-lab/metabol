@@ -1,0 +1,40 @@
+[{
+    "name": "h_e",
+    "change": 1
+}, {
+    "name": "h_c",
+    "change": 1
+}, {
+    "name": "6pgl_c",
+    "change": 1
+}, {
+    "name": "h2o_c",
+    "change": 1
+}, {
+    "name": "etoh_c",
+    "change": 1
+}, {
+    "name": "acon_C_c",
+    "change": -1
+}, {
+    "name": "gln__L_c",
+    "change": 1
+}, {
+    "name": "fru_e",
+    "change": -1
+}, {
+    "name": "nad_c",
+    "change": -1
+}, {
+    "name": "6pgc_c",
+    "change": -1
+}, {
+    "name": "mal__L_c",
+    "change": -1
+}, {
+    "name": "acald_c",
+    "change": 1
+}, {
+    "name": "pyr_e",
+    "change": -1
+}]
