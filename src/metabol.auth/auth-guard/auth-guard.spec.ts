@@ -1,27 +1,24 @@
 /* tslint:disable:no-unused-variable */
 
-import {
-  beforeEach, beforeEachProviders,
-  describe, xdescribe,
-  expect, it, xit,
-  async, inject
-} from '@angular/core/testing';
 import { AuthGuard } from './auth-guard';
-import {provide, Type} from '@angular/core';
-import {Router} from '@angular/router'
+import { TestBed, async, inject } from '@angular/core/testing';
+import { Router }    from '@angular/router';
 
-// TODO: Test navigation too
-class MockRouter {
-  navigate(commands: any[]) { }
+class RouterStub {
+  navigate(url: string) { return url; }
 }
 
 describe('AuthGuard Service', () => {
   let service;
 
-  beforeEachProviders(() => [
-    provide(Router, { useClass: MockRouter }),
-    AuthGuard
-  ]);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        AuthGuard,
+        { provide: Router, useClass: RouterStub }
+      ]
+    });
+  });
 
   beforeEach(inject([AuthGuard], (ag) => {
     service = ag;
@@ -37,7 +34,7 @@ describe('AuthGuard Service', () => {
   });
 
   it('should password incorrect', () => {
-    localStorage.setItem('access_token','not_null');
+    localStorage.setItem('access_token', 'not_null');
     expect(service.canActivate()).toBeTruthy();
   });
 
