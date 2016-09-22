@@ -9,7 +9,7 @@ class RouterStub {
 }
 
 describe('AuthGuard Service', () => {
-  let service;
+  let service: AuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,11 +18,10 @@ describe('AuthGuard Service', () => {
         { provide: Router, useClass: RouterStub }
       ]
     });
-  });
 
-  beforeEach(inject([AuthGuard], (ag) => {
-    service = ag;
-  }));
+    service = TestBed.get(AuthGuard);
+
+  });
 
   it('should create', () => {
     expect(service).toBeTruthy();
