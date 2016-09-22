@@ -5,7 +5,6 @@ import {DocumentationComponent} from './documentation.component';
 
 const documentationRoutes: Routes = [
     { path: 'documentation', component: DocumentationComponent },
-    { path: '', redirectTo: '/documentation', pathMatch: 'full' },
 ];
 
 export const documentationRoutingProviders: any[] = [];

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import {AccordionComponent, LoadingComponent} from './components';
-import {LoadingService, CurrencyMetabolitesService} from './services';
+import {LoadingService, CurrencyMetabolitesService, AppDataLoader} from './services';
 import {KeysPipe} from './pipes';
 
 
@@ -20,6 +20,7 @@ import {KeysPipe} from './pipes';
     ],
     providers: [
         LoadingService,
+        AppDataLoader,
         CurrencyMetabolitesService
     ],
     exports: [

@@ -1,0 +1,83 @@
+<section class="reactionDetails">
+  <div *ngIf="reaction" class="reactionDetailsChild col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <strong>{{reaction.name}}</strong>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p *ngIf="reaction.id ">
+          id: {{reaction.id}}
+        </p>
+        <p *ngIf="reaction.name">
+          name: {{reaction.name}}
+        </p>
+        <p *ngIf="reaction.reversible">
+          reversible: {{reaction.reversible}}
+        </p>
+        <p *ngIf="reaction.model">
+          model: {{reaction.model}}
+        </p>
+        <p *ngIf="reaction.annotation">
+          annotation: {{reaction.annotation}}
+        </p>
+        <p *ngIf="reaction.sboTerm">
+          sbo term: {{reaction.sboTerm}}
+        </p>
+        <p *ngIf="reaction.subsystem">
+          subsystem: {{reaction.subsystem}}
+        </p>
+        <p *ngFor="let r of reaction.notes">
+          {{ r }}
+        </p>
+        <br>
+        <h4 *ngIf="relatedMetabolites">
+          <chemical-equation [metabolites]="relatedMetabolites" [selectedMetabolite]="{}"></chemical-equation>
+        </h4>
+
+        <div class="row">
+          <div class="col-md-12">
+            <visualization [nodes]="nodes" [links]="links"></visualization>
+          </div>
+        </div>
+
+        <div>
+          <br>
+          <h4>
+            <strong>Connected Reactions</strong>
+          </h4>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Metabolite</strong>
+                </td>
+                <td>
+                  <strong>Reactions</strong>
+                </td>
+              </tr>
+
+              <tr *ngFor="let item of relatedMetabolites">
+                <td>
+                  <a [routerLink]="['/metabolite', item.id]">
+                    {{item.id}}
+                  </a>
+                </td>
+                <td>
+                  <span *ngFor="let item2 of item.reactions; let count = index">
+                    {{(0!=count)? ", " : ""}}
+                    <a [routerLink]="['/reaction', item2.id]">
+                      {{item2.id}}
+                    </a>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

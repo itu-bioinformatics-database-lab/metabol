@@ -1,3 +1,4 @@
+<simple-notifications [options]="notificationOptions"></simple-notifications>
 <app-loading *ngIf="loadingService.loading$ | async"></app-loading>
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
@@ -31,6 +32,13 @@
         </li>
         <li>
           <a>Contact</a>
+        </li>
+        <li>
+          <a *ngIf="!loginService.isLoggedIn()" [routerLink]="['login']">Login</a>
+          <a *ngIf="loginService.isLoggedIn()" (click)="loginService.logout()" [routerLink]="['panel']">Logout</a>
+        </li>
+        <li *ngIf="loginService.isLoggedIn()">
+          <a [routerLink]="['panel']">Control Panel</a>
         </li>
       </ul>
     </div>
