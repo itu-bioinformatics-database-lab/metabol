@@ -11,10 +11,10 @@ export interface FbaIteration {
 }
 
 export interface FbaNode extends d3.layout.force.Node {
-  id: number;
+  id?: number;
   name: string;
   type: string;
-  index: number;
+  index?: number;
   v?: number;
   isBorder?: boolean;
   concentration?: number;

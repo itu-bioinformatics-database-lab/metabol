@@ -1,14 +1,14 @@
 export class RelatedMetabolite {
-  id: Number;
-  name: String;
-  stoichiometry: Number;
+  id: string;
+  name: string;
+  stoichiometry: number;
   reactions: RelatedReaction[];
 }
 
 export class RelatedReaction {
-  id: Number;
-  name: String;
-  subsystem: String;
-  stoichiometry: Number;
+  id: string;
+  name: string;
+  subsystem: string;
+  stoichiometry: number;
   metabolites: RelatedMetabolite[];
 }
