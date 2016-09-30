@@ -1,17 +1,14 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
+import './polyfills.ts';
+import './rxjs-extensions';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { APP_ROUTER_PROVIDERS, AppComponent, environment } from './app';
-import {HTTP_PROVIDERS} from '@angular/http';
-import {LoadingService} from './common/services';
-import {NotificationsService} from 'angular2-notifications'
+import { environment } from './environments/environment';
+import { AppModule } from './app/';
+
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(AppComponent, [
-  APP_ROUTER_PROVIDERS,
-  HTTP_PROVIDERS,
-  LoadingService,
-  NotificationsService
-]);
+platformBrowserDynamic().bootstrapModule(AppModule);

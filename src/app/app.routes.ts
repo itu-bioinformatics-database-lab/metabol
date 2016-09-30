@@ -1,25 +1,9 @@
-import { provideRouter, RouterConfig } from '@angular/router';
-import {SearchEngineRoutes} from '../search-engine';
-import {LoginRoutes, SignupRoutes} from '../auth';
-import {SubsystemAnalyzeRoutes} from '../subsystem-analyze';
-import {PanelRoutes} from './components/panel/panel.routes';
-import {DocumentationComponent} from './components/documentation/documentation.component';
-import {LoadingComponent} from '../common/components';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import {AuthGuard, AuthGuardLogin} from '../auth';
+const appRoutes: Routes = [];
 
-export const routes: RouterConfig = [
-  ...SearchEngineRoutes,
-  ...LoginRoutes,
-  ...SignupRoutes,
-  ...SubsystemAnalyzeRoutes,
-  ...PanelRoutes,
-  { path: 'documentation', component: DocumentationComponent },
-  { path: 'loading', component: LoadingComponent }
+export const appRoutingProviders: any[] = [
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes),
-  AuthGuard,
-  AuthGuardLogin
-];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

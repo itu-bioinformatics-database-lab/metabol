@@ -1,0 +1,83 @@
+<fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="isFullScreen">
+  <svg:defs>
+    <svg:marker id="markerArrow" markerUnits="userSpaceOnUse" viewBox="0 0 20 20" markerWidth="30" markerHeight="30" refX="17" refY="5" orient="auto">
+      <svg:path d="M 0 0 L 10 5 L 0 10 z" />
+    </svg:marker>
+  </svg:defs>
+
+    <template ngFor let-l [ngForOf]="d3links">
+      <template [ngIf]="((currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration) && reactionActive(l.source, l.target)">
+
+        <svg:line class="link lighting-line"
+          *ngIf="fluxOfReactionOnLink(l.source, l.target)"
+          [attr.x1]="l.source.x"
+          [attr.y1]="l.source.y"
+          [attr.x2]="l.target.x"
+          [attr.y2]="l.target.y"/>
+
+        <svg:line class="link"
+          [attr.x1]="l.source.x"
+          [attr.y1]="l.source.y"
+          [attr.x2]="l.target.x"
+          [attr.y2]="l.target.y"
+          [attr.stroke]="linkColorByFlux(l.source, l.target)"
+          [attr.stroke-width]="strokeWidtByFlux(l.source, l.target)"
+          [attr.marker-end]="'url(metabol/' + url + '#markerArrow)'"/>
+
+        <svg:text class="text"
+          [attr.x]="(l.source.x + l.target.x) / 2"
+          [attr.y]="(l.source.y + l.target.y) / 2">{{ l.stoichiometry }}</svg:text>
+      </template>
+    </template>
+
+    <template ngFor let-d [ngForOf]="metabolites">
+      <svg:circle class="metabolite" r="10"
+        *ngIf="currentIteration >= d?.iteration || !currentIteration"
+        [attr.cx]="d.x"
+        [attr.cy]="d.y"
+        [attr.fill]="d.color"/>
+    </template>
+
+    <template ngFor let-d [ngForOf]="reactions">
+      <svg:rect class="reaction" width="20" height="20"
+        *ngIf="(currentIteration >= d?.iteration || !currentIteration) && !d?.deactive"
+        [attr.x]="d.x - 10"
+        [attr.y]="d.y - 10"
+        [attr.fill]="d.color"/>
+    </template>
+
+    <template ngFor let-d [ngForOf]="subsystems">
+      <svg:circle class="subsystem" r="30"
+        *ngIf="!d?.deactive"
+        (click)="activateReactions(d)"
+        [attr.cx]="d.x"
+        [attr.cy]="d.y"/>
+    </template>
+
+    <template ngFor let-d [ngForOf]="d3nodes">
+      <svg:text class="text"
+        *ngIf="(currentIteration >= d?.iteration || !currentIteration) && !d?.deactive"
+        [attr.x]="d.x - 8"
+        [attr.y]="d.y + 5">{{ d.iteration }}</svg:text>
+    </template>
+
+    <template ngFor let-d [ngForOf]="d3nodes">
+      <svg:text class="text"
+        *ngIf="((currentIteration >= d?.iteration) || !currentIteration) && !d?.deactive"
+        [attr.x]="d.x - 15"
+        [attr.y]="d.y - 15"
+        [style.fill]="searchInGraph(d.name)">{{ d.name }} {{d.v ? "(" + d.v + ")" : ""}}</svg:text>
+    </template>
+</fullscreenable-svg>
+<div id="down-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-down-right"></ng-content>
+</div>
+<div id="down-left" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-down-left"></ng-content>
+</div>
+<div id="top-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-top-right"></ng-content>
+</div>
+<div id="top-left" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <ng-content select="fullscreenable-top-left"></ng-content>
+</div>

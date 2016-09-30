@@ -1,29 +1,22 @@
 import { Component } from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {AppDataLoader} from './appDataLoader';
-import {LoadingComponent} from '../common/components';
-import {LoadingService} from '../common/services';
-import {LoginService} from '../auth/services'
-import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications'
-import {notificationOptions} from './notificationOptions';
+import {LoadingService} from '../metabol.common/services';
+import {AppSettings} from './app.settings';
+import {AppDataLoader} from '../metabol.common/services'
+import {LoginService} from '../metabol.auth/services';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES, LoadingComponent, SimpleNotificationsComponent],
-  providers: [AppDataLoader, LoginService]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
-  loading: boolean = false;
-  notificationOptions = notificationOptions;
+  notificationOptions = AppSettings.NOTIFICATION_OPTIONS;
 
   constructor(appDataLoader: AppDataLoader,
     public loadingService: LoadingService,
     public loginService: LoginService) {
-    appDataLoader.load();
-  }
+      appDataLoader.load();
+   }
 
 }

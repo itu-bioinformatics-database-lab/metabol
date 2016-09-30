@@ -1,10 +1,10 @@
-import { MetabolPage } from './app.po';
+import { MetabolNewPage } from './app.po';
 
-describe('metabol App', function() {
-  let page: MetabolPage;
+describe('metabol-new App', function() {
+  let page: MetabolNewPage;
 
   beforeEach(() => {
-    page = new MetabolPage();
+    page = new MetabolNewPage();
   });
 
   it('should display message saying app works', () => {
