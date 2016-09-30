@@ -1,10 +1,15 @@
 .metabolite {
   stroke: #696969;
   stroke-width: 2px;
+  fill:yellow;
 }
 .reaction {
   stroke: #696969;
   stroke-width: 2px;
+  fill:red;
+}
+.subsystem{
+  fill:blue;
 }
 /*.link {
   stroke: #777;

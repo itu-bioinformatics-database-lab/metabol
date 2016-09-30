@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {FbaNode, FbaLink} from '../../models/fbaiteration';
+import {FbaNode, FbaLink, SubsystemNode} from '../../models/fbaiteration';
 import * as d3 from 'd3';
 import {ActivatedRoute} from '@angular/router';
 import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component';
@@ -20,8 +20,10 @@ export class VisualizationComponent implements OnChanges {
 
   reactions: Array<FbaNode>;
   metabolites: Array<FbaNode>;
+  subsystems: Array<SubsystemNode> = [];
 
-  force: d3.layout.Force<FbaLink, FbaNode>;
+
+  force: d3.layout.Force<FbaLink, FbaNode | SubsystemNode>;
   d3links: Array<FbaLink>;
   d3nodes: Array<FbaNode>;
 
@@ -36,10 +38,16 @@ export class VisualizationComponent implements OnChanges {
 
   initForce() {
     return d3.layout.force<FbaLink, FbaNode>()
-      .linkDistance(100)
-      .charge(-1000)
+      .linkDistance(200)
+      .charge(-10000)
       .size([1000, 400])
+      .on('start', () => this.onForceStart())
       .on('tick', () => this.onForceTick());
+  }
+
+  onForceStart() {
+    this.onForceTick();
+    this.deactiveteAllReaction();
   }
 
   onForceTick() {
@@ -48,6 +56,9 @@ export class VisualizationComponent implements OnChanges {
 
     this.metabolites = this.force.nodes()
       .filter((x) => x['type'] == 'm');
+
+    this.subsystems = this.force.nodes()
+      .filter((x) => x['type'] == 'sub');
 
     this.d3links = this.force.links();
     this.d3nodes = this.force.nodes();
@@ -62,8 +73,8 @@ export class VisualizationComponent implements OnChanges {
     this.force.stop();
     this.mapFluxValue();
     this.force.nodes(this.nodes).links(this.links);
-    this.force.start();
 
+    this.force.start();
     this.url = this.location.path();
   }
 
@@ -104,5 +115,41 @@ export class VisualizationComponent implements OnChanges {
       return target.v || 0;
     else if (source.type == 'r')
       return source.v || 0;
+    return 0;
   }
+
+  reactionActive(source: FbaNode, target: FbaNode) {
+    if (target.type == 'r')
+      return !target.deactive;
+    else if (source.type == 'r')
+      return !source.deactive;
+    if (target.type == 'sub')
+      return !target.deactive;
+    else if (source.type == 'sub')
+      return !source.deactive;
+    return true;
+  }
+
+  activateReactions(subsystem: SubsystemNode) {
+    if (subsystem)
+      subsystem.deactive = true;
+    subsystem.reactions.forEach(r => {
+      r.deactive = false;
+    });
+    // this.force.start();
+  }
+
+  activeteSubsystem(subsystem: SubsystemNode) {
+    if (subsystem)
+      subsystem.deactive = false;
+    subsystem.reactions.forEach(r => {
+      if (r)
+        r.deactive = true;
+    });
+  }
+
+  deactiveteAllReaction() {
+    this.subsystems.forEach(s => this.activeteSubsystem(s));
+  }
+
 }

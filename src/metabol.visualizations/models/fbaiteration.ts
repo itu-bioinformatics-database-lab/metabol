@@ -14,16 +14,23 @@ export interface FbaNode extends d3.layout.force.Node {
   id?: number;
   name: string;
   type: string;
-  index?: number;
   v?: number;
   isBorder?: boolean;
   concentration?: number;
   change?: string;
   color?: string;
   iteration?: number;
+  deactive?: boolean;
 }
 
-export interface FbaLink extends d3.layout.force.Link<FbaNode | Number> {
+export interface FbaLink extends d3.layout.force.Link<FbaNode | Number | SubsystemNode> {
   role: string;
   stoichiometry?: number;
+}
+
+export interface SubsystemNode extends d3.layout.force.Node {
+  name: string;
+  type: string;
+  reactions?: FbaNode[];
+  deactive?: boolean;
 }

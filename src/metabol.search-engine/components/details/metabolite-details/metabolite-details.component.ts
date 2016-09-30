@@ -8,6 +8,7 @@ import {MetaboliteVisualizationService} from '../../../services/metabolite/metab
 import {LoadingService} from "../../../../metabol.common/services";
 
 import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
+import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 
 @Component({
   selector: 'app-metabolite-details',
@@ -26,7 +27,8 @@ export class MetaboliteDetailsComponent implements OnInit {
     private mea: MetaboliteService,
     private route: ActivatedRoute,
     private meaVis: MetaboliteVisualizationService,
-    private loading: LoadingService) {
+    private loading: LoadingService,
+    private relatedToVisual: RelatedToVisualizationService) {
 
     this.metabolite = new Object();
     this.relatedReactions = new Array<any>();
@@ -56,8 +58,8 @@ export class MetaboliteDetailsComponent implements OnInit {
   }
 
   loadVisualization() {
-    [this.nodes, this.links] = this.meaVis
-      .convertToFbaVisualization(this.metabolite, this.relatedReactions);
+    [this.nodes, this.links] = this.relatedToVisual
+      .visualizeMetaboliteDetail(this.metabolite, this.relatedReactions);
   }
 
 }

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MetabolCommonModule} from '../metabol.common';
 
 import {
   VisualizationComponent,
-  FullScreenableSvgComponent
+  FullScreenableSvgComponent,
+  SubsystemComponent
 } from './components';
 
 import {
@@ -14,6 +16,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    MetabolCommonModule
   ],
   providers: [
     RelatedToVisualizationService,
@@ -21,7 +24,8 @@ import {
   ],
   declarations: [
     VisualizationComponent,
-    FullScreenableSvgComponent
+    FullScreenableSvgComponent,
+    SubsystemComponent
   ],
   exports:[
     VisualizationComponent,

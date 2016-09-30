@@ -13,7 +13,7 @@ import {MetabolCommonModule} from '../metabol.common';
 import {SearchEngineModule} from "../metabol.search-engine";
 import {MetabolAuthModule} from "../metabol.auth";
 import {SubsystemAnalyzeModule} from "../metabol.subsystem-analyze";
-import {MetabolVisualizationModule} from '../metabol.visualizations'
+import {MetabolVisualizationModule} from '../metabol.visualizations';
 
 @NgModule({
   declarations: [
