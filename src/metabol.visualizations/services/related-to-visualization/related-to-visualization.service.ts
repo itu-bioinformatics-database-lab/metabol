@@ -90,7 +90,7 @@ export class RelatedToVisualizationService {
   visualizeRelatedMetabolites(related: RelatedMetabolite): [FbaNode[], FbaLink[]] {
     this.createMetaboliteIfDoNotExits(related);
     this.createLinkForInitialMetabolite(related);
-    this.visualizeRelatedMetabolite(related);
+    this.visualizeRelatedMetabolite(related, false);
     return this.getDataAndClean();
   }
 
@@ -101,9 +101,7 @@ export class RelatedToVisualizationService {
    */
   private createLinkForInitialMetabolite(related: RelatedMetabolite) {
     for (let r of related.reactions) {
-      this.createReactionIfDoNotExits(r);
-      this.createLinkFromRelatedMetabolite(related, r.id, related.id);
-      this.createSubsystem(r);
+      this.createSubsystemForInitial(r);
       this.createLinkForSubsystem(r.subsystem, related.id);
     }
   }
@@ -117,10 +115,11 @@ export class RelatedToVisualizationService {
   private visualizeRelatedReaction(related: RelatedReaction) {
     for (let m of related.metabolites || []) {
       this.createMetaboliteIfDoNotExits(m);
-      this.createLinkFromRelatedMetabolite(m, related.id, m.id);
+      this.createLinkFromRelated(m, related.id, m.id);
+
+      this.isBorderMetaboliteCreateLink(related, m)
+
       this.visualizeRelatedMetabolite(m);
-      if (this.isBorderMetabolite(related, m))
-        this.createLinkForSubsystem(related.subsystem, m.id);
     }
   }
 
@@ -130,29 +129,29 @@ export class RelatedToVisualizationService {
    * @param  {RelatedMetabolite} related [description]
    * @return {[type]}                    [description]
    */
-  private visualizeRelatedMetabolite(related: RelatedMetabolite) {
-    if (this.cur.isCurrency(related.id)) return;
+  private visualizeRelatedMetabolite(related: RelatedMetabolite, checkCurrecy: boolean = true) {
+    if (checkCurrecy)
+      if (this.cur.isCurrency(related.id)) return;
 
     for (let r of related.reactions || []) {
       this.createReactionIfDoNotExits(r);
-      this.createLinkFromRelatedMetabolite(related, r.id, related.id);
-      this.createSubsystem(r);
-      this.visualizeRelatedReaction(r);
+      this.createLinkFromRelated(related, r.id, related.id);
 
-      if (!r.metabolites)
-        this.createLinkForSubsystem(r.subsystem, related.id);
+      this.createSubsystem(r);
+
+      this.visualizeRelatedReaction(r);
 
     }
   }
 
   /**
-   * [createLinkFromRelatedMetabolite description]
-   * @param  {RelatedMetabolite} related        [description]
-   * @param  {FbaNode}           reactionNode   [description]
-   * @param  {FbaNode}           metaboliteNode [description]
-   * @return {FbaLink}                          [description]
+   * [createLinkFromRelated description]
+   * @param  {RelatedMetabolite} related      [description]
+   * @param  {string}            reactionId   [description]
+   * @param  {string}            metaboliteId [description]
+   * @return {[type]}                         [description]
    */
-  private createLinkFromRelatedMetabolite(related: RelatedMetabolite, reactionId: string, metaboliteId: string) {
+  private createLinkFromRelated(related: RelatedMetabolite, reactionId: string, metaboliteId: string) {
     let link: FbaLink;
     if (related.stoichiometry > 0)
       link = { source: this.reactions[reactionId], target: this.metabolites[metaboliteId], role: 'p' };
@@ -163,7 +162,10 @@ export class RelatedToVisualizationService {
   }
 
   private createLinkForSubsystem(subsystemId: string, metaboliteId: string) {
-    this.links.push({ source: this.subsystems[subsystemId], target: this.metabolites[metaboliteId], role: 'sub' });
+    this.links.push({
+      source: this.subsystems[subsystemId],
+      target: this.metabolites[metaboliteId], role: 'sub'
+    });
   }
 
   /**
@@ -172,9 +174,13 @@ export class RelatedToVisualizationService {
    * @return {[type]}          [description]
    */
   private createSubsystem(related: RelatedReaction) {
-    if (related.subsystem in this.subsystems)
-      this.subsystems[related.subsystem].reactions.push(this.reactions[related.id]);
-    else
+    if (!(related.subsystem in this.subsystems))
+      this.subsystems[related.subsystem] = { name: related.subsystem, type: 'sub', reactions: [] };
+    this.subsystems[related.subsystem].reactions.push(this.reactions[related.id]);
+  }
+
+  private createSubsystemForInitial(related: RelatedReaction) {
+    if (!(related.subsystem in this.subsystems))
       this.subsystems[related.subsystem] = { name: related.subsystem, type: 'sub', reactions: [] };
   }
 
@@ -184,11 +190,13 @@ export class RelatedToVisualizationService {
    * @param  {RelatedMetabolite} relatedMetabolite [description]
    * @return {[type]}                              [description]
    */
-  private isBorderMetabolite(relatedReaction: RelatedReaction, relatedMetabolite: RelatedMetabolite) {
+  private isBorderMetaboliteCreateLink(relatedReaction: RelatedReaction, relatedMetabolite: RelatedMetabolite) {
+    if (this.cur.isCurrency(relatedMetabolite.id)) return;
     for (let r of relatedMetabolite.reactions || [])
-      if (r.subsystem != relatedReaction.subsystem)
-        return true;
-    return false;
+      if (r.subsystem != relatedReaction.subsystem) {
+        this.createSubsystemForInitial(r);
+        this.createLinkForSubsystem(r.subsystem, relatedMetabolite.id);
+      }
   }
 
 }
