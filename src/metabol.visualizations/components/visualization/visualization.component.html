@@ -22,7 +22,7 @@
           [attr.y2]="l.target.y"
           [attr.stroke]="linkColorByFlux(l.source, l.target)"
           [attr.stroke-width]="strokeWidtByFlux(l.source, l.target)"
-          [attr.marker-end]="'url(metabol/' + url + '#markerArrow)'"/>
+          [attr.marker-end]="'url(metabol' + url + '#markerArrow)'"/>
 
         <svg:text class="text"
           [attr.x]="(l.source.x + l.target.x) / 2"
