@@ -1,6 +1,6 @@
 <div id="mainBox">
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <img src="/assets/img/user.png">
+    <img src="assets/img/user.png">
     <div class="form-group">
       <input class="form-control" placeholder="Email" type="email" formControlName="Email">
       <span class="text-danger" *ngIf="!form.controls['Email'].valid && form.controls['Email'].dirty">

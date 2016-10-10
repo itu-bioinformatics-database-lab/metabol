@@ -21,7 +21,7 @@ export class SampleComponent implements OnInit {
   }
 
   loadSampleDataSet() {
-    this.http.get('/assets/example-analyze-doc-files/example.json')
+    this.http.get('assets/example-analyze-doc-files/example.json')
       .map(res => res.json())
       .subscribe((data) => this.conTable = data);
   }
