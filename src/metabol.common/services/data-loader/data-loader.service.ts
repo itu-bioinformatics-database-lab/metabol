@@ -23,7 +23,7 @@ export class AppDataLoader {
     let collection = 'currency-metabolites';
 
     if (!localStorage.getItem(collection))
-      this.http.get('/assets/datasets/currency-metabolites.json')
+      this.http.get('assets/datasets/currency-metabolites.json')
         .map(res => res.json())
         .subscribe((data) => {
           localStorage.setItem(collection, JSON.stringify(data));

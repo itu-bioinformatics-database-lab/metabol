@@ -117,7 +117,7 @@ export class RelatedToVisualizationService {
       this.createMetaboliteIfDoNotExits(m);
       this.createLinkFromRelated(m, related.id, m.id);
 
-      this.isBorderMetaboliteCreateLink(related, m)
+      this.isBorderMetaboliteCreateLink(related, m);
 
       this.visualizeRelatedMetabolite(m);
     }
