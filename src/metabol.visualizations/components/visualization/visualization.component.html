@@ -6,7 +6,7 @@
   </svg:defs>
 
     <template ngFor let-l [ngForOf]="d3links">
-      <template [ngIf]="((currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration) && reactionActive(l.source, l.target)">
+      <template [ngIf]="((currentIteration >= l.target?.iteration && currentIteration >= l.source?.iteration) || !currentIteration) && isLinkActive(l)">
 
         <svg:line class="link lighting-line"
           *ngIf="fluxOfReactionOnLink(l.source, l.target)"
@@ -32,7 +32,7 @@
 
     <template ngFor let-d [ngForOf]="metabolites">
       <svg:circle class="metabolite" r="10"
-        *ngIf="currentIteration >= d?.iteration || !currentIteration"
+        *ngIf="(currentIteration >= d?.iteration || !currentIteration) && !d?.deactive"
         [attr.cx]="d.x"
         [attr.cy]="d.y"
         [attr.fill]="d.color"/>
@@ -49,7 +49,7 @@
     <template ngFor let-d [ngForOf]="subsystems">
       <svg:circle class="subsystem" r="30"
         *ngIf="!d?.deactive"
-        (click)="activateReactions(d)"
+        (click)="onSubsystemClick(d)"
         [attr.cx]="d.x"
         [attr.cy]="d.y"/>
     </template>

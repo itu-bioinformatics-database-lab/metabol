@@ -21,6 +21,7 @@ export interface FbaNode extends d3.layout.force.Node {
   color?: string;
   iteration?: number;
   deactive?: boolean;
+  subsystems?: string[];
 }
 
 export interface FbaLink extends d3.layout.force.Link<FbaNode | Number | SubsystemNode> {
@@ -32,5 +33,6 @@ export interface SubsystemNode extends d3.layout.force.Node {
   name: string;
   type: string;
   reactions?: FbaNode[];
+  metabolites?: FbaNode[];
   deactive?: boolean;
 }

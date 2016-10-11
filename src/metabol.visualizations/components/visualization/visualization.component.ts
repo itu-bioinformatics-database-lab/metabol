@@ -48,6 +48,8 @@ export class VisualizationComponent implements OnChanges {
   onForceStart() {
     this.onForceTick();
     this.deactiveteAllReaction();
+    this.deactiveAllMetabolite();
+    this.updateMetabolitesActivation();
   }
 
   onForceTick() {
@@ -118,7 +120,8 @@ export class VisualizationComponent implements OnChanges {
     return 0;
   }
 
-  reactionActive(source: FbaNode, target: FbaNode) {
+  isLinkActive(link: FbaLink) {
+    let source = <FbaNode>link.source, target = <FbaNode>link.target;
     if (target.type == 'r')
       return !target.deactive;
     else if (source.type == 'r')
@@ -131,12 +134,9 @@ export class VisualizationComponent implements OnChanges {
   }
 
   activateReactions(subsystem: SubsystemNode) {
-    if (subsystem)
-      subsystem.deactive = true;
     subsystem.reactions.forEach(r => {
       r.deactive = false;
     });
-    // this.force.start();
   }
 
   activeteSubsystem(subsystem: SubsystemNode) {
@@ -150,6 +150,28 @@ export class VisualizationComponent implements OnChanges {
 
   deactiveteAllReaction() {
     this.subsystems.forEach(s => this.activeteSubsystem(s));
+  }
+
+  deactiveAllMetabolite() {
+    this.metabolites.forEach(x => x.deactive = true);
+  }
+
+  updateMetabolitesActivation() {
+    this.links.forEach(l => {
+      if (this.isLinkActive(l)) this.getMetaboliteFromLink(l).deactive = false;
+    });
+  }
+
+  getMetaboliteFromLink(link) {
+    let source = <FbaNode>link.source, target = <FbaNode>link.target;
+    return target.type == 'r' || target.type == 'sub' ? source : target;
+  }
+
+  onSubsystemClick(subsystem: SubsystemNode){
+    if (subsystem)
+      subsystem.deactive = true;
+    this.activateReactions(subsystem);
+    this.updateMetabolitesActivation();
   }
 
 }
