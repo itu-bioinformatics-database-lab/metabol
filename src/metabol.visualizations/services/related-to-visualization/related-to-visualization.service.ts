@@ -31,6 +31,10 @@ export class RelatedToVisualizationService {
       .concat(_.values(this.metabolites))
       .concat(_.values(this.reactions));
     let links = this.links;
+
+    console.log(_.values(this.subsystems));
+    console.log(links);
+
     this.constructor();
     return [nodes, links];
   }
@@ -69,6 +73,23 @@ export class RelatedToVisualizationService {
       reactions: relateds
     };
     return this.visualizeRelatedMetabolites(relatedMetabolite);
+  }
+
+  /**
+   * [visualizeReactionDetail description]
+   * @param  {Metabolite}        metabolite [description]
+   * @param  {RelatedReaction[]} relateds   [description]
+   * @return {[type]}                       [description]
+   */
+  visualizeReactionDetail(reaction: Reaction, relateds: RelatedMetabolite[]): [FbaNode[], FbaLink[]] {
+    let relatedReaction: RelatedReaction = {
+      id: reaction.id,
+      name: reaction.name,
+      subsystem: reaction.subsystem,
+      stoichiometry: 0,
+      metabolites: relateds
+    };
+    return this.visualizeRelatedReactions(relatedReaction);
   }
 
   /**

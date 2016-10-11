@@ -5,6 +5,7 @@ export class Reaction {
   model: string;
   annotation: string;
   sboTerm: string;
+  subsystem: string;
   notes: Array<string>;
 }
 

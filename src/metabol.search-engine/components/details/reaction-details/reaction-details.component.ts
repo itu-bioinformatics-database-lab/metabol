@@ -11,6 +11,7 @@ import {LoadingService} from "../../../../metabol.common/services";
 
 import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
 import {VisualizationComponent} from '../../../../metabol.visualizations/components';
+import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 
 @Component({
   selector: 'app-reaction-details',
@@ -28,7 +29,8 @@ export class ReactionDetailsComponent implements OnInit {
     private rea: ReactionService,
     private route: ActivatedRoute,
     private reaVis: ReactionVisualizationService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private relatedToVisual: RelatedToVisualizationService
   ) {
     this.reaction = new Reaction();
     this.nodes = new Array<FbaNode>();
@@ -57,8 +59,8 @@ export class ReactionDetailsComponent implements OnInit {
   }
 
   loadVisualization() {
-    [this.nodes, this.links] = this.reaVis
-      .convertToFbaVisualization(this.reaction, this.relatedMetabolites);
+    [this.nodes, this.links] = this.relatedToVisual
+      .visualizeReactionDetail(this.reaction, this.relatedMetabolites);
   }
 
 }
