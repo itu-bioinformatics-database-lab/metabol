@@ -35,7 +35,7 @@
         *ngIf="(currentIteration >= d?.iteration || !currentIteration) && !d?.deactive"
         [attr.cx]="d.x"
         [attr.cy]="d.y"
-        [attr.fill]="d.color"/>
+        [style.fill]="d.color"/>
     </template>
 
     <template ngFor let-d [ngForOf]="reactions">
@@ -43,7 +43,7 @@
         *ngIf="(currentIteration >= d?.iteration || !currentIteration) && !d?.deactive"
         [attr.x]="d.x - 10"
         [attr.y]="d.y - 10"
-        [attr.fill]="d.color"/>
+        [style.fill]="d.color"/>
     </template>
 
     <template ngFor let-d [ngForOf]="subsystems">

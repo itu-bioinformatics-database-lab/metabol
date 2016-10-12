@@ -99,6 +99,7 @@ export class RelatedToVisualizationService {
    */
   visualizeRelatedReactions(related: RelatedReaction): [FbaNode[], FbaLink[]] {
     this.createReactionIfDoNotExits(related);
+    this.reactions[related.id].color = '#a01ec8';
     this.visualizeRelatedReaction(related);
     return this.getDataAndClean();
   }
@@ -110,6 +111,7 @@ export class RelatedToVisualizationService {
    */
   visualizeRelatedMetabolites(related: RelatedMetabolite): [FbaNode[], FbaLink[]] {
     this.createMetaboliteIfDoNotExits(related);
+    this.metabolites[related.id].color = '#a01ec8';
     this.createLinkForInitialMetabolite(related);
     this.visualizeRelatedMetabolite(related, false);
     return this.getDataAndClean();
@@ -218,7 +220,7 @@ export class RelatedToVisualizationService {
         this.createSubsystemForInitial(r);
         this.createLinkForSubsystem(r.subsystem, relatedMetabolite.id);
       }
-      
+
   }
 
 }
