@@ -214,6 +214,7 @@ export class RelatedToVisualizationService {
     for (let r of relatedMetabolite.reactions || [])
       if (r.subsystem != relatedReaction.subsystem) {
         this.createSubsystemForInitial(r);
+        this.createLinkForSubsystem(relatedReaction.subsystem, relatedMetabolite.id);
         this.createLinkForSubsystem(r.subsystem, relatedMetabolite.id);
       }
 
