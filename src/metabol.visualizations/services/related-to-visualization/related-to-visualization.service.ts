@@ -31,10 +31,6 @@ export class RelatedToVisualizationService {
       .concat(_.values(this.metabolites))
       .concat(_.values(this.reactions));
     let links = this.links;
-
-    console.log(_.values(this.subsystems));
-    console.log(links);
-
     this.constructor();
     return [nodes, links];
   }
