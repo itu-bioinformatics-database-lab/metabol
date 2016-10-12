@@ -85,7 +85,7 @@ export class RelatedToVisualizationService {
     let relatedReaction: RelatedReaction = {
       id: reaction.id,
       name: reaction.name,
-      subsystem: reaction.subsystem,
+      subsystem: 'mock-subsystem',
       stoichiometry: 0,
       metabolites: relateds
     };
@@ -213,15 +213,12 @@ export class RelatedToVisualizationService {
    */
   private isBorderMetaboliteCreateLink(relatedReaction: RelatedReaction, relatedMetabolite: RelatedMetabolite) {
     if (this.cur.isCurrency(relatedMetabolite.id)) return;
-    let isBorder: boolean;
     for (let r of relatedMetabolite.reactions || [])
       if (r.subsystem != relatedReaction.subsystem) {
-        isBorder = true;
         this.createSubsystemForInitial(r);
         this.createLinkForSubsystem(r.subsystem, relatedMetabolite.id);
       }
-    // if (!isBorder)
-    //   this.metabolites[relatedMetabolite.id].subsystems.push(relatedReaction.subsystem);
+      
   }
 
 }

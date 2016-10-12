@@ -73,6 +73,12 @@
   <ng-content select="fullscreenable-down-right"></ng-content>
 </div>
 <div id="down-left" [style.position]="isFullScreen ? 'fixed' :'absolute'">
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default"
+      (click)="deactiveteAllSubsystem()">Reaction View</button>
+    <button type="button" class="btn btn-default"
+      (click)="deactiveteAllReaction()">Subsystem View</button>
+  </div>
   <ng-content select="fullscreenable-down-left"></ng-content>
 </div>
 <div id="top-right" [style.position]="isFullScreen ? 'fixed' :'absolute'">
