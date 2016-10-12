@@ -48,7 +48,6 @@ export class VisualizationComponent implements OnChanges {
   onForceStart() {
     this.onForceTick();
     this.deactiveteAllReaction();
-    this.deactiveAllMetabolite();
     this.updateMetabolitesActivation();
   }
 
@@ -150,13 +149,19 @@ export class VisualizationComponent implements OnChanges {
 
   deactiveteAllReaction() {
     this.subsystems.forEach(s => this.activeteSubsystem(s));
+    this.updateMetabolitesActivation();
   }
 
-  deactiveAllMetabolite() {
-    this.metabolites.forEach(x => x.deactive = true);
+  deactiveteAllSubsystem() {
+    this.subsystems.forEach(s => {
+      s.deactive = true;
+      this.activateReactions(s);
+    });
+    this.updateMetabolitesActivation();
   }
 
   updateMetabolitesActivation() {
+    this.metabolites.forEach(x => x.deactive = true);
     this.links.forEach(l => {
       if (this.isLinkActive(l)) this.getMetaboliteFromLink(l).deactive = false;
     });
@@ -167,7 +172,7 @@ export class VisualizationComponent implements OnChanges {
     return target.type == 'r' || target.type == 'sub' ? source : target;
   }
 
-  onSubsystemClick(subsystem: SubsystemNode){
+  onSubsystemClick(subsystem: SubsystemNode) {
     if (subsystem)
       subsystem.deactive = true;
     this.activateReactions(subsystem);
