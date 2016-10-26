@@ -27,12 +27,23 @@ export class RelatedToVisualizationService {
    * @return {[type]} [description]
    */
   private getDataAndClean(): [FbaNode[], FbaLink[]] {
-    let nodes = _.values(this.subsystems)
-      .concat(_.values(this.metabolites))
-      .concat(_.values(this.reactions));
+    let nodes = [
+      ..._.values(this.subsystems),
+      ..._.values(this.metabolites),
+      ..._.values(this.reactions)
+    ];
+    this.normalize();
     let links = this.links;
     this.constructor();
     return [nodes, links];
+  }
+
+  /**
+   * [normalize description]
+   * @return {[type]} [description]
+   */
+  private normalize() {
+    this.links = this.links.filter(l => l.source && l.target);
   }
 
   /**
