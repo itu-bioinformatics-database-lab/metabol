@@ -44,6 +44,11 @@ export class RelatedToVisualizationService {
    */
   private normalize() {
     this.links = this.links.filter(l => l.source && l.target);
+    this.links = this.links.filter(l => {
+      let s = <FbaNode>l.source;
+      let t = <FbaNode>l.target;
+      return s.name != 'mock-metabolite' && t.name != 'mock-metabolite';
+    });
   }
 
   /**
@@ -64,6 +69,16 @@ export class RelatedToVisualizationService {
   private createMetaboliteIfDoNotExits(related: RelatedMetabolite) {
     if (!(related.id in this.metabolites))
       this.metabolites[related.id] = { name: related.id, type: 'm' };
+  }
+
+  vizulizeSubsystemDetail(relateds: RelatedReaction[]) {
+    let relatedMetabolite: RelatedMetabolite = {
+      id: 'mock-metabolite',
+      name: 'mock-metabolite',
+      stoichiometry: relateds[0].stoichiometry,
+      reactions: relateds
+    };
+    return this.visualizeRelatedMetabolites(relatedMetabolite);
   }
 
   /**
