@@ -70,7 +70,7 @@ describe('RelatedToVisualization Service', () => {
       { name: 's1', type: 'sub', reactions: [{ name: 'r2', type: 'r' }] },
       { name: 's2', type: 'sub', reactions: [{ name: 'r4', type: 'r' }] },
       { name: 's3', type: 'sub', reactions: [{ name: 'r5', type: 'r' }] },
-      { name: 'm1', type: 'm' },
+      { name: 'm1', type: 'm', color: '#a01ec8' },
       { name: 'h[c]', type: 'm' },
       { name: 'm3', type: 'm' },
       { name: 'r2', type: 'r' },
@@ -90,33 +90,38 @@ describe('RelatedToVisualization Service', () => {
         role: 'sub'
       },
       {
-        source: { name: 'r2', type: 'r' },
-        target: { name: 'm1', type: 'm' },
+        source: expectedNodes[6],
+        target: expectedNodes[3],
         role: 'p', stoichiometry: 1
       },
       {
-        source: { name: 'r4', type: 'r' },
-        target: { name: 'm1', type: 'm' },
+        source: expectedNodes[7],
+        target: expectedNodes[3],
         role: 'p', stoichiometry: 1
       },
       {
-        source: { name: 'r4', type: 'r' },
-        target: { name: 'h[c]', type: 'm' },
+        source: expectedNodes[7],
+        target: expectedNodes[4],
         role: 'p', stoichiometry: 2
       },
       {
-        source: { name: 'm3', type: 'm' },
-        target: { name: 'r4', type: 'r' },
+        source: expectedNodes[5],
+        target: expectedNodes[7],
         role: 's', stoichiometry: -1
       },
       {
-        source: expectedNodes[2],
-        target: { name: 'm3', type: 'm' },
+        source: expectedNodes[1],
+        target: expectedNodes[5],
         role: 'sub'
       },
       {
-        source: { name: 'm3', type: 'm' },
-        target: { name: 'r5', type: 'r' },
+        source: expectedNodes[2],
+        target: expectedNodes[5],
+        role: 'sub'
+      },
+      {
+        source: expectedNodes[5],
+        target: expectedNodes[8],
         role: 's', stoichiometry: -1
       },
     ];

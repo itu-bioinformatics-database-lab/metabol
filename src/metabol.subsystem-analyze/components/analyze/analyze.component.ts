@@ -19,8 +19,6 @@ export class AnalyzeComponent implements OnInit {
 
   @ViewChild(FullScreenableSvgComponent) fullSvg: FullScreenableSvgComponent;
 
-  data: any;
-
   nodes: SubsystemTreeNode[];
   links: any[];
   tree: d3.layout.Tree<SubsystemTreeNode>;
@@ -41,8 +39,7 @@ export class AnalyzeComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.analyze.getSolution(params['key'], (data) => {
-        this.data = data;
-        let solutionTree = this.analyze.getSolutionTree(this.data);
+        let solutionTree = this.analyze.getSolutionTree(data);
         this.nodes = this.tree.nodes(solutionTree);
         this.links = this.tree.links(this.nodes);
         this.filterNode().forEach(name => {

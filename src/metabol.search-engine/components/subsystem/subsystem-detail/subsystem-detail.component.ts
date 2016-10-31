@@ -36,8 +36,6 @@ export class SubsystemDetailComponent implements OnInit {
         this.connectedSubsystems = data.connectedSubsystems;
         [this.nodes, this.links] = this.relatedToVisual
           .vizulizeSubsystemDetail(this.reactions);
-        console.log(this.nodes);
-        console.log(this.links);
       });
     });
   }
