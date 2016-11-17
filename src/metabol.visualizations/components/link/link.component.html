@@ -1,0 +1,14 @@
+<template [ngIf]="isLinkActive(link)">
+
+  <svg:path class="link"
+    [attr.d]="linkArc(link)"
+    [attr.stroke-width]="stroke(link)"
+    [attr.marker-end]="'url(' + url + '#markerArrow)'"/>
+
+  <svg:text class="text"
+    [attr.x]="linkTextX(link) || 0"
+    [attr.y]="linkTextY(link)">
+    {{ link.stoichiometry }}
+  </svg:text>
+
+</template>

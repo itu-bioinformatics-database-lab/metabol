@@ -14,6 +14,16 @@ export class AppDataLoader {
    */
   load(): void {
     this.loadCurrencyMetabolites();
+    this.loadSubsystemNetwork();
+  }
+
+  loadFile(filename) {
+    if (!localStorage.getItem(filename))
+      this.http.get(`assets/datasets/${filename}.json`)
+        .map(res => res.json())
+        .subscribe((data) => {
+          localStorage.setItem(filename, JSON.stringify(data));
+        });
   }
 
   /**
@@ -21,13 +31,15 @@ export class AppDataLoader {
    */
   loadCurrencyMetabolites(): void {
     let collection = 'currency-metabolites';
+    this.loadFile(collection);
+  }
 
-    if (!localStorage.getItem(collection))
-      this.http.get('assets/datasets/currency-metabolites.json')
-        .map(res => res.json())
-        .subscribe((data) => {
-          localStorage.setItem(collection, JSON.stringify(data));
-        });
+  /**
+   * load subsystem network in subsystem-network.json
+   */
+  loadSubsystemNetwork(): void {
+    let collection = 'subsystem-network';
+    this.loadFile(collection);
   }
 
 }
