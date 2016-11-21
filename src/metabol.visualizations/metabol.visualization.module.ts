@@ -10,6 +10,7 @@ import {
   ReactionComponent,
   LinkComponent,
   NodeTextComponent,
+  AllNetworkVisualizationComponent
 } from './components';
 
 import {
@@ -33,11 +34,13 @@ import {
     ReactionComponent,
     SubsystemComponent,
     LinkComponent,
+    AllNetworkVisualizationComponent,
     NodeTextComponent,
   ],
   exports: [
     VisualizationComponent,
-    FullScreenableSvgComponent
+    FullScreenableSvgComponent,
+    AllNetworkVisualizationComponent
   ]
 })
 export class MetabolVisualizationModule { }
