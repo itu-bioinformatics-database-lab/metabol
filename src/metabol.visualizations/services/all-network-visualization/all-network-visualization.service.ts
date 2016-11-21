@@ -5,26 +5,43 @@ import * as _ from 'lodash';
 @Injectable()
 export class AllNetworkVisualizationService {
 
-  private subsystems: { [key: string]: SubsystemNode };
-  private metabolites: { [key: string]: FbaNode };
-  links: Array<FbaLink>;
+  private subsystems: { [key: string]: SubsystemNode } = {};
+  private metabolites: { [key: string]: FbaNode } = {};
+  private links: Array<FbaLink> = [];
 
-  private getOrCreateMetabolite(name: string) {
+  /**
+   * Checks metabolite already create and stored in service
+   * otherwise it create one and store
+   * @param  {string} name name of metabolite
+   * @return {FbaNode}
+   */
+  private getOrCreateMetabolite(name: string): FbaNode {
     if (!(name in this.metabolites))
-      this.metabolites[name] = { name: name, type: 'r' };
+      this.metabolites[name] = { name: name, type: 'm' };
     return this.metabolites[name];
   }
 
-  private getOrCreateSubsystem(name: string) {
+  /**
+   * Checks subsystem already create and stored in service
+   * otherwise it create one and store
+   * @param  {string}        name name of metabolite
+   * @return {SubsystemNode}
+   */
+  private getOrCreateSubsystem(name: string): SubsystemNode {
     if (!(name in this.subsystems))
       this.subsystems[name] = { name: name, type: 'sub', reactions: [] };
     return this.subsystems[name];
   }
 
+  /**
+   * Creates link for subsystem and border metabolite
+   * @param  {string} subsystemName  name of subsystem
+   * @param  {string} metaboliteName name of metabolite
+   */
   private createLink(subsystemName: string, metaboliteName: string) {
     this.links.push({
-      source: this.subsystems[subsystemName],
-      target: this.metabolites[metaboliteName], role: 'sub'
+      source: this.getOrCreateSubsystem(subsystemName),
+      target: this.getOrCreateMetabolite(metaboliteName), role: 'sub'
     });
   }
 
@@ -42,12 +59,22 @@ export class AllNetworkVisualizationService {
     }
   }
 
+  /**
+   * [get description]
+   * @return {[type]} [description]
+   */
   get(): [FbaNode[], FbaLink[]] {
     let nodes = [
       ..._.values(this.subsystems),
       ..._.values(this.metabolites)
     ];
-    return [nodes, this.links];
+    let links = this.links;
+
+    this.subsystems = {};
+    this.metabolites = {};
+    this.links = [];
+
+    return [nodes, links];
   }
 
 }

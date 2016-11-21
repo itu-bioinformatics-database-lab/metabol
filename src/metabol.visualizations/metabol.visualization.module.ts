@@ -14,7 +14,6 @@ import {
 
 import {
   RelatedToVisualizationService,
-  ServiceService,
   AllNetworkVisualizationService
 } from './services';
 
@@ -25,7 +24,6 @@ import {
   ],
   providers: [
     RelatedToVisualizationService,
-    ServiceService,
     AllNetworkVisualizationService
   ],
   declarations: [
