@@ -1,34 +1,8 @@
-<fullscreenable-svg (window:resize)="onResize()" [(isFullScreen)]="isFullScreen">
-  <svg:defs>
-    <svg:marker id="markerArrow" markerUnits="userSpaceOnUse" viewBox="0 0 20 20" markerWidth="30" markerHeight="30" refX="17" refY="5" orient="auto">
-      <svg:path d="M 0 0 L 10 5 L 0 10 z" />
-    </svg:marker>
-  </svg:defs>
-
-  <svg:g link [link]="l " *ngFor="let l of d3links " />
-
-  <svg:g metabolite [node]="d " *ngFor="let d of metabolites " />
-
-  <svg:g subsystem [node]="d " *ngFor="let d of subsystems " (onClick)="updateMetabolitesActivation() " />
-
-  <svg:g reaction [node]="d " *ngFor="let d of reactions " />
-
-  <svg:g node-text [node]="d " *ngFor="let d of d3nodes " />
-
-</fullscreenable-svg>
-<div id="down-right " [style.position]="isFullScreen ? 'fixed' : 'absolute' ">
-  <ng-content select="fullscreenable-down-right "></ng-content>
-</div>
-<div id="down-left " [style.position]="isFullScreen ? 'fixed' : 'absolute' ">
-  <div class="btn-group " role="group " aria-label="... ">
-    <button type="button " class="btn btn-default " (click)="deactiveteAllSubsystem() ">Reaction View</button>
-    <button type="button " class="btn btn-default " (click)="deactiveteAllReaction() ">Subsystem View</button>
+<core-visualization [nodes]="nodes" [links]="links" (subsystemClick)="subsystemClick(s)">
+  <div core-visualization-down-left>
+    <div class="btn-group" role="group " aria-label="...">
+      <button type="button" class="btn btn-default" (click)="deactiveteAllSubsystem()">Reaction View</button>
+      <button type="button" class="btn btn-default" (click)="deactiveteAllReaction()">Subsystem View</button>
+    </div>
   </div>
-  <ng-content select="fullscreenable-down-left "></ng-content>
-</div>
-<div id="top-right " [style.position]="isFullScreen ? 'fixed' : 'absolute' ">
-  <ng-content select="fullscreenable-top-right "></ng-content>
-</div>
-<div id="top-left " [style.position]="isFullScreen ? 'fixed' : 'absolute' ">
-  <ng-content select="fullscreenable-top-left "></ng-content>
-</div>
+</core-visualization>

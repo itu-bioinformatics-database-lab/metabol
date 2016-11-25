@@ -27,36 +27,31 @@ export class LinkComponent implements OnChanges {
     return true;
   }
 
-  linkArc(d) {
-    let dx = d.target.x - d.source.x;
-    let dy = d.target.y - d.source.y;
-    let dr = Math.sqrt(dx * dx + dy * dy);
-    return `M ${d.source.x}, ${d.source.y} A ${dr} , ${dr} 0 0,1 ${d.target.x} , ${d.target.y}`;
-  }
-
   linkTextX(d) {
-    let vx = d.target.x - d.source.x;
-    let vy = d.target.y - d.source.y;
-    let dis = Math.sqrt(vx * vx + vy * vy);
-    let h = -0.15 * dis;
+    let [vx, vy, dis, h] = this.linkText(d);
     let perX = h * (-1 * vy) / dis || 0;
     return perX + (d.target.x + d.source.x) / 2
   }
 
   linkTextY(d) {
+    let [vx, vy, dis, h] = this.linkText(d);
+    let perY = h * vx / dis || 0;
+    return perY + (d.target.y + d.source.y) / 2;
+  }
+
+  linkText(d) {
     let vx = d.target.x - d.source.x;
     let vy = d.target.y - d.source.y;
     let dis = Math.sqrt(vx * vx + vy * vy);
-    let h = -0.11 * dis;
-    let perY = h * vx / dis || 0;
-    return perY + (d.target.y + d.source.y) / 2;
+    let h = 10;
+    return [vx, vy, dis, h];
   }
 
   ngOnChanges(d) {
     this.url = this.location.path();
   }
 
-  stroke(d){
+  stroke(d) {
     return Math.log(Math.abs(d.stoichiometry)) + 2;
   }
 

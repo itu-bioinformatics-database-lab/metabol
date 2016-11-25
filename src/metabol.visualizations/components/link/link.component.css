@@ -2,3 +2,7 @@
   fill: none;
   stroke: #666;
 }
+text {
+  text-anchor: middle;
+  alignment-baseline:central;
+}

@@ -10,12 +10,13 @@ import {
   ReactionComponent,
   LinkComponent,
   NodeTextComponent,
-  AllNetworkVisualizationComponent
+  AllNetworkVisualizationComponent,
+  CoreVisualizationComponent
 } from './components';
 
 import {
   RelatedToVisualizationService,
-  AllNetworkVisualizationService
+  AllNetworkVisualizationService,
 } from './services';
 
 @NgModule({
@@ -25,7 +26,7 @@ import {
   ],
   providers: [
     RelatedToVisualizationService,
-    AllNetworkVisualizationService
+    AllNetworkVisualizationService,
   ],
   declarations: [
     VisualizationComponent,
@@ -35,6 +36,7 @@ import {
     SubsystemComponent,
     LinkComponent,
     AllNetworkVisualizationComponent,
+    CoreVisualizationComponent,
     NodeTextComponent,
   ],
   exports: [
