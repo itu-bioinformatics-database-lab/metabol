@@ -11,12 +11,11 @@ import { Component,
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 
+import * as d3 from 'd3';
+
 import {FbaNode, FbaLink, SubsystemNode} from '../../models/fbaiteration';
 import {LinkComponent} from '../link';
 
-import {VisualizationActivationService} from '../../services/visualization-activation';
-
-import * as d3 from 'd3';
 
 @Component({
   selector: 'core-visualization',
@@ -29,8 +28,6 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   @Input() links: Array<FbaLink> = [];
 
   @Output() subsystemClick = new EventEmitter();
-
-  @ViewChild(LinkComponent) linkCom: LinkComponent;
 
   reactions: Array<FbaNode> = [];
   metabolites: Array<FbaNode> = [];
