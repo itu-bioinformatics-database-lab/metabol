@@ -14,6 +14,7 @@ import {SearchEngineModule} from "../metabol.search-engine";
 import {MetabolAuthModule} from "../metabol.auth";
 import {SubsystemAnalyzeModule} from "../metabol.subsystem-analyze";
 import {MetabolVisualizationModule} from '../metabol.visualizations';
+import {MetabolPanelModule} from '../metabol.panel';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MetabolVisualizationModule} from '../metabol.visualizations';
     MetabolVisualizationModule,
     SearchEngineModule,
     SubsystemAnalyzeModule,
+    MetabolPanelModule,
 
     routing
   ],

@@ -178,5 +178,25 @@ export class VisualizationComponent implements OnChanges {
     this.activateReactions(subsystem);
     this.updateMetabolitesActivation();
   }
+  /*
+  saveAsImage() {
+    let svg = document.querySelector("svg");
+    let svgData = new XMLSerializer().serializeToString(svg);
+
+    let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
+
+    let img = document.createElement("img");
+    img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
+
+
+    ctx.drawImage(img, 0, 0);
+
+    // Now is done
+    console.log(canvas.toDataURL("image/png"));
+
+
+  }
+  */
 
 }
