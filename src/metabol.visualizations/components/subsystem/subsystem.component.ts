@@ -9,12 +9,4 @@ import {SubsystemNode} from '../../models';
 export class SubsystemComponent {
 
   @Input() node: SubsystemNode;
-  @Output() onClick = new EventEmitter();
-
-  onSubsystemClick() {
-    this.node.deactive = true;
-    this.node.reactions.forEach(r => { r.deactive = false });
-    this.onClick.emit(this.node);
-  }
-
 }

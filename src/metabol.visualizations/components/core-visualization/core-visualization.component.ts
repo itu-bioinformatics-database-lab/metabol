@@ -122,4 +122,8 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
     return true;
   }
 
+  subsystemClicked(s) {
+    this.subsystemClick.emit(s);
+  }
+
 }

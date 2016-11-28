@@ -1,4 +1,4 @@
-<core-visualization [nodes]="nodes" [links]="links" (subsystemClick)="subsystemClick(s)">
+<core-visualization [nodes]="nodes" [links]="links" (subsystemClick)="subsystemClick($event)">
   <div core-visualization-down-left>
     <div class="btn-group" role="group " aria-label="...">
       <button type="button" class="btn btn-default" (click)="deactiveteAllSubsystem()">Reaction View</button>

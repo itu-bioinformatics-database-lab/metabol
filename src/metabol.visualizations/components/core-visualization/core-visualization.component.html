@@ -9,7 +9,7 @@
 
   <svg:g metabolite [node]="d" *ngFor="let d of metabolites" />
 
-  <svg:g subsystem [node]="d" *ngFor="let d of subsystems" (click)="subsystemClick.emit(s)"/>
+  <svg:g subsystem [node]="d" *ngFor="let d of subsystems" (click)="subsystemClicked(d)"/>
 
   <svg:g reaction [node]="d" *ngFor="let d of reactions" />
 
