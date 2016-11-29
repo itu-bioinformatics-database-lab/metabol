@@ -37,7 +37,6 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   d3links: Array<FbaLink>;
   d3nodes: Array<FbaNode>;
 
-  isFullScreen: Boolean;
   url: string;
 
   constructor(private location: Location) {
