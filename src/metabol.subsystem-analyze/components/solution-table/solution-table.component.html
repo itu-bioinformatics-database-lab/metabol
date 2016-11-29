@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Solution
+      </th>
+      <th>
+        Active
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of rows" (click)="rowClick.emit(s.name)" [hidden]="!s.active">
+      <th>{{ s.name }}</th>
+      <th>{{ s.subsystems | json }}</th>
+    </tr>
+  </tbody>
+</table>

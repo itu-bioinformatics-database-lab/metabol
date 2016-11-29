@@ -1,71 +1,27 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
+
       <div class="panel panel-default visulazition">
         <div class="panel-heading">
-          <h3 class="panel-title">Visulazition</h3>
+          <h3 class="panel-title">Visualization</h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-md-12">
-              <fullscreenable-svg>
-
-                <svg:path class="link highlight-link"
-                  *ngFor="let l of filterHighlightLink(links)"
-                  [attr.d]="diagonal(l)"/>
-
-                <svg:circle class="highlight"
-                  *ngFor="let d of filterHighlight(nodes)"
-                  [attr.cx]="d.x"
-                  [attr.cy]="d.y"/>
-
-                <svg:path class="link"
-                  *ngFor="let l of links"
-                  [style.stroke]="linkColor(l.target)"
-                  [attr.d]="diagonal(l)"/>
-
-                <svg:circle class="node"
-                  *ngFor="let d of nodes"
-                  [style.stroke]="nodeColor(d)"
-                  [attr.cx]="d.x"
-                  [attr.cy]="d.y"/>
-
-                <svg:text class="text" y="100"
-                  *ngFor="let d of nodes"
-                  [attr.transform]="'rotate(25,'+ d.x +','+ d.y +')'"
-                  [attr.x]="d.x+10"
-                  [attr.y]="d.y">
-                    {{ d.name.replace("Pathway","") }}
-                </svg:text>
-
-              </fullscreenable-svg>
+              <tree-visualization [root]="solutionRoot"></tree-visualization>
             </div>
           </div>
         </div>
       </div>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Tabular View</h3>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>
-                Solution
-              </th>
-              <th>
-                Active
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let n of filterSolution(nodes)" (click)="highlight(n)">
-              <th>{{ n.name }}</th>
-              <th>{{ getParentByActivation(n,true) | json }}</th>
-            </tr>
-          </tbody>
-        </table>
+        <solution-table [solutions]="solutions"  [inactiveSubsystems]="inactiveSubsystems" (rowClick)="highlight($event)"></solution-table>
       </div>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">All Network Visualization</h3>
@@ -73,13 +29,16 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-12">
-              <all-network-visualization></all-network-visualization>
+              <all-network-visualization [inactiveSubsystems]="inactiveSubsystems"></all-network-visualization>
             </div>
           </div>
         </div>
       </div>
+
     </div>
+
     <div class="col-md-4">
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Filter</h3>
@@ -87,16 +46,15 @@
         <div class="panel-body">
           <div class="form-group" *ngFor="let k of subsystemNameActivation | keys">
             <label>{{k}}</label>
-            <select class="form-control"
-              [(ngModel)]="subsystemNameActivation[k]"
-              (ngModelChange)="activationChange(k, $event)">
-                <option [ngValue]="0">Active</option>
-                <option [ngValue]="1">Passive</option>
-                <option [ngValue]="2">Don't Care</option>
+            <select class="form-control" [(ngModel)]="subsystemNameActivation[k]" (ngModelChange)="activationChange(k, $event)">
+              <option [ngValue]="0">Active</option>
+              <option [ngValue]="1">Passive</option>
+              <option [ngValue]="2">Don't Care</option>
             </select>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
