@@ -121,6 +121,10 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
       return !source.deactive;
     return true;
   }
+   
+  subsystemClicked(s) {
+   this.subsystemClick.emit(s);
+  }
 
   saveAsImage() {
     let svg = document.querySelector("svg");
