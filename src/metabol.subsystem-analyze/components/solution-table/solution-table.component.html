@@ -10,9 +10,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let s of rows" (click)="rowClick.emit(s.name)" [hidden]="!s.active">
-      <th>{{ s.name }}</th>
-      <th>{{ s.subsystems | json }}</th>
-    </tr>
+    <template ngFor let-s [ngForOf]="rows">
+      <tr (click)="rowOnclick(s)" [hidden]="!s.active">
+        <th>{{ s.name }}</th>
+        <th>{{ s.subsystems | json }}</th>
+      </tr>
+      <tr *ngIf="s.name == activeVisualization">
+        <th>
+        </th>
+        <th>
+          <div class="row">
+            <div class="col-md-12">
+              <all-network-visualization [inactiveSubsystems]="inactiveSubsystems"></all-network-visualization>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </template>
+
   </tbody>
 </table>

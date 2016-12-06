@@ -7,15 +7,17 @@ import {SubsystemAnalyzeComponent} from './subsystem-analyze.component';
 import {AnalyzeComponent} from "./analyze";
 import {MeasurementComponent} from './measurement/measurement.component';
 
-export const SubsystemAnalyzeRoutes: Routes = [{
-  path: 'analyze',
-  component: SubsystemAnalyzeComponent,
-  children: [
-    { path: 'manual', component: ManualComponent },
-    { path: 'upload', component: UploadComponent },
-    { path: 'measurement', component: MeasurementComponent },
-    { path: 'subsystem/:key', component: AnalyzeComponent },
-    { path: 'sample', component: SampleComponent },
-    { path: '', redirectTo: 'measurement', pathMatch: 'full' }
-  ]
-}];
+export const SubsystemAnalyzeRoutes: Routes = [
+  {
+    path: 'analyze',
+    component: SubsystemAnalyzeComponent,
+    children: [
+      { path: 'manual', component: ManualComponent },
+      { path: 'upload', component: UploadComponent },
+      { path: 'measurement', component: MeasurementComponent },
+      { path: 'sample', component: SampleComponent },
+      { path: '', redirectTo: 'measurement', pathMatch: 'full' }
+    ]
+  },
+  { path: 'subsystem/:key', component: AnalyzeComponent }
+];

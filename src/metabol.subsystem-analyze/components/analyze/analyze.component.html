@@ -1,7 +1,25 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
 
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Filter</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group" *ngFor="let k of subsystemNameActivation | keys">
+            <label>{{k}}</label>
+            <select class="form-control" [(ngModel)]="subsystemNameActivation[k]" (ngModelChange)="activationChange(k, $event)">
+              <option [ngValue]="0">Active</option>
+              <option [ngValue]="1">Passive</option>
+              <option [ngValue]="2">Don't Care</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10">
       <div class="panel panel-default visulazition">
         <div class="panel-heading">
           <h3 class="panel-title">Visualization</h3>
@@ -19,42 +37,9 @@
         <div class="panel-heading">
           <h3 class="panel-title">Tabular View</h3>
         </div>
-        <solution-table [solutions]="solutions"  [inactiveSubsystems]="inactiveSubsystems" (rowClick)="highlight($event)"></solution-table>
+        <solution-table [solutions]="solutions" [inactiveSubsystems]="inactiveSubsystems" (rowClick)="highlight($event)"></solution-table>
       </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">All Network Visualization</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-12">
-              <all-network-visualization [inactiveSubsystems]="inactiveSubsystems"></all-network-visualization>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <div class="col-md-4">
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Filter</h3>
-        </div>
-        <div class="panel-body">
-          <div class="form-group" *ngFor="let k of subsystemNameActivation | keys">
-            <label>{{k}}</label>
-            <select class="form-control" [(ngModel)]="subsystemNameActivation[k]" (ngModelChange)="activationChange(k, $event)">
-              <option [ngValue]="0">Active</option>
-              <option [ngValue]="1">Passive</option>
-              <option [ngValue]="2">Don't Care</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>

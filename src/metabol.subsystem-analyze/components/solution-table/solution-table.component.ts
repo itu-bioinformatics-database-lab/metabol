@@ -11,6 +11,8 @@ export class SolutionTableComponent implements OnChanges {
 
   rows = [];
 
+  activeVisualization: string;
+
   @Input() solutions = {};
   @Input() inactiveSubsystems = [];
   @Output() rowClick = new EventEmitter();
@@ -25,6 +27,13 @@ export class SolutionTableComponent implements OnChanges {
       for (let r of this.rows)
         if (_.includes(r.subsystems, s))
           r.active = false;
+  }
+
+  rowOnclick(s) {
+    this.activeVisualization = s.name;
+    this.rowClick.emit(s.name);
+    this.rows = this.rows.filter(x => x.name != s.name);
+    this.rows.unshift(s);
   }
 
 }
