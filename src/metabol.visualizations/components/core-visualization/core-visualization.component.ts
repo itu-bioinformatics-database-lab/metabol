@@ -37,6 +37,7 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   d3links: Array<FbaLink>;
   d3nodes: Array<FbaNode>;
 
+  isFullScreen: Boolean;
   url: string;
 
   constructor(private location: Location) {
@@ -122,7 +123,37 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   }
 
   subsystemClicked(s) {
-    this.subsystemClick.emit(s);
+   this.subsystemClick.emit(s);
+  }
+
+  saveAsImage() {
+    let svg = document.querySelector("svg");
+    let svgData = new XMLSerializer().serializeToString(svg);
+    let canvas = document.createElement("canvas");
+    let svgSize = svg.getBoundingClientRect();
+
+    canvas.width = svgSize.width;
+    canvas.height = svgSize.height;
+
+    let ctx = canvas.getContext("2d");
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,1000,1000);
+
+    let img = document.createElement("img");
+    img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
+    ctx.drawImage(img, 0, 0);
+
+    let imgsrc = canvas.toDataURL("image/png",1.0);
+    console.log(canvas.toDataURL("image/png"));
+
+    let a = document.createElement("a");
+    a.download = "untitled"+".png";
+    a.href = imgsrc;
+    a.click();
+
+
+
+
   }
 
 }

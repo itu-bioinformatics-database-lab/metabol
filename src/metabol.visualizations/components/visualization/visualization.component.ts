@@ -34,5 +34,10 @@ export class VisualizationComponent {
   deactiveteAllSubsystem() {
     this.coreVisCom.deactiveteAllSubsystem();
   }
+  saveAsImage(){
+    this.coreVisCom.saveAsImage();
+
+
+  }
 
 }
