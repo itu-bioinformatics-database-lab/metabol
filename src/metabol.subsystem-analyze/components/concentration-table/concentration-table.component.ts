@@ -75,7 +75,7 @@ export class ConcentrationTableComponent {
 
     this.analyzeService.startSolutions(this.analyzeName.value, onlyWorkingData,
       (key) => {
-        this.router.navigate(['/analyze/subsystem', key]);
+        this.router.navigate(['/subsystem', key]);
       });
   }
 

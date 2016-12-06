@@ -5,12 +5,18 @@ import {MetabolCommonModule} from '../metabol.common';
 import {
   VisualizationComponent,
   FullScreenableSvgComponent,
-  SubsystemComponent
+  SubsystemComponent,
+  MetaboliteComponent,
+  ReactionComponent,
+  LinkComponent,
+  NodeTextComponent,
+  AllNetworkVisualizationComponent,
+  CoreVisualizationComponent
 } from './components';
 
 import {
   RelatedToVisualizationService,
-  ServiceService
+  AllNetworkVisualizationService,
 } from './services';
 
 @NgModule({
@@ -20,16 +26,23 @@ import {
   ],
   providers: [
     RelatedToVisualizationService,
-    ServiceService
+    AllNetworkVisualizationService,
   ],
   declarations: [
     VisualizationComponent,
     FullScreenableSvgComponent,
-    SubsystemComponent
+    MetaboliteComponent,
+    ReactionComponent,
+    SubsystemComponent,
+    LinkComponent,
+    AllNetworkVisualizationComponent,
+    CoreVisualizationComponent,
+    NodeTextComponent,
   ],
-  exports:[
+  exports: [
     VisualizationComponent,
-    FullScreenableSvgComponent
+    FullScreenableSvgComponent,
+    AllNetworkVisualizationComponent
   ]
 })
 export class MetabolVisualizationModule { }

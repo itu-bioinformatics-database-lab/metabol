@@ -1,13 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {SubsystemNode} from '../../models';
 
 @Component({
-  selector: 'subsystem',
+  selector: '[subsystem]',
   templateUrl: './subsystem.component.html',
   styleUrls: ['./subsystem.component.css']
 })
 export class SubsystemComponent {
 
   @Input() node: SubsystemNode;
-
 }

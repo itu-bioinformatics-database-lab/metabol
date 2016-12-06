@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class CurrencyMetabolitesService {
 
   currencyMetabolites: { [key: string]: string }
+
   constructor() {
     this.loadCurrecyMetabolites();
   }

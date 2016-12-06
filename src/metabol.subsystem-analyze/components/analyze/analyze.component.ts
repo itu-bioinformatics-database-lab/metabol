@@ -1,12 +1,11 @@
-import {SubsystemAnalyzeService} from "../../services/subsystem-analyze/subsystem-analyze.service";
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import * as d3 from 'd3';
 import * as _ from 'lodash';
 
-import {SubsystemTreeNode, SubsystemTreeNodeType} from '../../models/subsystem';
-import {FullScreenableSvgComponent} from '../../../metabol.visualizations/components';
+import {SubsystemTreeNode, SubsystemTreeNodeType} from '../../models';
 import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
+import {SubsystemAnalyzeService} from "../../services/subsystem-analyze/subsystem-analyze.service";
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -17,30 +16,31 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AnalyzeComponent implements OnInit {
 
-  @ViewChild(FullScreenableSvgComponent) fullSvg: FullScreenableSvgComponent;
+  solutionRoot: SubsystemTreeNode;
+  solutions = {};
 
-  nodes: SubsystemTreeNode[];
-  links: any[];
+  nodes: SubsystemTreeNode[] = [];
+  links: any[] = [];
   tree: d3.layout.Tree<SubsystemTreeNode>;
   lines: any[];
   diagonal = d3.svg.diagonal();
 
-  subsystemNameActivation: { [name: string]: number };
+  subsystemNameActivation: { [name: string]: number } = {};
+  inactiveSubsystems: Array<string> = [];
   SubsystemTreeNodeType = SubsystemTreeNodeType;
 
-  constructor(private analyze: SubsystemAnalyzeService, private route: ActivatedRoute) {
-    this.tree = d3.layout.tree<SubsystemTreeNode>()
-      .size([4000, 1500])
-      .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
-
-    this.subsystemNameActivation = {};
+  constructor(
+    private analyze: SubsystemAnalyzeService,
+    private route: ActivatedRoute) {
+    this.tree = d3.layout.tree<SubsystemTreeNode>();
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.analyze.getSolution(params['key'], (data) => {
-        let solutionTree = this.analyze.getSolutionTree(data);
-        this.nodes = this.tree.nodes(solutionTree);
+        this.solutions = data;
+        this.solutionRoot = this.analyze.getSolutionTree(data);
+        this.nodes = this.tree.nodes(this.solutionRoot);
         this.links = this.tree.links(this.nodes);
         this.filterNode().forEach(name => {
           this.subsystemNameActivation[name] = 2;
@@ -48,31 +48,23 @@ export class AnalyzeComponent implements OnInit {
       });
     });
 
-    this.fullSvg.translate = [400, 200];
-  }
-
-  nodeColor(node: SubsystemTreeNode) {
-    if (node.active)
-      return node.type == SubsystemTreeNodeType.Pathway ? '#3be614' : 'red';
-    return "rgba(0,0,0,0.2)";
-  }
-
-  linkColor(nodeSource: SubsystemTreeNode) {
-    if (nodeSource.active)
-      return '#777';
-    return "rgba(0,0,0,0.2)";
   }
 
   activationChange(subsystem, active) {
     let nds = this.nodes.filter(n => n.name == subsystem);
     if (active == 0) {
       nds.forEach(n => this.activateNode(n));
+      this.inactiveSubsystems = _.without(this.inactiveSubsystems, subsystem);
     }
-    else if (active == 1)
+    else if (active == 1) {
       nds.forEach(n => {
         this.subsystemNameActivation[n.name] = 1;
         this.deactivateNode(n)
       });
+      this.inactiveSubsystems.push(subsystem);
+      this.inactiveSubsystems = this.inactiveSubsystems.slice();
+    }
+    console.log(this.inactiveSubsystems);
   }
 
   activationChangeOnTree(node = this.nodes[0]) {
@@ -126,19 +118,11 @@ export class AnalyzeComponent implements OnInit {
     return parents;
   }
 
-  filterHighlight(nodes: SubsystemTreeNode[]) {
-    if (nodes)
-      return nodes.filter(x => x.highlight);
-  }
-
-  filterHighlightLink(links) {
-    if (links)
-      return links.filter(x => x.target.highlight);
-  }
-
-  highlight(solution: SubsystemTreeNode) {
-    this.dehighlightAll();
-    this.highlightPath(solution);
+  highlight($event) {
+    // TODO: Fix tih line
+    let solution = this.nodes.find(s => s.name == $event);
+    // this.dehighlightAll();
+    // this.highlightPath(solution);
   }
 
   highlightPath(solution: SubsystemTreeNode) {
