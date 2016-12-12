@@ -80,13 +80,10 @@ export class AnalyzeComponent implements OnInit {
   }
 
   activateNode(node: SubsystemTreeNode) {
-    node.active = true;
-    this.subsystemNameActivation[node.name] = 0;
     let parent = <SubsystemTreeNode>node.parent;
-
-    while (this.subsystemNameActivation[parent.name] == 1) {
-      this.subsystemNameActivation[parent.name] = 2;
-      node = parent;
+    if (parent.active) {
+      node.active = true;
+      this.subsystemNameActivation[node.name] = 0;
     }
     this.activationChangeOnTree();
   }
@@ -121,8 +118,10 @@ export class AnalyzeComponent implements OnInit {
   highlight($event) {
     // TODO: Fix tih line
     let solution = this.nodes.find(s => s.name == $event);
-    // this.dehighlightAll();
-    // this.highlightPath(solution);
+    if (solution) {
+      this.dehighlightAll();
+      this.highlightPath(solution);
+    }
   }
 
   highlightPath(solution: SubsystemTreeNode) {
