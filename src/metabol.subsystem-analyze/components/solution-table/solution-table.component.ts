@@ -35,6 +35,8 @@ export class SolutionTableComponent implements OnChanges {
     this.rows = this.rows.filter(x => x.name != s.name);
     this.rows.unshift(s);
     document.documentElement.scrollTop = document.body.scrollTop = 400;
+
+    this.rowClick.emit();
   }
 
 }
