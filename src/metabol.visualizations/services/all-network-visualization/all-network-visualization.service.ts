@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import {SubsystemNode, FbaLink, FbaNode} from '../../models';
+
 import * as _ from 'lodash';
+
+import {SubsystemNode, FbaLink, FbaNode} from '../../models';
+import {CurrencyMetabolitesService} from "../../../metabol.common/services/";
 
 @Injectable()
 export class AllNetworkVisualizationService {
@@ -8,6 +11,10 @@ export class AllNetworkVisualizationService {
   private subsystems: { [key: string]: SubsystemNode } = {};
   private metabolites: { [key: string]: FbaNode } = {};
   private links: Array<FbaLink> = [];
+
+  constructor(private currencyService: CurrencyMetabolitesService) {
+
+  }
 
   /**
    * Checks metabolite already create and stored in service
@@ -54,8 +61,10 @@ export class AllNetworkVisualizationService {
 
     for (let i of data) {
       // TODO: Arrow direction
-      this.createLink(i["subsystemSource"], i["borderMetaboliteId"]);
-      this.createLink(i["subsystemTarget"], i["borderMetaboliteId"]);
+      if (!this.currencyService.isCurrency(i["borderMetaboliteId"])) {
+        this.createLink(i["subsystemSource"], i["borderMetaboliteId"]);
+        this.createLink(i["subsystemTarget"], i["borderMetaboliteId"]);
+      }
     }
   }
 

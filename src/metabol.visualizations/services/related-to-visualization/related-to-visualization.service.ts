@@ -1,6 +1,6 @@
-import {CurrencyMetabolitesService} from "../../../metabol.common/services/";
 import { Injectable } from '@angular/core';
 import {RelatedMetabolite, RelatedReaction, Metabolite, Reaction} from '../../../metabol.search-engine/models';
+import {CurrencyMetabolitesService} from "../../../metabol.common/services/";
 import {FbaNode, FbaLink, SubsystemNode} from '../../models';
 import * as _ from 'lodash';
 

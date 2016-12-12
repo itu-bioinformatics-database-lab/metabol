@@ -7,9 +7,9 @@ import {SubsystemNode, FbaLink, FbaNode} from '../../models';
   templateUrl: './all-network-visualization.component.html',
   styleUrls: ['./all-network-visualization.component.css']
 })
-export class AllNetworkVisualizationComponent implements OnInit, OnChanges {
+export class AllNetworkVisualizationComponent implements OnInit {
 
-  @Input() inactiveSubsystems = [];
+  @Input() activeSubsystems = [];
 
   nodes: Array<FbaNode>;
   links: Array<FbaLink>;
@@ -18,18 +18,13 @@ export class AllNetworkVisualizationComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.anvService.load();
+
     let data = this.anvService.get();
     this.nodes = data[0];
     this.links = data[1];
-  }
 
-  ngOnChanges() {
-    if (this.nodes)
-      for (let n of this.nodes.filter(n => n.type == 'sub')) {
-        n.deactive = false;
-        if (_.includes(this.inactiveSubsystems, n.name))
-          n.deactive = true;
-      }
+    for (let n of this.nodes)
+      n.deactive = !_.includes(this.activeSubsystems, n.name);
   }
 
 }

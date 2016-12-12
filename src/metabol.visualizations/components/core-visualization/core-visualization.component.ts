@@ -26,6 +26,8 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   @Input() nodes: Array<FbaNode> = [];
   @Input() links: Array<FbaLink> = [];
+  @Input() defaultInit = true;
+
 
   @Output() subsystemClick = new EventEmitter();
 
@@ -79,10 +81,11 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   }
 
   deactiveteAllReaction() {
-    this.subsystems.forEach(s => {
-      s.deactive = false;
-      s.reactions.forEach(r => { r.deactive = true });
-    });
+    if (this.defaultInit)
+      this.subsystems.forEach(s => {
+        s.deactive = false;
+        s.reactions.forEach(r => { r.deactive = true });
+      });
     this.updateMetabolitesActivation();
   }
 
@@ -123,7 +126,7 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   }
 
   subsystemClicked(s) {
-   this.subsystemClick.emit(s);
+    this.subsystemClick.emit(s);
   }
 
   saveAsImage() {
@@ -136,24 +139,20 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
     canvas.height = svgSize.height;
 
     let ctx = canvas.getContext("2d");
-    ctx.fillStyle="white";
-    ctx.fillRect(0,0,1000,1000);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, 1000, 1000);
 
     let img = document.createElement("img");
     img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
     ctx.drawImage(img, 0, 0);
 
-    let imgsrc = canvas.toDataURL("image/png",1.0);
+    let imgsrc = canvas.toDataURL("image/png", 1.0);
     console.log(canvas.toDataURL("image/png"));
 
     let a = document.createElement("a");
-    a.download = "untitled"+".png";
+    a.download = "untitled" + ".png";
     a.href = imgsrc;
     a.click();
-
-
-
-
   }
 
 }
