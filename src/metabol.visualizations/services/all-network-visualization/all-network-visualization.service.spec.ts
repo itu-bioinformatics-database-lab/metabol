@@ -1,6 +1,8 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
+
+import {CurrencyMetabolitesService} from "../../../metabol.common/services/";
 import { AllNetworkVisualizationService } from './all-network-visualization.service';
 
 describe('Service: AllNetworkVisualization', () => {
@@ -70,11 +72,12 @@ describe('Service: AllNetworkVisualization', () => {
   beforeAll(function() {
     localStorage.clear();
     localStorage.setItem('subsystem-network', JSON.stringify(localStoreData));
+    localStorage.setItem('currency-metabolites', JSON.stringify({}));
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AllNetworkVisualizationService]
+      providers: [AllNetworkVisualizationService, CurrencyMetabolitesService]
     });
 
     service = TestBed.get(AllNetworkVisualizationService);
