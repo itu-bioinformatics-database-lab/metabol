@@ -1,0 +1,76 @@
+<section id="compare-analysis">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Visualization</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <all-network-visualization [activeSubsystems]="['Citric Acid Cycle','Pyruvate Metabolism']"></all-network-visualization>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Tabular View</h3>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <h3>
+                  Common
+                </h3>
+              </tr>
+              <tr>
+                <th>Anaylsis 1</th>
+                <th>Anaylsis 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of [[6,7],[3],[1,2,5],[1,2,3,4],[1,3]]">
+                <th *ngFor="let j of [[6,7],[3]]">
+                  Subsystem - {{i[0]}} - T {{ i |json }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <h3>
+                  Distinct
+                </h3>
+              </tr>
+              <tr>
+                <th>Anaylsis 1</th>
+                <th>Anaylsis 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of [[6,7],[3],[1,2,5],[1,2,3,4],[1,3]]">
+                <th *ngFor="let j of [[6,7],[3]]">
+                  Subsystem - {{i[0]}} - T {{ i |json }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
