@@ -15,18 +15,21 @@ import * as d3 from 'd3';
 
 import {FbaNode, FbaLink, SubsystemNode} from '../../models/fbaiteration';
 import {LinkComponent} from '../link';
-
+import * as _ from 'lodash';
+import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component'
 
 @Component({
   selector: 'core-visualization',
   templateUrl: './core-visualization.component.html',
-  styleUrls: ['./core-visualization.component.css']
+  styleUrls: ['./core-visualization.component.css'],
+
 })
 export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   @Input() nodes: Array<FbaNode> = [];
   @Input() links: Array<FbaLink> = [];
   @Input() defaultInit = true;
+
 
 
   @Output() subsystemClick = new EventEmitter();
@@ -41,9 +44,29 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   isFullScreen: Boolean;
   url: string;
+  maxNodeX:any;
+  maxNodeY:any;
+  minNodeX:any;
+  minNodeY:any;
+  rangeX:any;
+  rangeY:any;
+  translate:Array<any> = [];
+  scale2:number;
+
+  a = [{"x":3,"y":2},{"x":4,"y":2},{"x":5,"y":1},{"x":10,"y":5},{"x":4,"y":9}];
+
+
+
+  @ViewChild(FullScreenableSvgComponent) fullVisCom: FullScreenableSvgComponent;
+
 
   constructor(private location: Location) {
     this.initForce();
+
+  }
+
+  scaleValued(){
+    this.fullVisCom.scaleValue();
   }
 
   initForce() {
@@ -62,6 +85,7 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
     this.d3links = this.force.links();
     this.d3nodes = this.force.nodes();
+
   }
 
   onForceStart() {
@@ -72,12 +96,15 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.url = this.location.path();
     this.deactiveteAllReaction();
-  }
 
+  }
+//
   ngOnChanges() {
     this.force.stop();
     this.force.nodes(this.nodes).links(this.links);
     this.force.start();
+    //this.scaleValue();
+
   }
 
   deactiveteAllReaction() {
@@ -129,18 +156,20 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
     this.subsystemClick.emit(s);
   }
 
+
   saveAsImage() {
+    this.fullVisCom.scaleValue();
     let svg = document.querySelector("svg");
     let svgData = new XMLSerializer().serializeToString(svg);
     let canvas = document.createElement("canvas");
     let svgSize = svg.getBoundingClientRect();
 
-    canvas.width = svgSize.width;
-    canvas.height = svgSize.height;
+    canvas.width = 1000
+    canvas.height = 1000;
 
     let ctx = canvas.getContext("2d");
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, 1000, 1000);
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,10000,10000);
 
     let img = document.createElement("img");
     img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
@@ -153,6 +182,8 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
     a.download = "untitled" + ".png";
     a.href = imgsrc;
     a.click();
+
+
   }
 
 }
