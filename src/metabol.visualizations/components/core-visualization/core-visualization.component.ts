@@ -44,25 +44,12 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   isFullScreen: Boolean;
   url: string;
-  maxNodeX:any;
-  maxNodeY:any;
-  minNodeX:any;
-  minNodeY:any;
-  rangeX:any;
-  rangeY:any;
-  translate:Array<any> = [];
-  scale2:number;
-
-  a = [{"x":3,"y":2},{"x":4,"y":2},{"x":5,"y":1},{"x":10,"y":5},{"x":4,"y":9}];
-
-
 
   @ViewChild(FullScreenableSvgComponent) fullVisCom: FullScreenableSvgComponent;
 
 
   constructor(private location: Location) {
     this.initForce();
-
   }
 
   scaleValued(){
@@ -176,8 +163,7 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
     ctx.drawImage(img, 0, 0);
 
     let imgsrc = canvas.toDataURL("image/png", 1.0);
-    console.log(canvas.toDataURL("image/png"));
-
+    
     let a = document.createElement("a");
     a.download = "untitled" + ".png";
     a.href = imgsrc;

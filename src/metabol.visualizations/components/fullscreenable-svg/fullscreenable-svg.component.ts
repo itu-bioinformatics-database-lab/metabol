@@ -26,6 +26,7 @@ export class FullScreenableSvgComponent {
 
     this.isFullScreen = this.isFullScreen || false;
     this.isFullScreenChange = new EventEmitter<Boolean>();
+
   }
 
   scaleValue() {
@@ -47,8 +48,9 @@ export class FullScreenableSvgComponent {
     let svgSize = svg.getBoundingClientRect();
 
 
+
     if ((svgSize.height - parent.height) > (svgSize.width - parent.width)) {
-      this.scale = (this.scale * (parent.height / svgSize.height)) - 0.02
+      this.scale = (this.scale * (parent.height / svgSize.height)) - 0.02;
       console.log("minimized from height");
     }
 
@@ -60,8 +62,10 @@ export class FullScreenableSvgComponent {
 
     let translate_x = fullWidth / 2 - this.scale * midX,
         translate_y =  fullHeight / 2 - this.scale * midY;
-    this.translate = [translate_x, translate_y]
+    this.translate = [translate_x, translate_y];
 
+    this.zoom.scale(this.scale);
+    this.zoom.translate([this.translate[0],this.translate[1]]);
 
     console.log("translate value", this.translate)
     console.log("scale value", this.scale)
