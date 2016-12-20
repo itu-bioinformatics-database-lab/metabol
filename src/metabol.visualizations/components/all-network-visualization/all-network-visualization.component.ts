@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {AllNetworkVisualizationService} from '../../services';
 import {SubsystemNode, FbaLink, FbaNode} from '../../models';
+import * as _ from 'lodash';
+
 
 @Component({
   selector: 'all-network-visualization',

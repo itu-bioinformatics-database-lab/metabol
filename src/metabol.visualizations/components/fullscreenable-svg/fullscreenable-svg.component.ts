@@ -26,48 +26,45 @@ export class FullScreenableSvgComponent {
 
     this.isFullScreen = this.isFullScreen || false;
     this.isFullScreenChange = new EventEmitter<Boolean>();
-
   }
 
+  scaleValue() {
 
-  scaleValue(){
-    this.translate = [0, 0];
+    let bound: any = document.querySelector("svg g");
+    let bounds = bound.getBBox();
+    let parent = document.querySelector("svg").getBoundingClientRect();
+
+    let fullWidth = parent.width,
+        fullHeight = parent.height;
+
+    let width = bounds.width,
+        height = bounds.height;
+
+    let midX = bounds.x + width / 2,
+        midY = bounds.y + height / 2;
+
     let svg = document.querySelector("svg g");
     let svgSize = svg.getBoundingClientRect();
 
 
-    let container = document.querySelector("svg");
-    let containerSize = container.getBoundingClientRect();
-    console.log(svgSize);
-    console.log(svgSize.left-33,svgSize.top-17);
-    console.log(svgSize.width,containerSize.width,svgSize.height,containerSize.height);
-
-    if((svgSize.height - containerSize.height) > (svgSize.width - containerSize.width) ){
-        this.scale = this.scale*(containerSize.height/svgSize.height)
-
-
-        console.log("1111");
-        let svg5 = document.querySelector("svg g");
-        let svgSize5 = svg5.getBoundingClientRect();
-        console.log("width-after scale",svgSize5.width);
-        }
+    if ((svgSize.height - parent.height) > (svgSize.width - parent.width)) {
+      this.scale = (this.scale * (parent.height / svgSize.height)) - 0.02
+      console.log("minimized from height");
+    }
 
     else {
-        this.scale = this.scale*(containerSize.width/svgSize.width)
-
-        console.log("222");
-        }
-
-    let svg4 = document.querySelector("svg g");
-    let svgSize4 = svg4.getBoundingClientRect();
+      this.scale = (this.scale * (parent.width / svgSize.width));
+      console.log("minimized from width");
+    }
 
 
-    let container4 = document.querySelector("svg");
-    let containerSize4 = container4.getBoundingClientRect();
-    //this.translate = [svgSize4.width/2,svgSize4.height/2]//[containerSize4.width-(svgSize4.width/2),containerSize4.height-(svgSize4.height/2) ]//[Math.abs(svgSize.width)/2,Math.abs(svgSize.height )/2];
+    let translate_x = fullWidth / 2 - this.scale * midX,
+        translate_y =  fullHeight / 2 - this.scale * midY;
+    this.translate = [translate_x, translate_y]
 
-    console.log("translate value",this.translate)
-    console.log("scale value",this.scale)
+
+    console.log("translate value", this.translate)
+    console.log("scale value", this.scale)
   }
 
   ngOnInit() {
