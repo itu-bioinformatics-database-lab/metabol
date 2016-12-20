@@ -9,7 +9,7 @@ import {SubsystemAnalyzeService} from "../../services/subsystem-analyze/subsyste
   selector: 'concentration-table',
   templateUrl: 'concentration-table.component.html',
   styleUrls: ['concentration-table.component.css'],
-  providers:[SubsystemAnalyzeService],
+  providers: [SubsystemAnalyzeService],
 })
 export class ConcentrationTableComponent {
   @Input() conTable: Array<MetaboliteConcentration>;
@@ -73,10 +73,13 @@ export class ConcentrationTableComponent {
       }
     ];
 
-    this.analyzeService.startSolutions(this.analyzeName.value, onlyWorkingData,
-      (key) => {
-        this.router.navigate(['/subsystem', key]);
-      });
+    let key = "6bda7485-19f2-49bf-9489-1dfdde84cc73";
+    this.router.navigate(['/subsystem', key]);
+
+    // this.analyzeService.startSolutions(this.analyzeName.value, onlyWorkingData,
+    //   (key) => {
+    //     this.router.navigate(['/subsystem', key]);
+    //   });
   }
 
 }
