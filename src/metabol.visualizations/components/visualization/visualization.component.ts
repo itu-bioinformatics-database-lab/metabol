@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter, Output, OnChanges, OnInit, ElementRef, 
 import {FbaNode, FbaLink, SubsystemNode} from '../../models/fbaiteration';
 import * as d3 from 'd3';
 import {ActivatedRoute} from '@angular/router';
-import {FullScreenableSvgComponent} from '../fullscreenable-svg';
+import {FullScreenableSvgComponent} from '../fullscreenable-svg/fullscreenable-svg.component';
 import {LinkComponent} from '../link';
 import {CoreVisualizationComponent} from '../core-visualization';
 
@@ -21,6 +21,7 @@ export class VisualizationComponent {
 
   @ViewChild(CoreVisualizationComponent) coreVisCom: CoreVisualizationComponent;
 
+
   subsystemClick(s) {
     s.deactive = true;
     s.reactions.forEach(r => r.deactive = false);
@@ -34,10 +35,13 @@ export class VisualizationComponent {
   deactiveteAllSubsystem() {
     this.coreVisCom.deactiveteAllSubsystem();
   }
+
   saveAsImage(){
     this.coreVisCom.saveAsImage();
+  }
 
-
+  scaleValue(){
+    this.coreVisCom.scaleValued();
   }
   /*
   saveAsImage() {
