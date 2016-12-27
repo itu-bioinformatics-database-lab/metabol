@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef} from '@angular/core';
+import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import * as d3 from 'd3';
 import * as _ from 'lodash';
 import {CoreVisualizationComponent} from '../core-visualization';
@@ -20,12 +21,17 @@ export class FullScreenableSvgComponent {
   translate: Array<number>;
 
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef,private router: Router) {
     this.scale = 1;
     this.translate = [0, 0];
 
     this.isFullScreen = this.isFullScreen || false;
     this.isFullScreenChange = new EventEmitter<Boolean>();
+
+    router.events.subscribe(() => { //If rooter changes, runs scaleValue function
+        setTimeout(() => {
+        this.scaleValue()}, 3100);
+    });
 
   }
 
@@ -55,7 +61,7 @@ export class FullScreenableSvgComponent {
     }
 
     else {
-      this.scale = (this.scale * (parent.width / svgSize.width));
+      this.scale = (this.scale * (parent.width / svgSize.width)) - 0.02;
       console.log("minimized from width");
     }
 
@@ -79,6 +85,7 @@ export class FullScreenableSvgComponent {
     d3.select(this.elementRef.nativeElement)
       .select('svg')
       .call(this.zoom);
+
   }
 
   onZoom() {
