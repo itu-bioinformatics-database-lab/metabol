@@ -1,4 +1,4 @@
-import { Component,
+import { Component,AfterViewChecked,
   Input,
   EventEmitter,
   Output,
@@ -9,7 +9,7 @@ import { Component,
   ChangeDetectorRef
 } from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute,Router} from '@angular/router';
 
 import * as d3 from 'd3';
 
@@ -44,25 +44,16 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   isFullScreen: Boolean;
   url: string;
-  maxNodeX:any;
-  maxNodeY:any;
-  minNodeX:any;
-  minNodeY:any;
-  rangeX:any;
-  rangeY:any;
-  translate:Array<any> = [];
-  scale2:number;
-
-  a = [{"x":3,"y":2},{"x":4,"y":2},{"x":5,"y":1},{"x":10,"y":5},{"x":4,"y":9}];
-
-
 
   @ViewChild(FullScreenableSvgComponent) fullVisCom: FullScreenableSvgComponent;
 
 
-  constructor(private location: Location) {
+  constructor(private location: Location,private router: Router) {
     this.initForce();
-
+    router.events.subscribe(() => {
+        setTimeout(() => {
+        this.force.stop()}, 3000);//Stop moving d3 after 3 seconds
+    });
   }
 
   scaleValued(){
@@ -159,13 +150,14 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
   saveAsImage() {
     this.fullVisCom.scaleValue();
+
     let svg = document.querySelector("svg");
     let svgData = new XMLSerializer().serializeToString(svg);
     let canvas = document.createElement("canvas");
     let svgSize = svg.getBoundingClientRect();
 
-    canvas.width = 1000
-    canvas.height = 1000;
+    canvas.width = 6000;
+    canvas.height = 5000;
 
     let ctx = canvas.getContext("2d");
     ctx.fillStyle="white";
@@ -173,10 +165,10 @@ export class CoreVisualizationComponent implements OnChanges, OnInit {
 
     let img = document.createElement("img");
     img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
-    ctx.drawImage(img, 0, 0);
+    //ctx.drawImage(img, (canvas.width-svgSize.width)/2, (canvas.height-svgSize.height)/2,canvas.width*3,canvas.height*3);
+    ctx.drawImage(img, 0,0,svgSize.width,svgSize.height,0,0,canvas.width,canvas.height);
 
     let imgsrc = canvas.toDataURL("image/png", 1.0);
-    console.log(canvas.toDataURL("image/png"));
 
     let a = document.createElement("a");
     a.download = "untitled" + ".png";
