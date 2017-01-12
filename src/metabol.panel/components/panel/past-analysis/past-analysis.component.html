@@ -3,12 +3,18 @@
     <div class="row">
       <div class="col-md-12">
 
+        <a class="btn btn-default" [routerLink]="['/panel/compare-analysis']">
+          Compare
+        </a>
+
         <div class="panel panel-default">
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let i of [1,2,3,4,5]">
+            <li class="list-group-item" *ngFor="let i of data">
+              <input type="checkbox" value="{{i.key}}">
+
               <i class="glyphicon glyphicon-floppy-saved"></i>
-              <a [routerLink]="['/panel/compare-analysis']">
-                 My analysis - {{i}}
+              <a [routerLink]="['/panel/past-subsystem', '6bda7485-19f2-49bf-9489-1dfdde84cc73']">
+                 My analysis - {{i.key}}
               </a>
             </li>
           </ul>

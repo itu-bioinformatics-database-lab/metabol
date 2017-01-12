@@ -16,6 +16,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AnalyzeComponent implements OnInit {
 
+  key: string;
   solutionRoot: SubsystemTreeNode;
   solutions = {};
 
@@ -37,6 +38,7 @@ export class AnalyzeComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+      this.key = params['key'];
       this.analyze.getSolution(params['key'], (data) => {
         this.solutions = data;
         this.solutionRoot = this.analyze.getSolutionTree(data);
@@ -137,6 +139,10 @@ export class AnalyzeComponent implements OnInit {
     for (let n of this.nodes) {
       n.highlight = false;
     }
+  }
+
+  save() {
+    this.analyze.save(this.key);
   }
 
 }

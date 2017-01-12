@@ -161,4 +161,19 @@ export class SubsystemAnalyzeService {
     this.loading.finish();
     return this.solutionTree;
   }
+
+  /**
+   * Save analysis to database
+   * @param  {string} key id of analysis
+   */
+  save(key: string) {
+    this.loading.start();
+    let apiUrl = `${AppSettings.API_ENDPOINT}/subsystem-analyze-storage/save`;
+    let body = JSON.stringify(key);
+    this.http.post(apiUrl, body , this.login.optionByAuthorization())
+      .subscribe((data) => {
+        this.loading.finish();
+      });
+  }
+
 }

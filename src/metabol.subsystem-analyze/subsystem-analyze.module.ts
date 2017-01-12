@@ -40,5 +40,8 @@ import {MetabolCommonModule} from '../metabol.common';
     SampleComponent,
     SubsystemAnalyzeComponent
   ],
+  exports:[
+    AnalyzeComponent
+  ]
 })
 export class SubsystemAnalyzeModule { }

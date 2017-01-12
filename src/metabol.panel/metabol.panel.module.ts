@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import {MetabolVisualizationModule} from '../metabol.visualizations';
+import {SubsystemAnalyzeModule} from '../metabol.subsystem-analyze';
 
 import {PanelComponent} from './components'
 import {LoginService} from '../metabol.auth/services/login/login.service';
@@ -12,6 +13,7 @@ import {ChangePasswordComponent} from './components/panel/profile/change-passwor
 import {ProfileComponent} from './components/panel/profile/profile.component'
 import {PastAnalysisComponent} from "./components/panel/past-analysis";
 import {CompareAnalysisComponent} from "./components/panel/compare-analysis";
+import {PastAnalysisDetailComponent} from "./components/panel/past-analysis-detail";
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import {CompareAnalysisComponent} from "./components/panel/compare-analysis";
     ChangePasswordComponent,
     PastAnalysisComponent,
     CompareAnalysisComponent,
+    PastAnalysisDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import {CompareAnalysisComponent} from "./components/panel/compare-analysis";
 
     MetabolVisualizationModule,
     PanelRoutesRouting,
+    SubsystemAnalyzeModule
   ],
   providers: [
     LoginService,
