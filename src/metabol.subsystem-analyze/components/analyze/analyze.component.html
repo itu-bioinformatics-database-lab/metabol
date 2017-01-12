@@ -10,7 +10,7 @@
             <label>{{k}}</label>
             <select class="form-control" [(ngModel)]="subsystemNameActivation[k]" (ngModelChange)="activationChange(k, $event)">
               <option [ngValue]="0">Active</option>
-              <option [ngValue]="1">Passive</option>
+              <option [ngValue]="1">Inactive</option>
               <option [ngValue]="2">Don't Care</option>
             </select>
           </div>
