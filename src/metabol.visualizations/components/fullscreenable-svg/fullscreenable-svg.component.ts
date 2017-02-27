@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import * as _ from 'lodash';
 import {CoreVisualizationComponent} from '../core-visualization';
 import {FbaNode, FbaLink, SubsystemNode} from '../../models/fbaiteration';
+
 @Component({
   selector: 'fullscreenable-svg',
   templateUrl: 'fullscreenable-svg.component.html',
@@ -53,18 +54,13 @@ export class FullScreenableSvgComponent {
     let svg = document.querySelector("svg g");
     let svgSize = svg.getBoundingClientRect();
 
-
-
     if ((svgSize.height - parent.height) > (svgSize.width - parent.width)) {
       this.scale = (this.scale * (parent.height / svgSize.height)) - 0.02;
-      console.log("minimized from height");
     }
 
     else {
       this.scale = (this.scale * (parent.width / svgSize.width)) - 0.02;
-      console.log("minimized from width");
     }
-
 
     let translate_x = fullWidth / 2 - this.scale * midX,
         translate_y =  fullHeight / 2 - this.scale * midY;
@@ -72,9 +68,6 @@ export class FullScreenableSvgComponent {
 
     this.zoom.scale(this.scale);
     this.zoom.translate([this.translate[0],this.translate[1]]);
-
-    console.log("translate value", this.translate)
-    console.log("scale value", this.scale)
   }
 
   ngOnInit() {

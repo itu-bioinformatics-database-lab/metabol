@@ -15,6 +15,7 @@ export class AppDataLoader {
   load(): void {
     this.loadCurrencyMetabolites();
     this.loadSubsystemNetwork();
+    this.loadFile('recon2');
   }
 
   loadFile(filename) {
@@ -24,6 +25,10 @@ export class AppDataLoader {
         .subscribe((data) => {
           localStorage.setItem(filename, JSON.stringify(data));
         });
+  }
+
+  get(collection: string){
+    return JSON.parse(localStorage.getItem(collection));
   }
 
   /**

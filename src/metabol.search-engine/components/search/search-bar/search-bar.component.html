@@ -1,7 +1,7 @@
 <div class="input-group">
   <input [(ngModel)]="query" type="text" class="form-control" placeholder="Search for..." (keyup)=getSearch(query)>
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="search()">
+    <button class="btn btn-default" type="button" (click)="search(query)">
       Search
     </button>
   </span>
@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="size-of-bar" *ngIf="filteredReactions.length > 0 && filteredMetabolites.length > 0">
+    <div class="size-of-bar" *ngIf="filteredReactions.length > 0 || filteredMetabolites.length > 0">
 
       <div class="col-md-6">
         <div *ngIf="filteredReactions.length > 0">
@@ -17,7 +17,7 @@
           <div *ngFor="let r of filteredReactions" id="change-color-on-mouse-over">
             <ul>
               <li>
-                <a [routerLink]="['/search-result', r.name]">
+                <a (click)="search(r.name)">
                   <b>{{ r.id }}</b> {{ r.name }}
                 </a>
               </li>
@@ -32,7 +32,7 @@
           <div *ngFor="let m of filteredMetabolites" id="change-color-on-mouse-over">
             <ul>
               <li>
-                <a [routerLink]="['/search-result', m.name]">
+                <a (click)="search(r.name)">
                   <b>{{ m.id }}</b> {{ m.name }}
                 </a>
               </li>

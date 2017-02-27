@@ -8,3 +8,4 @@
 /// <reference path="../node_modules/@types/lodash/index.d.ts" />
 
 declare var System: any;
+declare var escher;

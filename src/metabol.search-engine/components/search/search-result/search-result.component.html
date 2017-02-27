@@ -34,7 +34,7 @@
   </div>
 
   <div class="al">
-    <div class="row" *ngIf="nothingFound">
+    <div class="row" *ngIf="filteredReactions.length == 0 && filteredMetabolites.length == 0 ">
       <h1>NOTHING FOUND</h1>
     </div>
   </div>

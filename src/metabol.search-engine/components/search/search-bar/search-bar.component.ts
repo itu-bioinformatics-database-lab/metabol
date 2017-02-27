@@ -1,12 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import {SearchService} from '../../../services/search/search.service';
 import {Router} from '@angular/router';
+import { AppDataLoader } from '../../../../metabol.common/services';
 
 @Component({
   selector: 'search-bar',
   templateUrl: 'search-bar.component.html',
   styleUrls: ['search-bar.component.css'],
-  providers: [SearchService],
   host: {
     '(document:click)': 'handleClick($event)',
   },
@@ -15,38 +14,36 @@ import {Router} from '@angular/router';
 export class SearchBarComponent {
 
   query: String;
-  filteredMetabolites: Array<any>;
-  filteredReactions: Array<any>;
+  recon: any;
+  filteredMetabolites = [];
+  filteredReactions = [];
 
   constructor(
-    private searchService: SearchService,
     private router: Router,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef,
+    private loader: AppDataLoader) {
+    this.recon = loader.get('recon2');
+  }
 
+  search(query: string) {
+    if (query)
+      this.router.navigate(['/search-result', query]);
     this.generateFilters();
+  }
+
+  getSearch(query: string) {
+    if (query) {
+      this.filteredReactions = this.recon.reactions
+        .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
+      this.filteredMetabolites = this.recon.metabolites
+        .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
+    }
   }
 
   generateFilters() {
     this.filteredReactions = new Array<any>();
     this.filteredMetabolites = new Array<any>();
   }
-
-  search() {
-    if (this.query)
-      this.router.navigate(['/search-result', this.query]);
-  }
-
-  getSearch(query: string) {
-    if (this.query)
-      this.searchService.searchPrefix(query).subscribe(
-        data => {
-          this.filteredReactions = data["reactions"];
-          this.filteredMetabolites = data["metabolites"];
-        });
-    else
-      this.generateFilters();
-  }
-
 
   /**
    * Closes the autocomplete when click anywhere
