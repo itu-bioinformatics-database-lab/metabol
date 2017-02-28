@@ -21,23 +21,18 @@ export class ChemicalEquationComponent {
   ngOnChanges() {
     this.constructor();
 
-    this.metabolites
-      .filter((key) => key.stoichiometry > 0)
-      .forEach((key) => {
-        this.reactants.push({
-          id: key.id,
-          stoichiometry: key.stoichiometry
-        });
-      });
-
-    this.metabolites
-      .filter((key) => key.stoichiometry < 0)
-      .forEach((key) => {
+    for (let key in this.metabolites) {
+      if (this.metabolites[key] > 0)
         this.products.push({
-          id: key.id,
-          stoichiometry: Math.abs(key.stoichiometry)
+          id: key,
+          stoichiometry: this.metabolites[key]
         });
-      });
+      else
+        this.reactants.push({
+          id: key,
+          stoichiometry: Math.abs(this.metabolites[key])
+        });
+    }
   }
 
 }

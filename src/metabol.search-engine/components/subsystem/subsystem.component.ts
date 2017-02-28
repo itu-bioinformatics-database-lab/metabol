@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SubsystemService} from "../../services/subsystem/subsystem.service";
-
+import { AppDataLoader } from '../../../metabol.common/services';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-subsystem',
@@ -10,15 +11,17 @@ import {SubsystemService} from "../../services/subsystem/subsystem.service";
 })
 export class SubsystemComponent implements OnInit {
 
+  recon;
   subsystems: string[];
   encodeURIComponent = encodeURIComponent;
 
-  constructor(private subsystem: SubsystemService) { }
+  constructor(private loader: AppDataLoader) {
+    this.recon = loader.get('recon2');
+  }
 
   ngOnInit() {
-    this.subsystem.all((data) => {
-      this.subsystems = data;
-    });
+    this.subsystems = _.uniq<string>(_.values<any>(this.recon.reactions)
+      .map(x => x.subsystem));
   }
 
 }

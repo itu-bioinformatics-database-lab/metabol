@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { AppDataLoader } from '../../../../metabol.common/services';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'search-bar',
@@ -33,9 +34,9 @@ export class SearchBarComponent {
 
   getSearch(query: string) {
     if (query) {
-      this.filteredReactions = this.recon.reactions
+      this.filteredReactions = _.values<any>(this.recon.reactions)
         .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
-      this.filteredMetabolites = this.recon.metabolites
+      this.filteredMetabolites = _.values<any>(this.recon.metabolites)
         .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
     }
   }

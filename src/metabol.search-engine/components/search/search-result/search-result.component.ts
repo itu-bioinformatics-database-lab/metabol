@@ -25,12 +25,15 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
 
-      this.filteredReactions = this.recon.reactions
+      for(let k in this.recon.reactions.formula)
+        console.log(this.recon.metabolites[k]);      
+
+      this.filteredReactions = _.values<any>(this.recon.reactions)
         .filter(x =>
           x.id.startsWith(params['query'])
           || x.name.startsWith(params['query']));
 
-      this.filteredMetabolites = this.recon.metabolites
+      this.filteredMetabolites = _.values<any>(this.recon.metabolites)
         .filter(x =>
           x.id.startsWith(params['query'])
           || x.name.startsWith(params['query']));
