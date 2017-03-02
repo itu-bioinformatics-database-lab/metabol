@@ -8,11 +8,14 @@ import {Reaction} from '../../../models/reaction';
 import {RelatedMetabolite} from '../../../models/relateds';
 
 import {LoadingService} from "../../../../metabol.common/services";
+import { AppDataLoader } from '../../../../metabol.common/services';
 
 import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
 import {VisualizationComponent} from '../../../../metabol.visualizations/components';
 import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 import * as d3 from 'd3';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-reaction-details',
@@ -22,51 +25,54 @@ import * as d3 from 'd3';
 })
 export class ReactionDetailsComponent implements OnInit {
   reaction: Reaction;
-  relatedMetabolites: RelatedMetabolite[];
+  relatedMetabolites: Array<Object> = [];//RelatedReaction[];
   nodes: Array<FbaNode>;
   links: Array<FbaLink>;
+  recon: any;
 
   constructor(
     private rea: ReactionService,
     private route: ActivatedRoute,
     private reaVis: ReactionVisualizationService,
     private loading: LoadingService,
+    private loader: AppDataLoader,
     private relatedToVisual: RelatedToVisualizationService,
     private elementRef: ElementRef
   ) {
     this.reaction = new Reaction();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
+    this.recon = loader.get("recon2")
   };
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+
       this.loadData(params['reactionId']);
     });
   }
 
+
   loadData(reactionId) {
-    this.build();
+    // this.build();
     console.log(d3.select(this.elementRef.nativeElement)
       .select('#map_container_3'));
-    this.loading.start();
-    this.rea.getReaction(reactionId).subscribe(data => {
-      this.reaction = data;
-      if (this.reaction.notes)
-        this.reaction.notes = data.notes.split('\n');
-      this.rea.getRelatedMetabolites(reactionId)
-        .subscribe((data) => {
-          this.relatedMetabolites = data['metabolites'];
-          this.loadVisualization();
-          this.loading.finish();
-        });
-    });
+
+    this.reaction = this.recon.reactions[reactionId];
+    let metabolitesList =  Object.keys(this.reaction["formula"])
+    for(let relatedmetabolite of metabolitesList){
+          let m = this.recon.metabolites[relatedmetabolite]
+          this.relatedMetabolites.push({id: m.id,
+                                        name: m.name,
+                                        stoichiometry: m.stoichiometry,
+                                        reactions: []})
+        }
   }
 
-  loadVisualization() {
-    [this.nodes, this.links] = this.relatedToVisual
-      .visualizeReactionDetail(this.reaction, this.relatedMetabolites);
-  }
+  // loadVisualization() {
+  //   [this.nodes, this.links] = this.relatedToVisual
+  //     .visualizeReactionDetail(this.reaction, this.relatedMetabolites);
+  // }
 
   build() {
     var custom_model = {
@@ -112,6 +118,9 @@ export class ReactionDetailsComponent implements OnInit {
     }
 
     // Set up the Builder
+
+
+
     var options3 = {
       // just show the zoom buttons
       menu: 'zoom',
@@ -124,12 +133,18 @@ export class ReactionDetailsComponent implements OnInit {
       // show the descriptive names
       identifiers_on_map: 'name',
       // The callback
-      first_load_callback: first_load_callback
+      first_load_callback: first_load_callback,
+      scroll_behavior: 'zoom',
+      //fill_screen: true,
+      //embedded_css:
+
     };
 
     let visualizationElement = d3.select(this.elementRef.nativeElement)
       .select('#map_container_3')[0][0];
-    escher.Builder(null, custom_model, null, visualizationElement, null);
+    let csss = d3.select("#map_container_3").style("background-color", "red");
+    //console.log(csss)
+    escher.Builder(null, custom_model, null, visualizationElement, options3);
 
   }
 

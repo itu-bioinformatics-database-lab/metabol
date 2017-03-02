@@ -6,6 +6,7 @@ import {ChemicalEquationComponent} from "../../details/chemical-equation/chemica
 import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
 import { AppDataLoader } from '../../../../metabol.common/services';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-subsystem-detail',

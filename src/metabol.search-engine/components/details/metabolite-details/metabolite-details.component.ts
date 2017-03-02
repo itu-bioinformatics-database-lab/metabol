@@ -6,10 +6,12 @@ import {MetaboliteService} from '../../../services/metabolite/metabolite.service
 import {MetaboliteVisualizationService} from '../../../services/metabolite/metabolite-visualization.service';
 
 import {LoadingService} from "../../../../metabol.common/services";
+import { AppDataLoader } from '../../../../metabol.common/services';
 
 import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
 import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 
+import * as _ from 'lodash';
 @Component({
   selector: 'app-metabolite-details',
   templateUrl: 'metabolite-details.component.html',
@@ -22,18 +24,21 @@ export class MetaboliteDetailsComponent implements OnInit {
   relatedReactions: Array<any>;
   nodes: Array<FbaNode>;
   links: Array<FbaLink>;
+  recon: any;
 
   constructor(
     private mea: MetaboliteService,
     private route: ActivatedRoute,
     private meaVis: MetaboliteVisualizationService,
     private loading: LoadingService,
+    private loader: AppDataLoader,
     private relatedToVisual: RelatedToVisualizationService) {
 
     this.metabolite = new Object();
     this.relatedReactions = new Array<any>();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
+    this.recon = loader.get("recon2")
   }
 
   ngOnInit() {
@@ -43,18 +48,18 @@ export class MetaboliteDetailsComponent implements OnInit {
   }
 
   loadData(metaboliteId) {
-    this.loading.start();
-    this.mea.getMetabolite(metaboliteId).subscribe(data => {
-      this.metabolite = data;
-      if (this.metabolite.notes)
-        this.metabolite.notes = data.notes.split('\n');
-      this.mea.getRelatedReactions(metaboliteId)
-        .subscribe(data => {
-          this.relatedReactions = data['reactions'];
-          this.loadVisualization();
-          this.loading.finish();
-        });
-    });
+    this.metabolite = this.recon.metabolites[metaboliteId];
+  
+    let all_reactions = this.recon.reactions;
+    let reactionsList =  Object.keys(all_reactions)
+
+    for(let reaction of reactionsList)
+        if (all_reactions[reaction].formula[metaboliteId]){
+            this.relatedReactions.push({id: all_reactions[reaction].id,
+                                        name: all_reactions[reaction].name,
+                                        subsystem: all_reactions[reaction].subsystem,
+                                        stoichiometry: all_reactions[reaction].stoichiometry,
+                                        formula: all_reactions[reaction].formula})}
   }
 
   loadVisualization() {

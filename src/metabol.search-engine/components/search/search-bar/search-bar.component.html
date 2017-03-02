@@ -32,7 +32,7 @@
           <div *ngFor="let m of filteredMetabolites" id="change-color-on-mouse-over">
             <ul>
               <li>
-                <a (click)="search(r.name)">
+                <a (click)="search(m.name)">
                   <b>{{ m.id }}</b> {{ m.name }}
                 </a>
               </li>

@@ -18,36 +18,21 @@
         <p *ngIf="metabolite.compartment">
           compartment: {{metabolite.compartment}}
         </p>
-        <p *ngIf="metabolite.initialAmount">
-          initial amount: {{metabolite.initialAmount}}
-        </p>
         <p *ngIf="metabolite.charge">
           charge: {{metabolite.charge}}
         </p>
-        <p *ngIf="metabolite.model">
-          model: {{metabolite.model}}
-        </p>
-        <p *ngIf="metabolite.species_type">
-          species_type: {{metabolite.species_type}}
-        </p>
-        <p *ngIf="metabolite.annotation">
-          annotation: {{metabolite.annotation}}
-        </p>
-        <p *ngIf="metabolite.sboTerm">
-          sbo term: {{metabolite.sboTerm}}
-        </p>
-        <p>
+        <!-- <p>
           Subsystems:
           <span *ngFor="let s of metabolite.subsystems;let i = index;">{{ i ? "," : "" }} {{ s }}</span>
-        </p>
-        <p *ngFor="let n of metabolite.notes">
+        </p> -->
+        <!-- <p *ngFor="let n of metabolite.notes">
           {{ n }}
-        </p>
-        <div class="row">
+        </p>  -->
+        <!-- <div class="row">
           <div class="col-md-12">
             <visualization [nodes]="nodes" [links]="links"></visualization>
           </div>
-        </div>
+        </div> -->
         <br>
         <div *ngIf="relatedReactions">
           <h4>
@@ -70,7 +55,7 @@
                   </a>
                 </td>
                 <td>
-                  <chemical-equation [metabolites]="item.metabolites" [selectedMetabolite]="{id:metabolite.id, stoichiometry: item.stoichiometry}">
+                  <chemical-equation [metabolites]="item.formula" [selectedMetabolite]="{}">
                   </chemical-equation>
                 </td>
               </tr>
