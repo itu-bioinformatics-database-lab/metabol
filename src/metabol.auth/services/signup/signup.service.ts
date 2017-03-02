@@ -16,7 +16,7 @@ export class SignupService {
   }
 
   signup(signupForm, callback: () => void) {
-    let url = `${AppSettings.API_ENDPOINT}/account/Register`;
+    let url = `${AppSettings.API_ENDPOINT}/auth/sign-up`;
     this.http.post(url, signupForm, { headers: this.headers })
       .subscribe(
       () => {
@@ -25,10 +25,11 @@ export class SignupService {
       },
       error => {
         if (error.status == 400) {
-          let errorContent = error.json()
-          for (let em in errorContent.modelState)
-            for (let e of errorContent.modelState[em])
-              this.notify.error(errorContent.message, e);
+          let errorContent = error.json();
+          console.log(errorContent);
+          for (let em in errorContent)
+            for (let e of errorContent[em])
+              this.notify.error(em.toUpperCase(), e);
         }
       });
   }
