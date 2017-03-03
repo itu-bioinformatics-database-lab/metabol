@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchBarComponent} from '../search-bar';
 import {Route, ActivatedRoute} from '@angular/router';
 import { AppDataLoader } from '../../../../metabol.common/services';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-search-result',
@@ -26,7 +27,7 @@ export class SearchResultComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       for(let k in this.recon.reactions.formula)
-        console.log(this.recon.metabolites[k]);      
+        console.log(this.recon.metabolites[k]);
 
       this.filteredReactions = _.values<any>(this.recon.reactions)
         .filter(x =>
