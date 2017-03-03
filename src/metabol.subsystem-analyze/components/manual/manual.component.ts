@@ -7,12 +7,4 @@ import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
   templateUrl: 'manual.component.html',
   styleUrls: ['manual.component.css'],
 })
-export class ManualComponent {
-
-  conTable: Array<MetaboliteConcentration>;
-
-  constructor() {
-    this.conTable = new Array<MetaboliteConcentration>();
-  }
-
-}
+export class ManualComponent { }
