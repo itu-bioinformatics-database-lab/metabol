@@ -43,13 +43,14 @@ export class MetaboliteDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+      this.relatedReactions = [];
       this.loadData(params['metaboliteId']);
     });
   }
 
   loadData(metaboliteId) {
     this.metabolite = this.recon.metabolites[metaboliteId];
-  
+
     let all_reactions = this.recon.reactions;
     let reactionsList =  Object.keys(all_reactions)
 

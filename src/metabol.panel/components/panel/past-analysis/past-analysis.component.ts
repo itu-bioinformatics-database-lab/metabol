@@ -19,7 +19,7 @@ export class PastAnalysisComponent implements OnInit {
   }
 
   getData() {
-    let apiUrl = `${AppSettings.API_ENDPOINT}/subsystem-analyze-storage/list`;
+    let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/list`;
     this.http.get(apiUrl, this.login.optionByAuthorization())
       .map(res => res.json())
       .subscribe((data) => {

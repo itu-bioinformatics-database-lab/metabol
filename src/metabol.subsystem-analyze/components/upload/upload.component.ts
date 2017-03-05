@@ -9,12 +9,10 @@ import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
   styleUrls: ['upload.component.css'],
 })
 export class UploadComponent {
-  conTable: Array<MetaboliteConcentration>;
+  conTable: Array<[string, number]> = [];
   file: any;
 
-  constructor(fb: FormBuilder) {
-    this.conTable = new Array<MetaboliteConcentration>();
-  }
+  constructor(fb: FormBuilder) { }
 
   jsonChange($event) {
     this.readJson($event.target);
@@ -24,7 +22,7 @@ export class UploadComponent {
     var file: File = inputValue.files[0];
     var myReader: FileReader = new FileReader();
     myReader.onload = (e: any) =>
-      this.conTable = JSON.parse(e.target.result);
+      this.conTable = <Array<[string, number]>>_.toPairs(JSON.parse(e.target.result));
     myReader.readAsText(file);
   }
 
@@ -39,11 +37,7 @@ export class UploadComponent {
       let lines = e.target.result.split("\n");
       for (let i of lines) {
         let c = i.split(',');
-        this.conTable.push({
-          name: c[0],
-          change: c[1],
-          exactValue: c[2]
-        });
+        this.conTable.push(c);
       }
     }
     myReader.readAsText(file);

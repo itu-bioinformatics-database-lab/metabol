@@ -47,7 +47,7 @@ export class ReactionDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-
+      this.relatedMetabolites = [];
       this.loadData(params['reactionId']);
     });
   }

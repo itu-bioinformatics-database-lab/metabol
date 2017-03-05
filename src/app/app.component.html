@@ -18,7 +18,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <li *ngIf="loginService.isLoggedIn()">
           <a [routerLink]="['analyze']">Analyze</a>
         </li>
         <li>

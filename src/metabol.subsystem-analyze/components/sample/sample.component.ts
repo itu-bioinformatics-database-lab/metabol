@@ -10,11 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SampleComponent implements OnInit {
 
-  conTable: Array<MetaboliteConcentration>;
+  conTable: Array<[string, number]> = [];
 
-  constructor(private http: Http) {
-    this.conTable = new Array<MetaboliteConcentration>();
-  }
+  constructor(private http: Http) { }
 
   ngOnInit() {
     this.loadSampleDataSet();
@@ -23,6 +21,6 @@ export class SampleComponent implements OnInit {
   loadSampleDataSet() {
     this.http.get('assets/example-analyze-doc-files/example.json')
       .map(res => res.json())
-      .subscribe((data) => this.conTable = data);
+      .subscribe((data) => this.conTable = <Array<[string, number]>>_.toPairs(data));
   }
 }

@@ -4,7 +4,10 @@
 <span *ngFor="let r of reactants;let i = index;">
   {{ i ? "+" : "" }}
   {{r.stoichiometry - 1 ? r.stoichiometry : ""}}
-  <a [routerLink]="['/metabolite', r.id]">
+  <b *ngIf="selectedMetabolite == r.id">
+      {{ selectedMetabolite }}
+  </b>
+  <a *ngIf="selectedMetabolite != r.id" [routerLink]="['/metabolite', r.id]">
     {{r.id}}
   </a>
 </span> →
@@ -14,44 +17,10 @@
 <span *ngFor="let p of products;let i = index;">
   {{ i ? "+" : "" }}
   {{p.stoichiometry - 1 ? p.stoichiometry : ""}}
-  <a [routerLink]="['/metabolite', p.id]">
+  <b *ngIf="selectedMetabolite == p.id">
+      {{ selectedMetabolite }}
+  </b>
+  <a *ngIf="selectedMetabolite != p.id" [routerLink]="['/metabolite', p.id]">
     {{p.id}}
   </a>
 </span>
-<!-- <span *ngIf="selectedMetabolite">
-  <span *ngIf="selectedMetabolite.stoichiometry && selectedMetabolite.stoichiometry>0">
-    <strong>
-      <a [routerLink]="['\metabolite', selectedMetabolite.id]">
-        {{(selectedMetabolite.stoichiometry>1) ? selectedMetabolite.stoichiometry : ""}}{{selectedMetabolite.id}}
-      </a>
-    </strong>
-  </span>
-</span>
-
-<span *ngFor="let key of reactants|keys;  let count = index">
-
-  {{( selectedMetabolite ? (0!=count || selectedMetabolite.stoichiometry>0) : 0!=count)? "+" : ""}}
-  <a [routerLink]="['\metabolite',key]">
-    {{(reactants[key]>1) ? reactants[key] : ""}}{{key}}
-  </a>
-</span>
-<span>
-  →
-</span>
-<span *ngIf="selectedMetabolite">
-  <span *ngIf="selectedMetabolite.stoichiometry && selectedMetabolite.stoichiometry<0">
-    <strong>
-      <a [routerLink]="['\metabolite', selectedMetabolite.id]">
-        {{(selectedMetabolite.stoichiometry>1) ? selectedMetabolite.stoichiometry : ""}}{{selectedMetabolite.id}}
-      </a>
-    </strong>
-  </span>
-</span>
-
-<span *ngFor="let key of products|keys; let count = index">
-
-  {{( selectedMetabolite ? (0!=count || selectedMetabolite.stoichiometry<0) : 0!=count) ? "+" : ""}}
-  <a [routerLink]="['\metabolite', key]">
-    {{(products[key]>1) ? products[key] : ""}}{{key}}
-  </a>
-</span> -->
