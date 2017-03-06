@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConcentrationTableComponent} from '../concentration-table/concentration-table.component';
 import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-upload',
   templateUrl: 'upload.component.html',

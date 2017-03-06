@@ -14,6 +14,7 @@ import {FbaNode, FbaLink} from '../../../../metabol.visualizations/models';
 import {VisualizationComponent} from '../../../../metabol.visualizations/components';
 import {RelatedToVisualizationService} from '../../../../metabol.visualizations/services';
 import * as d3 from 'd3';
+import {CurrencyMetabolitesService} from '../../../../metabol.common/services/currency-metabolites/currency-metabolites.service';
 
 import * as _ from 'lodash';
 
@@ -26,9 +27,11 @@ import * as _ from 'lodash';
 export class ReactionDetailsComponent implements OnInit {
   reaction: Reaction;
   relatedMetabolites: Array<Object> = [];//RelatedReaction[];
+  relatedReaction: Array<Object> = [];
   nodes: Array<FbaNode>;
   links: Array<FbaLink>;
   recon: any;
+  currency: any;
 
   constructor(
     private rea: ReactionService,
@@ -36,18 +39,22 @@ export class ReactionDetailsComponent implements OnInit {
     private reaVis: ReactionVisualizationService,
     private loading: LoadingService,
     private loader: AppDataLoader,
+    private currencyM: CurrencyMetabolitesService,
     private relatedToVisual: RelatedToVisualizationService,
     private elementRef: ElementRef
   ) {
     this.reaction = new Reaction();
     this.nodes = new Array<FbaNode>();
     this.links = new Array<FbaLink>();
-    this.recon = loader.get("recon2")
+    this.recon = loader.get("recon2");
+
+
   };
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.relatedMetabolites = [];
+      this.relatedReaction = [];
       this.loadData(params['reactionId']);
     });
   }
@@ -59,14 +66,40 @@ export class ReactionDetailsComponent implements OnInit {
       .select('#map_container_3'));
 
     this.reaction = this.recon.reactions[reactionId];
-    let metabolitesList =  Object.keys(this.reaction["formula"])
-    for(let relatedmetabolite of metabolitesList){
-          let m = this.recon.metabolites[relatedmetabolite]
-          this.relatedMetabolites.push({id: m.id,
-                                        name: m.name,
-                                        stoichiometry: m.stoichiometry,
-                                        reactions: []})
+    let metabolitesList = Object.keys(this.reaction["formula"])
+
+    for (let relatedmetabolite of metabolitesList) {
+      let m = this.recon.metabolites[relatedmetabolite]
+      this.relatedMetabolites.push({
+        id: m.id,
+        name: m.name,
+        stoichiometry: m.stoichiometry,
+        reactions: []
+      })
+    }
+
+    for (let r in this.recon.reactions) {
+      let rr = Object.keys(this.recon.reactions[r]["formula"])
+      for (let crncy of rr) {
+
+        if (!this.currencyM.isCurrency(crncy)) {
+
+          let kk = _.intersection(metabolitesList, rr);
+          if (kk) {
+            this.relatedReaction.push(r);
+          }
         }
+    
+      }
+    }
+
+
+
+
+    //for(let RelatedReaction of reactionList){
+    //  let r = this.recon.reaction[]
+
+    //  }
   }
 
   // loadVisualization() {

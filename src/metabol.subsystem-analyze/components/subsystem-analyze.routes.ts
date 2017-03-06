@@ -4,7 +4,6 @@ import {ConcentrationTableComponent} from './concentration-table';
 import {ManualComponent} from './manual/manual.component';
 import {UploadComponent} from './upload/upload.component';
 import {SubsystemAnalyzeComponent} from './subsystem-analyze.component';
-import {AnalyzeComponent} from "./analyze";
 import {MeasurementComponent} from './measurement/measurement.component';
 
 export const SubsystemAnalyzeRoutes: Routes = [
@@ -19,5 +18,5 @@ export const SubsystemAnalyzeRoutes: Routes = [
       { path: '', redirectTo: 'measurement', pathMatch: 'full' }
     ]
   },
-  { path: 'subsystem/:key', component: AnalyzeComponent }
+
 ];

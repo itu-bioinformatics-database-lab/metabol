@@ -3,15 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import {
-  AnalyzeComponent,
   ConcentrationTableComponent,
   ManualComponent,
   MeasurementComponent,
   UploadComponent,
   SampleComponent,
   SubsystemAnalyzeComponent,
-  TreeVisualizationComponent,
-  SolutionTableComponent
+
 } from './components';
 
 import {subsystemAnalyzeRoutingProviders, subsystemAnalyzeRouting} from './subsystem-analyze.routes';
@@ -30,9 +28,6 @@ import {MetabolCommonModule} from '../metabol.common';
   ],
   providers: [subsystemAnalyzeRoutingProviders],
   declarations: [
-    SolutionTableComponent,
-    TreeVisualizationComponent,
-    AnalyzeComponent,
     ConcentrationTableComponent,
     ManualComponent,
     MeasurementComponent,
@@ -41,7 +36,7 @@ import {MetabolCommonModule} from '../metabol.common';
     SubsystemAnalyzeComponent
   ],
   exports:[
-    AnalyzeComponent
+    
   ]
 })
 export class SubsystemAnalyzeModule { }
