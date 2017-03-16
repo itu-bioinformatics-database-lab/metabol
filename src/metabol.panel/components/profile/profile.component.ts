@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-//import { ROUTER_DIRECTIVES, Router} from '@angular/router';
-//import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
-//import {ChangePasswordComponent} from './change-password/change-password.component';
-import {LoginService} from '../../../../metabol.auth/services/login/login.service';
+import {LoginService} from "../../../metabol.auth/services";
 
 
 @Component({
-  //moduleId: module.id,
   selector: 'app-profile',
   templateUrl: 'profile.component.html',
   styleUrls: ['profile.component.css'],
-  //directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, ChangePasswordComponent],
-  providers: [LoginService]
 })
 export class ProfileComponent {
   name: string;
@@ -23,7 +16,6 @@ export class ProfileComponent {
   affiliation: string;
   form: FormGroup;
 
-  //TODO: reduce code repetation
   constructor(private fb: FormBuilder, public loginService: LoginService, private router: Router) {
     this.form = fb.group({
       "name": [this.name, Validators.required],

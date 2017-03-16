@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
-import {AppSettings} from "../../../../app";
-import {LoginService} from "../../../../metabol.auth/services";
+import {AppSettings} from "../../../app";
+import {LoginService} from "../../../metabol.auth/services";
 
 @Component({
   selector: 'app-past-analysis',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
-import {AppSettings} from "../../../../app";
-import {LoginService} from "../../../../metabol.auth/services";
 import {ActivatedRoute} from '@angular/router';
+import {LoginService} from "../../../metabol.auth/services";
+import {AppSettings} from "../../../app";
 
 
 @Component({
@@ -14,10 +14,7 @@ export class PastAnalysisDetailComponent implements OnInit {
 
   data;
 
-  constructor(
-    private http: Http,
-    private login: LoginService,
-    private route: ActivatedRoute) { }
+  constructor(private http: Http, private login: LoginService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

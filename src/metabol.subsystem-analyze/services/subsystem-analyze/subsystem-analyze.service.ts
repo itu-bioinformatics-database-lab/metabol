@@ -1,5 +1,4 @@
 import {LoginService} from "../../../metabol.auth/services";
-import {LoadingService} from "../../../metabol.common/services";
 import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
@@ -12,7 +11,7 @@ export class SubsystemAnalyzeService {
   apiUrl: String;
   private solutionTree: SubsystemTreeNode;
 
-  constructor(private http: Http, private login: LoginService, private loading: LoadingService) {
+  constructor(private http: Http, private login: LoginService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
     this.solutionTree = {
       name: "All",
@@ -39,22 +38,18 @@ export class SubsystemAnalyzeService {
       "concentrationChanges": data
     };
 
-    this.loading.start();
     this.http.post(`${this.apiUrl}-start`, postData, this.login.optionByAuthorization())
       .map(res => res.json())
       .subscribe((data) => {
         callback(data);
-        this.loading.finish();
       });
   }
 
   getSolution(key: string, callback: (data: { [solutions: string]: Array<string> }) => void) {
-    this.loading.start();
     this.http.get(`${this.apiUrl}/${key}`)
       .map(res => res.json())
       .subscribe((data) => {
         callback(data);
-        this.loading.finish();
       });
   }
 
@@ -156,9 +151,7 @@ export class SubsystemAnalyzeService {
   }
 
   getSolutionTree(data: { [solutions: string]: Array<string> }) {
-    this.loading.start();
     this.createSolutionTree(this.solutionTree, this.reverseDict(data));
-    this.loading.finish();
     return this.solutionTree;
   }
 
@@ -167,12 +160,10 @@ export class SubsystemAnalyzeService {
    * @param  {string} key id of analysis
    */
   save(key: string) {
-    this.loading.start();
     let apiUrl = `${AppSettings.API_ENDPOINT}/subsystem-analyze-storage/save`;
     let body = JSON.stringify(key);
     this.http.post(apiUrl, body , this.login.optionByAuthorization())
       .subscribe((data) => {
-        this.loading.finish();
       });
   }
 
