@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {MetabolVisualizationModule} from '../metabol.visualizations';
 import {SubsystemAnalyzeModule} from '../metabol.subsystem-analyze';
 
 import {PanelComponent} from './components'
@@ -12,7 +11,6 @@ import {PanelRoutesRoutingProviders, PanelRoutesRouting} from './metabol.panel.r
 import {ChangePasswordComponent} from './components/panel/profile/change-password/change-password.component';
 import {ProfileComponent} from './components/panel/profile/profile.component'
 import {PastAnalysisComponent} from "./components/panel/past-analysis";
-import {CompareAnalysisComponent} from "./components/panel/compare-analysis";
 import {PastAnalysisDetailComponent} from "./components/panel/past-analysis-detail";
 
 
@@ -22,7 +20,6 @@ import {PastAnalysisDetailComponent} from "./components/panel/past-analysis-deta
     ProfileComponent,
     ChangePasswordComponent,
     PastAnalysisComponent,
-    CompareAnalysisComponent,
     PastAnalysisDetailComponent,
   ],
   imports: [
@@ -31,7 +28,6 @@ import {PastAnalysisDetailComponent} from "./components/panel/past-analysis-deta
     FormsModule,
     HttpModule,
 
-    MetabolVisualizationModule,
     PanelRoutesRouting,
     SubsystemAnalyzeModule
   ],

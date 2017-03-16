@@ -1,7 +1,8 @@
-export {DetailRoutes} from './details'
-export {SearchRoutes} from './search'
-export {SubsystemRoutes} from './subsystem'
-
-export * from './details';
-export * from './search';
-export * from './subsystem';
+export {SubsystemDetailComponent} from "./subsystem-detail";
+export {SubsystemComponent} from "./subsystem";
+export {ReactionDetailsComponent} from "./reaction-details";
+export {SearchResultComponent} from "./search-result";
+export {SearchPageComponent} from "./search-page";
+export {MetaboliteDetailsComponent} from "./metabolite-details";
+export {SearchBarComponent} from "./search-bar";
+export {ChemicalEquationComponent} from "./chemical-equation";

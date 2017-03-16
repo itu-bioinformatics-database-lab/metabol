@@ -14,7 +14,6 @@ import {
 
 import {subsystemAnalyzeRoutingProviders, subsystemAnalyzeRouting} from './subsystem-analyze.routes';
 
-import {MetabolVisualizationModule} from '../metabol.visualizations';
 import {MetabolCommonModule} from '../metabol.common';
 
 @NgModule({
@@ -23,8 +22,7 @@ import {MetabolCommonModule} from '../metabol.common';
     FormsModule,
     ReactiveFormsModule,
     subsystemAnalyzeRouting,
-    MetabolCommonModule,
-    MetabolVisualizationModule
+    MetabolCommonModule
   ],
   providers: [subsystemAnalyzeRoutingProviders],
   declarations: [
@@ -36,7 +34,7 @@ import {MetabolCommonModule} from '../metabol.common';
     SubsystemAnalyzeComponent
   ],
   exports:[
-    
+
   ]
 })
 export class SubsystemAnalyzeModule { }

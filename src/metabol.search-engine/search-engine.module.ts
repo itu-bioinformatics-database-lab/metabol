@@ -13,18 +13,16 @@ import {
   SubsystemDetailComponent
 } from './components';
 
-import {MetabolVisualizationModule} from '../metabol.visualizations'
 
-import {searchEngineRoutingProviders, searchEngineRouting} from './search-engine.routes';
+import { searchEngineRouting} from './search-engine.routes';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    MetabolVisualizationModule,
     searchEngineRouting
   ],
-  providers: [searchEngineRoutingProviders],
+  // providers: [searchEngineRoutingProviders],
   declarations: [
     ChemicalEquationComponent,
     ReactionDetailsComponent,
