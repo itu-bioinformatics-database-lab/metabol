@@ -36,15 +36,14 @@
                   <strong>Chemical Formula</strong>
                 </td>
               </tr>
-              <tr *ngFor="let item of relatedReactions">
+              <tr *ngFor="let r of relatedReactions">
                 <td>
-                  <a [routerLink]="['/reaction', item.id]">
-                    {{item.name}}
+                  <a [routerLink]="['/reaction', r.id]">
+                    {{r.name}} 
                   </a>
                 </td>
                 <td>
-                  <chemical-equation [metabolites]="item.formula" [selectedMetabolite]="metabolite.id">
-                  </chemical-equation>
+                  <chemical-equation [metabolites]="r.metabolites" [selectedMetabolite]="metabolite.id"></chemical-equation>
                 </td>
               </tr>
             </tbody>

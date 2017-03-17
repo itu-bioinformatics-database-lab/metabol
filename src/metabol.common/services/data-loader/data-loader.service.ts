@@ -19,7 +19,6 @@ export class AppDataLoader {
       .subscribe(data => {
         localStorage.setItem(collection, JSON.stringify(data));
         callback(data);
-        console.log('get');
       });
   }
 

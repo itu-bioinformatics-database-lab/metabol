@@ -11,6 +11,7 @@ import { AppDataLoader } from '../../../metabol.common/services';
 export class MetaboliteDetailsComponent implements OnInit {
 
   metabolite;
+  relatedReactions;
 
   constructor(private route: ActivatedRoute, private loader: AppDataLoader) { }
 
@@ -18,6 +19,8 @@ export class MetaboliteDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.loader.get("recon2", (recon) => {
         this.metabolite = recon.metabolites[params['id']];
+        this.relatedReactions = this.metabolite.reactions
+          .map(x => recon.reactions[x]);
       });
     });
   }

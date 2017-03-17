@@ -1,6 +1,4 @@
 <section class="reactionDetails">
-
-
   <div *ngIf="reaction" class="reactionDetailsChild col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -53,24 +51,22 @@
                   <strong>Reactions</strong>
                 </td>
               </tr>
-
-              <tr *ngFor="let item of relatedMetabolites">
+              <tr *ngFor="let m of relatedMetabolites">
                 <td>
-                  <a [routerLink]="['/metabolite', item.id]">
-                    {{item.id}}
+                  <a [routerLink]="['/metabolite', m.id]">
+                    {{m.id}}
                   </a>
                 </td>
                 <td>
-                  <span *ngFor="let item2 of relatedReaction; let i=index">
-                    <a [routerLink]="['/reaction', item2]" *ngIf="i<10">
-                      {{item2}}
-                    </a>
+                  <span *ngFor="let r of m.reactions">
+                    <a [routerLink]="['/reaction', r]">
+                      {{r}}
+                    </a>,
                   </span>
                 </td>
               </tr>
             </tbody>
           </table>
-
         </div>
       </div>
     </div>
