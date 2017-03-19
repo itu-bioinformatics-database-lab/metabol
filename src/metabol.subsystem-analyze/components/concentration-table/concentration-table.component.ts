@@ -55,12 +55,13 @@ export class ConcentrationTableComponent {
       "name": this.analyzeName.value,
       "concentration_changes": _.fromPairs(this.conTable)
     };
-    console.log(data);
+
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
       data, this.login.optionByAuthorization())
-      .subscribe(() => {
+      .map(data => data.json())
+      .subscribe((data) => {
         this.notify.info('Analysis Start', 'Analysis in progress');
-        this.router.navigate(['/panel/past-analysis']);
+        this.router.navigate(['/panel/past-analysis', data['id']]);
       },
       error => {
         this.notify.error('Analysis Fail', error);

@@ -19,7 +19,7 @@ export const MetabolPanelRoutes: Routes = [{
     { path: 'profile', component: ProfileComponent },
     { path: 'past-analysis', component: PastAnalysisComponent },
     { path: 'changePassword', component: ChangePasswordComponent },
-    { path: 'past-subsystem/:key', component: PastAnalysisDetailComponent }
+    { path: 'past-analysis/:key', component: PastAnalysisDetailComponent }
   ]
 }];
 

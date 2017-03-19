@@ -24,7 +24,6 @@ import {MetabolPanelModule} from '../metabol.panel';
     FormsModule,
     HttpModule,
 
-    SimpleNotificationsModule,
 
     MetabolCommonModule,
     DocumentationModule,
@@ -33,6 +32,7 @@ import {MetabolPanelModule} from '../metabol.panel';
     SubsystemAnalyzeModule,
     MetabolPanelModule,
 
+    SimpleNotificationsModule,
     routing
   ],
   providers: [appRoutingProviders],
