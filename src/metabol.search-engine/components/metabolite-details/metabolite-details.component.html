@@ -22,6 +22,13 @@
           charge: {{metabolite.charge}}
         </p>
         <br>
+        <div class="row">
+          <div class="col-md-12">
+            <visualization-metabolite></visualization-metabolite>
+            <!-- <visualization [nodes]="nodes" [links]="links"></visualization> -->
+          </div>
+        </div>
+
         <div *ngIf="relatedReactions">
           <h4>
             <strong>Connected Reactions</strong>
@@ -39,7 +46,7 @@
               <tr *ngFor="let r of relatedReactions">
                 <td>
                   <a [routerLink]="['/reaction', r.id]">
-                    {{r.name}} 
+                    {{r.name}}
                   </a>
                 </td>
                 <td>

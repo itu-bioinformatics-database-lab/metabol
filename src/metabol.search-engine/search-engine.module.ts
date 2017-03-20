@@ -13,14 +13,15 @@ import {
   SubsystemDetailComponent
 } from './components';
 
-
+import {VisualizationModule} from "../metabol.visualization";
 import { searchEngineRouting} from './search-engine.routes';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    searchEngineRouting
+    searchEngineRouting,
+    VisualizationModule
   ],
   // providers: [searchEngineRoutingProviders],
   declarations: [

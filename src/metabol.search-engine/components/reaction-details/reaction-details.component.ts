@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { AppDataLoader } from '../../../metabol.common/services';
-
+import {ReactionVisualizationComponent} from '../../../metabol.visualization/components'
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-reaction-details',
@@ -12,6 +13,7 @@ export class ReactionDetailsComponent implements OnInit {
 
   reaction;
   relatedMetabolites;
+  relatedMetabolitesEscher;
 
   constructor(private route: ActivatedRoute, private loader: AppDataLoader) { }
 
@@ -21,6 +23,7 @@ export class ReactionDetailsComponent implements OnInit {
         this.reaction = recon.reactions[params['id']];
         this.relatedMetabolites = _.keys(this.reaction.metabolites)
           .map(x => recon.metabolites[x]);
+          this.relatedMetabolitesEscher =   this.relatedMetabolites.map(x => _.pick(x,["name","id"]));
       });
     });
   }

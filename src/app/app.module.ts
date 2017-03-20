@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import {DocumentationModule} from '../documentation';
 import {MetabolCommonModule} from '../metabol.common';
 import {SearchEngineModule} from "../metabol.search-engine";
+import {VisualizationModule} from "../metabol.visualization";
 import {MetabolAuthModule} from "../metabol.auth";
 import {SubsystemAnalyzeModule} from "../metabol.subsystem-analyze";
 import {MetabolPanelModule} from '../metabol.panel';
@@ -31,6 +32,7 @@ import {MetabolPanelModule} from '../metabol.panel';
     SearchEngineModule,
     SubsystemAnalyzeModule,
     MetabolPanelModule,
+    VisualizationModule,
 
     SimpleNotificationsModule,
     routing
