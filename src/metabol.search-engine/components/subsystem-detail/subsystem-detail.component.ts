@@ -20,7 +20,8 @@ export class SubsystemDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.loader.get('recon2', (recon) => {
-        this.reactions = recon.pathways[decodeURIComponent(params['id'])];
+        this.reactions = recon.pathways[decodeURIComponent(params['id'])]
+          .map(x => recon.reactions[x]);
       });
     });
   }

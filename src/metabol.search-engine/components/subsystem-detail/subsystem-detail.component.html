@@ -13,32 +13,7 @@
             </a>
         </td>
         <td class="col-md-8">
-          <chemical-equation [metabolites]="r.formula" [selectedMetabolite]="{}"></chemical-equation>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">
-      Connected Subsystems
-    </h3>
-  </div>
-  <table class="table table-hover">
-    <tbody>
-      <tr *ngFor="let s of connectedSubsystems">
-        <td>
-          <a [routerLink]="['..', encodeURIComponent(s.subsystem)]">
-            {{s.subsystem}}
-          </a>
-        </td>
-        <td>
-          <span *ngFor="let m of s.metabolites">
-            <a [routerLink]="['/metabolite', m.id]">
-              {{ m.name }}
-            </a>,
-        </span>
+          <chemical-equation [metabolites]="r.metabolites" [selectedMetabolite]="{}"></chemical-equation>
         </td>
       </tr>
     </tbody>
