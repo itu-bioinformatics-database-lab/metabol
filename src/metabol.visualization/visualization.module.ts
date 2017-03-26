@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import {
   ReactionVisualizationComponent,
   MetaboliteVisualizationComponent
 } from './components';
 
-
+import {EscherService} from './services'
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-
   ],
-
   declarations: [
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent
   ],
-
-  exports:[
+  providers: [
+    EscherService
+  ],
+  exports: [
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent
   ]
