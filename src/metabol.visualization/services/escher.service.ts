@@ -1,9 +1,10 @@
+import {Http} from "@angular/http";
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EscherService {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   options = {
     use_3d_transform: false,
@@ -51,6 +52,12 @@ export class EscherService {
     escher.Builder(null, this.escherModel(model), null, element, this.options);
   }
 
+  buildPathwayMap(pathway, model, element) {
+    this.http.get('/assets/datasets/visualizations/tryptophan-metabolism.json').map(data => data.json()).subscribe(data => {
+      escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options);
+    });
+  }
+
   escherModel(model) {
     return {
       metabolites: _.values(model.metabolites),
@@ -61,6 +68,14 @@ export class EscherService {
 
   selected_metabolite_index(map, metabolite_id) {
     return _.toPairs(map.nodes).filter(x => x[1].bigg_id == metabolite_id)[0][0];
+  }
+
+  escherModelForPathway(model, pathway) {
+    return {
+      metabolites: _.values(model.metabolites),
+      reactions: _.values(model.reactions).filter(x => x['subsystem'] == pathway),
+      genes: []
+    }
   }
 
 }

@@ -13,7 +13,6 @@ export class MetaboliteDetailsComponent implements OnInit {
 
   metabolite;
   relatedReactions;
-  relatedReactionEscher;
 
   constructor(private route: ActivatedRoute, private loader: AppDataLoader) { }
 
@@ -24,9 +23,6 @@ export class MetaboliteDetailsComponent implements OnInit {
         // console.log(this.metabolite)
         this.relatedReactions = this.metabolite.reactions
           .map(x => recon.reactions[x]);
-          this.relatedReactionEscher =   this.relatedReactions.map(x => _.pick(x,["id","name","upper_bound","lower_bound", "metabolites"]));
-          console.log(this.relatedReactionEscher);
-
       });
     });
   }

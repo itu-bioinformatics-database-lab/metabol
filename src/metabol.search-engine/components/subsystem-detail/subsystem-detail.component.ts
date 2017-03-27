@@ -11,17 +11,20 @@ import * as _ from 'lodash';
 })
 export class SubsystemDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private loader: AppDataLoader) { }
+  constructor(
+    private route: ActivatedRoute,
+    private loader: AppDataLoader) { }
 
+  pathway: string;
   reactions: any[];
   connectedSubsystems: string[];
-  encodeURIComponent = encodeURIComponent;
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.loader.get('recon2', (recon) => {
-        this.reactions = recon.pathways[decodeURIComponent(params['id'])]
-          .map(x => recon.reactions[x]);
+        this.pathway = decodeURIComponent(params['id']);
+        this.reactions = recon.pathways[this.pathway].map(x => recon.reactions[x]);
+
       });
     });
   }

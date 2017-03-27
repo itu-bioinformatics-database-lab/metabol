@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import {
   ReactionVisualizationComponent,
-  MetaboliteVisualizationComponent
+  MetaboliteVisualizationComponent,
+  PathwayVisualizationComponent
 } from './components';
 
 import {EscherService} from './services'
@@ -14,14 +15,16 @@ import {EscherService} from './services'
   ],
   declarations: [
     ReactionVisualizationComponent,
-    MetaboliteVisualizationComponent
+    MetaboliteVisualizationComponent,
+    PathwayVisualizationComponent
   ],
   providers: [
     EscherService
   ],
   exports: [
     ReactionVisualizationComponent,
-    MetaboliteVisualizationComponent
+    MetaboliteVisualizationComponent,
+    PathwayVisualizationComponent
   ]
 })
 export class VisualizationModule { }
