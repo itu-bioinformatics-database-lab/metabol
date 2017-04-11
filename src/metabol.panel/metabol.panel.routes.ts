@@ -15,7 +15,7 @@ export const MetabolPanelRoutes: Routes = [{
   component: PanelComponent,
   canActivate: [AuthGuard],
   children: [
-    { path: '', redirectTo: 'profile' },
+    { path: '', redirectTo: 'profile', pathMatch: 'full' },
     { path: 'profile', component: ProfileComponent },
     { path: 'past-analysis', component: PastAnalysisComponent },
     { path: 'changePassword', component: ChangePasswordComponent },

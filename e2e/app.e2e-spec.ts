@@ -1,6 +1,6 @@
 import { MetabolPage } from './app.po';
 
-describe('metabol App', function() {
+describe('metabol App', () => {
   let page: MetabolPage;
 
   beforeEach(() => {

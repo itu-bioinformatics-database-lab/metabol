@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
   selector: 'app-panel',
   templateUrl: 'panel.component.html',
   styleUrls: [
-    './css/font-awesome.min.css',
     './css/sb-admin-2.css',
     './panel.component.css'
   ],
