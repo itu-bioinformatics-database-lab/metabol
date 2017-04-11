@@ -13,9 +13,12 @@
         <p *ngIf="reaction.name">
           name: {{reaction.name}}
         </p>
+        <p *ngIf="reaction.name">
+          pathway: {{ reaction.subsystem }}
+        </p>
         <p *ngIf="reaction.lower_bound && reaction.upper_bound">
           reversible: {{ reaction.lower_bound
-          < 0 && reaction.upper_bound> 0 }}
+          < 0 && reaction.upper_bound > 0 }}
         </p>
         <p *ngIf="reaction.upper_bound">
           upper_bound: {{reaction.upper_bound}}
