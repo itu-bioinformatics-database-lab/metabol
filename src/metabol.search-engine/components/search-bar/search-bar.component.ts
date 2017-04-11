@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 
 export class SearchBarComponent {
 
-  query: String;
+  query: string;
   recon: any;
   filteredMetabolites = [];
   filteredReactions = [];

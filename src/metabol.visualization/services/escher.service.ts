@@ -54,7 +54,8 @@ export class EscherService {
   }
 
   buildPathwayMap(pathway, model, element) {
-    this.http.get(`/assets/datasets/visualizations/${pathway}.json`)
+    let pathwayName = pathway.split(' ').join('-').split('/').join('-').toLowerCase();
+    this.http.get(`assets/datasets/visualizations/${pathwayName}.json`)
       .map(data => data.json()).subscribe(data =>
         escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options)
       , () =>

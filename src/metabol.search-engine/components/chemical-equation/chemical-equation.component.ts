@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 })
 export class ChemicalEquationComponent {
   @Input() metabolites: any[];
-  @Input() selectedMetabolite: Object;
+  @Input() selectedMetabolite: { id: string, stoichiometry: number };
   reactants: Array<{ id: string, stoichiometry: number }>;
   products: Array<{ id: string, stoichiometry: number }>;
 
