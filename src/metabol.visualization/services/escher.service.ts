@@ -53,9 +53,12 @@ export class EscherService {
   }
 
   buildPathwayMap(pathway, model, element) {
-    this.http.get('/assets/datasets/visualizations/tryptophan-metabolism.json').map(data => data.json()).subscribe(data => {
-      escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options);
-    });
+    this.http.get(`/assets/datasets/visualizations/${pathway}.json`)
+      .map(data => data.json()).subscribe(data =>
+        escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options)
+      , () =>
+        escher.Builder(null, this.escherModelForPathway(model, pathway), null, element, this.options)
+      );
   }
 
   escherModel(model) {
