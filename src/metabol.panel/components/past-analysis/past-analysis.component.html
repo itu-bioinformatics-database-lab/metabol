@@ -2,17 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-
+        <button type="button" class="btn btn-default" (click)="submit()">
+          Compare
+        </button>
         <div class="panel panel-default">
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let i of data">
-
-              <i class="glyphicon glyphicon-{{i.status ?  'saved' : 'time' }}"></i>
-              <a [routerLink]="['/panel/past-analysis', i.id]">
+            <ul class="list-group" [formGroup]="form">
+              <li class="list-group-item" *ngFor="let i of data">
+                <input type="checkbox" [formControlName]="i.id" />
+                <i class="glyphicon glyphicon-{{i.status ?  'saved' : 'time' }}"></i>
+                <a [routerLink]="['/panel/past-analysis', i.id]">
                  {{i.name}} - ({{i.status ?  'done' : 'running' }})
-              </a>
-            </li>
-          </ul>
+                </a>
+              </li>
+            </ul>
         </div>
 
       </div>

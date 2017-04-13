@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {SubsystemAnalyzeModule} from '../metabol.subsystem-analyze';
+import {SubsystemAnalyzeModule} from "../metabol.subsystem-analyze";
 
 import {
   PanelComponent,
   ProfileComponent,
   PastAnalysisComponent,
   ChangePasswordComponent,
-  PastAnalysisDetailComponent
+  PastAnalysisDetailComponent,
+  CompareAnalysisComponent
 } from "./components";
 
 import {LoginService} from '../metabol.auth/services/login/login.service';
@@ -23,6 +24,7 @@ import {PanelRoutesRoutingProviders, PanelRoutesRouting} from './metabol.panel.r
     ChangePasswordComponent,
     PastAnalysisComponent,
     PastAnalysisDetailComponent,
+    CompareAnalysisComponent,
   ],
   imports: [
     BrowserModule,

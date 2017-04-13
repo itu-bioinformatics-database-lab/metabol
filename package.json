@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^4.0.1",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -20,15 +21,16 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "@angular/animations": "^4.0.1",
+    "angular2-highcharts": "^0.5.5",
     "angular2-notifications": "^0.5.6",
     "core-js": "^2.4.1",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4",
-    "lodash": "^4.15.0",
     "d3": "^3.0.0",
     "escher-vis": "^1.6.0",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "lodash": "^4.15.0",
+    "ngx-pipes": "^1.5.8",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
