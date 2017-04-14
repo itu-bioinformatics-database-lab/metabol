@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import {SubsystemAnalyzeModule} from "../metabol.subsystem-analyze";
+import { VisualizationModule } from '../metabol.visualization';
 
 import {
   PanelComponent,
@@ -33,7 +34,8 @@ import {PanelRoutesRoutingProviders, PanelRoutesRouting} from './metabol.panel.r
     HttpModule,
 
     PanelRoutesRouting,
-    SubsystemAnalyzeModule
+    SubsystemAnalyzeModule,
+    VisualizationModule
   ],
   providers: [
     LoginService,

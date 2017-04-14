@@ -18,7 +18,7 @@ import {MetabolPanelModule} from '../metabol.panel';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent    
   ],
   imports: [
     BrowserModule,

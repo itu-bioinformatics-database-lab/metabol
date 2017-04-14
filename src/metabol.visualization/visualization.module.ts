@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import {
   ReactionVisualizationComponent,
   MetaboliteVisualizationComponent,
-  PathwayVisualizationComponent
+  PathwayVisualizationComponent,
+  PathwayHeatmapComponent
 } from './components';
 
 import {EscherService} from './services'
@@ -16,7 +17,8 @@ import {EscherService} from './services'
   declarations: [
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent,
-    PathwayVisualizationComponent
+    PathwayVisualizationComponent,
+    PathwayHeatmapComponent
   ],
   providers: [
     EscherService
@@ -24,7 +26,8 @@ import {EscherService} from './services'
   exports: [
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent,
-    PathwayVisualizationComponent
+    PathwayVisualizationComponent,
+    PathwayHeatmapComponent
   ]
 })
 export class VisualizationModule { }
