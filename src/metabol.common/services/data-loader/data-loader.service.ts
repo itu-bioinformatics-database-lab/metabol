@@ -1,5 +1,5 @@
-import {Http} from '@angular/http';
-import {Injectable} from "@angular/core";
+import { Http } from '@angular/http';
+import { Injectable } from "@angular/core";
 import * as _ from 'lodash';
 
 /**
@@ -11,6 +11,7 @@ export class AppDataLoader {
   constructor(private http: Http) { }
 
   get(collection: string, callback: (data) => void) {
+    // ToDo: set app version to setting and check if do not match then clean localStorage
     let localCol = localStorage.getItem(collection);
     if (localCol) callback(JSON.parse(localCol));
     else this.http

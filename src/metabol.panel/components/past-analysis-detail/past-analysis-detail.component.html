@@ -1,6 +1,27 @@
 <h1>
   {{ data?.name }} ({{data?.status ?  'done' : 'running' }})
 </h1>
-<p>
-  {{ data?.result | json }}
-</p>
+<div *ngIf="data?.results">
+  <div>
+    <pathway-histogram [pathwayScores]="data.results.pathway"></pathway-histogram>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> </th>
+        <th> Pathway </th>
+        <th> Diff Score </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of data.results.pathway[0] | pairs ">
+        <td>
+	  <i (click)="openPathwayDialog(r[0])" class="fa fa-lg fa-line-chart fa-border fa-pull-left"></i>
+	  <i (click)="openReactionDialog(r[0])" class="fa fa-lg fa-table fa-border fa-pull-left"></i>
+        </td>
+        <td> {{ r[0] }} </td>
+        <td> {{ r[1] }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

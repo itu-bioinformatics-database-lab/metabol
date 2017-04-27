@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-pathway-histogram',
+  templateUrl: './pathway-histogram.component.html',
+  styleUrls: ['./pathway-histogram.component.css']
+})
+export class PathwayHistogramComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

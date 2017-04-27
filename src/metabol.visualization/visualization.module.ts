@@ -5,20 +5,26 @@ import {
   ReactionVisualizationComponent,
   MetaboliteVisualizationComponent,
   PathwayVisualizationComponent,
-  PathwayHeatmapComponent
+  PathwayHeatmapComponent,
+  PathwayHistogramComponent
 } from './components';
 
-import {EscherService} from './services'
+import { MdDialogModule } from '@angular/material';
+
+
+import { EscherService } from './services'
 
 @NgModule({
   imports: [
     CommonModule,
+    MdDialogModule
   ],
   declarations: [
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent,
     PathwayVisualizationComponent,
-    PathwayHeatmapComponent
+    PathwayHeatmapComponent,
+    PathwayHistogramComponent
   ],
   providers: [
     EscherService
@@ -27,7 +33,8 @@ import {EscherService} from './services'
     ReactionVisualizationComponent,
     MetaboliteVisualizationComponent,
     PathwayVisualizationComponent,
-    PathwayHeatmapComponent
+    PathwayHeatmapComponent,
+    PathwayHistogramComponent
   ]
 })
 export class VisualizationModule { }

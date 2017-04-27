@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
+import { Component, OnInit, Input } from '@angular/core';
+import * as _ from 'lodash';
+
 
 declare var Plotly: any;
 
@@ -10,7 +11,7 @@ declare var Plotly: any;
 })
 export class PathwayHeatmapComponent implements OnInit {
 
-  constructor(private http: Http) { }
+  constructor() { }
 
   data = [{
     x: ['a', 'b', 'c'],
@@ -18,19 +19,18 @@ export class PathwayHeatmapComponent implements OnInit {
     type: 'heatmap',
   }];
 
-  ngOnInit() {
-    // this.http.get('assets/datasets/healties_heatmap.json')
-    //   .map(data => data.json())
-    //   .subscribe(data => this.data = data);
-  }
+  @Input() pathwayScores: Array<object>;
+
+  ngOnInit() { }
 
   ngAfterViewInit() {
-    this.http.get('assets/datasets/healties_heatmap.json')
-      .map(data => data.json())
-      .subscribe(data => {
-        data.margin = { b: 500 }
-        Plotly.plot('heatmap', [data]);
-      });
+    this.data[0].x = Object.keys(this.pathwayScores[0]);
+    this.data[0].z = [];
+
+    for (let scores of this.pathwayScores)
+      this.data[0].z.push(_.sortBy(_.toPairs(scores), [(x) => x[0]]).map(x => x[1]));
+
+    Plotly.plot('heatmap', this.data);
   }
 
 }

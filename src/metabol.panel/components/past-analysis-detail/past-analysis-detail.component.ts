@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
-import {ActivatedRoute} from '@angular/router';
-import {LoginService} from "../../../metabol.auth/services";
-import {AppSettings} from "../../../app";
+import { Http } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
+import { MdDialog, MdDialogRef } from '@angular/material';
+
+import { LoginService } from "../../../metabol.auth/services";
+import { AppSettings } from "../../../app";
+import { DialogPathwayVisualizationComponent } from '../dialog-pathway-visualization';
+import { DialogReactionResultsComponent } from '../dialog-reaction-results';
 
 
 @Component({
@@ -14,7 +18,11 @@ export class PastAnalysisDetailComponent implements OnInit {
 
   data;
 
-  constructor(private http: Http, private login: LoginService, private route: ActivatedRoute) { }
+  constructor(
+    private http: Http,
+    private login: LoginService,
+    private route: ActivatedRoute,
+    private dialog: MdDialog) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -29,5 +37,18 @@ export class PastAnalysisDetailComponent implements OnInit {
       .subscribe((data) => {
         this.data = data;
       });
+  }
+
+  openReactionDialog(pathway) {
+    let dialogRef = this.dialog.open(DialogReactionResultsComponent);
+    dialogRef.componentInstance.fluxData = this.data.results.reaction[0];
+    dialogRef.componentInstance.pathway = pathway;
+  }
+
+  openPathwayDialog(pathway) {
+    let dialogRef = this.dialog.open(DialogPathwayVisualizationComponent, {
+      width: '1000px',
+    });
+    dialogRef.componentInstance.pathway = pathway.split('_')[0];
   }
 }
