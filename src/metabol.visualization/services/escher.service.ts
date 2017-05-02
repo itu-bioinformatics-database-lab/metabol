@@ -1,4 +1,4 @@
-import {Http} from "@angular/http";
+import { Http } from "@angular/http";
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
@@ -53,12 +53,13 @@ export class EscherService {
     escher.Builder(null, this.escherModel(model), null, element, this.options);
   }
 
-  buildPathwayMap(pathway, model, element) {
+  buildPathwayMap(pathway, model, element, callback?: (d) => void) {
     let pathwayName = pathway.split(' ').join('-').split('/').join('-').toLowerCase();
     this.http.get(`assets/datasets/visualizations/${pathwayName}.json`)
-      .map(data => data.json()).subscribe(data =>
-        escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options)
-      , () =>
+      .map(data => data.json()).subscribe(data => {
+        let m = escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options);
+        callback(m);
+      }, () =>
         escher.Builder(null, this.escherModelForPathway(model, pathway), null, element, this.options)
       );
   }
@@ -81,6 +82,18 @@ export class EscherService {
       reactions: _.values(model.reactions).filter(x => x['subsystem'] == pathway),
       genes: []
     }
+  }
+
+  setFluxData(model, fluxes) {
+
+    let ff = _.keys(fluxes[0])
+      .filter(x => x.split('_')[1] == 'max')
+      .map(x => x.split('_')[0]);
+
+    let fff = _.zipObject(ff, _.values(fluxes[0]));
+    console.log(fff);
+
+    model.set_reaction_data(fff);
   }
 
 }

@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnChanges, Input} from '@angular/core';
+import { Component, ElementRef, OnChanges, Input } from '@angular/core';
 import { AppDataLoader } from '../../../metabol.common/services';
-import {EscherService} from '../../services';
+import { EscherService } from '../../services';
 import * as d3 from 'd3';
 
 @Component({
@@ -11,6 +11,7 @@ import * as d3 from 'd3';
 export class PathwayVisualizationComponent implements OnChanges {
 
   @Input() name;
+  @Input() fluxes?: Array<any>;
 
   constructor(
     private loader: AppDataLoader,
@@ -20,7 +21,9 @@ export class PathwayVisualizationComponent implements OnChanges {
   ngOnChanges() {
     this.loader.get('recon2', (recon) => {
       let element = d3.select(this.elementRef.nativeElement).select('#map_container_3');
-      this.escher.buildPathwayMap(this.name, recon, element);
+      this.escher.buildPathwayMap(this.name, recon, element, (m) => {
+        if (this.fluxes) this.escher.setFluxData(m, this.fluxes);
+      });
     });
   }
 

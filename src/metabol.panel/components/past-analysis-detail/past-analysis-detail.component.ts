@@ -50,5 +50,6 @@ export class PastAnalysisDetailComponent implements OnInit {
       width: '1000px',
     });
     dialogRef.componentInstance.pathway = pathway.split('_')[0];
+    dialogRef.componentInstance.fluxes = this.data.results.reaction;
   }
 }
