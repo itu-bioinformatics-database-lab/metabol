@@ -85,15 +85,7 @@ export class EscherService {
   }
 
   setFluxData(model, fluxes) {
-
-    let ff = _.keys(fluxes[0])
-      .filter(x => x.split('_')[1] == 'max')
-      .map(x => x.split('_')[0]);
-
-    let fff = _.zipObject(ff, _.values(fluxes[0]));
-    console.log(fff);
-
-    model.set_reaction_data(fff);
+    model.set_reaction_data(fluxes);
   }
 
 }

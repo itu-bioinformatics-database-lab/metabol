@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import { AppDataLoader } from '../../../metabol.common/services'
+import * as _ from 'lodash';
 
 
 @Component({
@@ -12,15 +13,17 @@ export class DialogReactionResultsComponent implements OnInit {
 
   constructor(public dialogRef: MdDialogRef<DialogReactionResultsComponent>, private loader: AppDataLoader) { }
 
+  page: number;
   pathway: string;
-  fluxData: Array<any>;
+  fluxes: Array<any>;
   reactions: Array<any>;
 
   ngOnInit() {
     this.loader.get('recon2', (recon) => {
       this.reactions = [];
-      recon.pathways[this.pathway.split("_")[0]]
-        .forEach(x => this.reactions.push([x, this.fluxData[`${x}_max`]]));
+      for (let r of recon.pathways[this.pathway])
+        this.reactions.push([r, this.fluxes[r]]);
+      this.reactions = _.orderBy(this.reactions, [(x) => Math.abs(x[1])], ['desc']);
     });
   }
 

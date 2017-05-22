@@ -8,53 +8,58 @@ import { VisualizationModule } from '../metabol.visualization';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { MdDialogModule } from '@angular/material'
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 import {
-    PanelComponent,
-    ProfileComponent,
-    PastAnalysisComponent,
-    ChangePasswordComponent,
-    PastAnalysisDetailComponent,
-    CompareAnalysisComponent,
-    DialogPathwayVisualizationComponent,
-    DialogReactionResultsComponent,
+  PanelComponent,
+  ProfileComponent,
+  PastAnalysisComponent,
+  ChangePasswordComponent,
+  PastAnalysisDetailComponent,
+  CompareAnalysisComponent,
+  DialogPathwayVisualizationComponent,
+  DialogReactionResultsComponent,
 } from "./components";
 
 import { LoginService } from '../metabol.auth/services/login/login.service';
 import { PanelRoutesRoutingProviders, PanelRoutesRouting } from './metabol.panel.routes';
 
 @NgModule({
-    declarations: [
-        PanelComponent,
-        ProfileComponent,
-        ChangePasswordComponent,
-        PastAnalysisComponent,
-        PastAnalysisDetailComponent,
-        CompareAnalysisComponent,
-        DialogPathwayVisualizationComponent,
-        DialogReactionResultsComponent
-    ],
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        FormsModule,
-        HttpModule,
+  declarations: [
+    PanelComponent,
+    ProfileComponent,
+    ChangePasswordComponent,
+    PastAnalysisComponent,
+    PastAnalysisDetailComponent,
+    CompareAnalysisComponent,
+    DialogPathwayVisualizationComponent,
+    DialogReactionResultsComponent
+  ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpModule,
 
-        NgPipesModule,
+    NgPipesModule,
+    NgxPaginationModule,
+    NgxDatatableModule,
 
-        PanelRoutesRouting,
-        SubsystemAnalyzeModule,
-        VisualizationModule,
-        MdDialogModule
-    ],
-    providers: [
-        LoginService,
-        PanelRoutesRoutingProviders,
-    ],
-    exports: [],
-    entryComponents: [
-        DialogPathwayVisualizationComponent,
-        DialogReactionResultsComponent,
-    ]
+    PanelRoutesRouting,
+    SubsystemAnalyzeModule,
+    VisualizationModule,
+    MdDialogModule
+  ],
+  providers: [
+    LoginService,
+    PanelRoutesRoutingProviders,
+  ],
+  exports: [],
+  entryComponents: [
+    DialogPathwayVisualizationComponent,
+    DialogReactionResultsComponent,
+  ]
 })
 export class MetabolPanelModule { }

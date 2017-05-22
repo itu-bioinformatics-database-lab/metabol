@@ -8,6 +8,7 @@ import { AppSettings } from "../../../app";
 import { DialogPathwayVisualizationComponent } from '../dialog-pathway-visualization';
 import { DialogReactionResultsComponent } from '../dialog-reaction-results';
 
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-past-analysis-detail',
@@ -17,6 +18,12 @@ import { DialogReactionResultsComponent } from '../dialog-reaction-results';
 export class PastAnalysisDetailComponent implements OnInit {
 
   data;
+  tableData;
+
+  columns = [
+    { name: 'Name' },
+    { name: 'Score', comparator: this.scoreComparator.bind(this) }
+  ];
 
   constructor(
     private http: Http,
@@ -36,12 +43,13 @@ export class PastAnalysisDetailComponent implements OnInit {
       .map(res => res.json())
       .subscribe((data) => {
         this.data = data;
+        this.tableData = this.convertToTableData(data.results.pathway[0]);
       });
   }
 
   openReactionDialog(pathway) {
     let dialogRef = this.dialog.open(DialogReactionResultsComponent);
-    dialogRef.componentInstance.fluxData = this.data.results.reaction[0];
+    dialogRef.componentInstance.fluxes = this.data.results.reaction[0];
     dialogRef.componentInstance.pathway = pathway;
   }
 
@@ -49,7 +57,19 @@ export class PastAnalysisDetailComponent implements OnInit {
     let dialogRef = this.dialog.open(DialogPathwayVisualizationComponent, {
       width: '1000px',
     });
-    dialogRef.componentInstance.pathway = pathway.split('_')[0];
-    dialogRef.componentInstance.fluxes = this.data.results.reaction;
+    dialogRef.componentInstance.pathway = pathway;
+    dialogRef.componentInstance.fluxes = this.data.results.reaction[0];
   }
+
+  convertToTableData(pathwayScores) {
+    return _.toPairs(pathwayScores).map(x => {
+      return { 'name': x[0], 'score': x[1] };
+    });
+  }
+
+  scoreComparator(s1, s2) {
+    console.log(s1);
+    return Math.abs(s1) > Math.abs(s2) ? 1 : -1;
+  }
+
 }
