@@ -1,6 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthGuard} from "../metabol.auth";
+import { AuthGuard } from "../metabol.auth";
 import {
   PanelComponent,
   ProfileComponent,
@@ -21,7 +21,7 @@ export const MetabolPanelRoutes: Routes = [{
     { path: 'past-analysis', component: PastAnalysisComponent },
     { path: 'changePassword', component: ChangePasswordComponent },
     { path: 'past-analysis/:key', component: PastAnalysisDetailComponent },
-    { path: 'compare-analysis/:key1/:key2', component: CompareAnalysisComponent }
+    { path: 'compare-analysis', component: CompareAnalysisComponent }
   ]
 }];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 
 declare var Plotly: any;
@@ -8,7 +8,7 @@ declare var Plotly: any;
   templateUrl: './pathway-histogram.component.html',
   styleUrls: ['./pathway-histogram.component.css']
 })
-export class PathwayHistogramComponent implements OnInit {
+export class PathwayHistogramComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 

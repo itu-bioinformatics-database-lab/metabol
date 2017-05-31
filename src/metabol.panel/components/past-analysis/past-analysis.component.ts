@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
-import {Router} from '@angular/router';
-
-import {AppSettings} from "../../../app";
-import {LoginService} from "../../../metabol.auth/services";
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+
+import { AppSettings } from "../../../app";
+import { LoginService } from "../../../metabol.auth/services";
 import * as _ from 'lodash';
 
 
@@ -31,16 +31,13 @@ export class PastAnalysisComponent implements OnInit {
   }
 
   createForm() {
-    console.log(this.data);
-    this.form = this.fb.group(_.zipObject(
-      this.data.map(x => x.id),
-      _.times(this.data.length, _.constant(new FormControl(false)))
-    ));
+    this.form = this.fb.group(_.zipObject(this.data.map(x => x.id),
+      _.times(this.data.length, _.constant([false]))));
   }
 
   submit() {
-    console.log(this.form.value);
-    this.router.navigate(['panel', 'compare-analysis', 1, 2])
+    let selecteds = _.toPairs(this.form.value).filter(x => x[1]).map(x => x[0]);
+    this.router.navigate(['panel', 'compare-analysis', selecteds]);
   }
 
 }
