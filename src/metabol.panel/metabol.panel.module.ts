@@ -21,7 +21,8 @@ import {
   CompareAnalysisComponent,
   DialogPathwayVisualizationComponent,
   DialogReactionResultsComponent,
-  ResultTableComponent
+  ResultTableComponent,
+  SimilarDiseasesComponent
 } from "./components";
 
 import { LoginService } from '../metabol.auth/services/login/login.service';
@@ -37,7 +38,8 @@ import { PanelRoutesRoutingProviders, PanelRoutesRouting } from './metabol.panel
     CompareAnalysisComponent,
     DialogPathwayVisualizationComponent,
     DialogReactionResultsComponent,
-    ResultTableComponent
+    ResultTableComponent,
+    SimilarDiseasesComponent
   ],
   imports: [
     BrowserModule,
