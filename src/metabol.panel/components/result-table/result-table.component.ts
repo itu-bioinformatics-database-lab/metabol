@@ -24,7 +24,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges() {
-    let tableData = Object.keys(this.data[0].results.pathway[0])
+    let tableData = Object.keys(this.data[0].results_pathway[0])
       .map(x => ({ name: x }));
 
     this.columns = [{ name: 'Name' }];
@@ -35,7 +35,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
       this.columns.push({ prop: analysisName });
       this.analysisNames.push(analysisName);
       for (let t of tableData)
-        t[analysisName] = this.data[i].results.pathway[0][t.name];
+        t[analysisName] = this.data[i].results_pathway[0][t.name];
     }
     this.tableData = tableData;
   }
@@ -43,7 +43,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
   openReactionDialog(pathway, index) {
     let dialogRef = this.dialog.open(DialogReactionResultsComponent);
     dialogRef.componentInstance.pathway = pathway;
-    dialogRef.componentInstance.fluxes = this.data[index].results.reaction[0];
+    dialogRef.componentInstance.fluxes = this.data[index].results_reaction[0];
   }
 
   openPathwayDialog(pathway, index) {
@@ -51,7 +51,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
       width: '1000px',
     });
     dialogRef.componentInstance.pathway = pathway;
-    dialogRef.componentInstance.fluxes = this.data[index].results.reaction[0];
+    dialogRef.componentInstance.fluxes = this.data[index].results_reaction[0];
   }
 
   scoreComparator(s1, s2) {

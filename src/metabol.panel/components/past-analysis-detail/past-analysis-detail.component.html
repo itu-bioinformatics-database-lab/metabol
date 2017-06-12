@@ -1,9 +1,9 @@
 <h1>
   {{ data?.name }} ({{data?.status ?  'done' : 'running' }})
 </h1>
-<div *ngIf="data?.results">
+<div *ngIf="data?.results_pathway">
   <div>
-    <pathway-histogram [pathwayScores]="data.results.pathway"></pathway-histogram>
+    <pathway-histogram [pathwayScores]="data.results_pathway"></pathway-histogram>
   </div>
   <div>
     <similar-diseases></similar-diseases>
