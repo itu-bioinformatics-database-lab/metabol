@@ -1,26 +1,16 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Disease</th>
-      <th>Similarity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Celiac Disease Adult (>18 years old)#Male#Blood#</td>
-      <td>0.9</td>
-    </tr>
-    <tr>
-      <td>Heart Transplant Adult (>18 years old)#Female#Blood#</td>
-      <td>0.2</td>
-    </tr>
-    <tr>
-      <td>Gastroesophageal Reflux Disease Children (1 - 13 years old)#Not Specified#Urine#</td>
-      <td>0.15</td>
-    </tr>
-    <tr>
-      <td>Lewy Body Disease Adult (>18 years old)#Male#Saliva#</td>
-      <td>0.01</td>
-    </tr>
-  </tbody>
-</table>
+<div class="panel panel-default">
+	<table *ngIf="diseases" class="table table-hover">
+		<thead>
+			<tr>
+				<th>Disease</th>
+				<th>Similarity</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let p of diseases | pairs">
+				<td>{{ p[0] }}</td>
+				<td>{{ p[1] }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

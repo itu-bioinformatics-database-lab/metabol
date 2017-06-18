@@ -15,24 +15,30 @@ import * as _ from 'lodash';
 })
 export class PastAnalysisComponent implements OnInit {
 
-  data: Array<any>;
+  data = { list: [], disease: [] };
   form = new FormGroup({});
 
   constructor(private http: Http, private fb: FormBuilder, private login: LoginService, private router: Router) { }
 
   ngOnInit() {
-    let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/list`;
+    ['list', 'disease'].forEach(x => this.getData(x));
+  }
+
+  getData(type: string) {
+    let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/${type}`;
+
     this.http.get(apiUrl, this.login.optionByAuthorization())
       .map(res => res.json())
-      .subscribe((data) => {
-        this.data = data;
+      .subscribe((d) => {
+        this.data[type] = d;
         this.createForm();
       });
   }
 
   createForm() {
-    this.form = this.fb.group(_.zipObject(this.data.map(x => x.id),
-      _.times(this.data.length, _.constant([false]))));
+    let combined_data = [...this.data.list, ...this.data.disease];
+    this.form = this.fb.group(_.zipObject(combined_data.map(x => x.id),
+      _.times(combined_data.length, _.constant([false]))));
   }
 
   submit() {

@@ -17,6 +17,7 @@ import * as _ from 'lodash';
 })
 export class PastAnalysisDetailComponent implements OnInit {
 
+  id;
   data;
 
   constructor(
@@ -26,12 +27,13 @@ export class PastAnalysisDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.getData(params['key']);
+      this.id = params['key'];
+      this.getData();
     });
   }
 
-  getData(id) {
-    let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/detail/${id}`;
+  getData() {
+    let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/detail/${this.id}`;
     this.http.get(apiUrl, this.login.optionByAuthorization())
       .map(res => res.json())
       .subscribe((data) => {
