@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 import { AppSettings } from "../../../app";
@@ -15,13 +15,32 @@ import * as _ from 'lodash';
 })
 export class PastAnalysisComponent implements OnInit {
 
-  data = { list: [], disease: [] };
+  data = { list: [], disease: [], public: [], results: [] };
   form = new FormGroup({});
 
-  constructor(private http: Http, private fb: FormBuilder, private login: LoginService, private router: Router) { }
+  constructor(
+    private http: Http,
+    private fb: FormBuilder,
+    private login: LoginService,
+    private actRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    ['list', 'disease'].forEach(x => this.getData(x));
+    this.actRoute.params.subscribe(params => {
+      if (params['query'])
+        this.search(params['query']);
+      else
+        ['list', 'disease', 'public'].forEach(x => this.getData(x));
+    });
+  }
+
+  search(query) {
+    this.http.get(`${AppSettings.API_ENDPOINT}/analysis/search/${query}`)
+      .map(res => res.json())
+      .subscribe(d => {
+        this.data.results = d;
+        this.createForm();
+      });
   }
 
   getData(type: string) {
@@ -36,14 +55,17 @@ export class PastAnalysisComponent implements OnInit {
   }
 
   createForm() {
-    let combined_data = [...this.data.list, ...this.data.disease];
+    let combined_data = [];
+    for (let t in this.data)
+      combined_data = combined_data.concat(this.data[t]);
+
     this.form = this.fb.group(_.zipObject(combined_data.map(x => x.id),
       _.times(combined_data.length, _.constant([false]))));
   }
 
   submit() {
     let selecteds = _.toPairs(this.form.value).filter(x => x[1]).map(x => x[0]);
-    this.router.navigate(['panel', 'compare-analysis', selecteds]);
+    this.router.navigate(['compare-analysis', selecteds]);
   }
 
 }

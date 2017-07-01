@@ -8,3 +8,4 @@ export { DialogPathwayVisualizationComponent } from './dialog-pathway-visualizat
 export { DialogReactionResultsComponent } from './dialog-reaction-results';
 export { ResultTableComponent } from './result-table';
 export { SimilarDiseasesComponent } from './similar-diseases'
+export { AnalysisListComponent } from './analysis-list'

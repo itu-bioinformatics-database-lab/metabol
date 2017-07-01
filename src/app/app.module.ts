@@ -20,7 +20,7 @@ import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
