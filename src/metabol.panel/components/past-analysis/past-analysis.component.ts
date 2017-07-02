@@ -27,8 +27,12 @@ export class PastAnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.actRoute.params.subscribe(params => {
-      if (params['query'])
-        this.search(params['query']);
+      let searchResults = JSON.parse(localStorage.getItem('search-results'));
+      if (searchResults) {
+        this.data.results = searchResults;
+        this.createForm();
+        localStorage.removeItem('search-results');
+      }
       else
         ['list', 'disease', 'public'].forEach(x => this.getData(x));
     });

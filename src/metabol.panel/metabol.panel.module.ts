@@ -23,7 +23,7 @@ import {
   DialogReactionResultsComponent,
   ResultTableComponent,
   SimilarDiseasesComponent,
-  AnalysisListComponent
+  AnalysisListComponent,
 } from "./components";
 
 import { LoginService } from '../metabol.auth/services/login/login.service';
@@ -41,7 +41,7 @@ import { PanelRoutesRoutingProviders, PanelRoutesRouting } from './metabol.panel
     DialogReactionResultsComponent,
     ResultTableComponent,
     SimilarDiseasesComponent,
-    AnalysisListComponent
+    AnalysisListComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,12 +60,11 @@ import { PanelRoutesRoutingProviders, PanelRoutesRouting } from './metabol.panel
   ],
   providers: [
     LoginService,
-    PanelRoutesRoutingProviders,
+    PanelRoutesRoutingProviders
   ],
-  exports: [],
   entryComponents: [
     DialogPathwayVisualizationComponent,
-    DialogReactionResultsComponent,
+    DialogReactionResultsComponent
   ]
 })
 export class MetabolPanelModule { }

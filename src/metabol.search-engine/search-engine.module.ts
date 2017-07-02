@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { NgPipesModule } from 'ngx-pipes';
+
 
 import {
   ChemicalEquationComponent,
@@ -10,18 +13,22 @@ import {
   SearchPageComponent,
   SearchResultComponent,
   SubsystemComponent,
-  SubsystemDetailComponent
+  SubsystemDetailComponent,
+  AnalysisSearchComponent
 } from './components';
 
-import {VisualizationModule} from "../metabol.visualization";
-import { searchEngineRouting} from './search-engine.routes';
+import { VisualizationModule } from "../metabol.visualization";
+import { searchEngineRouting } from './search-engine.routes';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     searchEngineRouting,
-    VisualizationModule
+    VisualizationModule,
+
+    NgPipesModule
   ],
   // providers: [searchEngineRoutingProviders],
   declarations: [
@@ -32,7 +39,8 @@ import { searchEngineRouting} from './search-engine.routes';
     SearchPageComponent,
     SearchResultComponent,
     SubsystemComponent,
-    SubsystemDetailComponent
+    SubsystemDetailComponent,
+    AnalysisSearchComponent
   ]
 })
 export class SearchEngineModule { }

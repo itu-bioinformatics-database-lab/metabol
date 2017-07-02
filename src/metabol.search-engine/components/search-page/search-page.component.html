@@ -6,17 +6,17 @@
       </div>
     </div>
     <div class="row">
-			<search-bar></search-bar>
-		</div>
+      <search-bar></search-bar>
+    </div>
     <div class="row">
-			<div class="input-group">
-				<input [(ngModel)]="query" type="text" class="form-control" placeholder="Search for analysis...">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" (click)="search(query)">
-						Search
-					</button>
-				</span>
-			</div>
-		</div>
+      <div class="col-md-12">
+	<div class="panel panel-default">
+	  <div class="panel-heading">Search Analysis Result</div>
+	  <div class="panel-body">
+	    <analysis-search></analysis-search>
+	  </div>
 	</div>
+      </div>      
+    </div>
+  </div>
 </section>

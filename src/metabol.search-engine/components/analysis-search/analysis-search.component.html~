@@ -1,5 +1,5 @@
 <div class="row">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <form [formGroup]="form" (ngSubmit)="add(form.value)">
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -15,23 +15,23 @@
               <div class="form-group">
                 <input formControlName="name" type="text" class="form-control" placeholder="Metabolite Name">
                 <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
-                Field Required
-              </span>
+                  Field Required
+		</span>
               </div>
             </td>
             <td>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Value" formControlName="value">
                 <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
-                Field Required
-              </span>
+                  Field Required
+		</span>
               </div>
             </td>
             <td>
               <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
             </td>
           </tr>
-          <tr *ngFor="let r of conTable;let i=index">
+          <tr *ngFor="let r of pathwayChanges | pairs;let i=index">
             <td>{{ r[0] }}</td>
             <td>{{ r[1] }}</td>
             <td>
@@ -43,4 +43,4 @@
     </div>
   </form>
 </div>
-<button (click)="analyze()" class="btn btn-default" [disabled]="!analyzeName.valid">Analyze</button>
+<button (click)="analyze()" class="btn btn-default">Analyze</button>
