@@ -1,46 +1,49 @@
-<div class="row">
-  <form [formGroup]="form" (ngSubmit)="add(form.value)">
-    <div class="table-responsive">
+<section id="search-analysis" fxLayout="row" fxLayoutAlign="center start">
+  <md-card fxFlex.gt-sm="900px">
+    <md-card-header>
+      <md-card-title>
+	<h3>Search Analysis Results</h3>
+      </md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <form [formGroup]="form" (ngSubmit)="add(form.value)">
+	<md-input-container>
+	  <input mdInput placeholder="Choose Pathway" [mdAutocomplete]="auto" formControlName="pathway">
+	</md-input-container>
+	<md-autocomplete #auto="mdAutocomplete">
+	  <md-option *ngFor="let p of filteredPathways | async" [value]="p">
+	    {{ p }}
+	  </md-option>
+	</md-autocomplete>
+	<md-select placeholder="Choose Change" formControlName="change">
+	  <md-option value="1">Increase</md-option>
+	  <md-option value="-1">Decrease</md-option>
+	</md-select>   
+	<md-select placeholder="Diff Qualifier" formControlName="qualifier">
+	  <md-option value="1">Up-to</md-option>
+	  <md-option value="1">At least</md-option>
+	  <md-option value="0">Around (+/- 10)</md-option>
+	</md-select>
+	<md-autocomplete #auto="mdAutocomplete">
+	  <md-option *ngFor="let p of filteredPathways | async" [value]="p">
+	    {{ p }}
+	  </md-option>
+	</md-autocomplete>
+	<md-input-container>
+	  <input mdInput placeholder="Diff Amount" formControlName="amount">
+	</md-input-container>
+	<button md-mini-fab [disabled]="!form.valid"><md-icon>add</md-icon></button>
+      </form>
       <table class="table">
-        <thead>
-          <tr>
-            <th>Pathway Name</th>
-            <th>Change</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="form-group">
-                <input formControlName="name" type="text" class="form-control" placeholder="Pathway Name">
-                <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
-                  Field Required
-		</span>
-              </div>
-            </td>
-            <td>
-              <div class="form-group">
-		<select class="form-control" formControlName="value">
-		  <option value="1">Increase</option>
-		  <option value="-1">Decrease</option>
-		</select>
-              </div>
-            </td>
-            <td>
-              <input [disabled]="!form.valid" type="submit" class="btn btn-default" value="Add">
-            </td>
-          </tr>
-          <tr *ngFor="let r of pathwayChanges;let i=index">
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] > 0 ? 'Increase' : 'Decrease' }}</td>
-            <td>
-              <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true" (click)="remove(i)"></span>
-            </td>
-          </tr>
-        </tbody>
+	<tr *ngFor="let r of pathwayChanges;let i=index">
+          <td>{{ r[0] }}</td>
+          <td>{{ r[1] > 0 ? 'Increase' : 'Decrease' }}</td>
+          <td>
+            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true" (click)="remove(i)"></span>
+          </td>
+	</tr>
       </table>
-    </div>
-  </form>
-</div>
-<button (click)="search()" class="btn btn-default">Search</button>
+      <button md-raised-button [disabled]="pathwayChanges.length == 0" color="accent" (click)="search()">Search</button>
+    </md-card-content>
+  </md-card>
+</section>

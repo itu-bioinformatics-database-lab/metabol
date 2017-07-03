@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { SimpleNotificationsModule } from 'angular2-notifications'
+import { NgPipesModule } from 'ngx-pipes';
+import { MaterialModule } from '@angular/material';
+
 
 import { routing, appRoutingProviders } from './app.routes';
 import { AppComponent } from './app.component';
@@ -15,7 +18,6 @@ import { VisualizationModule } from "../metabol.visualization";
 import { MetabolAuthModule } from "../metabol.auth";
 import { SubsystemAnalyzeModule } from "../metabol.subsystem-analyze";
 import { MetabolPanelModule } from '../metabol.panel';
-import { NgPipesModule } from 'ngx-pipes';
 
 
 @NgModule({
@@ -36,8 +38,9 @@ import { NgPipesModule } from 'ngx-pipes';
     VisualizationModule,
 
     NgPipesModule,
-
+    MaterialModule,
     SimpleNotificationsModule.forRoot(),
+
     routing
   ],
   providers: [appRoutingProviders],

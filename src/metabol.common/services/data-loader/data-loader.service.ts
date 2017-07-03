@@ -14,8 +14,7 @@ export class AppDataLoader {
     // ToDo: set app version to setting and check if do not match then clean localStorage
     let localCol = localStorage.getItem(collection);
     if (localCol) callback(JSON.parse(localCol));
-    else this.http
-      .get(`assets/datasets/${collection}.json`)
+    else this.http.get(`assets/datasets/${collection}.json`)
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem(collection, JSON.stringify(data));

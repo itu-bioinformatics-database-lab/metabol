@@ -2,10 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as _ from 'lodash';
 
-import { AppSettings } from '../../../app/';
+import * as _ from 'lodash';
 import { NotificationsService } from 'angular2-notifications';
+
+import { AppDataLoader } from '../../../metabol.common/services';
+import { AppSettings } from '../../../app/';
 
 
 @Component({
@@ -15,25 +17,47 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class AnalysisSearchComponent implements OnInit {
 
-  pathwayChanges = [];
-
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: Http, private router: Router) {
-    this.form = this.fb.group({
-      "name": ["", Validators.required],
-      "value": [""]
+  pathways;
+  filteredPathways;
+
+  pathwayChanges = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private http: Http,
+    private router: Router,
+    private loader: AppDataLoader) { }
+
+  ngOnInit() {
+
+    this.loader.get('recon2', (recon) => {
+      this.pathways = Object.keys(recon.pathways).sort();
     });
+
+    this.form = this.fb.group({
+      pathway: ["", Validators.required],
+      change: ["", Validators.required],
+      qualifier: [""],
+      amount: [""]
+    });
+
+    this.filteredPathways = this.form.controls.pathway.valueChanges
+      .startWith(null)
+      .map(val => val ? this.filter(val).sort() : this.pathways.slice());
   }
 
-  ngOnInit() { }
+  filter(val: string): string[] {
+    return this.pathways.filter(option => new RegExp(`^${val}`, 'gi').test(option));
+  }
 
   remove(index) {
     this.pathwayChanges.splice(index, 1);
   }
 
   add(value) {
-    this.pathwayChanges.push([value['name'], parseInt(value['value'])]);
+    this.pathwayChanges.push([value['pathway'], parseInt(value['change'])]);
     this.form.reset();
   }
 

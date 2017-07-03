@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgPipesModule } from 'ngx-pipes';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   ChemicalEquationComponent,
@@ -17,6 +18,8 @@ import {
   AnalysisSearchComponent
 } from './components';
 
+import { MaterialModule } from '@angular/material';
+
 import { VisualizationModule } from "../metabol.visualization";
 import { searchEngineRouting } from './search-engine.routes';
 
@@ -25,10 +28,13 @@ import { searchEngineRouting } from './search-engine.routes';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
+    MaterialModule,
+    FlexLayoutModule,
+    NgPipesModule,
+
     searchEngineRouting,
     VisualizationModule,
-
-    NgPipesModule
   ],
   // providers: [searchEngineRoutingProviders],
   declarations: [

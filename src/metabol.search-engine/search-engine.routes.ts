@@ -7,14 +7,15 @@ import {
   ReactionDetailsComponent,
   SearchResultComponent,
   SearchPageComponent,
-  MetaboliteDetailsComponent
+  MetaboliteDetailsComponent,
+  AnalysisSearchComponent
 } from "./components";
-
 
 export const SearchEngineRoutes: Routes = [
   { path: 'metabolite/:id', component: MetaboliteDetailsComponent },
   { path: 'reaction/:id', component: ReactionDetailsComponent },
   { path: 'search', component: SearchPageComponent },
+  { path: 'search-analysis', component: AnalysisSearchComponent },
   { path: 'search-result/:query', component: SearchResultComponent },
   {
     path: 'subsystem', component: SubsystemComponent,
