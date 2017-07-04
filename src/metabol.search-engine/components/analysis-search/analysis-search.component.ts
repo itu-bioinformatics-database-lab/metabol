@@ -62,10 +62,7 @@ export class AnalysisSearchComponent implements OnInit {
   }
 
   search() {
-    console.log(this.pathwayChanges);
-    let data = { changes: _.fromPairs(this.pathwayChanges) };
-
-    this.http.post(`${AppSettings.API_ENDPOINT}/analysis/search-by-change`, data)
+    this.http.post(`${AppSettings.API_ENDPOINT}/analysis/search-by-change`, this.pathwayChanges)
       .map(data => data.json())
       .subscribe((data) => {
         localStorage.setItem('search-results', JSON.stringify(data));
