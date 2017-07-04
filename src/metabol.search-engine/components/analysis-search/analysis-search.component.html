@@ -20,9 +20,9 @@
 	  <md-option value="-1">Decrease</md-option>
 	</md-select>   
 	<md-select placeholder="Diff Qualifier" formControlName="qualifier">
-	  <md-option value="1">Up-to</md-option>
-	  <md-option value="1">At least</md-option>
-	  <md-option value="0">Around (+/- 10)</md-option>
+	  <md-option value="lt">Up-to</md-option>
+	  <md-option value="gt">At least</md-option>
+	  <md-option value="eq">Around (+/- 10)</md-option>
 	</md-select>
 	<md-autocomplete #auto="mdAutocomplete">
 	  <md-option *ngFor="let p of filteredPathways | async" [value]="p">
@@ -36,8 +36,14 @@
       </form>
       <table class="table">
 	<tr *ngFor="let r of pathwayChanges;let i=index">
-          <td>{{ r[0] }}</td>
-          <td>{{ r[1] > 0 ? 'Increase' : 'Decrease' }}</td>
+          <td>{{ r.pathway }}</td>
+          <td>{{ r.change > 0 ? 'Increase' : 'Decrease' }}</td>
+          <td>
+	     <ng-template [ngIf]="r.qualifier == 'lt'">Up-to</ng-template>
+	     <ng-template [ngIf]="r.qualifier == 'gt'">At least</ng-template>
+	     <ng-template [ngIf]="r.qualifier == 'eq'">Around (+/- 10)</ng-template>	    
+	  </td>
+          <td>{{ r.amount }}</td>
           <td>
             <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true" (click)="remove(i)"></span>
           </td>

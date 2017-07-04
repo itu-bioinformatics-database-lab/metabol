@@ -3,8 +3,14 @@
     <label>Analyze Name</label>
     <input [formControl]="analyzeName" type="text" class="form-control" placeholder="Analyze Name">
     <span class="text-danger" *ngIf="!analyzeName.valid && analyzeName.dirty">
-    Field Required
-  </span>
+      Field Required
+    </span>
+  </div>
+  <div class="form-group col-md-4">
+    <label>Public or Private</label>
+    <div>
+      <md-slide-toggle [formControl]="isPublic">{{ isPublic.value ? 'Public' : 'Private' }}</md-slide-toggle>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -24,16 +30,16 @@
               <div class="form-group">
                 <input formControlName="name" type="text" class="form-control" placeholder="Metabolite Name">
                 <span class="text-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].dirty">
-                Field Required
-              </span>
+                  Field Required
+		</span>
               </div>
             </td>
             <td>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Value" formControlName="value">
                 <span class="text-danger" *ngIf="form.errors?.exactValueEmpty && form.controls['value'].dirty">
-                Field Required
-              </span>
+                  Field Required
+		</span>
               </div>
             </td>
             <td>

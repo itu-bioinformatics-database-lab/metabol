@@ -57,11 +57,12 @@ export class AnalysisSearchComponent implements OnInit {
   }
 
   add(value) {
-    this.pathwayChanges.push([value['pathway'], parseInt(value['change'])]);
+    this.pathwayChanges.push(value);
     this.form.reset();
   }
 
   search() {
+    console.log(this.pathwayChanges);
     let data = { changes: _.fromPairs(this.pathwayChanges) };
 
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/search-by-change`, data)

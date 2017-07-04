@@ -36,11 +36,16 @@
       <button md-button [routerLink]="['login']" *ngIf="!loginService.isLoggedIn()">
 	Login
       </button>
-      <button md-button [routerLink]="['panel']" *ngIf="loginService.isLoggedIn()">
-	Control Panel
-      </button>
-      <button md-button (click)="loginService.logout()" [routerLink]="['panel']" *ngIf="loginService.isLoggedIn()">
-	Logout
+      <md-menu #accountMenu="mdMenu">
+	<button md-menu-item [routerLink]="['panel']">
+	  Control Panel
+	</button>
+	<button md-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
+	  Logout
+	</button>
+      </md-menu>
+      <button md-button [mdMenuTriggerFor]="accountMenu" *ngIf="loginService.isLoggedIn()">
+	Account
       </button>
     </div>
   </div>

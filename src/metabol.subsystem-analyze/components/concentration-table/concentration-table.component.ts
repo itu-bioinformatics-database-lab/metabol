@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router';
-import {Http} from '@angular/http';
-import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Http } from '@angular/http';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
-import {LoginService} from "../../../metabol.auth/services";
-import {MetaboliteConcentration} from '../../models/metaboliteConcentration';
-import {SubsystemAnalyzeService} from "../../services/subsystem-analyze/subsystem-analyze.service";
-import {AppSettings} from '../../../app/';
-import {NotificationsService} from 'angular2-notifications';
+import { LoginService } from "../../../metabol.auth/services";
+import { MetaboliteConcentration } from '../../models/metaboliteConcentration';
+import { SubsystemAnalyzeService } from "../../services/subsystem-analyze/subsystem-analyze.service";
+import { AppSettings } from '../../../app/';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'concentration-table',
@@ -16,22 +16,24 @@ import {NotificationsService} from 'angular2-notifications';
   styleUrls: ['concentration-table.component.css'],
   providers: [SubsystemAnalyzeService],
 })
-export class ConcentrationTableComponent {
+export class ConcentrationTableComponent implements OnInit {
   @Input() conTable: Array<[string, number]> = [];
 
   form: FormGroup;
   analyzeName: FormControl;
+  isPublic: FormControl;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private login: LoginService,
     private http: Http,
-    private notify: NotificationsService
-  ) {
+    private notify: NotificationsService) { }
 
+  ngOnInit() {
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze", Validators.required);
+    this.isPublic = new FormControl("public", Validators.required);
   }
 
   remove(index) {
@@ -41,6 +43,7 @@ export class ConcentrationTableComponent {
   createForm() {
     return this.fb.group({
       "name": ["", Validators.required],
+      "public": [true, Validators.required],
       "value": ["", Validators.pattern('[0-9]+(\\.[0-9]+)?')]
     });
   }

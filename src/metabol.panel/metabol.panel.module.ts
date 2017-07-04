@@ -5,9 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { SubsystemAnalyzeModule } from "../metabol.subsystem-analyze";
 import { VisualizationModule } from '../metabol.visualization';
-import { NgPipesModule } from 'ngx-pipes';
 
-import { MdDialogModule } from '@angular/material'
+import { NgPipesModule } from 'ngx-pipes';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '@angular/material';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -50,13 +51,14 @@ import { PanelRoutesRoutingProviders, PanelRoutesRouting } from './metabol.panel
     HttpModule,
 
     NgPipesModule,
+    MaterialModule,
+    FlexLayoutModule,
     NgxPaginationModule,
     NgxDatatableModule,
 
     PanelRoutesRouting,
     SubsystemAnalyzeModule,
     VisualizationModule,
-    MdDialogModule
   ],
   providers: [
     LoginService,
