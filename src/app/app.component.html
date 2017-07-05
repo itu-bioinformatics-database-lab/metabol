@@ -4,13 +4,10 @@
     <div class="navbar-header">
       <a class="navbar-brand" id="logo"  [routerLink]="['search']">
         <img src="assets/img/logo.png" alt=""/>
-        <span>Metabolitics - 0.0.6</span>
+        <span>Metabolitics - 0.0.7</span>
       </a>
     </div>
     <div class="nav navbar-nav navbar-right">
-      <button md-button *ngIf="loginService.isLoggedIn()" [routerLink]="['analyze']">
-	Analyze
-      </button>
       <md-menu #searchMenu="mdMenu">
 	<button md-menu-item [routerLink]="['search']">Search Metabolites-Reactions</button>
 	<button md-menu-item [routerLink]="['search-analysis']">Search Metabolomics Analysis</button>
@@ -35,9 +32,9 @@
 	Login
       </button>
       <md-menu #accountMenu="mdMenu">
-	<button md-menu-item [routerLink]="['panel']">
-	  Control Panel
-	</button>
+	<button md-menu-item [routerLink]="['panel']">Profile</button>
+	<button md-menu-item [routerLink]="['analyze']">Make Analyze</button>
+	<button md-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
 	<button md-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
 	  Logout
 	</button>

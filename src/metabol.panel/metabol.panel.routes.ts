@@ -11,23 +11,13 @@ import {
 } from "./components";
 
 
-export const MetabolPanelRoutes: Routes = [{
-  path: 'panel',
-  component: PanelComponent,
-  canActivate: [AuthGuard],
-  children: [
-    { path: '', redirectTo: 'profile', pathMatch: 'full' },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'past-analysis', component: PastAnalysisComponent },
-    { path: 'changePassword', component: ChangePasswordComponent },
-    { path: 'past-analysis/:key', component: PastAnalysisDetailComponent },
-    { path: 'compare-analysis', component: CompareAnalysisComponent }
-  ]
-},
-{ path: 'past-analysis', component: PastAnalysisComponent },
-{ path: 'search-past-analysis/:query', component: PastAnalysisComponent },
-{ path: 'past-analysis/:key', component: PastAnalysisDetailComponent },
-{ path: 'compare-analysis', component: CompareAnalysisComponent }
+export const MetabolPanelRoutes: Routes = [
+  { path: 'panel', redirectTo: 'profile', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'past-analysis', component: PastAnalysisComponent },
+  { path: 'search-past-analysis/:query', component: PastAnalysisComponent },
+  { path: 'past-analysis/:key', component: PastAnalysisDetailComponent },
+  { path: 'compare-analysis', component: CompareAnalysisComponent }
 ];
 
 

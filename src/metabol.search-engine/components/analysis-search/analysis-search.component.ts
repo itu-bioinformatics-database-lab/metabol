@@ -39,8 +39,8 @@ export class AnalysisSearchComponent implements OnInit {
     this.form = this.fb.group({
       pathway: ["", Validators.required],
       change: ["", Validators.required],
-      qualifier: [""],
-      amount: [""]
+      qualifier: [],
+      amount: []
     });
 
     this.filteredPathways = this.form.controls.pathway.valueChanges
