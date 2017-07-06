@@ -8,6 +8,7 @@
       </a>
     </div>
     <div class="nav navbar-nav navbar-right">
+      <button md-button [routerLink]="['analyze']">Analyze</button>
       <md-menu #searchMenu="mdMenu">
 	<button md-menu-item [routerLink]="['search']">Search Metabolites-Reactions</button>
 	<button md-menu-item [routerLink]="['search-analysis']">Search Metabolomics Analysis</button>
@@ -33,7 +34,6 @@
       </button>
       <md-menu #accountMenu="mdMenu">
 	<button md-menu-item [routerLink]="['panel']">Profile</button>
-	<button md-menu-item [routerLink]="['analyze']">Perform Analysis</button>
 	<button md-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
 	<button md-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
 	  Logout
