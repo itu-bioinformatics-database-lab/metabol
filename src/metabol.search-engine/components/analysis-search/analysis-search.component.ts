@@ -44,7 +44,7 @@ export class AnalysisSearchComponent implements OnInit {
     });
 
     this.filteredPathways = this.form.controls.pathway.valueChanges
-      .startWith(null)
+      //.startWith(null)
       .map(val => val ? this.filter(val).sort() : this.pathways.slice());
   }
 

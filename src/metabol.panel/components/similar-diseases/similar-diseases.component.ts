@@ -1,7 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Http } from '@angular/http';
+
+import * as _ from 'lodash';
+
 import { AppSettings } from "../../../app";
 import { LoginService } from "../../../metabol.auth/services";
-import { Http } from '@angular/http';
+
 
 @Component({
   selector: 'similar-diseases',
@@ -19,7 +23,7 @@ export class SimilarDiseasesComponent implements OnInit {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/most-similar-diseases/${this.id}`;
     this.http.get(apiUrl, this.login.optionByAuthorization())
       .map(res => res.json())
-      .subscribe((d) => this.diseases = d);
+      .subscribe((d) => this.diseases = _.orderBy(_.toPairs(d), '1', 'desc'));
   }
 
 }

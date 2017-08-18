@@ -32,7 +32,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.data.length; i++) {
       let analysisName = `${this.data[i].name}_${i}`;
-      this.columns.push({ prop: analysisName });
+      this.columns.push({ prop: analysisName, comparator: this.scoreComparator.bind(this) });
       this.analysisNames.push(analysisName);
       for (let t of tableData)
         t[analysisName] = this.data[i].results_pathway[0][t.name];

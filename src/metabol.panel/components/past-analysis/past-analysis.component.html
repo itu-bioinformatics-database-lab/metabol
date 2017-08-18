@@ -10,7 +10,7 @@
 	    <md-tab *ngIf="data[type].length != 0" [label]="(type == 'list' ? 'private' : type) | titlecase">
 	      <div class="panel panel-default">
 		<ul class="list-group">
-		  <li class="list-group-item" *ngFor="let i of data[type]">
+		  <li class="list-group-item" *ngFor="let i of data[type] | orderBy:'name'">
 		    <input type="checkbox" [formControlName]="i.id" />
 		    <i class="glyphicon glyphicon-{{i.status ?  'saved' : 'time' }}"></i>
 		    <a [routerLink]="['/past-analysis', i.id]">
