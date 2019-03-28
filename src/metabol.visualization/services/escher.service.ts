@@ -1,11 +1,13 @@
-import { Http } from "@angular/http";
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import * as escher from 'escher';
+
 
 @Injectable()
 export class EscherService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   options = {
     use_3d_transform: false,
@@ -19,12 +21,12 @@ export class EscherService {
   }
 
   buildReactionMap(reactionId, model, element) {
-    this.options['first_load_callback'] = function() {
-      let size = this.zoom_container.get_size();
+    this.options['first_load_callback'] = function(builder) {
+      let size = builder.zoom_container.get_size();
       let coor = { x: size.width / 2, y: size.height / 2 - 250 };
-      this.map.new_reaction_from_scratch(reactionId, coor, 90);
-      this.map.zoom_extent_nodes();
-      this.map.select_none();
+      builder.map.new_reaction_from_scratch(reactionId, coor, 90);
+      builder.map.zoom_extent_nodes();
+      builder.map.select_none();
     }
 
     escher.Builder(null, this.escherModel(model), null, element, this.options);
@@ -33,21 +35,21 @@ export class EscherService {
   buildMetaboliteMap(metaboliteId, model, element) {
     let that = this;
 
-    this.options['first_load_callback'] = function() {
-      let size = this.zoom_container.get_size();
+    this.options['first_load_callback'] = function(builder) {
+      let size = builder.zoom_container.get_size();
       let coor = { x: size.width / 2, y: size.height / 2 };
       let rs = model.metabolites[metaboliteId].reactions;
 
       let producer = rs.filter(x => model.reactions[x].metabolites[metaboliteId] < 0);
       let consumer = rs.filter(x => model.reactions[x].metabolites[metaboliteId] > 0);
-      this.map.new_reaction_from_scratch(producer[0], coor, 0);
-      let mindex = that.selected_metabolite_index(this.map, metaboliteId);
+      builder.map.new_reaction_from_scratch(producer[0], coor, 0);
+      let mindex = that.selected_metabolite_index(builder.map, metaboliteId);
 
-      this.map.new_reaction_for_metabolite(consumer[0], mindex, 180);
+      builder.map.new_reaction_for_metabolite(consumer[0], mindex, 180);
       // this.map.new_reaction_for_metabolite(rs[2], mindex, 60);
 
-      this.map.zoom_extent_nodes();
-      this.map.select_none();
+      builder.map.zoom_extent_nodes();
+      builder.map.select_none();
     }
 
     escher.Builder(null, this.escherModel(model), null, element, this.options);
@@ -56,7 +58,7 @@ export class EscherService {
   buildPathwayMap(pathway, model, element, callback?: (d) => void) {
     let pathwayName = pathway.split(' ').join('-').split('/').join('-').toLowerCase();
     this.http.get(`assets/datasets/visualizations/${pathwayName}.json`)
-      .map(data => data.json()).subscribe(data => {
+      .subscribe((data:any) => {
         let m = escher.Builder(data, this.escherModelForPathway(model, pathway), null, element, this.options);
         callback(m);
       }, () =>
@@ -73,7 +75,7 @@ export class EscherService {
   }
 
   selected_metabolite_index(map, metabolite_id) {
-    return _.toPairs(map.nodes).filter(x => x[1].bigg_id == metabolite_id)[0][0];
+    return _.toPairs(map.nodes).filter(x => x[1] == metabolite_id)[0][0];
   }
 
   escherModelForPathway(model, pathway) {

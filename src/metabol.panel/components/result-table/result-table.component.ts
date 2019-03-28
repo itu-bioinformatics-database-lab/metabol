@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { DialogPathwayVisualizationComponent } from '../dialog-pathway-visualization';
 import { DialogReactionResultsComponent } from '../dialog-reaction-results';
 import * as _ from 'lodash';
@@ -19,7 +19,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
   analysisNames: Array<string>;
   columns;
 
-  constructor(private dialog: MdDialog) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -28,6 +28,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
       .map(x => ({ name: x }));
 
     this.columns = [{ name: 'Name' }];
+
     this.analysisNames = [];
 
     for (let i = 0; i < this.data.length; i++) {

@@ -1,38 +1,38 @@
 <section id="search-analysis" fxLayout="row" fxLayoutAlign="center start">
-  <md-card fxFlex.gt-sm="900px">
-    <md-card-header>
-      <md-card-title>
+  <mat-card fxFlex.gt-sm="900px">
+    <mat-card-header>
+      <mat-card-title>
 	<h3>Search Analysis Results</h3>
-      </md-card-title>
-    </md-card-header>
-    <md-card-content>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="add(form.value)">
-	<md-input-container>
-	  <input mdInput placeholder="Choose Pathway" [mdAutocomplete]="auto" formControlName="pathway">
-	</md-input-container>
-	<md-autocomplete #auto="mdAutocomplete">
-	  <md-option *ngFor="let p of filteredPathways | async" [value]="p">
+	<mat-form-field>
+	  <input matInput placeholder="Choose Pathway" [matAutocomplete]="auto" formControlName="pathway">
+	</mat-form-field>
+	<mat-autocomplete #auto="matAutocomplete">
+	  <mat-option *ngFor="let p of filteredPathways | async" [value]="p">
 	    {{ p }}
-	  </md-option>
-	</md-autocomplete>
-	<md-select placeholder="Choose Change" formControlName="change">
-	  <md-option value="1">Increase</md-option>
-	  <md-option value="-1">Decrease</md-option>
-	</md-select>   
-	<md-select placeholder="Diff Qualifier" formControlName="qualifier">
-	  <md-option value="lt">Up-to</md-option>
-	  <md-option value="gt">At least</md-option>
-	  <md-option value="eq">Around (+/- 10)</md-option>
-	</md-select>
-	<md-autocomplete #auto="mdAutocomplete">
-	  <md-option *ngFor="let p of filteredPathways | async" [value]="p">
+	  </mat-option>
+	</mat-autocomplete>
+	<mat-select placeholder="Choose Change" formControlName="change">
+	  <mat-option value="1">Increase</mat-option>
+	  <mat-option value="-1">Decrease</mat-option>
+	</mat-select>   
+	<mat-select placeholder="Diff Qualifier" formControlName="qualifier">
+	  <mat-option value="lt">Up-to</mat-option>
+	  <mat-option value="gt">At least</mat-option>
+	  <mat-option value="eq">Around (+/- 10)</mat-option>
+	</mat-select>
+	<mat-autocomplete #auto="matAutocomplete">
+	  <mat-option *ngFor="let p of filteredPathways | async" [value]="p">
 	    {{ p }}
-	  </md-option>
-	</md-autocomplete>
-	<md-input-container>
-	  <input mdInput placeholder="Diff Amount" formControlName="amount">
-	</md-input-container>
-	<button md-mini-fab [disabled]="!form.valid"><md-icon>add</md-icon></button>
+	  </mat-option>
+	</mat-autocomplete>
+	<mat-form-field>
+	  <input matInput placeholder="Diff Amount" formControlName="amount">
+	</mat-form-field>
+	<button mat-mini-fab [disabled]="!form.valid"><mat-icon>add</mat-icon></button>
       </form>
       <table class="table">
 	<tr *ngFor="let r of pathwayChanges;let i=index">
@@ -49,7 +49,7 @@
           </td>
 	</tr>
       </table>
-      <button md-raised-button [disabled]="pathwayChanges.length == 0" color="accent" (click)="search()">Search</button>
-    </md-card-content>
-  </md-card>
+      <button mat-raised-button [disabled]="pathwayChanges.length == 0" color="accent" (click)="search()">Search</button>
+    </mat-card-content>
+  </mat-card>
 </section>

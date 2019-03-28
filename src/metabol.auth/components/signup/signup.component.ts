@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SignupService} from '../../services/signup/signup.service';
-import { Http, Response, Headers} from '@angular/http';
+
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +15,7 @@ export class SignupComponent {
   form: FormGroup;
 
   constructor(private signupService: SignupService, private fb: FormBuilder,
-    private http: Http, private router: Router) {
+     private router: Router) {
 
     this.form = fb.group({
       "name": ["", Validators.required],

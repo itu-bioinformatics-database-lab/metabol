@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@angular/material';
+import { MatRippleModule } from '@angular/material';
 
 import {
   ConcentrationTableComponent,
@@ -16,14 +16,16 @@ import {
 import { subsystemAnalyzeRoutingProviders, subsystemAnalyzeRouting } from './subsystem-analyze.routes';
 
 import { MetabolCommonModule } from '../metabol.common';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+      MatSlideToggleModule,
 
-    MaterialModule,
+
+    MatRippleModule,
 
     subsystemAnalyzeRouting,
     MetabolCommonModule

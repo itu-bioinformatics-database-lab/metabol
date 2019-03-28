@@ -1,6 +1,6 @@
 import {LoginService} from "../../../metabol.auth/services";
 import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
-import {Http} from "@angular/http";
+import {HttpClient} from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import {AppSettings} from "../../../app";
 import {SubsystemTreeNode, SubsystemTreeNodeType} from "../../models/subsystem";
@@ -11,7 +11,7 @@ export class SubsystemAnalyzeService {
   apiUrl: String;
   private solutionTree: SubsystemTreeNode;
 
-  constructor(private http: Http, private login: LoginService) {
+  constructor(private http: HttpClient, private login: LoginService) {
     this.apiUrl = `${AppSettings.API_ENDPOINT}/subsystems-analyze`;
     this.solutionTree = {
       name: "All",
@@ -39,16 +39,14 @@ export class SubsystemAnalyzeService {
     };
 
     this.http.post(`${this.apiUrl}-start`, postData, this.login.optionByAuthorization())
-      .map(res => res.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         callback(data);
       });
   }
 
   getSolution(key: string, callback: (data: { [solutions: string]: Array<string> }) => void) {
     this.http.get(`${this.apiUrl}/${key}`)
-      .map(res => res.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         callback(data);
       });
   }

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, RequestOptions, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {AppSettings} from '../../../app/';
 import {NotificationsService} from 'angular2-notifications'
 
 
 @Injectable()
 export class SignupService {
-  headers: Headers;
+  headers: HttpHeaders;
   options: any;
 
-  constructor(private http: Http, private notify: NotificationsService) {
-    this.headers = new Headers();
+  constructor(private http: HttpClient, private notify: NotificationsService) {
+    this.headers = new HttpHeaders();
     this.headers.append('Content-Type', 'application/json');
   }
 

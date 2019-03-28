@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import * as _ from 'lodash';
 import { NotificationsService } from 'angular2-notifications';
 
 import { AppDataLoader } from '../../../metabol.common/services';
 import { AppSettings } from '../../../app/';
-
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'analysis-search',
@@ -26,7 +26,7 @@ export class AnalysisSearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     private loader: AppDataLoader) { }
 
@@ -45,7 +45,7 @@ export class AnalysisSearchComponent implements OnInit {
 
     this.filteredPathways = this.form.controls.pathway.valueChanges
       //.startWith(null)
-      .map(val => val ? this.filter(val).sort() : this.pathways.slice());
+      .pipe(map(val => val ? this.filter(val).sort() : this.pathways.slice()));
   }
 
   filter(val: string): string[] {
@@ -63,8 +63,7 @@ export class AnalysisSearchComponent implements OnInit {
 
   search() {
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/search-by-change`, this.pathwayChanges)
-      .map(data => data.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         localStorage.setItem('search-results', JSON.stringify(data));
         this.router.navigate(['past-analysis']);
       });

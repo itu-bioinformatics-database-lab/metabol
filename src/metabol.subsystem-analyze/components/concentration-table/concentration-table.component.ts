@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -27,7 +27,7 @@ export class ConcentrationTableComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private login: LoginService,
-    private http: Http,
+    private http: HttpClient,
     private notify: NotificationsService) { }
 
   ngOnInit() {
@@ -61,8 +61,7 @@ export class ConcentrationTableComponent implements OnInit {
 
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
       data, this.login.optionByAuthorization())
-      .map(data => data.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         this.notify.info('Analysis Start', 'Analysis in progress');
         this.router.navigate(['/panel/past-analysis', data['id']]);
       },

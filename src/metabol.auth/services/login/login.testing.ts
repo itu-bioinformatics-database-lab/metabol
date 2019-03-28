@@ -1,9 +1,9 @@
-import {RequestOptions, Headers} from "@angular/http";
+import {HttpHeaders} from "@angular/common/http";
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LoginTestingService {
-
+  options: any;
   constructor() {
 
   }
@@ -37,8 +37,8 @@ export class LoginTestingService {
   }
 
   optionByAuthorization() {
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return new RequestOptions({ headers: headers });
+    return new this.options({ headers: headers });
   }
 }

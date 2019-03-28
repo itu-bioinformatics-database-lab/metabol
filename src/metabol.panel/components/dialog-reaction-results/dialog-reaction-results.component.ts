@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { AppDataLoader } from '../../../metabol.common/services'
 import * as _ from 'lodash';
 
@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 })
 export class DialogReactionResultsComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<DialogReactionResultsComponent>, private loader: AppDataLoader) { }
+  constructor(public dialogRef: MatDialogRef<DialogReactionResultsComponent>, private loader: AppDataLoader) { }
 
   page: number;
   pathway: string;

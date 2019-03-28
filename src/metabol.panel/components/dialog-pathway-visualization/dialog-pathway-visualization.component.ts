@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-dialog-pathway-visualization',
@@ -8,7 +8,7 @@ import { MdDialogRef } from '@angular/material';
 })
 export class DialogPathwayVisualizationComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<DialogPathwayVisualizationComponent>) { }
+  constructor(public dialogRef: MatDialogRef<DialogPathwayVisualizationComponent>) { }
 
   pathway: string;
   fluxes: any;

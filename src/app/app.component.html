@@ -8,38 +8,38 @@
       </a>
     </div>
     <div class="nav navbar-nav navbar-right">
-      <button md-button [routerLink]="['analyze']">Analyze</button>
-      <md-menu #searchMenu="mdMenu">
-	<button md-menu-item [routerLink]="['search']">Search Metabolites-Reactions</button>
-	<button md-menu-item [routerLink]="['search-analysis']">Search Metabolomics Analysis</button>
-      </md-menu>
-      <button md-button [mdMenuTriggerFor]="searchMenu">
+      <button mat-button [routerLink]="['analyze']">Analyze</button>
+      <mat-menu #searchMenu="matMenu">
+	<button mat-menu-item [routerLink]="['search']">Search Metabolites-Reactions</button>
+	<button mat-menu-item [routerLink]="['search-analysis']">Search Metabolomics Analysis</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="searchMenu">
 	Search
       </button>
-      <button md-button [routerLink]="['documentation']">
+      <button mat-button [routerLink]="['documentation']">
 	Documentation
       </button>
-      <md-menu #browseMenu="mdMenu">
-	<button md-menu-item [routerLink]="['subsystem']">Browse Pathways</button>
-	<button md-menu-item  [routerLink]="['past-analysis']">Browse Analysis</button>
-      </md-menu>
-      <button md-button [mdMenuTriggerFor]="browseMenu">
+      <mat-menu #browseMenu="matMenu">
+	<button mat-menu-item [routerLink]="['subsystem']">Browse Pathways</button>
+	<button mat-menu-item  [routerLink]="['past-analysis']">Browse Analysis</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="browseMenu">
 	Browse
       </button>
-      <button md-button>
+      <button mat-button>
 	Contact
       </button>
-      <button md-button [routerLink]="['login']" *ngIf="!loginService.isLoggedIn()">
+      <button mat-button [routerLink]="['login']" *ngIf="!loginService.isLoggedIn()">
 	Login
       </button>
-      <md-menu #accountMenu="mdMenu">
-	<button md-menu-item [routerLink]="['panel']">Profile</button>
-	<button md-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
-	<button md-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
+      <mat-menu #accountMenu="matMenu">
+	<button mat-menu-item [routerLink]="['panel']">Profile</button>
+	<button mat-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
+	<button mat-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
 	  Logout
 	</button>
-      </md-menu>
-      <button md-button [mdMenuTriggerFor]="accountMenu" *ngIf="loginService.isLoggedIn()">
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="accountMenu" *ngIf="loginService.isLoggedIn()">
 	Account
       </button>
     </div>

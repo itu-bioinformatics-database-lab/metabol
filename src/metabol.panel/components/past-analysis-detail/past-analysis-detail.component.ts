@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
-
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { map } from "rxjs/operators";
 import { LoginService } from "../../../metabol.auth/services";
 import { AppSettings } from "../../../app";
 import { DialogPathwayVisualizationComponent } from '../dialog-pathway-visualization';
@@ -21,7 +21,7 @@ export class PastAnalysisDetailComponent implements OnInit {
   data;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private login: LoginService,
     private route: ActivatedRoute) { }
 
@@ -35,8 +35,7 @@ export class PastAnalysisDetailComponent implements OnInit {
   getData() {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/detail/${this.id}`;
     this.http.get(apiUrl, this.login.optionByAuthorization())
-      .map(res => res.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         this.data = data;
       });
   }

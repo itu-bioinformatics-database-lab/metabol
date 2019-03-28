@@ -1,4 +1,4 @@
-import {Http} from "@angular/http";
+import {HttpClient} from "@angular/common/http";
 import {ConcentrationTableComponent} from "../concentration-table/concentration-table.component";
 import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +12,7 @@ export class SampleComponent implements OnInit {
 
   conTable: Array<[string, number]> = [];
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.loadSampleDataSet();
@@ -20,7 +20,7 @@ export class SampleComponent implements OnInit {
 
   loadSampleDataSet() {
     this.http.get('assets/example-analyze-doc-files/example.json')
-      .map(res => res.json())
-      .subscribe((data) => this.conTable = <Array<[string, number]>>_.toPairs(data));
+
+      .subscribe((data:any) => this.conTable = <Array<[string, number]>>_.toPairs(data));
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core'
-import { Http, URLSearchParams } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
@@ -19,7 +19,7 @@ export class CompareAnalysisComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: Http,
+    private http: HttpClient,
     private login: LoginService) { }
 
   options;
@@ -31,7 +31,7 @@ export class CompareAnalysisComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe((params) => {
 
       this.options = this.login.optionByAuthorization();
-      this.options.params = new URLSearchParams();
+      this.options.params = new HttpParams();
       for (let k in params) this.options.params.set(k, params[k]);
 
       this.getAnalysesData(this.options);
@@ -41,15 +41,13 @@ export class CompareAnalysisComponent implements OnInit, AfterViewInit {
   getAnalysesData(options) {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/set`;
     this.http.get(apiUrl, options)
-      .map(res => res.json())
-      .subscribe((data) => this.analyses = data);
+      .subscribe((data:any) => this.analyses = data);
   }
 
   getVisualizationData(options) {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/visualization`;
     this.http.get(apiUrl, options)
-      .map(res => res.json())
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         data.type = 'heatmap';
         let layout = { margin: { l: 300 }, height: 1500 };
         Plotly.plot('heatmap', [data], layout);

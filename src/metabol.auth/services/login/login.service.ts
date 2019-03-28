@@ -1,14 +1,14 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
 import {NotificationsService} from 'angular2-notifications';
+import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class LoginService {
-  options: RequestOptions;
+  options: any;
 
-  constructor(private http: Http, private router: Router, private notify: NotificationsService) { }
+  constructor(private http:HttpClient, private router: Router, private notify: NotificationsService) { }
 
   login(loginForm, callback: (data) => void) {
     let tokenData = {
@@ -16,8 +16,7 @@ export class LoginService {
       password: loginForm.Password
     };
     this.http.post(`${AppSettings.API_ENDPOINT}/auth`, tokenData)
-      .map(res => res.json())
-      .subscribe(data => {
+      .subscribe((data: any) => {
         callback(data);
         this.notify.success('Login Successful', 'Welcome');
         localStorage.setItem('access_token', data.access_token);
@@ -66,8 +65,7 @@ export class LoginService {
   userInfo(callback: (data) => void) {
     let url = `${AppSettings.API_ENDPOINT}/auth/info`;
     this.http.get(url, this.optionByAuthorization())
-      .map(response => response.json())
-      .subscribe(data => {
+      .subscribe((data: any) => {
         callback(data)
       });
   }
@@ -99,7 +97,7 @@ export class LoginService {
     headers.append('Content-Type', 'application/json');
     if (this.isLoggedIn())
       headers.append('Authorization', this.token());
-    return new RequestOptions({ headers: headers });
+    return new this.options ({ headers: headers });
   }
 
 }

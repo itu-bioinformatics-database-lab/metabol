@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class AnalysisListComponent implements OnInit, OnChanges {
   data = { list: [], disease: [] };
   form = new FormGroup({});
 
-  constructor(private http: Http, private fb: FormBuilder, private login: LoginService, private router: Router) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private login: LoginService, private router: Router) { }
 
   ngOnInit() { }
 
@@ -33,8 +33,8 @@ export class AnalysisListComponent implements OnInit, OnChanges {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/${type}`;
 
     if (type != 'private' || this.login.isLoggedIn())
-      this.http.get(apiUrl).map(res => res.json())
-        .subscribe((d) => {
+      this.http.get(apiUrl)
+        .subscribe((d:any) => {
           this.data[type] = d;
           this.createForm();
         });
