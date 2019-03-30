@@ -2,11 +2,10 @@ import { Injectable, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppSettings} from '../../../app/';
 import {NotificationsService} from 'angular2-notifications';
-import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class LoginService {
-  options: any;
 
   constructor(private http:HttpClient, private router: Router, private notify: NotificationsService) { }
 
@@ -93,11 +92,11 @@ export class LoginService {
   }
 
   optionByAuthorization() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    let _headers = new HttpHeaders();
+    _headers.append('Content-Type', 'application/json');
     if (this.isLoggedIn())
-      headers.append('Authorization', this.token());
-    return new this.options ({ headers: headers });
+      _headers.append('Authorization', this.token());
+    return  {headers: _headers};
   }
 
 }
