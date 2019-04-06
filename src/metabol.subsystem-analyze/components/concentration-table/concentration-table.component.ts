@@ -33,7 +33,7 @@ export class ConcentrationTableComponent implements OnInit {
   ngOnInit() {
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze", Validators.required);
-    this.isPublic = new FormControl("public", Validators.required);
+    this.isPublic = new FormControl(true, Validators.required);
   }
 
   remove(index) {
@@ -43,7 +43,6 @@ export class ConcentrationTableComponent implements OnInit {
   createForm() {
     return this.fb.group({
       "name": ["", Validators.required],
-      "public": [true, Validators.required],
       "value": ["", Validators.pattern('[0-9]+(\\.[0-9]+)?')]
     });
   }
@@ -56,6 +55,7 @@ export class ConcentrationTableComponent implements OnInit {
   analyze() {
     let data = {
       "name": this.analyzeName.value,
+      "public": this.isPublic.value,
       "concentration_changes": _.fromPairs(this.conTable)
     };
 
@@ -63,7 +63,7 @@ export class ConcentrationTableComponent implements OnInit {
       data, this.login.optionByAuthorization())
       .subscribe((data:any) => {
         this.notify.info('Analysis Start', 'Analysis in progress');
-        this.router.navigate(['/panel/past-analysis', data['id']]);
+        this.router.navigate(['/past-analysis', data['id']]);
       },
       error => {
         this.notify.error('Analysis Fail', error);

@@ -92,10 +92,9 @@ export class LoginService {
   }
 
   optionByAuthorization() {
-    let _headers = new HttpHeaders();
-    _headers.append('Content-Type', 'application/json');
+    let _headers;
     if (this.isLoggedIn())
-      _headers.append('Authorization', this.token());
+      _headers = new HttpHeaders().append('Authorization', this.token());
     return  {headers: _headers};
   }
 
