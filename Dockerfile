@@ -13,6 +13,6 @@ FROM nginx:1.15
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build-stage app/dist /app
+COPY --from=build-stage app/dist/metabol /app
 
 EXPOSE 80
