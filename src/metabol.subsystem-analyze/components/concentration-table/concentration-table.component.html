@@ -9,7 +9,16 @@
   <div class="form-group col-mat-4">
     <label>Public or Private</label>
     <div>
-      <mat-slide-toggle [formControl]="isPublic">{{ isPublic.value ? 'Public' : 'Private' }}</mat-slide-toggle>
+<!--      <mat-slide-toggle [formControl]="isPublic">{{ isPublic.value ? 'Public' : 'Private' }}</mat-slide-toggle>-->
+
+      <input type="radio" name="type" [formControl]="type" value="public" />Public
+      <input type="radio" name="type" [formControl]="type" value="private"/>Private
+      <input type="radio" name="type" [formControl]="type" value="disease" *ngIf="isAdmin" id="diseaseRadio"/>
+      <label for="diseaseRadio" *ngIf="isAdmin">Disease</label>
+
+
+
+
     </div>
   </div>
 </div>

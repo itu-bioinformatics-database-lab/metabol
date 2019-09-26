@@ -49,7 +49,9 @@ export class PastAnalysisComponent implements OnInit {
 
   getData(type: string) {
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/${type}`;
+    // let apiUrl = `http://127.0.0.1:5000/analysis/${type}`;
 
+    // http://127.0.0.1:5000
     this.http.get(apiUrl, this.login.optionByAuthorization())
 
       .subscribe((d:any) => {

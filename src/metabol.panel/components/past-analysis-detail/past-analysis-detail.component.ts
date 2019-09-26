@@ -33,10 +33,15 @@ export class PastAnalysisDetailComponent implements OnInit {
   }
 
   getData() {
+
+
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/detail/${this.id}`;
-    this.http.get(apiUrl, this.login.optionByAuthorization())
+    //   let apiUrl = `http://127.0.0.1:5000/analysis/detail/${this.id}`;
+
+      this.http.get(apiUrl, this.login.optionByAuthorization())
       .subscribe((data:any) => {
         this.data = data;
+        console.log(this.data);
       });
   }
 }

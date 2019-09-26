@@ -17,6 +17,8 @@ export class SignupService {
 
   signup(signupForm, callback: () => void) {
     let url = `${AppSettings.API_ENDPOINT}/auth/sign-up`;
+    // let url = `http://127.0.0.1:5000/auth/sign-up`;
+
     this.http.post(url, signupForm, { headers: this.headers })
       .subscribe(
       () => {

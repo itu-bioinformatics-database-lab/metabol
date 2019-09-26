@@ -21,7 +21,8 @@ export class ConcentrationTableComponent implements OnInit {
 
   form: FormGroup;
   analyzeName: FormControl;
-  isPublic: FormControl;
+  type: FormControl;
+  isAdmin = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +34,11 @@ export class ConcentrationTableComponent implements OnInit {
   ngOnInit() {
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze", Validators.required);
-    this.isPublic = new FormControl(true, Validators.required);
+    this.type = new FormControl('public', Validators.required);
+    if (localStorage.getItem('admin' ) === 'tajtest2019@gmail.com'){
+      this.isAdmin = true ;
+    }
+
   }
 
   remove(index) {
@@ -55,11 +60,14 @@ export class ConcentrationTableComponent implements OnInit {
   analyze() {
     let data = {
       "name": this.analyzeName.value,
-      "public": this.isPublic.value,
+      "public": this.type.value,
       "concentration_changes": _.fromPairs(this.conTable)
     };
 
+
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
+    // this.http.post(`http://127.0.0.1:5000/analysis/fva`,
+
       data, this.login.optionByAuthorization())
       .subscribe((data:any) => {
         this.notify.info('Analysis Start', 'Analysis in progress');

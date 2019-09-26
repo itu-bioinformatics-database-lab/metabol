@@ -1,0 +1,122 @@
+{
+    "compartments": {
+        "uVol": "uVol"
+    },
+    "genes": [],
+    "id": "mgl00590",
+    "metabolites": [
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "E1_space_11_space_1_space_9",
+            "name": "1.11.1.9"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "E2_space_3_space_2_space_2",
+            "name": "2.3.2.2"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "E3_space_1_space_1_space_4",
+            "name": "3.1.1.4"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "_space_15S_space__minus_15_minus_Hydroxy_minus_5_space_8_space_11_minus_cis_minus_13_minus_trans_minus_eicosatetraenoate",
+            "name": "(15S)-15-Hydroxy-5,8,11-cis-13-trans-eicosatetraenoate"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "Leukotriene_space_D4",
+            "name": "Leukotriene D4"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "Leukotriene_space_C4",
+            "name": "Leukotriene C4"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "_space_15_space_S_space__minus_HPETE",
+            "name": "15(S)-HPETE"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "_space_5_space_S_space__minus_HETE",
+            "name": "5(S)-HETE"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "_space_5_space_S_space__minus_HPETE",
+            "name": "5(S)-HPETE"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "_space_5Z_space_8Z_space_11Z_space_14Z_space__minus_Icosatetraenoic_space_acid",
+            "name": "(5Z,8Z,11Z,14Z)-Icosatetraenoic acid"
+        },
+        {
+            "compartment": "uVol",
+            "formula": "",
+            "id": "Phosphatidylcholine",
+            "name": "Phosphatidylcholine"
+        }
+    ],
+    "reactions": [
+        {
+            "gene_reaction_rule": "",
+            "id": "R07034",
+            "lower_bound": 0,
+            "metabolites": {
+                "_space_5_space_S_space__minus_HETE": 1.0,
+                "_space_5_space_S_space__minus_HPETE": -1.0
+            },
+            "name": "R07034",
+            "upper_bound": 1000
+        },
+        {
+            "gene_reaction_rule": "",
+            "id": "R01317",
+            "lower_bound": 0,
+            "metabolites": {
+                "Phosphatidylcholine": -1.0,
+                "_space_5Z_space_8Z_space_11Z_space_14Z_space__minus_Icosatetraenoic_space_acid": 1.0
+            },
+            "name": "R01317",
+            "upper_bound": 1000
+        },
+        {
+            "gene_reaction_rule": "",
+            "id": "R03867",
+            "lower_bound": 0,
+            "metabolites": {
+                "Leukotriene_space_C4": -1.0,
+                "Leukotriene_space_D4": 1.0
+            },
+            "name": "R03867",
+            "upper_bound": 1000
+        },
+        {
+            "gene_reaction_rule": "",
+            "id": "R07035",
+            "lower_bound": 0,
+            "metabolites": {
+                "_space_15S_space__minus_15_minus_Hydroxy_minus_5_space_8_space_11_minus_cis_minus_13_minus_trans_minus_eicosatetraenoate": 1.0,
+                "_space_15_space_S_space__minus_HPETE": -1.0
+            },
+            "name": "R07035",
+            "upper_bound": 1000
+        }
+    ],
+    "version": "1"
+}

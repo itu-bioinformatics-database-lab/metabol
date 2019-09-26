@@ -14,8 +14,14 @@ export class LoginService {
       username: loginForm.Email,
       password: loginForm.Password
     };
+    if (loginForm.Email === 'tajtest2019@gmail.com'){
+      console.log( "YES");
+      localStorage.setItem('admin', 'tajtest2019@gmail.com');
+    }
     this.http.post(`${AppSettings.API_ENDPOINT}/auth`, tokenData)
-      .subscribe((data: any) => {
+    // this.http.post(`http://127.0.0.1:5000/auth`, tokenData)
+
+  .subscribe((data: any) => {
         callback(data);
         this.notify.success('Login Successful', 'Welcome');
         localStorage.setItem('access_token', data.access_token);
@@ -31,6 +37,9 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('access_token');
+    if (localStorage.getItem('admin') === "tajtest2019@gmail.com"){
+    localStorage.removeItem('admin'); }
+
     this.notify.info('Logged out', 'Goodbye');
     setTimeout(() => {
       this.router.navigate(['/login']);

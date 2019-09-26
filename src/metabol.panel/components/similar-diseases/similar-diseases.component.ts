@@ -20,8 +20,12 @@ export class SimilarDiseasesComponent implements OnInit {
   constructor(private http: HttpClient, private login: LoginService) { }
 
   ngOnInit() {
+
+    // http://127.0.0.1:5000
     let apiUrl = `${AppSettings.API_ENDPOINT}/analysis/most-similar-diseases/${this.id}`;
-    this.http.get(apiUrl, this.login.optionByAuthorization())
+    //   let apiUrl = `http://127.0.0.1:5000/analysis/most-similar-diseases/${this.id}`;
+
+      this.http.get(apiUrl, this.login.optionByAuthorization())
       .subscribe((d:any) => this.diseases = _.orderBy(_.toPairs(d), '1', 'desc'));
   }
 
